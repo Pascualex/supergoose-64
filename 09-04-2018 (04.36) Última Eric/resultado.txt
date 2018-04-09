@@ -1,0 +1,14 @@
+Move s --> OK
+Grasp key --> OK
+Move s --> OK
+Move s --> OK
+Move s --> OK
+Move e --> OK
+Move w --> ERROR
+Move e --> OK
+Move e --> OK
+Move e --> OK
+Move s --> OK
+Move w --> OK
+Drop key --> OK
+Exit --> OK

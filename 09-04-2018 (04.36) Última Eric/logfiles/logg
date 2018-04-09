@@ -1,0 +1,77 @@
+Following --> OK
+Following --> OK
+Following --> OK
+Previous --> OK
+Previous --> OK
+Grasp key --> OK
+Previous --> OK
+Grasp sword --> OK
+Following --> OK
+Drop 2 --> OK
+Drop 1 --> OK
+Following --> OK
+Following --> OK
+Grasp gold --> OK
+Previous --> OK
+Previous --> OK
+Previous --> OK
+Following --> OK
+Following --> OK
+Following --> OK
+Move south --> OK
+Move south --> OK
+Previous --> OK
+Drop 3 --> OK
+Right --> OK
+Move east --> OK
+Throw --> OK
+Throw --> OK
+Throw --> OK
+Throw --> OK
+Throw --> OK
+Throw --> OK
+Throw --> OK
+Throw --> OK
+Throw --> OK
+Previous --> OK
+Previous --> OK
+Previous --> OK
+Previous --> OK
+Previous --> OK
+Previous --> OK
+Previous --> OK
+Previous --> OK
+Previous --> OK
+Previous --> OK
+Previous --> OK
+Previous --> OK
+Previous --> ERROR
+Unknown --> ERROR
+Previous --> ERROR
+Previous --> ERROR
+Previous --> ERROR
+Previous --> ERROR
+Previous --> ERROR
+Previous --> ERROR
+Previous --> ERROR
+Previous --> ERROR
+Right --> ERROR
+Right --> ERROR
+Right --> ERROR
+Right --> ERROR
+Left --> ERROR
+Left --> ERROR
+Left --> ERROR
+Left --> ERROR
+Following --> OK
+Following --> OK
+Following --> OK
+Following --> OK
+Following --> OK
+Previous --> OK
+Left --> ERROR
+Right --> OK
+Right --> OK
+Left --> ERROR
+Following --> OK
+Exit --> OK
