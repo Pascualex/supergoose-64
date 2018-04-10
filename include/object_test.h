@@ -136,5 +136,61 @@ void test1_object_get_check();
  */
 void test2_object_get_check();
 
+/**
+ * @test Test to see if function add_tags works under normal conditions
+ * @pre Created object
+ * @post OUTPUT==OK
+ */
+void test1_object_add_tags();
+
+/**
+ * @test Test to see if function add_tags works under abnormal conditions
+ * @pre NULL object
+ * @post OUTPUT==ERROR
+ */
+void test2_object_add_tags();
+
+/**
+ * @test Test to see if function get_tags works under normal conditions
+ * @pre Created object with correct tags
+ * @post OUTPUT==OK
+ */
+void test1_object_get_tags();
+
+/**
+ * @test Test to see if function get_tags works under abnormal conditions
+ * @pre NULL object
+ * @post OUTPUT==ERROR
+ */
+void test2_object_get_tags();
+
+/**
+ * @test Test to see if function get_tags_number works under normal conditions
+ * @pre Created object with correct tags
+ * @post OUTPUT==TAGS_NUMBER
+ */
+void test1_object_get_tags_number();
+
+/**
+ * @test Test to see if function get_tags works under abnormal conditions
+ * @pre NULL object
+ * @post OUTPUT==0
+ */
+void test2_object_get_tags_number();
+
+/**
+ * @test Test to see if function is works under normal conditions
+ * @pre Created object with correct tags
+ * @post Object is passed tag
+ */
+void test1_object_is();
+
+/**
+ * @test Test to see if function is works under abnormal conditions
+ * @pre Created object with correct tags
+ * @post Object isn't passed tag
+ */
+void test2_object_is();
+
 #endif
 

@@ -28,6 +28,7 @@
 #define MAX_OBJECTS 10              /*!< Maximum number of objects a game is prepared to store*/
 #define MAX_DIES 10                 /*!< Maximum number of dies a game is prepared to store*/
 #define MAX_LINKS 50                /*!< Maximum number of links a game is prepared to store*/
+#define MAX_TAGS 10					/*!< Maximun number of tags an object can have*/
 
 #define ID_RANGE 1000               /*!< Used to define the maximum amount of elements from each type we can manage*/
 #define SPACE_BASE_ID 0000          /*!< Marks where the Spaces Ids start*/
@@ -107,6 +108,20 @@ typedef enum {
     CYAN, /*!< CYAN COLOR*/
     WHITE /*!< WHITE COLOR*/
 } COLOR;
+
+/**
+ * @brief TAG enumeration (to be used when asigning propierties to objects)
+ */
+typedef enum {
+	NO_TAG = 0,		/*!< Tag not specified*/
+	VISIBLE, 		/*!< The object is visible*/
+	MOVABLE,		/*!< The object can be moved*/
+	MOVED,			/*!< The object has been moved*/
+	HIDDEN,			/*!< The object is hidden*/
+	CAN_GLOW,		/*!< The object is able to glow*/
+	GLOWING,		/*!< The object is glowing*/
+	IS_KEY			/*!< The object is a key*/
+} TAG;
 
 #endif
 
