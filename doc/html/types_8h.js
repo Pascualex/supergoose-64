@@ -13,6 +13,7 @@ var types_8h =
     [ "MAX_OBJECTS", "types_8h.html#acdc7844fbd4d45737d4aa56834d37829", null ],
     [ "MAX_PLAYERS", "types_8h.html#a1c346c944e8204fd06dc057393c7c96d", null ],
     [ "MAX_SPACES", "types_8h.html#a5f54fd55f983a2e33ce076cd9f587e82", null ],
+    [ "MAX_TAGS", "types_8h.html#aa653c0eca99802a09fd9560f28a9b1c1", null ],
     [ "NO_ID", "types_8h.html#a642e16f35aa1e585c25e405ede76e115", null ],
     [ "NOT_FOUND", "types_8h.html#a33bfc1f995233887a0414369c36936b8", null ],
     [ "OBJECT_BASE_ID", "types_8h.html#aceddbab5216f311ec0397e23b52fd221", null ],
@@ -63,5 +64,15 @@ var types_8h =
       [ "LEFT", "types_8h.html#a92dd10a73cd77d692dff6c0b2af222f9adb45120aafd37a973140edee24708065", null ],
       [ "MOVE", "types_8h.html#a92dd10a73cd77d692dff6c0b2af222f9aed3ef32890b6da0919b57254c5206c62", null ],
       [ "CHECK", "types_8h.html#a92dd10a73cd77d692dff6c0b2af222f9aed65b7dfe470f4e500b15f7074bb7fa2", null ]
+    ] ],
+    [ "TAG", "types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35", [
+      [ "NO_TAG", "types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35a33ca3be4d5e7ce4b0ef99a4819746d6c", null ],
+      [ "VISIBLE", "types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35abb22a6fcb7f208995b092f12d388786c", null ],
+      [ "MOVABLE", "types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35a9d86737eb7a3c269abe82f3024c407eb", null ],
+      [ "MOVED", "types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35ae2ce5b938a5d96737d97e2c19658e494", null ],
+      [ "HIDDEN", "types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35a41ae0a505430bf564b119bc82db7592d", null ],
+      [ "CAN_GLOW", "types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35a8686d5818408054e50d4da4b0860ccba", null ],
+      [ "GLOWING", "types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35ae02a1c2718542e66c1d67adcb098a9b9", null ],
+      [ "IS_KEY", "types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35a7bf039b3239c63e77c09bf900757b081", null ]
     ] ]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['left',['LEFT',['../types_8h.html#a92dd10a73cd77d692dff6c0b2af222f9adb45120aafd37a973140edee24708065',1,'types.h']]]
+  ['hidden',['HIDDEN',['../types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35a41ae0a505430bf564b119bc82db7592d',1,'types.h']]]
 ];

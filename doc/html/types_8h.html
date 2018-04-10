@@ -169,6 +169,8 @@ Macros</h2></td></tr>
 <tr class="separator:a1248a564e12a816260b44340c9adedfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a660ed1ec8604982002a0d6eced0e0367"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="types_8h.html#a660ed1ec8604982002a0d6eced0e0367">MAX_LINKS</a>&#160;&#160;&#160;50</td></tr>
 <tr class="separator:a660ed1ec8604982002a0d6eced0e0367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa653c0eca99802a09fd9560f28a9b1c1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="types_8h.html#aa653c0eca99802a09fd9560f28a9b1c1">MAX_TAGS</a>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:aa653c0eca99802a09fd9560f28a9b1c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a042ea1e5827a34a330a514290d626e02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="types_8h.html#a042ea1e5827a34a330a514290d626e02">ID_RANGE</a>&#160;&#160;&#160;1000</td></tr>
 <tr class="separator:a042ea1e5827a34a330a514290d626e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7ffcb470c09612da2829bafd749f98b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="types_8h.html#af7ffcb470c09612da2829bafd749f98b">SPACE_BASE_ID</a>&#160;&#160;&#160;0000</td></tr>
@@ -250,6 +252,20 @@ Enumerations</h2></td></tr>
  }<tr class="memdesc:af90824509586333cf45ce757d2711ce3"><td class="mdescLeft">&#160;</td><td class="mdescRight">COLOR enumeration (to be used when painting the graphic engine)  <a href="types_8h.html#af90824509586333cf45ce757d2711ce3">More...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:af90824509586333cf45ce757d2711ce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a781b03b8eb5f35cf89f3c931ffa26e35"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35">TAG</a> { <br />
+&#160;&#160;<a class="el" href="types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35a33ca3be4d5e7ce4b0ef99a4819746d6c">NO_TAG</a> = 0, 
+<a class="el" href="types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35abb22a6fcb7f208995b092f12d388786c">VISIBLE</a>, 
+<a class="el" href="types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35a9d86737eb7a3c269abe82f3024c407eb">MOVABLE</a>, 
+<a class="el" href="types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35ae2ce5b938a5d96737d97e2c19658e494">MOVED</a>, 
+<br />
+&#160;&#160;<a class="el" href="types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35a41ae0a505430bf564b119bc82db7592d">HIDDEN</a>, 
+<a class="el" href="types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35a8686d5818408054e50d4da4b0860ccba">CAN_GLOW</a>, 
+<a class="el" href="types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35ae02a1c2718542e66c1d67adcb098a9b9">GLOWING</a>, 
+<a class="el" href="types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35a7bf039b3239c63e77c09bf900757b081">IS_KEY</a>
+<br />
+ }<tr class="memdesc:a781b03b8eb5f35cf89f3c931ffa26e35"><td class="mdescLeft">&#160;</td><td class="mdescRight">TAG enumeration (to be used when asigning propierties to objects)  <a href="types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35">More...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a781b03b8eb5f35cf89f3c931ffa26e35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>It defines common types. </p>
@@ -424,6 +440,19 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Maximum number of spaces a game is prepared to store </p>
+
+</div>
+</div>
+<a class="anchor" id="aa653c0eca99802a09fd9560f28a9b1c1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_TAGS&#160;&#160;&#160;10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Maximun number of tags an object can have </p>
 
 </div>
 </div>
@@ -705,13 +734,53 @@ Enumerations</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a781b03b8eb5f35cf89f3c931ffa26e35"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35">TAG</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>TAG enumeration (to be used when asigning propierties to objects) </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a781b03b8eb5f35cf89f3c931ffa26e35a33ca3be4d5e7ce4b0ef99a4819746d6c"></a>NO_TAG&#160;</td><td class="fielddoc">
+<p>Tag not specified </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a781b03b8eb5f35cf89f3c931ffa26e35abb22a6fcb7f208995b092f12d388786c"></a>VISIBLE&#160;</td><td class="fielddoc">
+<p>The object is visible </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a781b03b8eb5f35cf89f3c931ffa26e35a9d86737eb7a3c269abe82f3024c407eb"></a>MOVABLE&#160;</td><td class="fielddoc">
+<p>The object can be moved </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a781b03b8eb5f35cf89f3c931ffa26e35ae2ce5b938a5d96737d97e2c19658e494"></a>MOVED&#160;</td><td class="fielddoc">
+<p>The object has been moved </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a781b03b8eb5f35cf89f3c931ffa26e35a41ae0a505430bf564b119bc82db7592d"></a>HIDDEN&#160;</td><td class="fielddoc">
+<p>The object is hidden </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a781b03b8eb5f35cf89f3c931ffa26e35a8686d5818408054e50d4da4b0860ccba"></a>CAN_GLOW&#160;</td><td class="fielddoc">
+<p>The object is able to glow </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a781b03b8eb5f35cf89f3c931ffa26e35ae02a1c2718542e66c1d67adcb098a9b9"></a>GLOWING&#160;</td><td class="fielddoc">
+<p>The object is glowing </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a781b03b8eb5f35cf89f3c931ffa26e35a7bf039b3239c63e77c09bf900757b081"></a>IS_KEY&#160;</td><td class="fielddoc">
+<p>The object is a key </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="types_8h.html">types.h</a></li>
-    <li class="footer">Generated on Tue Apr 10 2018 00:21:47 for SuperGoose_64 by
+    <li class="footer">Generated on Tue Apr 10 2018 14:37:20 for SuperGoose_64 by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

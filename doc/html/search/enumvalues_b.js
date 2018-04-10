@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['red',['RED',['../types_8h.html#af90824509586333cf45ce757d2711ce3af80f9a890089d211842d59625e561f88',1,'types.h']]],
-  ['right',['RIGHT',['../types_8h.html#a92dd10a73cd77d692dff6c0b2af222f9aec8379af7490bb9eaaf579cf17876f38',1,'types.h']]]
+  ['ok',['OK',['../types_8h.html#a32c27cc471df37f4fc818d65de0a56c4a2bc49ec37d6a5715dd23e85f1ff5bb59',1,'types.h']]],
+  ['open',['OPEN',['../types_8h.html#ab0ce7873e5a1bd8bc18fafaaed449b24a0e0143636c29971736eab47415868eae',1,'types.h']]]
 ];

@@ -150,7 +150,7 @@ typedef struct _Object&#160;</td><td class="memItemRight" valign="bottom"><a cla
 Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">object_create</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>It creates an object with the id passed.</p>
-<dl class="section author"><dt>Author</dt><dd>Alejandro Pascual edited by Eric Morales </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Alejandro Pascual edited by Eric Morales and Victor Yrazusta </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>2.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>19-02-2018 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -312,6 +312,73 @@ char **&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_check</
 <tr class="memitem:a56b716121e91855a9d73912925f2e516"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56b716121e91855a9d73912925f2e516"></a>
 <a class="el" href="types_8h.html#a32c27cc471df37f4fc818d65de0a56c4">STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><b>object_print</b> (<a class="el" href="object_8h.html#a7f8bbcda919b65ce67f92fba08e0212f">Object</a> *)</td></tr>
 <tr class="separator:a56b716121e91855a9d73912925f2e516"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">object_add_tags</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>It adds the passed tags to the passed object.</p>
+<dl class="section author"><dt>Author</dt><dd>Victor Yrazusta </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>10-04-2018 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Object*</td><td>-&gt; an object which will recieve the tags. </td></tr>
+    <tr><td class="paramname">num_tags-&gt;</td><td>the amount of tags that the funcion will add. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A STATUS that indicates whether the funcion was executed correctly or not.</dd></dl>
+<p>NOTE: This funcion has a variable number of input parameters. </p>
+</div></td></tr>
+<tr class="memitem:a3fead0b6e2b59cbbbc27f6a7ca3c98db"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3fead0b6e2b59cbbbc27f6a7ca3c98db"></a>
+<a class="el" href="types_8h.html#a32c27cc471df37f4fc818d65de0a56c4">STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><b>object_add_tags</b> (<a class="el" href="object_8h.html#a7f8bbcda919b65ce67f92fba08e0212f">Object</a> *, int num_tags,...)</td></tr>
+<tr class="separator:a3fead0b6e2b59cbbbc27f6a7ca3c98db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">object_get_tags</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>It returns all the tags that an object has.</p>
+<dl class="section author"><dt>Author</dt><dd>Victor Yrazusta </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>10-04-2018 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Object*</td><td>-&gt; an object whose tags will be returned. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A TAG* which will point towards the tags hold by the passed object. </dd></dl>
+</div></td></tr>
+<tr class="memitem:a74bc380972099a0f9c0cd87c72bb09b1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a74bc380972099a0f9c0cd87c72bb09b1"></a>
+<a class="el" href="types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35">TAG</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_tags</b> (<a class="el" href="object_8h.html#a7f8bbcda919b65ce67f92fba08e0212f">Object</a> *)</td></tr>
+<tr class="separator:a74bc380972099a0f9c0cd87c72bb09b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">object_get_tags_number</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>It returns the number of tags an object has.</p>
+<dl class="section author"><dt>Author</dt><dd>Victor Yrazusta </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>10-04-2018 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Object*</td><td>-&gt; an object whose number of tags will be returned. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A unsigned int, which is the amount of tags that the passed object has. </dd></dl>
+</div></td></tr>
+<tr class="memitem:a807d971b15a2fde02d19a93e73322420"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a807d971b15a2fde02d19a93e73322420"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_tags_number</b> (<a class="el" href="object_8h.html#a7f8bbcda919b65ce67f92fba08e0212f">Object</a> *)</td></tr>
+<tr class="separator:a807d971b15a2fde02d19a93e73322420"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">object_is</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>It checks if an object has a specified tag.</p>
+<dl class="section author"><dt>Author</dt><dd>Victor Yrazusta </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>10-04-2018 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Object*</td><td>-&gt; an object which will be checked. </td></tr>
+    <tr><td class="paramname">TAG</td><td>-&gt; the tag that the function will look for. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A BOOL, that indicates wheter or not the object has the passed tag. </dd></dl>
+</div></td></tr>
+<tr class="memitem:a6071566988a89b7892e359331d50604e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6071566988a89b7892e359331d50604e"></a>
+<a class="el" href="types_8h.html#a3e5b8192e7d9ffaf3542f1210aec18dd">BOOL</a>&#160;</td><td class="memItemRight" valign="bottom"><b>object_is</b> (<a class="el" href="object_8h.html#a7f8bbcda919b65ce67f92fba08e0212f">Object</a> *, <a class="el" href="types_8h.html#a781b03b8eb5f35cf89f3c931ffa26e35">TAG</a>)</td></tr>
+<tr class="separator:a6071566988a89b7892e359331d50604e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>It defines an object and the necessary functions to use it. </p>
@@ -325,7 +392,7 @@ char **&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_check</
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="object_8h.html">object.h</a></li>
-    <li class="footer">Generated on Tue Apr 10 2018 00:21:47 for SuperGoose_64 by
+    <li class="footer">Generated on Tue Apr 10 2018 14:37:20 for SuperGoose_64 by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

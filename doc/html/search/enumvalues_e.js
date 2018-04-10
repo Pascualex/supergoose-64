@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['unknown',['UNKNOWN',['../types_8h.html#a92dd10a73cd77d692dff6c0b2af222f9a6ce26a62afab55d7606ad4e92428b30c',1,'types.h']]]
+  ['s',['S',['../types_8h.html#aa268a41a13430b18e933ed40207178d0af1ce01387d2348f8b858721a7db81670',1,'types.h']]]
 ];

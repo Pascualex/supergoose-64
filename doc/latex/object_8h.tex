@@ -31,7 +31,7 @@ typedef struct \+\_\+\+Object \hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0
 {\em It creates an object with the id passed.
 
 \begin{DoxyAuthor}{Author}
-Alejandro Pascual edited by Eric Morales 
+Alejandro Pascual edited by Eric Morales and Victor Yrazusta 
 \end{DoxyAuthor}
 \begin{DoxyVersion}{Version}
 2.\+0 
@@ -290,6 +290,114 @@ An S\+T\+A\+T\+US, which could be \char`\"{}\+E\+R\+R\+O\+R\char`\"{} if the poi
 N\+O\+TE\+: This function was created for debugging purposes only and it is not used in the normal execution of the game. }\begin{DoxyCompactItemize}
 \item 
 \hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries object\+\_\+print} (\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object} $\ast$)\hypertarget{object_8h_a56b716121e91855a9d73912925f2e516}{}\label{object_8h_a56b716121e91855a9d73912925f2e516}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf object\+\_\+add\+\_\+tags}\par
+{\em It adds the passed tags to the passed object.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Object$\ast$} & -\/$>$ an object which will recieve the tags. \\
+\hline
+{\em num\+\_\+tags-\/$>$} & the amount of tags that the funcion will add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US that indicates whether the funcion was executed correctly or not.
+\end{DoxyReturn}
+N\+O\+TE\+: This funcion has a variable number of input parameters. }\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries object\+\_\+add\+\_\+tags} (\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object} $\ast$, int num\+\_\+tags,...)\hypertarget{object_8h_a3fead0b6e2b59cbbbc27f6a7ca3c98db}{}\label{object_8h_a3fead0b6e2b59cbbbc27f6a7ca3c98db}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf object\+\_\+get\+\_\+tags}\par
+{\em It returns all the tags that an object has.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Object$\ast$} & -\/$>$ an object whose tags will be returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A T\+A\+G$\ast$ which will point towards the tags hold by the passed object. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35}{T\+AG} $\ast$ {\bfseries object\+\_\+get\+\_\+tags} (\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object} $\ast$)\hypertarget{object_8h_a74bc380972099a0f9c0cd87c72bb09b1}{}\label{object_8h_a74bc380972099a0f9c0cd87c72bb09b1}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf object\+\_\+get\+\_\+tags\+\_\+number}\par
+{\em It returns the number of tags an object has.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Object$\ast$} & -\/$>$ an object whose number of tags will be returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A unsigned int, which is the amount of tags that the passed object has. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+unsigned int {\bfseries object\+\_\+get\+\_\+tags\+\_\+number} (\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object} $\ast$)\hypertarget{object_8h_a807d971b15a2fde02d19a93e73322420}{}\label{object_8h_a807d971b15a2fde02d19a93e73322420}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf object\+\_\+is}\par
+{\em It checks if an object has a specified tag.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Object$\ast$} & -\/$>$ an object which will be checked. \\
+\hline
+{\em T\+AG} & -\/$>$ the tag that the function will look for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A B\+O\+OL, that indicates wheter or not the object has the passed tag. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a3e5b8192e7d9ffaf3542f1210aec18dd}{B\+O\+OL} {\bfseries object\+\_\+is} (\hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object} $\ast$, \hyperlink{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35}{T\+AG})\hypertarget{object_8h_a6071566988a89b7892e359331d50604e}{}\label{object_8h_a6071566988a89b7892e359331d50604e}
 
 \end{DoxyCompactItemize}
 \end{Indent}

@@ -43,6 +43,8 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \item 
 \#define \hyperlink{types_8h_a660ed1ec8604982002a0d6eced0e0367}{M\+A\+X\+\_\+\+L\+I\+N\+KS}~50
 \item 
+\#define \hyperlink{types_8h_aa653c0eca99802a09fd9560f28a9b1c1}{M\+A\+X\+\_\+\+T\+A\+GS}~10
+\item 
 \#define \hyperlink{types_8h_a042ea1e5827a34a330a514290d626e02}{I\+D\+\_\+\+R\+A\+N\+GE}~1000
 \item 
 \#define \hyperlink{types_8h_af7ffcb470c09612da2829bafd749f98b}{S\+P\+A\+C\+E\+\_\+\+B\+A\+S\+E\+\_\+\+ID}~0000
@@ -113,6 +115,18 @@ enum \hyperlink{types_8h_af90824509586333cf45ce757d2711ce3}{C\+O\+L\+OR} \{ \\*
 \hyperlink{types_8h_af90824509586333cf45ce757d2711ce3aafe71cad474c15ce63b300c470eef8cc}{C\+Y\+AN}, 
 \hyperlink{types_8h_af90824509586333cf45ce757d2711ce3a283fc479650da98250635b9c3c0e7e50}{W\+H\+I\+TE}
  \}\begin{DoxyCompactList}\small\item\em C\+O\+L\+OR enumeration (to be used when painting the graphic engine) \end{DoxyCompactList}
+\item 
+enum \hyperlink{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35}{T\+AG} \{ \\*
+\hyperlink{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a33ca3be4d5e7ce4b0ef99a4819746d6c}{N\+O\+\_\+\+T\+AG} = 0, 
+\hyperlink{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35abb22a6fcb7f208995b092f12d388786c}{V\+I\+S\+I\+B\+LE}, 
+\hyperlink{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a9d86737eb7a3c269abe82f3024c407eb}{M\+O\+V\+A\+B\+LE}, 
+\hyperlink{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35ae2ce5b938a5d96737d97e2c19658e494}{M\+O\+V\+ED}, 
+\\*
+\hyperlink{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a41ae0a505430bf564b119bc82db7592d}{H\+I\+D\+D\+EN}, 
+\hyperlink{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a8686d5818408054e50d4da4b0860ccba}{C\+A\+N\+\_\+\+G\+L\+OW}, 
+\hyperlink{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35ae02a1c2718542e66c1d67adcb098a9b9}{G\+L\+O\+W\+I\+NG}, 
+\hyperlink{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a7bf039b3239c63e77c09bf900757b081}{I\+S\+\_\+\+K\+EY}
+ \}\begin{DoxyCompactList}\small\item\em T\+AG enumeration (to be used when asigning propierties to objects) \end{DoxyCompactList}
 \end{DoxyCompactItemize}
 
 
@@ -173,7 +187,10 @@ Maximum number of objects a game is prepared to store \index{types.\+h@{types.\+
 Maximum number of players a game is prepared to store \index{types.\+h@{types.\+h}!M\+A\+X\+\_\+\+S\+P\+A\+C\+ES@{M\+A\+X\+\_\+\+S\+P\+A\+C\+ES}}
 \index{M\+A\+X\+\_\+\+S\+P\+A\+C\+ES@{M\+A\+X\+\_\+\+S\+P\+A\+C\+ES}!types.\+h@{types.\+h}}
 \subsubsection[{\texorpdfstring{M\+A\+X\+\_\+\+S\+P\+A\+C\+ES}{MAX_SPACES}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+S\+P\+A\+C\+ES~100}\hypertarget{types_8h_a5f54fd55f983a2e33ce076cd9f587e82}{}\label{types_8h_a5f54fd55f983a2e33ce076cd9f587e82}
-Maximum number of spaces a game is prepared to store \index{types.\+h@{types.\+h}!N\+O\+\_\+\+ID@{N\+O\+\_\+\+ID}}
+Maximum number of spaces a game is prepared to store \index{types.\+h@{types.\+h}!M\+A\+X\+\_\+\+T\+A\+GS@{M\+A\+X\+\_\+\+T\+A\+GS}}
+\index{M\+A\+X\+\_\+\+T\+A\+GS@{M\+A\+X\+\_\+\+T\+A\+GS}!types.\+h@{types.\+h}}
+\subsubsection[{\texorpdfstring{M\+A\+X\+\_\+\+T\+A\+GS}{MAX_TAGS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+T\+A\+GS~10}\hypertarget{types_8h_aa653c0eca99802a09fd9560f28a9b1c1}{}\label{types_8h_aa653c0eca99802a09fd9560f28a9b1c1}
+Maximun number of tags an object can have \index{types.\+h@{types.\+h}!N\+O\+\_\+\+ID@{N\+O\+\_\+\+ID}}
 \index{N\+O\+\_\+\+ID@{N\+O\+\_\+\+ID}!types.\+h@{types.\+h}}
 \subsubsection[{\texorpdfstring{N\+O\+\_\+\+ID}{NO_ID}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+O\+\_\+\+ID~-\/1}\hypertarget{types_8h_a642e16f35aa1e585c25e405ede76e115}{}\label{types_8h_a642e16f35aa1e585c25e405ede76e115}
 Default Id used when there is no Id or something works as it shouldn\textquotesingle{}t \index{types.\+h@{types.\+h}!N\+O\+T\+\_\+\+F\+O\+U\+ND@{N\+O\+T\+\_\+\+F\+O\+U\+ND}}
@@ -328,4 +345,32 @@ L\+E\+FT\hypertarget{types_8h_a92dd10a73cd77d692dff6c0b2af222f9adb45120aafd37a97
 }]Left space (old) \index{M\+O\+VE@{M\+O\+VE}!types.\+h@{types.\+h}}\index{types.\+h@{types.\+h}!M\+O\+VE@{M\+O\+VE}}\item[{\em 
 M\+O\+VE\hypertarget{types_8h_a92dd10a73cd77d692dff6c0b2af222f9aed3ef32890b6da0919b57254c5206c62}{}\label{types_8h_a92dd10a73cd77d692dff6c0b2af222f9aed3ef32890b6da0919b57254c5206c62}
 }]Move to a direction \end{description}
+\end{Desc}
+\index{types.\+h@{types.\+h}!T\+AG@{T\+AG}}
+\index{T\+AG@{T\+AG}!types.\+h@{types.\+h}}
+\subsubsection[{\texorpdfstring{T\+AG}{TAG}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf T\+AG}}\hypertarget{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35}{}\label{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35}
+
+
+T\+AG enumeration (to be used when asigning propierties to objects) 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{N\+O\+\_\+\+T\+AG@{N\+O\+\_\+\+T\+AG}!types.\+h@{types.\+h}}\index{types.\+h@{types.\+h}!N\+O\+\_\+\+T\+AG@{N\+O\+\_\+\+T\+AG}}\item[{\em 
+N\+O\+\_\+\+T\+AG\hypertarget{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a33ca3be4d5e7ce4b0ef99a4819746d6c}{}\label{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a33ca3be4d5e7ce4b0ef99a4819746d6c}
+}]Tag not specified \index{V\+I\+S\+I\+B\+LE@{V\+I\+S\+I\+B\+LE}!types.\+h@{types.\+h}}\index{types.\+h@{types.\+h}!V\+I\+S\+I\+B\+LE@{V\+I\+S\+I\+B\+LE}}\item[{\em 
+V\+I\+S\+I\+B\+LE\hypertarget{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35abb22a6fcb7f208995b092f12d388786c}{}\label{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35abb22a6fcb7f208995b092f12d388786c}
+}]The object is visible \index{M\+O\+V\+A\+B\+LE@{M\+O\+V\+A\+B\+LE}!types.\+h@{types.\+h}}\index{types.\+h@{types.\+h}!M\+O\+V\+A\+B\+LE@{M\+O\+V\+A\+B\+LE}}\item[{\em 
+M\+O\+V\+A\+B\+LE\hypertarget{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a9d86737eb7a3c269abe82f3024c407eb}{}\label{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a9d86737eb7a3c269abe82f3024c407eb}
+}]The object can be moved \index{M\+O\+V\+ED@{M\+O\+V\+ED}!types.\+h@{types.\+h}}\index{types.\+h@{types.\+h}!M\+O\+V\+ED@{M\+O\+V\+ED}}\item[{\em 
+M\+O\+V\+ED\hypertarget{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35ae2ce5b938a5d96737d97e2c19658e494}{}\label{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35ae2ce5b938a5d96737d97e2c19658e494}
+}]The object has been moved \index{H\+I\+D\+D\+EN@{H\+I\+D\+D\+EN}!types.\+h@{types.\+h}}\index{types.\+h@{types.\+h}!H\+I\+D\+D\+EN@{H\+I\+D\+D\+EN}}\item[{\em 
+H\+I\+D\+D\+EN\hypertarget{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a41ae0a505430bf564b119bc82db7592d}{}\label{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a41ae0a505430bf564b119bc82db7592d}
+}]The object is hidden \index{C\+A\+N\+\_\+\+G\+L\+OW@{C\+A\+N\+\_\+\+G\+L\+OW}!types.\+h@{types.\+h}}\index{types.\+h@{types.\+h}!C\+A\+N\+\_\+\+G\+L\+OW@{C\+A\+N\+\_\+\+G\+L\+OW}}\item[{\em 
+C\+A\+N\+\_\+\+G\+L\+OW\hypertarget{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a8686d5818408054e50d4da4b0860ccba}{}\label{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a8686d5818408054e50d4da4b0860ccba}
+}]The object is able to glow \index{G\+L\+O\+W\+I\+NG@{G\+L\+O\+W\+I\+NG}!types.\+h@{types.\+h}}\index{types.\+h@{types.\+h}!G\+L\+O\+W\+I\+NG@{G\+L\+O\+W\+I\+NG}}\item[{\em 
+G\+L\+O\+W\+I\+NG\hypertarget{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35ae02a1c2718542e66c1d67adcb098a9b9}{}\label{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35ae02a1c2718542e66c1d67adcb098a9b9}
+}]The object is glowing \index{I\+S\+\_\+\+K\+EY@{I\+S\+\_\+\+K\+EY}!types.\+h@{types.\+h}}\index{types.\+h@{types.\+h}!I\+S\+\_\+\+K\+EY@{I\+S\+\_\+\+K\+EY}}\item[{\em 
+I\+S\+\_\+\+K\+EY\hypertarget{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a7bf039b3239c63e77c09bf900757b081}{}\label{types_8h_a781b03b8eb5f35cf89f3c931ffa26e35a7bf039b3239c63e77c09bf900757b081}
+}]The object is a key \end{description}
 \end{Desc}
