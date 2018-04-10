@@ -1,0 +1,4 @@
+grasp object
+grasp OBJ_NAME
+check OBJ_NAME
+check space

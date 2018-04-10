@@ -1,0 +1,589 @@
+\hypertarget{game_8h}{}\section{include/game.h File Reference}
+\label{game_8h}\index{include/game.\+h@{include/game.\+h}}
+
+
+It defines the game interface for each command and rest of needed functions.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}command.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}space.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}player.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}object.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}die.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}link.\+h\char`\"{}}\\*
+Include dependency graph for game.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{game_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{game_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \+\_\+\+Game \hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game}\hypertarget{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{}\label{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}
+
+\begin{DoxyCompactList}\small\item\em It holds the necessary data to manage a game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{Indent}{\bf game\+\_\+create}\par
+{\em It allocates memory for a game.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta edited by Eric Morales 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+27-\/02-\/2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+A game$\ast$, which could be N\+U\+LL if the function failed. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$ {\bfseries game\+\_\+create} ()\hypertarget{game_8h_a1cdbe3f06b9bf49eb5e334a22ad3b2b9}{}\label{game_8h_a1cdbe3f06b9bf49eb5e334a22ad3b2b9}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+create\+\_\+from\+\_\+file}\par
+{\em It loads into a game (with already allocated memory) the data inside a file.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta edited by Eric Morales 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+27-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game in which the function will store the obtained data, creating all the needed things on it. \\
+\hline
+{\em char$\ast$} & -\/$>$ a string which will be the file (allready opened) that contains the information of the game. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which will tell if the function failed. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries game\+\_\+create\+\_\+from\+\_\+file} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$, char $\ast$file\+\_\+name)\hypertarget{game_8h_a4061ad53c9235ace67a6bc4cc95fe45d}{}\label{game_8h_a4061ad53c9235ace67a6bc4cc95fe45d}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+update}\par
+{\em It updates the game to the last command that was input.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta edited by Eric Morales 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+27-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game which will be updated depending on the last introduced command. \\
+\hline
+{\em Command$\ast$} & -\/$>$ a command which will be the last given command from the user. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which will tell if the function failed. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries game\+\_\+update} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$, \hyperlink{command_8h_a7d2935971c252377cb0fc1c8545dc2bc}{Command} $\ast$)\hypertarget{game_8h_a4ec0eb4cc473661ae1e3d049e7628b9f}{}\label{game_8h_a4ec0eb4cc473661ae1e3d049e7628b9f}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+destroy}\par
+{\em It finds an object, a player, a die or a space in the passed game$\ast$ whose Id is passed as an argument.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta edited by Eric Morales 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+27-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game in which the function will search for the Id. \\
+\hline
+{\em Id} & -\/$>$ an id which will be the Id of the struct found (if any). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which will tell if the function failed. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries game\+\_\+destroy} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$)\hypertarget{game_8h_accc8491f1e1f5cd64399fdde0058d5b2}{}\label{game_8h_accc8491f1e1f5cd64399fdde0058d5b2}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+is over}\par
+{\em It checks if the game is over or not (right now there are no conditions yet).
+
+\begin{DoxyAuthor}{Author}
+Profesores P\+P\+R\+OG 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+13-\/01-\/2015 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ the game which we will check if its over or not. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A B\+O\+OL telling if its ended or not. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a3e5b8192e7d9ffaf3542f1210aec18dd}{B\+O\+OL} {\bfseries game\+\_\+is\+\_\+over} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$)\hypertarget{game_8h_a48225cf8a94551e4748e50d76e7017c3}{}\label{game_8h_a48225cf8a94551e4748e50d76e7017c3}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+print\+\_\+data}\par
+{\em It prints all the game data, for debugging purposes.
+
+\begin{DoxyAuthor}{Author}
+Profesores P\+P\+R\+OG edited by Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+13-\/01-\/2015 (Creation) 07-\/04-\/2018 (Edited) 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ which information will be printed (not graphic engine). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A void without any relevant information. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+void {\bfseries game\+\_\+print\+\_\+data} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$)\hypertarget{game_8h_ad379d0f940eb8020d7fbc6d805c307f9}{}\label{game_8h_ad379d0f940eb8020d7fbc6d805c307f9}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+add\+\_\+space}\par
+{\em It adds a new space to the game.
+
+\begin{DoxyAuthor}{Author}
+Profesores P\+P\+R\+OG edited by Javier Lougedo 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+13-\/01-\/2015 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game where the space will be added. \\
+\hline
+{\em Space$\ast$} & -\/$>$ carrying the space to be loaded. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which will tell if the function failed. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries game\+\_\+add\+\_\+space} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$, \hyperlink{space_8h_a67533ffc2b70463baecc38fb0629bbfc}{Space} $\ast$)\hypertarget{game_8h_a90f0011dd654de9aaef8f42db4d66294}{}\label{game_8h_a90f0011dd654de9aaef8f42db4d66294}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+add\+\_\+object}\par
+{\em It adds a new object to the game.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual edited by Javier Lougedo 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+11-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game where the object will be added. \\
+\hline
+{\em Object$\ast$} & -\/$>$ carrying the object to be loaded. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which will tell if the function failed. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries game\+\_\+add\+\_\+object} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$, \hyperlink{object_8h_a7f8bbcda919b65ce67f92fba08e0212f}{Object} $\ast$, \hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} location\+\_\+id)\hypertarget{game_8h_a9adce4004adbbd7fd1c070ccef95921c}{}\label{game_8h_a9adce4004adbbd7fd1c070ccef95921c}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+get\+\_\+spaces\+\_\+number}\par
+{\em It returns the number of spaces there are in the game.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+16-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game to check for the number of spaces in it. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An int with the number of spaces. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+int {\bfseries game\+\_\+get\+\_\+spaces\+\_\+number} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$)\hypertarget{game_8h_a176cb01b6aacab9b7cdcea4fa46d2967}{}\label{game_8h_a176cb01b6aacab9b7cdcea4fa46d2967}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+get\+\_\+players\+\_\+number}\par
+{\em It returns the number of players there are in the game.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+16-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game to check for the number of players in it. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An int with the number of players. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+int {\bfseries game\+\_\+get\+\_\+players\+\_\+number} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$)\hypertarget{game_8h_a1746123c2f85e94cfc345dfeed67e3d5}{}\label{game_8h_a1746123c2f85e94cfc345dfeed67e3d5}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+get\+\_\+objects\+\_\+number}\par
+{\em It returns the number of objects there are in the game.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+16-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game to check for the number of objects in it. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An int with the number of objects. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+int {\bfseries game\+\_\+get\+\_\+objects\+\_\+number} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$)\hypertarget{game_8h_a696aed082f87baa862e422d48d44321c}{}\label{game_8h_a696aed082f87baa862e422d48d44321c}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+get\+\_\+dies\+\_\+number}\par
+{\em It returns the number of dies there are in the game.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+16-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game to check for the number of dies in it. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An int with the number of dies. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+int {\bfseries game\+\_\+get\+\_\+dies\+\_\+number} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$)\hypertarget{game_8h_afe2a116d3db04b2f7b074165a77ce10a}{}\label{game_8h_afe2a116d3db04b2f7b074165a77ce10a}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+find}\par
+{\em It finds an object, a player, a die or a space in the passed game$\ast$ whose Id is passed as an argument.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+27-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game in which the function will search for the Id. \\
+\hline
+{\em Id} & -\/$>$ an id which will be the Id of the struct found (if any). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A void$\ast$, which could be N\+U\+LL if the function fails to find an object, a player, a die or a space with the specified Id, or the object, player, die or space found otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+void $\ast$ {\bfseries game\+\_\+find} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$, \hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} id)\hypertarget{game_8h_a3145940f5ae2b5d82a6271c062cc34a9}{}\label{game_8h_a3145940f5ae2b5d82a6271c062cc34a9}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+find\+\_\+name}\par
+{\em It finds an object, a player, a die or a space in the passed game$\ast$ whose name is passed as an argument.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+28-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game in which the function will search for the name. \\
+\hline
+{\em char$\ast$} & -\/$>$ a string which will be the name of the struct found (if any). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A void$\ast$, which could be N\+U\+LL if the function fails to find an object, a player, a die or a space with the specified Id, or the object, player, die or space found otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+void $\ast$ {\bfseries game\+\_\+find\+\_\+name} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$, char $\ast$name)\hypertarget{game_8h_a0410538a05363d74245854b77880ba44}{}\label{game_8h_a0410538a05363d74245854b77880ba44}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+set\+\_\+object\+\_\+location}\par
+{\em It changes the location of the passed object and the location id passed to register the new position of the object.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+28-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game in which the function will search for the name. \\
+\hline
+{\em Id} & -\/$>$ the id of the location which will start holding the passed object Id. \\
+\hline
+{\em Id} & -\/$>$ an id with the Id of the object which will be registered by the locations. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which indicates if the process was executed successfully or not. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries game\+\_\+set\+\_\+object\+\_\+location} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$game, \hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} location\+\_\+id, \hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} object\+\_\+id)\hypertarget{game_8h_a1667ce6e1db1af644d89c96f18c4c674}{}\label{game_8h_a1667ce6e1db1af644d89c96f18c4c674}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+get\+\_\+last\+\_\+command}\par
+{\em It gets the last command that the user input, to print it.
+
+\begin{DoxyAuthor}{Author}
+Profesores P\+P\+R\+OG 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+13-\/01-\/2015 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game where we will get the command from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A T\+\_\+\+Command (text) with the actual command. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a92dd10a73cd77d692dff6c0b2af222f9}{T\+\_\+\+Command} {\bfseries game\+\_\+get\+\_\+last\+\_\+command} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$)\hypertarget{game_8h_a6fc72cfae5f97e7e3198ebba0feb45b3}{}\label{game_8h_a6fc72cfae5f97e7e3198ebba0feb45b3}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+get\+\_\+status\+\_\+last\+\_\+command}\par
+{\em It give us the status of the last command printed on the screen
+
+\begin{DoxyAuthor}{Author}
+Eric Morales 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+26-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game to get the last command status from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, the status of the command. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries game\+\_\+get\+\_\+status\+\_\+last\+\_\+command} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$game)\hypertarget{game_8h_aa864653e168ad9407ff4c9a7b3d6f436}{}\label{game_8h_aa864653e168ad9407ff4c9a7b3d6f436}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+get\+\_\+last\+\_\+check}\par
+{\em It gives us the last description ordered by the user.
+
+\begin{DoxyAuthor}{Author}
+Eric Morales 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+26-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game which will give us the description we are asking for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A const char$\ast$ with the description. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+char $\ast$$\ast$ {\bfseries game\+\_\+get\+\_\+last\+\_\+check} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$game)\hypertarget{game_8h_aa220681feb41d34cc4a5209af820102d}{}\label{game_8h_aa220681feb41d34cc4a5209af820102d}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+add\+\_\+link}\par
+{\em It adds a link to the game.
+
+\begin{DoxyAuthor}{Author}
+Eric Morales edited by Javier Lougedo 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+26-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game where we are playing. \\
+\hline
+{\em Link} & -\/$>$ a link with the added link. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, OK if we can add the link or E\+R\+R\+OR if we have problems. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries game\+\_\+add\+\_\+link} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$game, \hyperlink{link_8h_ae3b299941e67be6971bfd64a25505eff}{Link} $\ast$link)\hypertarget{game_8h_a4691bee17d5784ad6eb257dfbb252c27}{}\label{game_8h_a4691bee17d5784ad6eb257dfbb252c27}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+add\+\_\+player}\par
+{\em It adds a player to the game.
+
+\begin{DoxyAuthor}{Author}
+Eric Morales edited by Javier Lougedo 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+03-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Game$\ast$} & -\/$>$ a game where we are playing. \\
+\hline
+{\em Player$\ast$} & -\/$>$ a player with the added player. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, OK if we can add the player or E\+R\+R\+OR if we have problems. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries game\+\_\+add\+\_\+player} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$game, \hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$player, \hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} location\+\_\+id)\hypertarget{game_8h_a793af7e077e54a0c25796c77b1d92751}{}\label{game_8h_a793af7e077e54a0c25796c77b1d92751}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+It defines the game interface for each command and rest of needed functions. 
+
+\begin{DoxyAuthor}{Author}
+Profesores P\+P\+R\+OG, edited by Victor Yrazustra, Eric Morales \& Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+13-\/01-\/2015 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+NU Public License 
+\end{DoxyCopyright}

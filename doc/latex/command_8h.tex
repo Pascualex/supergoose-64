@@ -1,0 +1,223 @@
+\hypertarget{command_8h}{}\section{include/command.h File Reference}
+\label{command_8h}\index{include/command.\+h@{include/command.\+h}}
+
+
+It implements the command interpreter and the necessary functions to work with it.  
+
+
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\\*
+Include dependency graph for command.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{command_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{command_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \+\_\+\+Command \hyperlink{command_8h_a7d2935971c252377cb0fc1c8545dc2bc}{Command}\hypertarget{command_8h_a7d2935971c252377cb0fc1c8545dc2bc}{}\label{command_8h_a7d2935971c252377cb0fc1c8545dc2bc}
+
+\begin{DoxyCompactList}\small\item\em It holds the necessary data to manage a command. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{Indent}{\bf command\+\_\+create}\par
+{\em It allocates the memory for a Command structure.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+16-\/03-\/2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+A Command$\ast$. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{command_8h_a7d2935971c252377cb0fc1c8545dc2bc}{Command} $\ast$ {\bfseries command\+\_\+create} ()\hypertarget{command_8h_a3e1d59fed8f0eb039c403543477d2ce0}{}\label{command_8h_a3e1d59fed8f0eb039c403543477d2ce0}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf command\+\_\+destroy}\par
+{\em It frees the memory of the passed Command$\ast$.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+16-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Command$\ast$} & -\/$>$ The command to be freed.. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which indicates if the process was executed successfully or not. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries command\+\_\+destroy} (\hyperlink{command_8h_a7d2935971c252377cb0fc1c8545dc2bc}{Command} $\ast$)\hypertarget{command_8h_ae919104b5b495669dd15a77936b1affe}{}\label{command_8h_ae919104b5b495669dd15a77936b1affe}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf command\+\_\+get\+\_\+user\+\_\+input}\par
+{\em It gets an input command from the user.
+
+\begin{DoxyAuthor}{Author}
+Profesores P\+P\+R\+OG, edited by Victor Yrazusta and Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+07-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Command$\ast$} & -\/$>$ a command in which the input from the user will be stored. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which indicates if the process was executed successfully or not. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries command\+\_\+get\+\_\+user\+\_\+input} (\hyperlink{command_8h_a7d2935971c252377cb0fc1c8545dc2bc}{Command} $\ast$)\hypertarget{command_8h_a1ceff4b9ade6a5381c217d28c80b1980}{}\label{command_8h_a1ceff4b9ade6a5381c217d28c80b1980}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf command\+\_\+get\+\_\+command}\par
+{\em It returns the T\+\_\+\+Command of the Command$\ast$ passed as an argument.
+
+\begin{DoxyAuthor}{Author}
+Víctor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+07-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Command$\ast$} & -\/$>$ a command whose T\+\_\+\+Command will be returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A T\+\_\+\+Command, which could be \char`\"{}\+N\+O\+\_\+\+C\+M\+D\char`\"{} if the passed pointer is N\+U\+LL, or the command\textquotesingle{}s T\+\_\+\+Command otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a92dd10a73cd77d692dff6c0b2af222f9}{T\+\_\+\+Command} {\bfseries command\+\_\+get\+\_\+command} (\hyperlink{command_8h_a7d2935971c252377cb0fc1c8545dc2bc}{Command} $\ast$)\hypertarget{command_8h_a699dacccff25074bc2ee5cde22dcebd8}{}\label{command_8h_a699dacccff25074bc2ee5cde22dcebd8}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf command\+\_\+get\+\_\+info}\par
+{\em It returns the info of the Command$\ast$ passed as an argument.
+
+\begin{DoxyAuthor}{Author}
+Víctor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+07-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Command$\ast$} & -\/$>$ a command whose info will be returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A char$\ast$, which could be N\+U\+LL if the passed pointer is N\+U\+LL, or the command\textquotesingle{}s info otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+char $\ast$ {\bfseries command\+\_\+get\+\_\+info} (\hyperlink{command_8h_a7d2935971c252377cb0fc1c8545dc2bc}{Command} $\ast$)\hypertarget{command_8h_a449b3e73c4f9b35bec3de911d9092fe2}{}\label{command_8h_a449b3e73c4f9b35bec3de911d9092fe2}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf command\+\_\+print}\par
+{\em It prints on the standard output the values of the command passed as an argument.
+
+\begin{DoxyAuthor}{Author}
+Víctor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+07-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Command$\ast$} & -\/$>$ a command whose data will be printed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An S\+T\+A\+T\+US, which could be \char`\"{}\+E\+R\+R\+O\+R\char`\"{} if the pointer passed as an argument is N\+U\+LL, or \char`\"{}\+O\+K\char`\"{} otherwise.
+\end{DoxyReturn}
+N\+O\+TE\+: This function was created for debugging purposes only and it is not used in the normal execution of the game. }\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries command\+\_\+print} (\hyperlink{command_8h_a7d2935971c252377cb0fc1c8545dc2bc}{Command} $\ast$)\hypertarget{command_8h_ad528a0862548455323650212bfdb0c7a}{}\label{command_8h_ad528a0862548455323650212bfdb0c7a}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf command\+\_\+get\+\_\+str}\par
+{\em This function gets the Command as a char to be used on the graphic\+\_\+engine.
+
+\begin{DoxyAuthor}{Author}
+Eric Morales edited by Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+19-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Command$\ast$} & -\/$>$ a command we will get the string from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A const char$\ast$ with the string of the command. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ {\bfseries command\+\_\+get\+\_\+str} (\hyperlink{types_8h_a92dd10a73cd77d692dff6c0b2af222f9}{T\+\_\+\+Command})\hypertarget{command_8h_a3ed26a34c16490917ff3cc0e8c372667}{}\label{command_8h_a3ed26a34c16490917ff3cc0e8c372667}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+It implements the command interpreter and the necessary functions to work with it. 
+
+\begin{DoxyAuthor}{Author}
+Profesores P\+P\+R\+OG edited by Victor Irazustra, Alejandro Pascual, Eric Morales. 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+19-\/12-\/2014 (creation) 02-\/04-\/2018 (last edit). 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+NU Public License. 
+\end{DoxyCopyright}

@@ -1,0 +1,531 @@
+\hypertarget{player_8h}{}\section{include/player.h File Reference}
+\label{player_8h}\index{include/player.\+h@{include/player.\+h}}
+
+
+It defines a player and the necessary functions to work with it.  
+
+
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}inventory.\+h\char`\"{}}\\*
+Include dependency graph for player.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{player_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{player_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \+\_\+\+Player \hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player}\hypertarget{player_8h_af30e2030635a69690f85e48bc6ef202f}{}\label{player_8h_af30e2030635a69690f85e48bc6ef202f}
+
+\begin{DoxyCompactList}\small\item\em It holds the necessary data to manage a player. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{Indent}{\bf player\+\_\+create}\par
+{\em It creates a player with the id passed.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta, edited by Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+19-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Id} & -\/$>$ the Id of the created player. \\
+\hline
+{\em int} & -\/$>$ which will define the size of the inventory of the player. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Player$\ast$, which points towards the created player. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$ {\bfseries player\+\_\+create} (\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id}, int inventory\+\_\+size)\hypertarget{player_8h_afbb8e3b390ae646cddff75ca6029272e}{}\label{player_8h_afbb8e3b390ae646cddff75ca6029272e}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf player\+\_\+destroy}\par
+{\em It deallocates the memory reserved for the Player$\ast$ passed.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+19-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ a player which will be deallocated. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which could be E\+R\+R\+OR if the pointer passed as an argument is N\+U\+LL, or OK otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries player\+\_\+destroy} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$)\hypertarget{player_8h_a7b6d052be93fe0c1b765e2a1f15baaee}{}\label{player_8h_a7b6d052be93fe0c1b765e2a1f15baaee}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf player\+\_\+set\+\_\+name}\par
+{\em It changes the name of the passed player to the passed name.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+19-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ a player whose name will be changed. \\
+\hline
+{\em char$\ast$} & -\/$>$ a string with the new name for the player. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which could be \char`\"{}\+E\+R\+R\+O\+R\char`\"{} if the pointer passed as an argument is N\+U\+LL, or \char`\"{}\+O\+K\char`\"{} otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries player\+\_\+set\+\_\+name} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$, char $\ast$name)\hypertarget{player_8h_a4398dd9b34eeb7aea457014ac06475fb}{}\label{player_8h_a4398dd9b34eeb7aea457014ac06475fb}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf player\+\_\+set\+\_\+graphic\+\_\+description}\par
+{\em It changes the graphic\+\_\+description of the passed player to the passed graphic\+\_\+description.
+
+\begin{DoxyAuthor}{Author}
+Eric Morales 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+04-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ the player whose graphic\+\_\+description will be changed. \\
+\hline
+{\em char$\ast$} & -\/$>$ a string with the new graphic\+\_\+description for the player. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which could be \char`\"{}\+E\+R\+R\+O\+R\char`\"{} if the pointer passed as an argument is N\+U\+LL, or \char`\"{}\+O\+K\char`\"{} otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries player\+\_\+set\+\_\+graphic\+\_\+description} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$, char $\ast$graphic\+\_\+description)\hypertarget{player_8h_a3ffbf18e583964ec57e0916d272bc134}{}\label{player_8h_a3ffbf18e583964ec57e0916d272bc134}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf object\+\_\+set\+\_\+location}\par
+{\em It changes the location of the passed player to the passed id of the new location.
+
+\begin{DoxyAuthor}{Author}
+V�ctor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+19-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ the player whose location will be changed. \\
+\hline
+{\em Id} & -\/$>$ the new location for the player. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which could be \char`\"{}\+E\+R\+R\+O\+R\char`\"{} if the pointer passed as an argument is N\+U\+LL, or \char`\"{}\+O\+K\char`\"{} otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries player\+\_\+set\+\_\+location} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$, \hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} location)\hypertarget{player_8h_a89c140a37db2ff01961fd4cde1fde6ff}{}\label{player_8h_a89c140a37db2ff01961fd4cde1fde6ff}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf object\+\_\+add\+\_\+object}\par
+{\em It adds the object id to the set of the inventory of the player.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+19-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ the player whose inventory will be modified \\
+\hline
+{\em Id} & -\/$>$ the (object) id that will be added to the set. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which could be \char`\"{}\+E\+R\+R\+O\+R\char`\"{} if the pointer passed as an argument is N\+U\+LL, or \char`\"{}\+O\+K\char`\"{} otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries player\+\_\+add\+\_\+object} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$, \hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} object\+\_\+id)\hypertarget{player_8h_aac23ee8c4fb5c0f267ab9bc4558740c0}{}\label{player_8h_aac23ee8c4fb5c0f267ab9bc4558740c0}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf object\+\_\+del\+\_\+object}\par
+{\em It removes the object id from the set of the inventory of the player.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+19-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ a player whose inventory will be modified. \\
+\hline
+{\em Id} & -\/$>$ the (object) id that will be removed from the set. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which could be \char`\"{}\+E\+R\+R\+O\+R\char`\"{} if the pointer passed as an argument is N\+U\+LL, or \char`\"{}\+O\+K\char`\"{} otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries player\+\_\+del\+\_\+object} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$, \hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} object\+\_\+id)\hypertarget{player_8h_af1504b6bfab73afb5fe341d0d6af03df}{}\label{player_8h_af1504b6bfab73afb5fe341d0d6af03df}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf player\+\_\+get\+\_\+name}\par
+{\em It returns the name of the player passed as an argument.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+19-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ the player whose name will be returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A const char$\ast$, which could be N\+U\+LL if the pointer passed as an argument is N\+U\+LL, or the player\textquotesingle{}s name otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ {\bfseries player\+\_\+get\+\_\+name} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$)\hypertarget{player_8h_a49d3f1d3881efbab6d6db1920866c3ab}{}\label{player_8h_a49d3f1d3881efbab6d6db1920866c3ab}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf player\+\_\+get\+\_\+graphic\+\_\+description}\par
+{\em It returns the graphic\+\_\+description of the player passed as an argument.
+
+\begin{DoxyAuthor}{Author}
+Eric Morales 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+04-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ the player whose graphic\+\_\+description will be returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A const char$\ast$, which could be N\+U\+LL if the pointer passed as an argument is N\+U\+LL, or the player\textquotesingle{}s graphic\+\_\+description otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ {\bfseries player\+\_\+get\+\_\+graphic\+\_\+description} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$)\hypertarget{player_8h_a82cc551b77170a7156d74e4525a82701}{}\label{player_8h_a82cc551b77170a7156d74e4525a82701}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf object\+\_\+get\+\_\+id}\par
+{\em It returns the id of the player passed as an argument.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+19-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ the player whose id will be returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An Id, which could be N\+O\+\_\+\+ID if the pointer passed as an argument is N\+U\+LL, or the player\textquotesingle{}s id otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} {\bfseries player\+\_\+get\+\_\+id} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$)\hypertarget{player_8h_a59ac73ab3cc7d0c888d44bfcf96c6551}{}\label{player_8h_a59ac73ab3cc7d0c888d44bfcf96c6551}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf player\+\_\+get\+\_\+location}\par
+{\em It returns the id of the location of the player passed as an argument.
+
+\begin{DoxyAuthor}{Author}
+V�ctor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+19-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ the player whose location id will be returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Id, which could be N\+O\+\_\+\+ID if the pointer passed as an argument is N\+U\+LL, of the player\textquotesingle{}s location id otherwise. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} {\bfseries player\+\_\+get\+\_\+location} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$)\hypertarget{player_8h_aa0c1b8174545f2675392702307cde9bb}{}\label{player_8h_aa0c1b8174545f2675392702307cde9bb}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf player\+\_\+get\+\_\+objects\+\_\+number}\par
+{\em It returns the current number of objects in the inventory of the player.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ the player from which we will get the number of objects. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An int, which is the current number of objects in the inventory of the player. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+int {\bfseries player\+\_\+get\+\_\+objects\+\_\+number} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$)\hypertarget{player_8h_ac6b2ae036b35cb6abde5af65a278d515}{}\label{player_8h_ac6b2ae036b35cb6abde5af65a278d515}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf player\+\_\+get\+\_\+max\+\_\+objects}\par
+{\em It returns the capacity of the Inventory of the Player.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ a player from which we will get the maximum number of objects. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An int, which is the capacity of the Inventory of the Player and 0 if the Player or the Inventory are N\+U\+LL. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+int {\bfseries player\+\_\+get\+\_\+max\+\_\+objects} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$)\hypertarget{player_8h_aec0055239578db4ed7789444ecb780b8}{}\label{player_8h_aec0055239578db4ed7789444ecb780b8}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf player\+\_\+get\+\_\+object}\par
+{\em It returns the id of the object in the postion specified on the set of the inventory of the player.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ the player which we will get the object from. \\
+\hline
+{\em int} & -\/$>$ an integer that specifies the postion in the set. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Id, which could be N\+O\+\_\+\+ID if the pointer passed as an argument is N\+U\+LL, of the object in the specified position on the set. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} {\bfseries player\+\_\+get\+\_\+object} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$, int position)\hypertarget{player_8h_aff5e36d144f93cde5c574508a7cb184c}{}\label{player_8h_aff5e36d144f93cde5c574508a7cb184c}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf player\+\_\+check\+\_\+object}\par
+{\em It checks if the passed object\+\_\+id is in the set of the inventory of the player.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+03-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ the player whose inventory will be checked seaching the object. \\
+\hline
+{\em Id} & -\/$>$ the id of the object to be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Bool, which is true if passed object id is in the set of the inventory of the player. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a3e5b8192e7d9ffaf3542f1210aec18dd}{B\+O\+OL} {\bfseries player\+\_\+check\+\_\+object} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$, \hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} object\+\_\+id)\hypertarget{player_8h_a10fb2fe31cd9ee4015039581fcfa8e9e}{}\label{player_8h_a10fb2fe31cd9ee4015039581fcfa8e9e}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf player\+\_\+is\+\_\+empty}\par
+{\em This function is used to check if the inventory of player is empty.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+31-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ a player whose inventory will be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Bool, which is true if the inventory of the player is empty or if the player is N\+U\+LL. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a3e5b8192e7d9ffaf3542f1210aec18dd}{B\+O\+OL} {\bfseries player\+\_\+is\+\_\+empty} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$)\hypertarget{player_8h_a79ebe803137e5d8621feb46595ee58db}{}\label{player_8h_a79ebe803137e5d8621feb46595ee58db}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf player\+\_\+is\+\_\+full}\par
+{\em This function is used to check if the inventory of player is full.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+31-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ whose inventory will be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Bool, which is true if the inventory of the player is full or if the player is N\+U\+LL. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a3e5b8192e7d9ffaf3542f1210aec18dd}{B\+O\+OL} {\bfseries player\+\_\+is\+\_\+full} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$)\hypertarget{player_8h_a717d470f9c93469ea00c97fbd058d77a}{}\label{player_8h_a717d470f9c93469ea00c97fbd058d77a}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf player\+\_\+print}\par
+{\em It prints on the standard output the values of the player passed as an argument.
+
+\begin{DoxyAuthor}{Author}
+Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+19-\/02-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Player$\ast$} & -\/$>$ whose data will be printed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which could be \char`\"{}\+E\+R\+R\+O\+R\char`\"{} if the pointer passed as an argument is N\+U\+LL, or \char`\"{}\+O\+K\char`\"{} otherwise.
+\end{DoxyReturn}
+N\+O\+TE\+: This function was created for debugging purposes only and it is not used in the normal execution of the game. }\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries player\+\_\+print} (\hyperlink{player_8h_af30e2030635a69690f85e48bc6ef202f}{Player} $\ast$)\hypertarget{player_8h_afc71635a7e93ea286e80a82a8500b23b}{}\label{player_8h_afc71635a7e93ea286e80a82a8500b23b}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+It defines a player and the necessary functions to work with it. 
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual and Victor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+13-\/02-\/2018 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+NU Public License 
+\end{DoxyCopyright}

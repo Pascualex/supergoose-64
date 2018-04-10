@@ -1,0 +1,149 @@
+\hypertarget{game__reader_8h}{}\section{include/game\+\_\+reader.h File Reference}
+\label{game__reader_8h}\index{include/game\+\_\+reader.\+h@{include/game\+\_\+reader.\+h}}
+
+
+It defines the functions to read games from files, used to initialize the game.  
+
+
+{\ttfamily \#include \char`\"{}space.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}game.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}link.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}player.\+h\char`\"{}}\\*
+Include dependency graph for game\+\_\+reader.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{game__reader_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{Indent}{\bf game\+\_\+reader\+\_\+load\+\_\+spaces}\par
+{\em It loads the data of the spaces from the passed filename to the passed game.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual edited by Eric Morales 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em char$\ast$} & -\/$>$ a string with the name of the file containing the data of the spaces. \\
+\hline
+{\em Game$\ast$} & -\/$>$ a game in which the data of the spaces will be loaded. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US which indicates whether the operation could be executed correctly. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries game\+\_\+reader\+\_\+load\+\_\+spaces} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$, char $\ast$filename)\hypertarget{game__reader_8h_a67d68956c8a51c03d0d5b075d649c3ad}{}\label{game__reader_8h_a67d68956c8a51c03d0d5b075d649c3ad}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+reader\+\_\+load\+\_\+players}\par
+{\em It loads the data of the players from the passed filename to the passed game.
+
+\begin{DoxyAuthor}{Author}
+Eric Morales 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+26-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em char$\ast$} & -\/$>$ a string with the name of the file containing the data of the players. \\
+\hline
+{\em Game$\ast$} & -\/$>$ a game in which the data of the players will be loaded. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US which indicates whether the operation could be executed correctly. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries game\+\_\+reader\+\_\+load\+\_\+players} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$game, char $\ast$filename)\hypertarget{game__reader_8h_ab683c8c4451a43ca9639c813cadbdafc}{}\label{game__reader_8h_ab683c8c4451a43ca9639c813cadbdafc}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+reader\+\_\+load\+\_\+objects}\par
+{\em It loads the data of the objects from the passed filename to the passed game.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual edited by Eric Morales 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+13-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em char$\ast$} & -\/$>$ a string with the name of the file containing the data of the objects. \\
+\hline
+{\em Game$\ast$} & -\/$>$ a game in which the data of the objects will be loaded. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US which indicates whether the operation could be executed correctly. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries game\+\_\+reader\+\_\+load\+\_\+objects} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$game, char $\ast$filename)\hypertarget{game__reader_8h_a07d0cc9ec5cae35a9ad5dd7882357234}{}\label{game__reader_8h_a07d0cc9ec5cae35a9ad5dd7882357234}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf game\+\_\+reader\+\_\+load\+\_\+links}\par
+{\em It loads the data of the links from the passed filename to the passed game.
+
+\begin{DoxyAuthor}{Author}
+Víctor Yrazusta 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+26-\/03-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em char$\ast$} & -\/$>$ a string with the name of the file containing the data of the links. \\
+\hline
+{\em Game$\ast$} & -\/$>$ a game in which the data of the links will be loaded. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US which indicates whether the operation could be executed correctly. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries game\+\_\+reader\+\_\+load\+\_\+links} (\hyperlink{game_8h_a57156d39c530aec3fba3a9dad8c2dc6a}{Game} $\ast$game, char $\ast$filename)\hypertarget{game__reader_8h_aa47ab8dc1e29821281766ab359e8ac8b}{}\label{game__reader_8h_aa47ab8dc1e29821281766ab359e8ac8b}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+It defines the functions to read games from files, used to initialize the game. 
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual and Víctor Yrazusta, edited by Eric Morales 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+08-\/02-\/2018 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+NU Public License 
+\end{DoxyCopyright}

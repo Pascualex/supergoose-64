@@ -1,0 +1,10 @@
+<map id="include/game.h" name="include/game.h">
+<area shape="rect" id="node3" href="$command_8h.html" title="It implements the command interpreter and the necessary functions to work with it. " alt="" coords="5,155,96,181"/>
+<area shape="rect" id="node5" href="$space_8h.html" title="It defines the space and the needed functions. " alt="" coords="121,155,189,181"/>
+<area shape="rect" id="node6" href="$player_8h.html" title="It defines a player and the necessary functions to work with it. " alt="" coords="274,80,342,107"/>
+<area shape="rect" id="node8" href="$object_8h.html" title="It defines an object and the necessary functions to use it. " alt="" coords="375,155,443,181"/>
+<area shape="rect" id="node9" href="$die_8h.html" title="It defines a die and the different functions it needs to be managed. " alt="" coords="421,80,472,107"/>
+<area shape="rect" id="node10" href="$link_8h.html" title="It defines a link and the different functions it needs to be managed. " alt="" coords="503,80,556,107"/>
+<area shape="rect" id="node4" href="$types_8h.html" title="It defines common types. " alt="" coords="275,229,341,256"/>
+<area shape="rect" id="node7" href="$inventory_8h.html" title="It implements the inventory interpreter and the different functions needed to use it..." alt="" coords="265,155,351,181"/>
+</map>

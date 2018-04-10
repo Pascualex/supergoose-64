@@ -1,0 +1,6 @@
+<map id="include/inventory.h" name="include/inventory.h">
+<area shape="rect" id="node2" href="$player_8h.html" title="It defines a player and the necessary functions to work with it. " alt="" coords="72,80,185,107"/>
+<area shape="rect" id="node3" href="$game_8h.html" title="It defines the game interface for each command and rest of needed functions. " alt="" coords="120,155,231,181"/>
+<area shape="rect" id="node4" href="$game__reader_8h.html" title="It defines the functions to read games from files, used to initialize the game. " alt="" coords="5,229,159,256"/>
+<area shape="rect" id="node5" href="$graphic__engine_8h.html" title="It defines a textual graphic engine. " alt="" coords="183,229,349,256"/>
+</map>

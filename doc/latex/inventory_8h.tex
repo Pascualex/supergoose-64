@@ -1,0 +1,368 @@
+\hypertarget{inventory_8h}{}\section{include/inventory.h File Reference}
+\label{inventory_8h}\index{include/inventory.\+h@{include/inventory.\+h}}
+
+
+It implements the inventory interpreter and the different functions needed to use it.  
+
+
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\\*
+Include dependency graph for inventory.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{inventory_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{inventory_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \+\_\+\+Inventory \hyperlink{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{Inventory}\hypertarget{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{}\label{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}
+
+\begin{DoxyCompactList}\small\item\em It holds the necessary data to manage an inventory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{Indent}{\bf inventory\+\_\+create}\par
+{\em It creates an Inventory with the passed int as its capacity.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em int} & -\/$>$ an integer with the capacity of the new inventory. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An Inventory$\ast$, which points towards the created inventory. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{Inventory} $\ast$ {\bfseries inventory\+\_\+create} (int max\+\_\+ids)\hypertarget{inventory_8h_abcf6f24e277f673a39437523a1e4a286}{}\label{inventory_8h_abcf6f24e277f673a39437523a1e4a286}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf inventory\+\_\+destroy}\par
+{\em It destroys the Inventory passed.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Inventory$\ast$} & -\/$>$ the inventory we are willing to destroy. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which indicates whether the operation could be executed correctly. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries inventory\+\_\+destroy} (\hyperlink{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{Inventory} $\ast$)\hypertarget{inventory_8h_a5d82d8e66a459a366d26d70f312504f5}{}\label{inventory_8h_a5d82d8e66a459a366d26d70f312504f5}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf inventory\+\_\+add}\par
+{\em It adds the passed Id to the Set of the Inventory.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Inventory$\ast$} & -\/$>$ the inventory we are willing to add an (object) id in. \\
+\hline
+{\em Id} & -\/$>$ the Id of the object (or other). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which indicates whether the operation could be executed correctly. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries inventory\+\_\+add} (\hyperlink{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{Inventory} $\ast$, \hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} object\+\_\+id)\hypertarget{inventory_8h_a9ad6d908b5f9c83b251b19d7286aef28}{}\label{inventory_8h_a9ad6d908b5f9c83b251b19d7286aef28}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf inventory\+\_\+del}\par
+{\em It removes the passed Id from the Set of the Inventory.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Inventory$\ast$} & -\/$>$ the inventory we want to delete an object in. \\
+\hline
+{\em Id} & -\/$>$ the Id of the object to be destroyed of the inventory. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which indicates whether the operation could be executed correctly. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries inventory\+\_\+del} (\hyperlink{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{Inventory} $\ast$, \hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} object\+\_\+id)\hypertarget{inventory_8h_a031c411e1e061161da757efef99a82b8}{}\label{inventory_8h_a031c411e1e061161da757efef99a82b8}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf inventory\+\_\+set\+\_\+max\+\_\+objects}\par
+{\em It sets the capacity of the Inventory.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Inventory$\ast$} & -\/$>$ the inventory whose max\+\_\+objects is going to be set. \\
+\hline
+{\em int} & -\/$>$ an integer that will define the capacity of the Inventory. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which indicates whether the operation could be executed correctly. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries inventory\+\_\+set\+\_\+max\+\_\+objects} (\hyperlink{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{Inventory} $\ast$, int max\+\_\+objects)\hypertarget{inventory_8h_ac8f4bb3a7415d3b6d887a93680e64949}{}\label{inventory_8h_ac8f4bb3a7415d3b6d887a93680e64949}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf inventory\+\_\+get\+\_\+object\+\_\+id}\par
+{\em It returns the Id of the specified position in the Set of the Inventory.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Inventory$\ast$} & -\/$>$ the inventory we are going to get the object from. \\
+\hline
+{\em int} & -\/$>$ an integer that will specifie the position of the Id in the Set of the Inventory. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Id of the specified position in the Set of the Inventory. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} {\bfseries inventory\+\_\+get\+\_\+object\+\_\+id} (\hyperlink{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{Inventory} $\ast$, int position)\hypertarget{inventory_8h_aaf1dddaa358d892a07aacc12c681db21}{}\label{inventory_8h_aaf1dddaa358d892a07aacc12c681db21}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf inventory\+\_\+get\+\_\+objects\+\_\+number}\par
+{\em It returns the current number of Ids in Set of the Inventory.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Inventory$\ast$} & -\/$>$ the inventory we want to get the quantity of objects in. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The current number of Ids in Set of the Inventory. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+int {\bfseries inventory\+\_\+get\+\_\+objects\+\_\+number} (\hyperlink{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{Inventory} $\ast$)\hypertarget{inventory_8h_a7c3c1ed9aa24751075f36cdb37a42db6}{}\label{inventory_8h_a7c3c1ed9aa24751075f36cdb37a42db6}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf inventory\+\_\+get\+\_\+max\+\_\+objects}\par
+{\em It returns the capacity of the Inventory.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Inventory$\ast$} & -\/$>$ the Inventory we want to get the max objects from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The capacity of the inventory as an int. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+int {\bfseries inventory\+\_\+get\+\_\+max\+\_\+objects} (\hyperlink{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{Inventory} $\ast$)\hypertarget{inventory_8h_a2938d0f22f713aa19214169708811356}{}\label{inventory_8h_a2938d0f22f713aa19214169708811356}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf inventory\+\_\+check\+\_\+object}\par
+{\em It checks if the passed Id is on the Set of the Inventory.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Inventory$\ast$} & -\/$>$ the inventory we are going to check in. \\
+\hline
+{\em Id} & -\/$>$ the Id of the object to be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A B\+O\+OL, which is T\+R\+UE if the object is in the Set. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a3e5b8192e7d9ffaf3542f1210aec18dd}{B\+O\+OL} {\bfseries inventory\+\_\+check\+\_\+object} (\hyperlink{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{Inventory} $\ast$, \hyperlink{types_8h_a845e604fb28f7e3d97549da3448149d3}{Id} object\+\_\+id)\hypertarget{inventory_8h_ad5a6495fb65ec1fa4a3a076e15a7e3e8}{}\label{inventory_8h_ad5a6495fb65ec1fa4a3a076e15a7e3e8}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf inventory\+\_\+is\+\_\+empty}\par
+{\em It checks if the Set of the Inventory is empty.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Inventory$\ast$} & -\/$>$ the inventory we will check if empty or not. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A B\+O\+OL, which is T\+R\+UE if the Set of the Inventory is empty or if the Inventory$\ast$ is N\+U\+LL. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a3e5b8192e7d9ffaf3542f1210aec18dd}{B\+O\+OL} {\bfseries inventory\+\_\+is\+\_\+empty} (\hyperlink{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{Inventory} $\ast$)\hypertarget{inventory_8h_a4789367383af94d5f789a6fc544675a5}{}\label{inventory_8h_a4789367383af94d5f789a6fc544675a5}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf inventory\+\_\+is\+\_\+full}\par
+{\em It checks if the Set of the Inventory is full.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Inventory$\ast$} & -\/$>$ the inventory we will check if full or not. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A B\+O\+OL, which is T\+R\+UE if the Set of the Inventory is full or if the Inventory$\ast$ is N\+U\+LL. 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a3e5b8192e7d9ffaf3542f1210aec18dd}{B\+O\+OL} {\bfseries inventory\+\_\+is\+\_\+full} (\hyperlink{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{Inventory} $\ast$)\hypertarget{inventory_8h_adeab3119b7030970980db8d25f60d3bd}{}\label{inventory_8h_adeab3119b7030970980db8d25f60d3bd}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf inventory\+\_\+print}\par
+{\em It prints the content of the Set of the Inventory.
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Inventory$\ast$} & -\/$>$ the inventory to be printed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A S\+T\+A\+T\+US, which indicates whether the operation could be executed correctly.
+\end{DoxyReturn}
+N\+O\+TE\+: This function was created for debugging purposes only and it is not used in the normal execution of the game. }\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a32c27cc471df37f4fc818d65de0a56c4}{S\+T\+A\+T\+US} {\bfseries inventory\+\_\+print} (\hyperlink{inventory_8h_a2253bf64ac4ce6a9c1d6f39c0b0d32a3}{Inventory} $\ast$)\hypertarget{inventory_8h_aa91cd1c1be9d1cbdfb72d2b48346d4fd}{}\label{inventory_8h_aa91cd1c1be9d1cbdfb72d2b48346d4fd}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+It implements the inventory interpreter and the different functions needed to use it. 
+
+\begin{DoxyAuthor}{Author}
+Alejandro Pascual. 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01-\/04-\/2018 (creation) 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+NU Public License 
+\end{DoxyCopyright}
