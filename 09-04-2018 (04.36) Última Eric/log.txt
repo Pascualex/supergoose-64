@@ -1,5 +1,0 @@
-Grasp sword --> OK
-Following --> OK
-Drop sword --> OK
-Previous --> OK
-Exit --> OK
