@@ -65,7 +65,7 @@ STATUS game_reader_load_spaces(Game *game, char *filename) {
             space_set_name(space, name);
             for (direction = NORTH; direction <= BELOW; direction++) space_set_direction(space, direction, LINK_BASE_ID+directions_ids[direction]);
             space_set_graphic_description(space, graphic_description);
-            space_set_check(space, check);
+            space_set_check_description(space, check);
             game_add_space(game, space);            
         }
     }

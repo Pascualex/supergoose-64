@@ -24,7 +24,7 @@ struct _Space {
     Id directions_ids[6];
     Set *objects_ids; /*A set to store the objects it has*/
     char **graphic_description; /*A graphic description to use in the graphic engine*/
-    char **check; /*A field to store the information of the space and give it when asked playing.*/
+    char **check_description; /*A field to store the information of the space and give it when asked playing.*/
 };
 
 /*This function is used to allocate memory for a space and create it with a given Id*/
@@ -60,18 +60,18 @@ Space *space_create(Id id) {
         }
     }
 
-    new_space->check = (char **) malloc(sizeof(char*)*MAX_CHECK_R);
+    new_space->check_description = (char **) malloc(sizeof(char*)*MAX_CHECK_R);
     for (i = 0; i < MAX_CHECK_R; i++) {
-        new_space->check[i] = (char *) malloc(sizeof(char)*MAX_CHECK_C);
-        if (new_space->check[i] == NULL) {
+        new_space->check_description[i] = (char *) malloc(sizeof(char)*MAX_CHECK_C);
+        if (new_space->check_description[i] == NULL) {
             for (i = i - 1; i >= 0; i--) {
-                free(new_space->check[i]);
+                free(new_space->check_description[i]);
             }
             for (i = 0; i < MAX_GDESC_R; i++) {
                 free(new_space->graphic_description[i]);
             }
             free(new_space->graphic_description);
-            free(new_space->check);
+            free(new_space->check_description);
             set_destroy(new_space->objects_ids);
             free(new_space);
             return NULL;
@@ -87,9 +87,9 @@ Space *space_create(Id id) {
     strcpy(new_space->graphic_description[1], "0000000");
     strcpy(new_space->graphic_description[2], "0000000");
 
-    strcpy(new_space->check[0], "0000000");
-    strcpy(new_space->check[1], "0000000");
-    strcpy(new_space->check[2], "0000000");
+    strcpy(new_space->check_description[0], "0000000");
+    strcpy(new_space->check_description[1], "0000000");
+    strcpy(new_space->check_description[2], "0000000");
 
     return new_space;
 }
@@ -109,11 +109,11 @@ STATUS space_destroy(Space *space) {
         free(space->graphic_description);
     }
 
-    if (space->check != NULL) {
+    if (space->check_description != NULL) {
         for (i = 0; i < MAX_CHECK_R; i++) {
-            if (space->check[i] != NULL) free(space->check[i]);
+            if (space->check_description[i] != NULL) free(space->check_description[i]);
         }
-        free(space->check);
+        free(space->check_description);
         free(space);
     }
 
@@ -174,13 +174,13 @@ STATUS space_set_graphic_description(Space *space, char graphic_description[MAX_
 }
 
 /*This function sets the space description of the space, to use it on the graphic engine*/
-STATUS space_set_check(Space *space, char check[MAX_CHECK_R][MAX_CHECK_C]) {
+STATUS space_set_check_description(Space *space, char check_description[MAX_CHECK_R][MAX_CHECK_C]) {
     int i;
 
-    if (space == NULL || check == NULL) return ERROR;
+    if (space == NULL || check_description == NULL) return ERROR;
 
     for (i = 0; i < MAX_CHECK_R; i++) {
-        strcpy(space->check[i], check[i]);
+        strcpy(space->check_description[i], check_description[i]);
     }
 
     return OK;
@@ -211,11 +211,11 @@ const char *space_get_name(Space *space) {
 }
 
 /*This function gets the description of a space*/
-char **space_get_check(Space *space) {
+char **space_get_check_description(Space *space) {
 
     if (space == NULL) return NULL;
 
-    return space->check;
+    return space->check_description;
 }
 
 /*This function is used to get the id of a space*/

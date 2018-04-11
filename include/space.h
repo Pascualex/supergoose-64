@@ -13,7 +13,7 @@
 #include "types.h"
 
 /**
- * @brief               It holds the necessary data to manage a space.
+ * @brief       It holds the necessary data to manage a space.
  */
 typedef struct _Space Space;
 
@@ -101,7 +101,7 @@ STATUS space_del_object(Space *, Id object_id);
 STATUS space_set_graphic_description(Space *, char graphic_description[3][8]);
 
 /** 
- * @name 		object_set_check
+ * @name 		space_set_check_description
  * @author 		Eric Morales
  * @version             1.0
  * @date		26-03-2018
@@ -110,7 +110,7 @@ STATUS space_set_graphic_description(Space *, char graphic_description[3][8]);
  * @param		check, with the new description for the object.
  * @return		An STATUS, which could be "ERROR" if one of the passed pointers is NULL or if the rename fails, or "OK" otherwise.
  */
-STATUS space_set_check(Space *, char check[MAX_CHECK_R][MAX_CHECK_C]);
+STATUS space_set_check_description(Space *, char check[MAX_CHECK_R][MAX_CHECK_C]);
 
 /** 
  * @name 		space_get_id
@@ -135,15 +135,15 @@ Id space_get_id(Space *);
 const char *space_get_name(Space *);
 
 /** 
- * @name 		space_get_check
+ * @name 		space_get_check_description
  * @author 		Eric Morales
  * @version             1.0
  * @date		26-03-2018
- * @brief               It returns the check of the space passed as an argument.
- * @param               Space*, whose name will be returned.
+ * @brief       It returns the check of the space passed as an argument.
+ * @param       Space*, whose name will be returned.
  * @return		A char**, which could be NULL if the pointer passed as an argument is NULL, or the object's check otherwise.
  */
-char **space_get_check(Space *);
+char **space_get_check_description(Space *);
 
 /** 
  * @name 		space_get_direction

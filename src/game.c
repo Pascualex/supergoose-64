@@ -920,7 +920,7 @@ STATUS game_callback_check(Game *game, char *string) {
     if (game == NULL || game->players == NULL || game->objects == NULL || string == NULL || atoi(string) < 0 || atoi(string) > ID_RANGE) return ERROR;
 
     if (strcmp(string, "space") == 0 || strcmp(string, "s") == 0) {
-        game->last_check = space_get_check(game_find(game, player_get_location(game->players[0])));
+        game->last_check = space_get_check_description(game_find(game, player_get_location(game->players[0])));
         if (game->last_check == NULL) return ERROR;
 
         return OK;
