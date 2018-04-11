@@ -60,7 +60,7 @@ Object *object_create(Id id) {
     }
     newObject->num_tags = 0;
 
-    object_add_tags(newObject, 1, VISIBLE);
+    object_add_tags(newObject, 2, VISIBLE, MOVABLE);
 
     return newObject;
 }
@@ -158,7 +158,7 @@ STATUS object_print(Object *object) {
 STATUS object_add_tags(Object *object, int num_tags, ...) {
     TAG tags[MAX_TAGS];
     va_list tags_list;
-    int i;
+    int i, j;
 
     if (object == NULL || num_tags == 0 || object->num_tags+num_tags >= MAX_TAGS) {
         return ERROR;
@@ -170,11 +170,14 @@ STATUS object_add_tags(Object *object, int num_tags, ...) {
         tags[i] = va_arg(tags_list, TAG);
     }
 
-    for (i = object->num_tags; i < object->num_tags+num_tags; i++) {
-        object->tags[i] = tags[i-object->num_tags];
+    for (i = 0, j = object->num_tags; i < num_tags; i++) {
+    	if (!object_is(object, tags[i])) {
+    		object->tags[j] = tags[i];
+    		j++;
+    	}
     }
 
-    object->num_tags = object->num_tags+num_tags;
+    object->num_tags = object->num_tags+j;
 
     va_end(tags_list);
 
@@ -213,4 +216,31 @@ BOOL object_is(Object *object, TAG tag) {
     }
 
     return FALSE;
+}
+
+STATUS object_remove_tag(Object *object, TAG tag) {
+	int i, j;
+
+	if (object == NULL || !object_is(object, tag)) {
+		return ERROR;
+	}
+
+	i = 0;
+	while (1) {
+		if (i > MAX_TAGS) {
+			return ERROR;
+		}
+
+		if (tag == object->tags[i]) {
+			for (j = i; j < object->num_tags; j++) {
+				object->tags[j] = object->tags[j+1];
+			}
+			object->tags[j] = NO_TAG;
+			object->num_tags--;
+			return OK;
+		}
+		i++;
+	}
+
+	return ERROR;
 }

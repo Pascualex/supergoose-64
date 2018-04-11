@@ -133,9 +133,9 @@ STATUS object_print(Object *);
 
 /**
  * @name 		object_add_tags
- * @author 		Victor Yrazusta
- * @version             1.0
- * @date		10-04-2018
+ * @author 		Victor Yrazusta edited by Victor Yrazusta
+ * @version             2.0
+ * @date		10-04-2018 (creation) 11-04-2018 (edition)
  * @brief               It adds the passed tags to the passed object.
  * @param               Object* -> an object which will recieve the tags.
  * @param               num_tags-> the amount of tags that the funcion will add.
@@ -177,5 +177,17 @@ unsigned int object_get_tags_number(Object *);
  * @return		A BOOL, that indicates wheter or not the object has the passed tag.
  */
 BOOL object_is(Object *, TAG);
+
+/**
+ * @name 		object_remove_tag
+ * @author 		Victor Yrazusta
+ * @version             1.0
+ * @date		11-04-2018
+ * @brief               It removes a specified tag from an object.
+ * @param               Object* -> an object who will have one of his tags removed.
+ * @param               TAG 	-> the tag to remove from the object.
+ * @return		A STATUS that indicates whether the funcion was executed correctly or not.
+ */
+STATUS object_remove_tag(Object *, TAG);
 
 #endif
