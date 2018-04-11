@@ -21,10 +21,7 @@
 struct _Space {
     Id id; /*An Id to distinguish the space from other spaces or things*/
     char name[WORD_SIZE + 1]; /*A char used to name the space*/
-    Id north; /*The northern Id of the northern space*/
-    Id east; /*The eastern Id of the eastern space*/
-    Id south; /*The southern Id of the eastern space*/
-    Id west; /*The western Id of the eastern space*/
+    Id directions_ids[6];
     Set *objects_ids; /*A set to store the objects it has*/
     char **graphic_description; /*A graphic description to use in the graphic engine*/
     char **check; /*A field to store the information of the space and give it when asked playing.*/
@@ -34,6 +31,7 @@ struct _Space {
 Space *space_create(Id id) {
     int i;
     Space *new_space = NULL;
+    DIRECTION direction;
 
     if (id == NO_ID) return NULL;
 
@@ -83,10 +81,7 @@ Space *space_create(Id id) {
     new_space->id = id;
     new_space->name[0] = '\0';
 
-    new_space->north = NO_ID;
-    new_space->south = NO_ID;
-    new_space->east = NO_ID;
-    new_space->west = NO_ID;
+    for (direction = NORTH; direction <= BELOW; direction++) new_space->directions_ids[direction] = NO_ID;
 
     strcpy(new_space->graphic_description[0], "0000000");
     strcpy(new_space->graphic_description[1], "0000000");
@@ -136,41 +131,32 @@ STATUS space_set_name(Space *space, char *name) {
 }
 
 /*This function sets the northern Id of the space*/
-STATUS space_set_north(Space *space, Id id) {
+STATUS space_set_direction(Space *space, DIRECTION direction, Id id) {
 
     if (space == NULL || id < LINK_BASE_ID || id >= LINK_BASE_ID + ID_RANGE) return ERROR;
 
-    space->north = id;
-
-    return OK;
-}
-
-/*This function sets the western Id of the space*/
-STATUS space_set_west(Space *space, Id id) {
-
-    if (space == NULL || id < LINK_BASE_ID || id >= LINK_BASE_ID + ID_RANGE) return ERROR;
-
-    space->west = id;
-
-    return OK;
-}
-
-/*This function sets the southern Id of the space*/
-STATUS space_set_south(Space *space, Id id) {
-
-    if (space == NULL || id < LINK_BASE_ID || id >= LINK_BASE_ID + ID_RANGE) return ERROR;
-
-    space->south = id;
-
-    return OK;
-}
-
-/*This function sets the eastern Id of the space*/
-STATUS space_set_east(Space *space, Id id) {
-
-    if (space == NULL || id < LINK_BASE_ID || id >= LINK_BASE_ID + ID_RANGE) return ERROR;
-
-    space->east = id;
+    switch (direction) {
+        case NORTH:
+            space->directions_ids[0] = id;
+            break;
+        case WEST:
+            space->directions_ids[1] = id;
+            break;
+        case SOUTH:
+            space->directions_ids[2] = id;
+            break;
+        case EAST:
+            space->directions_ids[3] = id;
+            break;
+        case ABOVE:
+            space->directions_ids[4] = id;
+            break;
+        case BELOW:
+            space->directions_ids[5] = id;
+            break;
+        default:
+            return ERROR;
+    }    
 
     return OK;
 }
@@ -241,35 +227,34 @@ Id space_get_id(Space *space) {
 }
 
 /*This function is used to get the northern id of a space*/
-Id space_get_north(Space *space) {
+Id space_get_direction(Space *space, DIRECTION direction) {
 
     if (space == NULL) return NO_ID;
 
-    return space->north;
-}
+    switch (direction) {
+        case NORTH:
+            return space->directions_ids[0];
+            break;
+        case WEST:
+            return space->directions_ids[1];
+            break;
+        case SOUTH:
+            return space->directions_ids[2];
+            break;
+        case EAST:
+            return space->directions_ids[3];
+            break;
+        case ABOVE:
+            return space->directions_ids[4];
+            break;
+        case BELOW:
+            return space->directions_ids[5];
+            break;
+        default:
+            return ERROR;
+    }    
 
-/*This function is used to get the western id of a space*/
-Id space_get_west(Space *space) {
-
-    if (space == NULL) return NO_ID;
-
-    return space->west;
-}
-
-/*This function is used to get the southern id of a space*/
-Id space_get_south(Space *space) {
-
-    if (space == NULL) return NO_ID;
-
-    return space->south;
-}
-
-/*This function is used to get the eastern id of a space*/
-Id space_get_east(Space *space) {
-
-    if (space == NULL) return NO_ID;
-
-    return space->east;
+    return OK;
 }
 
 /*This function is used to get an object from the spaces set*/
@@ -340,32 +325,32 @@ STATUS space_print(Space *space) {
 
     fprintf(stdout, "--> Space (Id: %ld; Name: %s)\n", space->id, space->name);
 
-    idaux = space_get_north(space);
+    idaux = space_get_direction(space, NORTH);
     if (NO_ID != idaux) {
         fprintf(stdout, "---> North link: %ld.\n", idaux);
     } else {
         fprintf(stdout, "---> No north link.\n");
     }
 
-    idaux = space_get_south(space);
+    idaux = space_get_direction(space, WEST);
+    if (NO_ID != idaux) {
+        fprintf(stdout, "---> West link: %ld.\n", idaux);
+    } else {
+        fprintf(stdout, "---> No west link.\n");
+    }
+
+    idaux = space_get_direction(space, SOUTH);
     if (NO_ID != idaux) {
         fprintf(stdout, "---> South link: %ld.\n", idaux);
     } else {
         fprintf(stdout, "---> No south link.\n");
     }
 
-    idaux = space_get_east(space);
+    idaux = space_get_direction(space, EAST);
     if (NO_ID != idaux) {
         fprintf(stdout, "---> East link: %ld.\n", idaux);
     } else {
         fprintf(stdout, "---> No east link.\n");
-    }
-
-    idaux = space_get_west(space);
-    if (NO_ID != idaux) {
-        fprintf(stdout, "---> West link: %ld.\n", idaux);
-    } else {
-        fprintf(stdout, "---> No west link.\n");
     }
 
     set_print(space->objects_ids);

@@ -667,46 +667,18 @@ char **game_get_last_check(Game* game) {
 /*This function is used to get connections between spaces*/
 Link *game_get_connection(Game *game, Space *origin, Space *destination) {
     Link *link = NULL;
+    DIRECTION direction;
 
     if (game == NULL || origin == NULL || destination == NULL) return NULL;
 
-    if (space_get_north(origin) != NO_ID) {
-        link = (Link *) game_find(game, space_get_north(origin));
-        if (link == NULL) {
-            return NULL;
-        }
-        if (link_get_other_side(link, space_get_id(origin)) == space_get_id(destination)) {
-            return link;
+    for (direction = NORTH; direction <= EAST; direction++) {
+        if (space_get_direction(origin, direction) != NO_ID) {
+            link = (Link *) game_find(game, space_get_direction(origin, direction));
+            if (link == NULL) return NULL;
+            if (link_get_other_side(link, space_get_id(origin)) == space_get_id(destination)) return link;
         }
     }
-    if (space_get_west(origin) != NO_ID) {
-        link = (Link *) game_find(game, space_get_west(origin));
-        if (link == NULL) {
-            return NULL;
-        }
-        if (link_get_other_side(link, space_get_id(origin)) == space_get_id(destination)) {
-            return link;
-        }
-    }
-    if (space_get_south(origin) != NO_ID) {
-        link = (Link *) game_find(game, space_get_south(origin));
-        if (link == NULL) {
-            return NULL;
-        }
-        if (link_get_other_side(link, space_get_id(origin)) == space_get_id(destination)) {
-            return link;
-        }
-    }
-    if (space_get_east(origin) != NO_ID) {
-        link = (Link *) game_find(game, space_get_east(origin));
-        if (link == NULL) {
-            return NULL;
-        }
-        if (link_get_other_side(link, space_get_id(origin)) == space_get_id(destination)) {
-            return link;
-        }
-    }
-
+    
     return NULL;
 }
 
@@ -740,7 +712,7 @@ STATUS game_callback_following(Game *game, char *string) {
         }
     }
 
-    link = (Link*) game_find(game, space_get_south((Space *) game_find(game, player_get_location(player))));
+    link = (Link*) game_find(game, space_get_direction((Space *) game_find(game, player_get_location(player)), SOUTH));
 
     if (link_get_status(link) == CLOSED) return ERROR;
 
@@ -769,7 +741,7 @@ STATUS game_callback_previous(Game *game, char *string) {
         if (player == NULL) player = game->players[0];
     }
 
-    link = (Link*) game_find(game, space_get_north((Space *) game_find(game, player_get_location(player))));
+    link = (Link*) game_find(game, space_get_direction((Space *) game_find(game, player_get_location(player)), NORTH));
 
     if (link_get_status(link) == CLOSED) return ERROR;
 
@@ -864,7 +836,7 @@ STATUS game_callback_right(Game *game, char *string) {
         }
     }
 
-    link = (Link*) game_find(game, space_get_east((Space *) game_find(game, player_get_location(player))));
+    link = (Link*) game_find(game, space_get_direction((Space *) game_find(game, player_get_location(player)), EAST));
 
     if (link_get_status(link) == CLOSED) return ERROR;
 
@@ -893,12 +865,10 @@ STATUS game_callback_left(Game *game, char *string) {
         if (player == NULL) player = game->players[0];
     }
 
-    link = (Link*) game_find(game, space_get_west((Space *) game_find(game, player_get_location(player))));
-
+    link = (Link*) game_find(game, space_get_direction((Space *) game_find(game, player_get_location(player)), WEST));
     if (link_get_status(link) == CLOSED) return ERROR;
 
     space = link_get_other_side(link, player_get_location(player));
-
     if (space == NO_ID) return ERROR;
 
     player_set_location(player, space);
@@ -910,10 +880,12 @@ STATUS game_callback_left(Game *game, char *string) {
 STATUS game_callback_move(Game *game, char *string) {
     char *direction[N_DIR] = {"North", "West", "South", "East"};
     char *direction_letter[N_DIR] = {"N", "W", "S", "E"};
-    DIRECTION dir = ERR;
-    int i = 0;
+    DIRECTION dir;
+    int i;
 
-    while (dir == ERR && i <= E && string != NULL) {
+    dir = NO_DIR;
+    i = 0;
+    while (dir == NO_DIR && i <= EAST && string != NULL) {
         if (!strcasecmp(string, direction[i]) || !strcasecmp(string, direction_letter[i])) {
             dir = i;
         } else {
@@ -922,16 +894,16 @@ STATUS game_callback_move(Game *game, char *string) {
     }
 
     switch (dir) {
-        case N:
+        case NORTH:
             if (game_callback_previous(game, string) == ERROR) return ERROR;
             break;
-        case W:
+        case WEST:
             if (game_callback_left(game, string) == ERROR) return ERROR;
             break;
-        case S:
+        case SOUTH:
             if (game_callback_following(game, string) == ERROR) return ERROR;
             break;
-        case E:
+        case EAST:
             if (game_callback_right(game, string) == ERROR) return ERROR;
             break;
         default:

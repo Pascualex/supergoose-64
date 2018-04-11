@@ -52,52 +52,17 @@ STATUS space_destroy(Space *);
 STATUS space_set_name(Space *, char *name);
 
 /** 
- * @name 		space_set_north
- * @author 		Profesores PPROG
- * @version             2.0
- * @date		18-03-2018
- * @brief 		It changes the north of the passed space.
- * @param 		Space* with the space whose north will be changed.
- * @param 		Id with the new north link for the space.
+ * @name 		space_set_direction
+ * @author 		Alejandro Pascual
+ * @version             3.0
+ * @date		11-04-2018
+ * @brief 		It changes the Link of the passed DIRECTION of the passed Space.
+ * @param 		Space* with the space whose Link will be changed.
+ * @param		DIRECTION wich specifies which Link will be changed.
+ * @param 		Id with the new Link for the Space.
  * @return		A STATUS which indicates whether the operation could be executed correctly.
  */
-STATUS space_set_north(Space *, Id);
-
-/**
- * @name 		space_set_west
- * @author 		Profesores PPROG
- * @version             2.0
- * @date		18-03-2018
- * @brief 		It changes the west of the passed space.
- * @param 		Space* with the space whose west will be changed.
- * @param 		Id with the new west link for the space.
- * @return		A STATUS which indicates whether the operation could be executed correctly.
- */
-STATUS space_set_west(Space *, Id);
-
-/** 
- * @name 		space_set_south
- * @author 		Profesores PPROG
- * @version             2.0
- * @date		18-03-2018
- * @brief 		It changes the south of the passed space.
- * @param 		Space* with the space whose south will be changed.
- * @param 		Id with the new south link for the space.
- * @return		A STATUS which indicates whether the operation could be executed correctly.
- */
-STATUS space_set_south(Space *, Id);
-
-/** 
- * @name 		space_set_east
- * @author 		Profesores PPROG
- * @version             2.0
- * @date		18-03-2018
- * @brief 		It changes the east of the passed space.
- * @param 		Space* with the space whose east will be changed.
- * @param 		Id with the new east link for the space.
- * @return		A STATUS which indicates whether the operation could be executed correctly.
- */
-STATUS space_set_east(Space *, Id);
+STATUS space_set_direction(Space *, DIRECTION, Id);
 
 /** 
  * @name 		space_add_object
@@ -181,48 +146,16 @@ const char *space_get_name(Space *);
 char **space_get_check(Space *);
 
 /** 
- * @name 		space_get_north
- * @author 		Profesores PPROG
- * @version             2.0
- * @date		18-03-2018
- * @brief 		It returns the north link of the passed space.
- * @param 		Space* with the space whose north link will be returned.
- * @return		The north link of the space passed.
+ * @name 		space_get_direction
+ * @author 		Alejandro Pascual 
+ * @version             3.0
+ * @date		26-04-2018
+ * @brief 		It returns the Link of the passed DIRECTION of the passed Space.
+ * @param 		Space* with the Space whose Link will be returned.
+ * @param		DIRECTION wich specifies which Link will be returned.
+ * @return		The Link of passed DIRECTION of the space passed.
  */
-Id space_get_north(Space *);
-
-/** 
- * @name 		space_get_west
- * @author 		Profesores PPROG
- * @version             2.0
- * @date		18-03-2018
- * @brief 		It returns the west link of the passed space.
- * @param 		Space* with the space whose west link will be returned.
- * @return		The west link of the space passed.
- */
-Id space_get_west(Space *);
-
-/**
- * @name 		space_get_south
- * @author 		Profesores PPROG
- * @version             2.0
- * @date		18-03-2018
- * @brief 		It returns the south link of the passed space.
- * @param 		Space* with the space whose south link will be returned.
- * @return		The south link of the space passed.
- */
-Id space_get_south(Space *);
-
-/**
- * @name 		space_get_east
- * @author 		Profesores PPROG
- * @version             2.0
- * @date		18-03-2018
- * @brief 		It returns the east link of the passed space.
- * @param 		Space* with the space whose east link will be returned.
- * @return		The east link of the space passed.
- */
-Id space_get_east(Space *);
+Id space_get_direction(Space *, DIRECTION);
 
 /**
  * @name 		space_get_object_id

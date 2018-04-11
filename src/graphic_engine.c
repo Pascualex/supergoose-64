@@ -80,8 +80,8 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     if ((id_act = player_get_location(player)) != NO_ID) {
         space_act = (Space *) game_find(game, id_act);
 
-        id_back = link_get_other_side((Link*) game_find(game, space_get_north(space_act)), id_act);
-        id_next = link_get_other_side((Link*) game_find(game, space_get_south(space_act)), id_act);
+        id_back = link_get_other_side((Link*) game_find(game, space_get_direction(space_act, NORTH)), id_act);
+        id_next = link_get_other_side((Link*) game_find(game, space_get_direction(space_act, SOUTH)), id_act);
 
         space_back = (Space *) game_find(game, id_back);
         space_next = (Space *) game_find(game, id_next);
@@ -138,34 +138,34 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
             screen_area_puts(ge->map, str);
             sprintf(str, "                  |   %s   |", graphic_description_act[0]);
             screen_area_puts(ge->map, str);
-            if (space_get_west(space_act) != NO_ID) {
-                if (space_get_east(space_act) != NO_ID) {
-                    if (link_get_status((Link*) game_find(game, space_get_east(space_act))) == OPEN) {
-                        if (link_get_status((Link*) game_find(game, space_get_west(space_act))) == OPEN) {
-                            sprintf(str, "        %4ld <--- |   %s   | ---> %ld", link_get_other_side((Link*) game_find(game, space_get_west(space_act)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_east(space_act)), id_act));
+            if (space_get_direction(space_act, WEST) != NO_ID) {
+                if (space_get_direction(space_act, EAST) != NO_ID) {
+                    if (link_get_status((Link*) game_find(game, space_get_direction(space_act, EAST))) == OPEN) {
+                        if (link_get_status((Link*) game_find(game, space_get_direction(space_act, WEST))) == OPEN) {
+                            sprintf(str, "        %4ld <--- |   %s   | ---> %ld", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                         } else {
-                            sprintf(str, "        %4ld <--- |   %s   | -|-> %ld", link_get_other_side((Link*) game_find(game, space_get_west(space_act)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_east(space_act)), id_act));
+                            sprintf(str, "        %4ld <--- |   %s   | -|-> %ld", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                         }
                     } else {
-                        if (link_get_status((Link*) game_find(game, space_get_west(space_act))) == OPEN) {
-                            sprintf(str, "        %4ld <-|- |   %s   | ---> %ld", link_get_other_side((Link*) game_find(game, space_get_west(space_act)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_east(space_act)), id_act));
+                        if (link_get_status((Link*) game_find(game, space_get_direction(space_act, WEST))) == OPEN) {
+                            sprintf(str, "        %4ld <-|- |   %s   | ---> %ld", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                         } else {
-                            sprintf(str, "        %4ld <-|- |   %s   | -|-> %ld", link_get_other_side((Link*) game_find(game, space_get_west(space_act)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_east(space_act)), id_act));
+                            sprintf(str, "        %4ld <-|- |   %s   | -|-> %ld", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                         }
                     }
                 } else {
-                    if (link_get_status((Link*) game_find(game, space_get_east(space_act))) == OPEN) {
-                        sprintf(str, "        %4ld <--- |   %s   |", link_get_other_side((Link*) game_find(game, space_get_west(space_act)), id_act), graphic_description_act[1]);
+                    if (link_get_status((Link*) game_find(game, space_get_direction(space_act, EAST))) == OPEN) {
+                        sprintf(str, "        %4ld <--- |   %s   |", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1]);
                     } else {
-                        sprintf(str, "        %4ld <-|- |   %s   |", link_get_other_side((Link*) game_find(game, space_get_west(space_act)), id_act), graphic_description_act[1]);
+                        sprintf(str, "        %4ld <-|- |   %s   |", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1]);
                     }
                 }
             } else {
-                if (space_get_east(space_act) != NO_ID) {
-                    if (link_get_status((Link*) game_find(game, space_get_east(space_act))) == OPEN) {
-                        sprintf(str, "                  |   %s   | ---> %ld", graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_east(space_act)), id_act));
+                if (space_get_direction(space_act, EAST) != NO_ID) {
+                    if (link_get_status((Link*) game_find(game, space_get_direction(space_act, EAST))) == OPEN) {
+                        sprintf(str, "                  |   %s   | ---> %ld", graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                     } else {
-                        sprintf(str, "                  |   %s   | -|-> %ld", graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_east(space_act)), id_act));
+                        sprintf(str, "                  |   %s   | -|-> %ld", graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                     }
                 } else {
                     sprintf(str, "                  |   %s   |", graphic_description_act[1]);

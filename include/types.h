@@ -79,11 +79,13 @@ typedef enum {
  * @brief Direction (to be used when moving through the board)
  */
 typedef enum {
-    ERR = -1, /*!< If something went wrong*/
-    N, /*!< When going North*/
-    W, /*!< When going West*/
-    S, /*!< When going South*/
-    E /*!< When going East*/
+    NO_DIR = -1, /*!< If something went wrong*/
+    NORTH,       /*!< When going north*/
+    WEST,        /*!< When going east*/
+    SOUTH,       /*!< When going south*/
+    EAST,        /*!< When going east*/
+    ABOVE,       /*!< When going above*/
+    BELOW        /*!< When going below*/
 } DIRECTION;
 
 /**
