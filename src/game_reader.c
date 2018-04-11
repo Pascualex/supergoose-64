@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 /*Own libraries*/
+/**/
 
 #include "../include/game.h"
 #include "../include/game_reader.h"
