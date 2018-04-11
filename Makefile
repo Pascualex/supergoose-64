@@ -5,7 +5,7 @@ OBJGAME= ./obj/command.o ./obj/die.o ./obj/game.o ./obj/game_reader.o ./obj/grap
 
 
 #=====================================ALL=====================================#
-all: doxygen dist doxylink test_create SuperGoose_64 run
+all: SuperGoose_64 run
 full: doxygen dist doxylink test_create SuperGoose_64 test valgrind
 
 #================================MAIN PROGRAMS================================#
