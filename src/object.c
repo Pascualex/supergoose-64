@@ -12,7 +12,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdarg.h>
 /*Own libraries*/
 #include "../include/types.h"
 #include "../include/object.h"
@@ -23,8 +22,6 @@ struct _Object {
     char name[WORD_SIZE + 1]; /*A string with the objects name*/
     char **check; /*A longer char with the description of the object*/
     Id location; /*An Id with the space its being located*/
-    TAG tags[MAX_TAGS]; /*A array of tags that define the propierties of the object*/
-    unsigned int num_tags; /*A number that indicates the number of tags*/
 };
 
 /*This function is used to allocate memory and create an object with the given Id*/
@@ -54,13 +51,6 @@ Object *object_create(Id id) {
             return NULL;
         }
     }
-
-    for (i = 0; i < MAX_TAGS; i++) {
-        newObject->tags[i] = NO_TAG;
-    }
-    newObject->num_tags = 0;
-
-    object_add_tags(newObject, 1, VISIBLE);
 
     return newObject;
 }
@@ -153,64 +143,4 @@ STATUS object_print(Object *object) {
     fprintf(stdout, "--> Object (Id: %ld; Name: %s; Location: %ld)\n", object->id, object->name, object->location);
 
     return OK;
-}
-
-STATUS object_add_tags(Object *object, int num_tags, ...) {
-    TAG tags[MAX_TAGS];
-    va_list tags_list;
-    int i;
-
-    if (object == NULL || num_tags == 0 || object->num_tags+num_tags >= MAX_TAGS) {
-        return ERROR;
-    }
-
-    va_start(tags_list, num_tags);
-
-    for (i = 0; i < num_tags; i++) {        /*We retrieve the information of all the tags passed*/
-        tags[i] = va_arg(tags_list, TAG);
-    }
-
-    for (i = object->num_tags; i < object->num_tags+num_tags; i++) {
-        object->tags[i] = tags[i-object->num_tags];
-    }
-
-    object->num_tags = object->num_tags+num_tags;
-
-    va_end(tags_list);
-
-    return OK;
-}
-
-TAG *object_get_tags(Object *object) {
-    
-    if (object == NULL) {
-        return NULL;
-    }
-
-    return object->tags;
-}
-
-unsigned int object_get_tags_number(Object *object) {
-    
-    if (object == NULL) {
-        return 0;
-    }
-
-    return object->num_tags;
-}
-
-BOOL object_is(Object *object, TAG tag) {
-    int i;
-
-    if (object == NULL) {
-        return FALSE;
-    }
-
-    for (i = 0; i < object->num_tags; i++) {
-        if (tag == object->tags[i]) {
-            return TRUE;
-        }
-    }
-
-    return FALSE;
 }

@@ -19,7 +19,7 @@ typedef struct _Object Object;
 
 /**
  * @name 		object_create
- * @author 		Alejandro Pascual edited by Eric Morales and Victor Yrazusta
+ * @author 		Alejandro Pascual edited by Eric Morales
  * @version             2.0
  * @date		19-02-2018
  * @brief               It creates an object with the id passed.
@@ -130,52 +130,5 @@ Id object_get_location(Object *);
  * @details             NOTE: This function was created for debugging purposes only and it is not used in the normal execution of the game.
  */
 STATUS object_print(Object *);
-
-/**
- * @name 		object_add_tags
- * @author 		Victor Yrazusta
- * @version             1.0
- * @date		10-04-2018
- * @brief               It adds the passed tags to the passed object.
- * @param               Object* -> an object which will recieve the tags.
- * @param               num_tags-> the amount of tags that the funcion will add.
- * @return		A STATUS that indicates whether the funcion was executed correctly or not.
- * @details				NOTE: This funcion has a variable number of input parameters.
- */
-STATUS object_add_tags(Object *, int num_tags, ...);
-
-/**
- * @name 		object_get_tags
- * @author 		Victor Yrazusta
- * @version             1.0
- * @date		10-04-2018
- * @brief               It returns all the tags that an object has.
- * @param               Object* -> an object whose tags will be returned.
- * @return		A TAG* which will point towards the tags hold by the passed object.
- */
-TAG *object_get_tags(Object *);
-
-/**
- * @name 		object_get_tags_number
- * @author 		Victor Yrazusta
- * @version             1.0
- * @date		10-04-2018
- * @brief               It returns the number of tags an object has.
- * @param               Object* -> an object whose number of tags will be returned.
- * @return		A unsigned int, which is the amount of tags that the passed object has.
- */
-unsigned int object_get_tags_number(Object *);
-
-/**
- * @name 		object_is
- * @author 		Victor Yrazusta
- * @version             1.0
- * @date		10-04-2018
- * @brief               It checks if an object has a specified tag.
- * @param               Object* -> an object which will be checked.
- * @param               TAG 	-> the tag that the function will look for.
- * @return		A BOOL, that indicates wheter or not the object has the passed tag.
- */
-BOOL object_is(Object *, TAG);
 
 #endif

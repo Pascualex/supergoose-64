@@ -14,7 +14,7 @@
 #include "../include/object_test.h"
 #include "../include/test.h"
 
-#define MAX_TESTS 26
+#define MAX_TESTS 18
 
 /*
  * Main function for Object unit tests. 
@@ -59,14 +59,6 @@ int main(int argc, char** argv) {
     if (all || test == 16) test2_object_get_location();
     if (all || test == 17) test1_object_get_check();
     if (all || test == 18) test2_object_get_check();
-    if (all || test == 19) test1_object_add_tags();
-    if (all || test == 20) test2_object_add_tags();
-    if (all || test == 21) test1_object_get_tags();
-    if (all || test == 22) test2_object_get_tags();
-    if (all || test == 23) test1_object_get_tags_number();
-    if (all || test == 24) test2_object_get_tags_number();
-    if (all || test == 25) test1_object_is();
-    if (all || test == 26) test2_object_is();
 
     PRINT_PASSED_PERCENTAGE;
 
@@ -210,57 +202,4 @@ void test1_object_get_check() {
 void test2_object_get_check() {
     Object *o = NULL;
     PRINT_TEST_RESULT(object_get_check(o) == NULL);
-}
-
-void test1_object_add_tags() {
-    Object *object = NULL;
-    object = object_create (OBJECT_BASE_ID+1);
-    PRINT_TEST_RESULT(object_add_tags(object, 5, VISIBLE, MOVABLE, MOVED, HIDDEN, IS_KEY) == OK);
-    object_destroy(object);
-}
-
-void test2_object_add_tags() {
-    Object *object = NULL;
-    PRINT_TEST_RESULT(object_add_tags(object, 5, VISIBLE, MOVABLE, MOVED, HIDDEN, IS_KEY) == ERROR);
-}
-
-void test1_object_get_tags() {
-    Object *object = NULL;
-    object = object_create (OBJECT_BASE_ID+1);
-    object_add_tags(object, 2, VISIBLE, MOVABLE);
-    PRINT_TEST_RESULT(object_get_tags(object) != NULL);
-    object_destroy(object);
-}
-
-void test2_object_get_tags() {
-    Object *object = NULL;
-    PRINT_TEST_RESULT(object_get_tags(object) == NULL);
-}
-
-void test1_object_get_tags_number() {
-    Object *object = NULL;
-    object = object_create (OBJECT_BASE_ID+1);
-    object_add_tags(object, 2, VISIBLE, MOVABLE);
-    PRINT_TEST_RESULT(object_get_tags_number(object) == 3);
-    object_destroy(object);
-}
-
-void test2_object_get_tags_number() {
-    Object *object = NULL;
-    PRINT_TEST_RESULT(object_get_tags_number(object) == 0);
-}
-
-void test1_object_is() {
-    Object *object = NULL;
-    object = object_create (OBJECT_BASE_ID+1);
-    object_add_tags(object, 2, VISIBLE, MOVABLE);
-    PRINT_TEST_RESULT(object_is(object, VISIBLE));
-    object_destroy(object);
-}
-
-void test2_object_is() {
-    Object *object = NULL;
-    object = object_create (OBJECT_BASE_ID+1);
-    PRINT_TEST_RESULT(!object_is(object, HIDDEN));
-    object_destroy(object);
 }
