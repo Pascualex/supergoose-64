@@ -22,7 +22,7 @@ struct _Player {
     char name[WORD_SIZE+1]; /*A char to give a name to the player*/
     char graphic_description[MAX_GDESC_C]; /*A char to give a grapgic description to the player*/
     Id location; /*A location to store where the player is*/
-    Inventory *inventory; /*An object_id to store the object the player carries Alex guapo :3 se que leeras esto TQ. Ahora me estoy sintiendo muy secretaria*/
+    Inventory *inventory; /*An object_id to store the object the player carries*/
 };
 
 /*This function is used to allocate memory for a player and create it with a given Id*/
