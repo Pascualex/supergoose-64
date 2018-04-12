@@ -26,7 +26,7 @@ void test2_space_create();
 
 /**
  * @test Test function for space_name setting
- * @pre Space Id and string with space name
+ * @pre Space and string with space name
  * @post Ouput==OK 
  */
 void test1_space_set_name();
@@ -40,70 +40,63 @@ void test2_space_set_name();
 
 /**
  * @test Test function for space_name setting
- * @pre Space Id and NULL char
+ * @pre Space and NULL char
  * @post Output==ERROR
  */
 void test3_space_set_name();
 
 /**
  * @test Test function for north Id setting
- * @pre Space ID
+ * @pre Space, NORTH direction and Space Id
  * @post OUTPUT==OK
  */
-void test1_space_set_north();
-
-/**
- * @test Test function for a non created space for north Id setting
- * @pre NULL Space and direction Id
- * @post OUTPUT==ERROR
- */
-void test2_space_set_north();
-
-/**
- * @test Test function for south Id setting
- * @pre Space ID and direction Id
- * @post OUTPUT==OK
- */
-void test1_space_set_south();
-
-/**
- * @test Test function for a non created space for south Id setting
- * @pre NULL Space and direction Id
- * @post OUTPUT==ERROR
- */
-void test2_space_set_south();
-
-/**
- * @test Test function for east Id setting
- * @pre Space ID and direction Id
- * @post OUTPUT==OK
- */
-void test1_space_set_east();
-
-/**
- * @test Test function for a non created space for east Id setting
- * @pre NULL Space and direction Id
- * @post OUTPUT==ERROR
- */
-void test2_space_set_east();
+void test1_space_set_direction();
 
 /**
  * @test Test function for west Id setting
- * @pre Space ID and direction Id
+ * @pre Space, WEST direction and Space Id
  * @post OUTPUT==OK
  */
-void test1_space_set_west();
+void test2_space_set_direction();
 
 /**
- * @test Test function for a non created space for west Id setting
- * @pre NULL Space and direction Id
+ * @test Test function for south Id setting
+ * @pre Space, SOUTH direction and Space Id
+ * @post OUTPUT==OK
+ */
+void test3_space_set_direction();
+
+/**
+ * @test Test function for east Id setting
+ * @pre Space, EAST direction and Space Id
+ * @post OUTPUT==OK
+ */
+void test4_space_set_direction();
+
+/**
+ * @test Test function for a non valid direction
+ * @pre NO_DIR Direction
  * @post OUTPUT==ERROR
  */
-void test2_space_set_west();
+void test5_space_set_direction();
+
+/**
+ * @test Test function for a non valid Id
+ * @pre NO_ID Id
+ * @post OUTPUT==ERROR
+ */
+void test6_space_set_direction();
+
+/**
+ * @test Test function for a non created space
+ * @pre NULL Space
+ * @post OUTPUT==ERROR
+ */
+void test7_space_set_direction();
 
 /**
  * @test Test graphic description of a space setting
- * @pre Space ID and a graphic description string
+ * @pre Space and a graphic description string
  * @post OUTPUT==OK
  */
 void test1_space_set_graphic_description();
@@ -117,14 +110,14 @@ void test2_space_set_graphic_description();
 
 /**
  * @test Test Space with a NULL graphic description
- * @pre Space ID and NULL string
+ * @pre Space and NULL string
  * @post OUTPUT==ERROR
  */
 void test3_space_set_graphic_description();
 
 /**
  * @test Test check of a space setting
- * @pre Space ID and a check string
+ * @pre Space and a check string
  * @post OUTPUT==OK
  */
 void test1_space_set_check();
@@ -138,14 +131,14 @@ void test2_space_set_check();
 
 /**
  * @test Test Space with a NULL check
- * @pre Space ID and NULL string
+ * @pre Space and NULL string
  * @post OUTPUT==ERROR
  */
 void test3_space_set_check();
 
 /**
  * @test Test to see if Space has the given name
- * @pre Space ID and a string with a name on it
+ * @pre Space and a string with a name on it
  * @post OUTPUT==0 (equal strings)
  */
 void test1_space_get_name();
@@ -159,7 +152,7 @@ void test2_space_get_name();
 
 /**
  * @test Test to see if Space has the given Id
- * @pre Space ID
+ * @pre Space
  * @post OUTPUT==OK
  */
 void test1_space_get_id();
@@ -173,63 +166,49 @@ void test2_space_get_id();
 
 /**
  * @test Test to check if the northern Id is set and got properly
- * @pre Space ID and north Id
- * @post OUTPUT==OK
+ * @pre Space and NORTH Direction
+ * @post OUTPUT==Northern Id
  */
-void test1_space_get_north();
-
-/**
- * @test Test to check if a NULL Space northern Id is 0
- * @pre NULL Id and a north Id
- * @post OUTPUT==NO_ID
- */
-void test2_space_get_north();
-
-/**
- * @test Test to check if the southern Id is set and got properly
- * @pre Space ID and south Id
- * @post OUTPUT==OK
- */
-void test1_space_get_south();
-
-/**
- * @test Test to check if a NULL Space southern Id is 0
- * @pre NULL Id and a south Id
- * @post OUTPUT==NO_ID
- */
-void test2_space_get_south();
-
-/**
- * @test Test to check if the eastern Id is set and got properly
- * @pre Space ID and east Id
- * @post OUTPUT==OK
- */
-void test1_space_get_east();
-
-/**
- * @test Test to check if a NULL Space eastern Id is 0
- * @pre NULL Id and a east Id
- * @post OUTPUT==NO_ID
- */
-void test2_space_get_east();
+void test1_space_get_direction();
 
 /**
  * @test Test to check if the western Id is set and got properly
- * @pre Space ID and west Id
- * @post OUTPUT==OK
+ * @pre Space and WEST Direction
+ * @post OUTPUT==Western Id
  */
-void test1_space_get_west();
+void test2_space_get_direction();
 
 /**
- * @test Test to check if a NULL Space western Id is 0
- * @pre NULL Id and a west Id
+ * @test Test to check if the souther Id is set and got properly
+ * @pre Space and SOUTH Direction
+ * @post OUTPUT==Southern Id
+ */
+void test3_space_get_direction();
+
+/**
+ * @test Test to check if the eastern Id is set and got properly
+ * @pre Space and EAST Direction
+ * @post OUTPUT==Eastern Id
+ */
+void test4_space_get_direction();
+
+/**
+ * @test Test to check if a NO_DIR Direction returns NO_ID
+ * @pre NO_DIR Direction
  * @post OUTPUT==NO_ID
  */
-void test2_space_get_west();
+void test5_space_get_direction();
+
+/**
+ * @test Test to check if a NULL Space returns NO_ID
+ * @pre NULL Space
+ * @post OUTPUT==NO_ID
+ */
+void test6_space_get_direction();
 
 /**
  * @test Test to see if the created space with the given graphic description returns the given graphic description
- * @pre Space ID and a string with a graphic description
+ * @pre Space and a string with a graphic description
  * @post OUTPUT==OK
  */
 void test1_space_get_graphic_description();
@@ -243,7 +222,7 @@ void test2_space_get_graphic_description();
 
 /**
  * @test Test to see if the created space with the given check returns the given check
- * @pre Space ID and a string with a check
+ * @pre Space and a string with a check
  * @post OUTPUT==OK
  */
 void test1_space_get_check();
@@ -257,7 +236,7 @@ void test2_space_get_check();
 
 /**
  * @test Test to see if the Id of an object on a Space is the one the Space returns.
- * @pre Space ID and Object Id
+ * @pre Space and Object Id
  * @post OUTPUT==OK
  */
 void test1_space_get_object_id();
@@ -271,14 +250,14 @@ void test2_space_get_object_id();
 
 /**
  * @test Test if Space carries one object
- * @pre Space ID and object
+ * @pre Space and object
  * @post OUTPUT==1
  */
 void test1_space_get_objects_number();
 
 /**
  * @test Test if Space its generated with 0 objects
- * @pre Space ID 
+ * @pre Space 
  * @post OUTPUT==0
  */
 void test2_space_get_objects_number();
@@ -292,14 +271,14 @@ void test3_space_get_objects_number();
 
 /**
  * @test Test if the maximum amount a Space can handle is the sets maximum
- * @pre Space ID and integer
+ * @pre Space and integer
  * @post OUTPUT==SET_MAX_IDS
  */
 void test4_space_get_objects_number();
 
 /**
  * @test Test if objects are added properly onto the space
- * @pre Space ID and object Id
+ * @pre Space and object Id
  * @post OUTPUT==OK
  */
 void test1_space_add_object();
@@ -313,7 +292,7 @@ void test2_space_add_object();
 
 /**
  * @test Test if a created Id is empty
- * @pre Space ID 
+ * @pre Space 
  * @post OUTPUT==TRUE
  */
 void test1_space_is_empty();
@@ -327,21 +306,21 @@ void test2_space_is_empty();
 
 /**
  * @test Test if a Space with an object is not empty
- * @pre Space ID and Object Id
+ * @pre Space and Object Id
  * @post OUTPUT==FALSE
  */
 void test3_space_is_empty();
 
 /**
  * @test Test if a space with all the objects possible is or not full
- * @pre Space ID and objects Id
+ * @pre Space and objects Id
  * @post OUTPUT==TRUE
  */
 void test1_space_is_full();
 
 /**
  * @test Test if an empty Space is full
- * @pre Space Id
+ * @pre Space
  * @post OUTPUT==ERROR
  */
 void test2_space_is_full();
@@ -355,31 +334,30 @@ void test3_space_is_full();
 
 /**
  * @test Test if a Space with one only object is full
- * @pre Space ID and Object Id
+ * @pre Space and Object Id
  * @post OUTPUT==FALSE
  */
 void test4_space_is_full();
 
 /**
  * @test Test to see if the check object works on a Space with an object
- * @pre Space ID and Object Id
+ * @pre Space and Object Id
  * @post OUTPUT==TRUE
  */
 void test1_space_check_object();
 
 /**
  * @test Test to see if the check object works on a Space without an object
- * @pre Space ID 
+ * @pre Space 
  * @post OUTPUT==FALSE
  */
 void test2_space_check_object();
 
 /**
  * @test Test to see if the check object works on a NULL Space
- * @pre Space ID 
+ * @pre Space 
  * @post OUTPUT==FALSE
  */
 void test3_space_check_object();
 
 #endif
-

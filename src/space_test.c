@@ -15,7 +15,7 @@
 #include "../include/space_test.h"
 #include "../include/test.h"
 
-#define MAX_TESTS 56
+#define MAX_TESTS 51
 
 /*
  * Main function for SPACE unit tests. 
@@ -42,62 +42,57 @@ int main(int argc, char** argv) {
         }
     }
 
-    if (all || test == 1) test1_space_create();
-    if (all || test == 2) test2_space_create();
-    if (all || test == 3) test1_space_set_name();
-    if (all || test == 4) test2_space_set_name();
-    if (all || test == 5) test3_space_set_name();
-    if (all || test == 6) test1_space_set_north();
-    if (all || test == 7) test2_space_set_north();
-    if (all || test == 8) test1_space_set_north();
-    if (all || test == 9) test2_space_set_north();
-    if (all || test == 10) test1_space_set_south();
-    if (all || test == 11) test2_space_set_south();
-    if (all || test == 12) test1_space_set_east();
-    if (all || test == 13) test2_space_set_east();
-    if (all || test == 15) test1_space_set_west();
-    if (all || test == 16) test2_space_set_west();
-    if (all || test == 17) test1_space_set_graphic_description();
-    if (all || test == 18) test2_space_set_graphic_description();
-    if (all || test == 19) test3_space_set_graphic_description();
-    if (all || test == 20) test1_space_set_check();
-    if (all || test == 21) test2_space_set_check();
-    if (all || test == 22) test3_space_set_check();
-    if (all || test == 23) test1_space_get_name();
-    if (all || test == 24) test2_space_get_name();
-    if (all || test == 25) test1_space_get_north();
-    if (all || test == 26) test2_space_get_north();
-    if (all || test == 27) test1_space_get_south();
-    if (all || test == 28) test2_space_get_south();
-    if (all || test == 29) test1_space_get_east();
-    if (all || test == 30) test2_space_get_east();
-    if (all || test == 31) test1_space_get_west();
-    if (all || test == 32) test2_space_get_west();
-    if (all || test == 33) test1_space_get_id();
-    if (all || test == 34) test2_space_get_id();
-    if (all || test == 35) test1_space_get_graphic_description();
-    if (all || test == 36) test2_space_get_graphic_description();
-    if (all || test == 37) test1_space_get_check();
-    if (all || test == 37) test2_space_get_check();
-    if (all || test == 38) test1_space_get_object_id();
-    if (all || test == 39) test2_space_get_object_id();
-    if (all || test == 40) test1_space_get_objects_number();
-    if (all || test == 41) test2_space_get_objects_number();
-    if (all || test == 42) test3_space_get_objects_number();
-    if (all || test == 43) test4_space_get_objects_number();
-    if (all || test == 44) test1_space_add_object();
-    if (all || test == 45) test2_space_add_object();
-    if (all || test == 46) test1_space_is_empty();
-    if (all || test == 47) test2_space_is_empty();
-    if (all || test == 48) test3_space_is_empty();
-    if (all || test == 49) test1_space_is_full();
-    if (all || test == 50) test2_space_is_full();
-    if (all || test == 51) test3_space_is_full();
-    if (all || test == 52) test4_space_is_full();
-    if (all || test == 53) test1_space_check_object();
-    if (all || test == 54) test2_space_check_object();
-    if (all || test == 55) test3_space_check_object();
-    if (all || test == 56) test3_space_check_object();
+    if (all || test ==  1) test1_space_create();
+    if (all || test ==  2) test2_space_create();
+    if (all || test ==  3) test1_space_set_name();
+    if (all || test ==  4) test2_space_set_name();
+    if (all || test ==  5) test3_space_set_name();
+    if (all || test ==  6) test1_space_set_direction();
+    if (all || test ==  7) test2_space_set_direction();
+    if (all || test ==  8) test3_space_set_direction();
+    if (all || test ==  9) test4_space_set_direction();
+    if (all || test == 10) test5_space_set_direction();
+    if (all || test == 11) test6_space_set_direction();
+    if (all || test == 12) test7_space_set_direction();
+    if (all || test == 13) test1_space_set_graphic_description();
+    if (all || test == 14) test2_space_set_graphic_description();
+    if (all || test == 15) test3_space_set_graphic_description();
+    if (all || test == 16) test1_space_set_check();
+    if (all || test == 17) test2_space_set_check();
+    if (all || test == 18) test3_space_set_check();
+    if (all || test == 19) test1_space_get_name();
+    if (all || test == 20) test2_space_get_name();
+    if (all || test == 21) test1_space_get_direction();
+    if (all || test == 22) test2_space_get_direction();
+    if (all || test == 23) test3_space_get_direction();
+    if (all || test == 24) test4_space_get_direction();
+    if (all || test == 25) test5_space_get_direction();
+    if (all || test == 26) test6_space_get_direction();
+    if (all || test == 27) test1_space_get_id();
+    if (all || test == 28) test2_space_get_id();
+    if (all || test == 29) test1_space_get_graphic_description();
+    if (all || test == 30) test2_space_get_graphic_description();
+    if (all || test == 31) test1_space_get_check();
+    if (all || test == 32) test2_space_get_check();
+    if (all || test == 33) test1_space_get_object_id();
+    if (all || test == 34) test2_space_get_object_id();
+    if (all || test == 35) test1_space_get_objects_number();
+    if (all || test == 36) test2_space_get_objects_number();
+    if (all || test == 37) test3_space_get_objects_number();
+    if (all || test == 38) test4_space_get_objects_number();
+    if (all || test == 39) test1_space_add_object();
+    if (all || test == 40) test2_space_add_object();
+    if (all || test == 41) test1_space_is_empty();
+    if (all || test == 42) test2_space_is_empty();
+    if (all || test == 43) test3_space_is_empty();
+    if (all || test == 44) test1_space_is_full();
+    if (all || test == 45) test2_space_is_full();
+    if (all || test == 46) test3_space_is_full();
+    if (all || test == 47) test4_space_is_full();
+    if (all || test == 48) test1_space_check_object();
+    if (all || test == 49) test2_space_check_object();
+    if (all || test == 50) test3_space_check_object();
+    if (all || test == 51) test3_space_check_object();
 
     PRINT_PASSED_PERCENTAGE;
 
@@ -137,52 +132,51 @@ void test3_space_set_name() {
     space_destroy(s);
 }
 
-void test1_space_set_north() {
+void test1_space_set_direction() {
     Space *s = NULL;
     s = space_create(SPACE_BASE_ID+1);
-    PRINT_TEST_RESULT(space_set_north(s, LINK_BASE_ID+1) == OK);
+    PRINT_TEST_RESULT(space_set_direction(s, NORTH, LINK_BASE_ID+1) == OK);
     space_destroy(s);
 }
 
-void test2_space_set_north() {
-    Space *s = NULL;
-    PRINT_TEST_RESULT(space_set_north(s, LINK_BASE_ID+1) == ERROR);
-}
-
-void test1_space_set_south() {
+void test2_space_set_direction() {
     Space *s = NULL;
     s = space_create(SPACE_BASE_ID+1);
-    PRINT_TEST_RESULT(space_set_south(s, LINK_BASE_ID+1) == OK);
+    PRINT_TEST_RESULT(space_set_direction(s, WEST, LINK_BASE_ID+1) == OK);
     space_destroy(s);
 }
 
-void test2_space_set_south() {
-    Space *s = NULL;
-    PRINT_TEST_RESULT(space_set_south(s, LINK_BASE_ID+1) == ERROR);
-}
-
-void test1_space_set_east() {
+void test3_space_set_direction() {
     Space *s = NULL;
     s = space_create(SPACE_BASE_ID+1);
-    PRINT_TEST_RESULT(space_set_east(s, LINK_BASE_ID+1) == OK);
+    PRINT_TEST_RESULT(space_set_direction(s, SOUTH, LINK_BASE_ID+1) == OK);
     space_destroy(s);
 }
 
-void test2_space_set_east() {
-    Space *s = NULL;
-    PRINT_TEST_RESULT(space_set_east(s, LINK_BASE_ID+1) == ERROR);
-}
-
-void test1_space_set_west() {
+void test4_space_set_direction() {
     Space *s = NULL;
     s = space_create(SPACE_BASE_ID+1);
-    PRINT_TEST_RESULT(space_set_west(s, LINK_BASE_ID+1) == OK);
+    PRINT_TEST_RESULT(space_set_direction(s, EAST, LINK_BASE_ID+1) == OK);
     space_destroy(s);
 }
 
-void test2_space_set_west() {
+void test5_space_set_direction() {
     Space *s = NULL;
-    PRINT_TEST_RESULT(space_set_west(s, LINK_BASE_ID+1) == ERROR);
+    s = space_create(SPACE_BASE_ID+1);
+    PRINT_TEST_RESULT(space_set_direction(s, NO_DIR, LINK_BASE_ID+1) == ERROR);
+    space_destroy(s);
+}
+
+void test6_space_set_direction() {
+    Space *s = NULL;
+    s = space_create(SPACE_BASE_ID+1);
+    PRINT_TEST_RESULT(space_set_direction(s, NORTH, NO_ID) == ERROR);
+    space_destroy(s);
+}
+
+void test7_space_set_direction() {
+    Space *s = NULL;
+    PRINT_TEST_RESULT(space_set_direction(s, NORTH, LINK_BASE_ID+1) == ERROR);
 }
 
 void test1_space_set_graphic_description() {
@@ -222,7 +216,7 @@ void test1_space_set_check() {
     for (i = 0; i < MAX_CHECK_R; i++) {
         strcpy(check[i], "CHECK");
     }
-    PRINT_TEST_RESULT(space_set_check(s, check) == OK);
+    PRINT_TEST_RESULT(space_set_check_description(s, check) == OK);
     space_destroy(s);
 }
 
@@ -233,13 +227,13 @@ void test2_space_set_check() {
     for (i = 0; i < MAX_CHECK_R; i++) {
         strcpy(check[i], "CHECK");
     }
-    PRINT_TEST_RESULT(space_set_check(s, check) == ERROR);
+    PRINT_TEST_RESULT(space_set_check_description(s, check) == ERROR);
 }
 
 void test3_space_set_check() {
     Space *s = NULL;
     s = space_create(SPACE_BASE_ID+1);
-    PRINT_TEST_RESULT(space_set_check(s, NULL) == ERROR);
+    PRINT_TEST_RESULT(space_set_check_description(s, NULL) == ERROR);
     space_destroy(s);
 }
 
@@ -268,56 +262,47 @@ void test2_space_get_id() {
     PRINT_TEST_RESULT(space_get_id(s) == NO_ID);
 }
 
-void test1_space_get_north() {
+void test1_space_get_direction() {
     Space *s = NULL;
     s = space_create(SPACE_BASE_ID+1);
-    space_set_north(s, LINK_BASE_ID+1);
-    PRINT_TEST_RESULT(space_get_north(s) == LINK_BASE_ID+1);
+    space_set_direction(s, NORTH, LINK_BASE_ID+1);
+    PRINT_TEST_RESULT(space_get_direction(s, NORTH) == LINK_BASE_ID+1);
     space_destroy(s);
 }
 
-void test2_space_get_north() {
-    Space *s = NULL;
-    PRINT_TEST_RESULT(space_get_north(s) == NO_ID);
-}
-
-void test1_space_get_south() {
+void test2_space_get_direction() {
     Space *s = NULL;
     s = space_create(SPACE_BASE_ID+1);
-    space_set_south(s, LINK_BASE_ID+1);
-    PRINT_TEST_RESULT(space_get_south(s) == LINK_BASE_ID+1);
+    space_set_direction(s, WEST, LINK_BASE_ID+1);
+    PRINT_TEST_RESULT(space_get_direction(s, WEST) == LINK_BASE_ID+1);
     space_destroy(s);
 }
 
-void test2_space_get_south() {
-    Space *s = NULL;
-    PRINT_TEST_RESULT(space_get_south(s) == NO_ID);
-}
-
-void test1_space_get_east() {
+void test3_space_get_direction() {
     Space *s = NULL;
     s = space_create(SPACE_BASE_ID+1);
-    space_set_east(s, LINK_BASE_ID+1);
-    PRINT_TEST_RESULT(space_get_east(s) == LINK_BASE_ID+1);
+    space_set_direction(s, SOUTH, LINK_BASE_ID+1);
+    PRINT_TEST_RESULT(space_get_direction(s, SOUTH) == LINK_BASE_ID+1);
     space_destroy(s);
 }
 
-void test2_space_get_east() {
-    Space *s = NULL;
-    PRINT_TEST_RESULT(space_get_east(s) == NO_ID);
-}
-
-void test1_space_get_west() {
+void test4_space_get_direction() {
     Space *s = NULL;
     s = space_create(SPACE_BASE_ID+1);
-    space_set_west(s, LINK_BASE_ID+1);
-    PRINT_TEST_RESULT(space_get_west(s) == LINK_BASE_ID+1);
+    space_set_direction(s, EAST, LINK_BASE_ID+1);
+    PRINT_TEST_RESULT(space_get_direction(s, EAST) == LINK_BASE_ID+1);
     space_destroy(s);
 }
 
-void test2_space_get_west() {
+void test5_space_get_direction() {
     Space *s = NULL;
-    PRINT_TEST_RESULT(space_get_west(s) == NO_ID);
+    s = space_create(SPACE_BASE_ID+1);
+    PRINT_TEST_RESULT(space_get_direction(s, NO_DIR) == NO_ID);
+}
+
+void test6_space_get_direction() {
+    Space *s = NULL;
+    PRINT_TEST_RESULT(space_get_direction(s, NORTH) == NO_ID);
 }
 
 void test1_space_get_graphic_description() {
@@ -356,8 +341,8 @@ void test1_space_get_check() {
     for (i = 0; i < MAX_CHECK_R; i++) {
         strcpy(check[i], "CHECK");
     }
-    space_set_check(s, check);
-    checkEnd = space_get_check(s);
+    space_set_check_description(s, check);
+    checkEnd = space_get_check_description(s);
     for (i = 0; i < MAX_CHECK_R; i++) {
         if (strcmp(checkEnd[i], "CHECK") != 0) {
             result = 1;
@@ -369,7 +354,7 @@ void test1_space_get_check() {
 
 void test2_space_get_check() {
     Space *s = NULL;
-    PRINT_TEST_RESULT(space_get_check(s) == NULL);
+    PRINT_TEST_RESULT(space_get_check_description(s) == NULL);
 }
 
 void test1_space_get_object_id() {

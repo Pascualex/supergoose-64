@@ -158,7 +158,7 @@ STATUS object_print(Object *object) {
 STATUS object_add_tags(Object *object, int num_tags, ...) {
     TAG tags[MAX_TAGS];
     va_list tags_list;
-    int i, j;
+    int i;
 
     if (object == NULL || num_tags == 0 || object->num_tags+num_tags >= MAX_TAGS) {
         return ERROR;
@@ -170,14 +170,12 @@ STATUS object_add_tags(Object *object, int num_tags, ...) {
         tags[i] = va_arg(tags_list, TAG);
     }
 
-    for (i = 0, j = object->num_tags; i < num_tags; i++) {
+    for (i = 0; i < num_tags; i++) {
     	if (!object_is(object, tags[i])) {
-    		object->tags[j] = tags[i];
-    		j++;
+    		object->tags[object->num_tags] = tags[i];
+    		object->num_tags++;
     	}
     }
-
-    object->num_tags = object->num_tags+j;
 
     va_end(tags_list);
 

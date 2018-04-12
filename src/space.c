@@ -28,10 +28,10 @@ struct _Space {
 };
 
 /*This function is used to allocate memory for a space and create it with a given Id*/
-Space *space_create(Id id) {
-    int i;
+Space *space_create(Id id) {    
     Space *new_space = NULL;
     DIRECTION direction;
+    int i;
 
     if (id == NO_ID) return NULL;
 
@@ -251,7 +251,7 @@ Id space_get_direction(Space *space, DIRECTION direction) {
             return space->directions_ids[5];
             break;
         default:
-            return ERROR;
+            return NO_ID;
     }    
 
     return OK;

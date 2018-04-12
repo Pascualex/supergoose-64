@@ -239,9 +239,9 @@ void test2_object_get_tags() {
 
 void test1_object_get_tags_number() {
     Object *object = NULL;
-    object = object_create (OBJECT_BASE_ID+1);
+    object = object_create(OBJECT_BASE_ID+1);
     object_add_tags(object, 2, IS_KEY, GLOWING);
-    PRINT_TEST_RESULT(object_get_tags_number(object) == 4);
+    PRINT_TEST_RESULT(object_get_tags_number(object) == 4);    
     object_destroy(object);
 }
 
@@ -253,8 +253,8 @@ void test2_object_get_tags_number() {
 void test1_object_is() {
     Object *object = NULL;
     object = object_create (OBJECT_BASE_ID+1);
-    object_add_tags(object, 2, VISIBLE, MOVABLE);
-    PRINT_TEST_RESULT(object_is(object, VISIBLE));
+    object_add_tags(object, 2, IS_KEY, MOVABLE);
+    PRINT_TEST_RESULT(object_is(object, IS_KEY));
     object_destroy(object);
 }
 

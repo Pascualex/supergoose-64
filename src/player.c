@@ -199,4 +199,3 @@ STATUS player_print(Player *player) {
 
     return OK;
 }
-
