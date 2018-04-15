@@ -220,15 +220,15 @@ T_Command game_get_last_command(Game *);
 STATUS game_get_status_last_command(Game* game);
 
 /**
- * @name 		game_get_last_check
+ * @name 		game_get_last_text_description
  * @author 		Eric Morales
  * @version             1.0
  * @date		26-03-2018
- * @brief               It gives us the last description ordered by the user.
- * @param               Game* -> a game  which will give us the description we are asking for.
- * @return		A const char* with the description.
+ * @brief               It gives us the last text description ordered by the user.
+ * @param               Game* -> a game  which will give us the text description we are asking for.
+ * @return		A const char* with the text description.
  */
-char **game_get_last_check(Game* game);
+char **game_get_last_text_description(Game* game);
 
 /**
  * @name 		game_add_link

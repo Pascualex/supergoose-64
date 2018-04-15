@@ -353,18 +353,10 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     screen_area_puts(ge->feedback, str);
 
     /* Paint the in the chat area */
-    if (last_cmd == 10 && game_get_status_last_command(game) == OK) {
-        screen_area_clear(ge->chat);
-        chat = game_get_last_check(game);
-        for (i = 0; i < MAX_CHECK_R; i++) {
-            strcpy(str, chat[i]);
-            screen_area_puts(ge->chat, str);
-        }
-    } else if (last_cmd == NO_CMD){
-        screen_area_clear(ge->chat);
-        sprintf(str, " Here is the check field.");
-        screen_area_puts(ge->chat, str);
-        sprintf(str, " To use it, type 'check' or 'c' followed by an object or by 'space'.");
+    screen_area_clear(ge->chat);
+    chat = game_get_last_text_description(game);
+    for (i = 0; i < MAX_TDESC_R; i++) {
+        strcpy(str, chat[i]);
         screen_area_puts(ge->chat, str);
     }
 

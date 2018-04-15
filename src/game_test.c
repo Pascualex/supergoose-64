@@ -91,9 +91,9 @@ int main(int argc, char** argv) {
     if (all || test == 46) test2_game_get_last_command();
     if (all || test == 47) test1_game_get_status_last_command();
     if (all || test == 48) test2_game_get_status_last_command();
-    if (all || test == 49) test1_game_get_last_check();
-    if (all || test == 50) test2_game_get_last_check();
-    if (all || test == 51) test3_game_get_last_check();
+    if (all || test == 49) test1_game_get_last_text_description();
+    if (all || test == 50) test2_game_get_last_text_description();
+    if (all || test == 51) test3_game_get_last_text_description();
     if (all || test == 52) test1_game_add_link();
     if (all || test == 53) test2_game_add_link();
     if (all || test == 54) test3_game_add_link();
@@ -562,7 +562,7 @@ void test2_game_get_status_last_command() {
     PRINT_TEST_RESULT(game_get_status_last_command(game) == ERROR);
 }
 
-void test1_game_get_last_check() {
+void test1_game_get_last_text_description() {
     Game *game = NULL;
     Command *command = NULL;
     char **desc = NULL;
@@ -571,18 +571,18 @@ void test1_game_get_last_check() {
     game_create_from_file(game, "./datafiles/test.dat");
     command_get_user_input(command);
     game_update(game, command);
-    desc = game_get_last_check(game);
+    desc = game_get_last_text_description(game);
     PRINT_TEST_RESULT(!strcmp(desc[0], "OBJ DESC 1") || !strcmp(desc[1], "OBJ DESC 2") || !strcmp(desc[2], "OBJ DESC 3"));
     game_destroy(game);
     command_destroy(command);
 }
 
-void test2_game_get_last_check() {
+void test2_game_get_last_text_description() {
     Game *game = NULL;
-    PRINT_TEST_RESULT(game_get_last_check(game) == NULL);
+    PRINT_TEST_RESULT(game_get_last_text_description(game) == NULL);
 }
 
-void test3_game_get_last_check() {
+void test3_game_get_last_text_description() {
     Game *game = NULL;
     Command *command = NULL;
     char **desc = NULL;
@@ -591,7 +591,7 @@ void test3_game_get_last_check() {
     game_create_from_file(game, "./datafiles/test.dat");
     command_get_user_input(command);
     game_update(game, command);
-    desc = game_get_last_check(game);
+    desc = game_get_last_text_description(game);
     PRINT_TEST_RESULT(!strcmp(desc[0], "CHECK DESC 1") || !strcmp(desc[1], "CHECK DESC 2") || !strcmp(desc[2], "CHECK DESC 3"));
     game_destroy(game);
     command_destroy(command);

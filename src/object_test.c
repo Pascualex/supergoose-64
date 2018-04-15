@@ -128,10 +128,10 @@ void test3_object_set_location() {
 
 void test1_object_set_check() {
     Object *o = NULL;
-    char check[MAX_CHECK_R][MAX_CHECK_C];
+    char check[MAX_TDESC_R][MAX_TDESC_C];
     int i;
     o = object_create(OBJECT_BASE_ID+1);
-    for (i = 0; i < MAX_CHECK_R; i++) {
+    for (i = 0; i < MAX_TDESC_R; i++) {
         strcpy(check[i], "CHECK");
     }
     PRINT_TEST_RESULT(object_set_check(o, check) == OK);
@@ -140,9 +140,9 @@ void test1_object_set_check() {
 
 void test2_object_set_check() {
     Object *o = NULL;
-    char check[MAX_CHECK_R][MAX_CHECK_C];
+    char check[MAX_TDESC_R][MAX_TDESC_C];
     int i;
-    for (i = 0; i < MAX_CHECK_R; i++) {
+    for (i = 0; i < MAX_TDESC_R; i++) {
         strcpy(check[i], "CHECK");
     }
     PRINT_TEST_RESULT(object_set_check(o, check) == ERROR);
@@ -188,17 +188,17 @@ void test2_object_get_location() {
 
 void test1_object_get_check() {
     Object *o = NULL;
-    char check[MAX_CHECK_R][MAX_CHECK_C];
+    char check[MAX_TDESC_R][MAX_TDESC_C];
     char **checkEnd;
     int i;
     int result = 0;
     o = object_create(OBJECT_BASE_ID+1);
-    for (i = 0; i < MAX_CHECK_R; i++) {
+    for (i = 0; i < MAX_TDESC_R; i++) {
         strcpy(check[i], "CHECK");
     }
     object_set_check(o, check);
     checkEnd = object_get_check(o);
-    for (i = 0; i < MAX_CHECK_R; i++) {
+    for (i = 0; i < MAX_TDESC_R; i++) {
         if (strcmp(checkEnd[i], "CHECK") != 0) {
             result = 1;
         }

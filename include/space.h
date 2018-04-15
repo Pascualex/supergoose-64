@@ -101,16 +101,28 @@ STATUS space_del_object(Space *, Id object_id);
 STATUS space_set_graphic_description(Space *, char graphic_description[3][8]);
 
 /** 
+ * @name 		space_set_basic_description
+ * @author 		Alejandro Pascual
+ * @version             1.0
+ * @date		15-04-2018
+ * @brief       It changes the basic description of the passed object to the passed char**.
+ * @param       Object*.
+ * @param		basic_description, with the new basic description for the object.
+ * @return		An STATUS, which could be "ERROR" if one of the passed pointers is NULL or if the set fails, or "OK" otherwise.
+ */
+STATUS space_set_basic_description(Space *, char basic_description[MAX_TDESC_R][MAX_TDESC_C]);
+
+/** 
  * @name 		space_set_check_description
  * @author 		Eric Morales
  * @version             1.0
  * @date		26-03-2018
- * @brief               It changes the check description of the passed object to the passed char**.
- * @param               Object*, which must point towards the object that wants to be renamed.
- * @param		check, with the new description for the object.
- * @return		An STATUS, which could be "ERROR" if one of the passed pointers is NULL or if the rename fails, or "OK" otherwise.
+ * @brief       It changes the check description of the passed object to the passed char**.
+ * @param       Object*.
+ * @param		check_description, with the new check description for the object.
+ * @return		An STATUS, which could be "ERROR" if one of the passed pointers is NULL or if the set fails, or "OK" otherwise.
  */
-STATUS space_set_check_description(Space *, char check[MAX_CHECK_R][MAX_CHECK_C]);
+STATUS space_set_check_description(Space *, char check_description[MAX_TDESC_R][MAX_TDESC_C]);
 
 /** 
  * @name 		space_get_id
@@ -134,14 +146,36 @@ Id space_get_id(Space *);
  */
 const char *space_get_name(Space *);
 
+/**
+ * @name 		space_get_graphic_description
+ * @author 		Alejandro Pascual
+ * @version             1.0
+ * @date		05-03-2018
+ * @brief 		It returns the graphic description that the passed space holds.
+ * @param 		Space* with the space whose graphic description will be returned.
+ * @return		A char**, with the graphic description of the space passed.
+ */
+char **space_get_graphic_description(Space *);
+
+/** 
+ * @name 		space_get_basic_description
+ * @author 		Alejandro Pascual
+ * @version             1.0
+ * @date		15-04-2018
+ * @brief       It returns the basic description of the space passed as an argument.
+ * @param       Space*, whose basic description will be returned.
+ * @return		A char**, which could be NULL if the pointer passed as an argument is NULL, or the object's basic description otherwise.
+ */
+char **space_get_basic_description(Space *);
+
 /** 
  * @name 		space_get_check_description
  * @author 		Eric Morales
  * @version             1.0
  * @date		26-03-2018
- * @brief       It returns the check of the space passed as an argument.
- * @param       Space*, whose name will be returned.
- * @return		A char**, which could be NULL if the pointer passed as an argument is NULL, or the object's check otherwise.
+ * @brief       It returns the check description of the space passed as an argument.
+ * @param       Space*, whose check description will be returned.
+ * @return		A char**, which could be NULL if the pointer passed as an argument is NULL, or the object's check description otherwise.
  */
 char **space_get_check_description(Space *);
 
@@ -179,17 +213,6 @@ Id space_get_object_id(Space *, int position);
  * @return		The number of objects that the passed space holds.
  */
 int space_get_objects_number(Space *);
-
-/**
- * @name 		space_get_graphic_description
- * @author 		Alejandro Pascual
- * @version             1.0
- * @date		05-03-2018
- * @brief 		It returns the graphic description that the passed space holds.
- * @param 		Space* with the space whose graphic description will be returned.
- * @return		A char**, with the graphic description of the space passed.
- */
-char **space_get_graphic_description(Space *);
 
 /**
  * @name 		space_check_object

@@ -27,8 +27,8 @@ struct _Command {
 };
 
 /*We define the different commands we can use, in long and short forms*/
-char *cmd_to_str[N_CMD] = {"No command", "Unknown", "Exit", "Following", "Previous", "Grasp", "Drop", "Throw", "Right", "Left", "Move", "Check"};
-char *short_cmd_to_str[N_CMD] = {"", "", "e", "f", "p", "g", "d", "t", "r", "l", "m", "c"};
+char *cmd_to_str[N_CMD] = {"No command", "Unknown", "Exit", "Move", "Previous", "Left", "Following", "Right", "Grasp", "Drop", "Throw", "Check"};
+char *short_cmd_to_str[N_CMD] = {"", "", "e", "m", "p", "l", "f", "r", "g", "d", "t", "c"};
 
 /*The following function creates commands, allocating memory for them and starting the command to No_CMD and the information as it was empty.*/
 Command *command_create() {

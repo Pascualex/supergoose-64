@@ -41,10 +41,10 @@ Object *object_create(Id id) {
     newObject->name[0] = '\0';
     newObject->location = NO_ID;
 
-    newObject->check = (char **) malloc(sizeof(char*)*MAX_CHECK_R);
+    newObject->check = (char **) malloc(sizeof(char*)*MAX_TDESC_R);
 
-    for (i = 0; i < MAX_CHECK_R; i++) {
-        newObject->check[i] = (char *) malloc(sizeof(char)*MAX_CHECK_C);
+    for (i = 0; i < MAX_TDESC_R; i++) {
+        newObject->check[i] = (char *) malloc(sizeof(char)*MAX_TDESC_C);
         if (newObject->check[i] == NULL) {
             for (i = i-1; i >= 0; i--) {
                 free(newObject->check[i]);
@@ -72,7 +72,7 @@ STATUS object_destroy(Object *object) {
     if (object == NULL) return ERROR;
 
     if (object->check != NULL) {
-        for (i = 0; i < MAX_CHECK_R; i++) {
+        for (i = 0; i < MAX_TDESC_R; i++) {
             if (object->check[i] != NULL) free(object->check[i]);
         }
         free(object->check);
@@ -91,12 +91,12 @@ STATUS object_set_name(Object *object, char *name) {
 }
 
 /*The following function is used to set the description of an object*/
-STATUS object_set_check(Object *object, char check[MAX_CHECK_R][MAX_CHECK_C]) {
+STATUS object_set_check(Object *object, char check[MAX_TDESC_R][MAX_TDESC_C]) {
     int i;
 
     if (object == NULL || check == NULL) return ERROR;
 
-    for (i = 0; i < MAX_CHECK_R; i++) {
+    for (i = 0; i < MAX_TDESC_R; i++) {
         strcpy(object->check[i], check[i]);
     }
 

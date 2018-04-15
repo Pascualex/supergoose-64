@@ -116,25 +116,46 @@ void test2_space_set_graphic_description();
 void test3_space_set_graphic_description();
 
 /**
- * @test Test check of a space setting
- * @pre Space and a check string
+ * @test Test basic description of a space setting
+ * @pre Space and a basic description string
  * @post OUTPUT==OK
  */
-void test1_space_set_check();
+void test1_space_set_basic_description();
 
 /**
- * @test Test check setting on a NULL Space
- * @pre NULL Space and check string
+ * @test Test basic description setting on a NULL Space
+ * @pre NULL Space and basic description string
  * @post OUTPUT==ERROR
  */
-void test2_space_set_check();
+void test2_space_set_basic_description();
 
 /**
- * @test Test Space with a NULL check
+ * @test Test Space with a NULL basic description
  * @pre Space and NULL string
  * @post OUTPUT==ERROR
  */
-void test3_space_set_check();
+void test3_space_set_basic_description();
+
+/**
+ * @test Test check description of a space setting
+ * @pre Space and a check description string
+ * @post OUTPUT==OK
+ */
+void test1_space_set_check_description();
+
+/**
+ * @test Test check description setting on a NULL Space
+ * @pre NULL Space and check description string
+ * @post OUTPUT==ERROR
+ */
+void test2_space_set_check_description();
+
+/**
+ * @test Test Space with a NULL check description
+ * @pre Space and NULL string
+ * @post OUTPUT==ERROR
+ */
+void test3_space_set_check_description();
 
 /**
  * @test Test to see if Space has the given name
@@ -221,18 +242,33 @@ void test1_space_get_graphic_description();
 void test2_space_get_graphic_description();
 
 /**
- * @test Test to see if the created space with the given check returns the given check
- * @pre Space and a string with a check
+ * @test Test to see if the created space with the given basic description returns the given basic description
+ * @pre Space and a string with a basic description
  * @post OUTPUT==OK
  */
-void test1_space_get_check();
+void test1_space_get_basic_description();
 
 /**
- * @test Test to check if the check of a NULL Space is NULL
+ * @test Test to basic if the basic description of a NULL Space is NULL
  * @pre NULL Space 
  * @post OUTPUT==NULL
  */
-void test2_space_get_check();
+void test2_space_get_basic_description();
+
+
+/**
+ * @test Test to see if the created space with the given check description returns the given check description
+ * @pre Space and a string with a check description
+ * @post OUTPUT==OK
+ */
+void test1_space_get_check_description();
+
+/**
+ * @test Test to check if the check description of a NULL Space is NULL
+ * @pre NULL Space 
+ * @post OUTPUT==NULL
+ */
+void test2_space_get_check_description();
 
 /**
  * @test Test to see if the Id of an object on a Space is the one the Space returns.

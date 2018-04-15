@@ -24,6 +24,7 @@ struct _Space {
     Id directions_ids[6];
     Set *objects_ids; /*A set to store the objects it has*/
     char **graphic_description; /*A graphic description to use in the graphic engine*/
+    char **basic_description; /*A field to store the basic information of the space.*/
     char **check_description; /*A field to store the information of the space and give it when asked playing.*/
 };
 
@@ -60,12 +61,33 @@ Space *space_create(Id id) {
         }
     }
 
-    new_space->check_description = (char **) malloc(sizeof(char*)*MAX_CHECK_R);
-    for (i = 0; i < MAX_CHECK_R; i++) {
-        new_space->check_description[i] = (char *) malloc(sizeof(char)*MAX_CHECK_C);
+    new_space->basic_description = (char **) malloc(sizeof(char*)*MAX_TDESC_R);
+    for (i = 0; i < MAX_TDESC_R; i++) {
+        new_space->basic_description[i] = (char *) malloc(sizeof(char)*MAX_TDESC_C);
+        if (new_space->basic_description[i] == NULL) {
+            for (i = i - 1; i >= 0; i--) {
+                free(new_space->basic_description[i]);
+            }
+            for (i = 0; i < MAX_GDESC_R; i++) {
+                free(new_space->graphic_description[i]);
+            }
+            free(new_space->graphic_description);
+            free(new_space->basic_description);
+            set_destroy(new_space->objects_ids);
+            free(new_space);
+            return NULL;
+        }
+    }
+
+    new_space->check_description = (char **) malloc(sizeof(char*)*MAX_TDESC_R);
+    for (i = 0; i < MAX_TDESC_R; i++) {
+        new_space->check_description[i] = (char *) malloc(sizeof(char)*MAX_TDESC_C);
         if (new_space->check_description[i] == NULL) {
             for (i = i - 1; i >= 0; i--) {
                 free(new_space->check_description[i]);
+            }
+            for (i = 0; i < MAX_TDESC_R; i++) {
+                free(new_space->basic_description[i]);
             }
             for (i = 0; i < MAX_GDESC_R; i++) {
                 free(new_space->graphic_description[i]);
@@ -83,13 +105,17 @@ Space *space_create(Id id) {
 
     for (direction = NORTH; direction <= BELOW; direction++) new_space->directions_ids[direction] = NO_ID;
 
-    strcpy(new_space->graphic_description[0], "0000000");
-    strcpy(new_space->graphic_description[1], "0000000");
-    strcpy(new_space->graphic_description[2], "0000000");
+    strcpy(new_space->graphic_description[0], "NO_GDES");
+    strcpy(new_space->graphic_description[1], "NO_GDES");
+    strcpy(new_space->graphic_description[2], "NO_GDES");
 
-    strcpy(new_space->check_description[0], "0000000");
-    strcpy(new_space->check_description[1], "0000000");
-    strcpy(new_space->check_description[2], "0000000");
+    strcpy(new_space->basic_description[0], "No basic description.");
+    strcpy(new_space->basic_description[1], "No basic description.");
+    strcpy(new_space->basic_description[2], "No basic description.");
+
+    strcpy(new_space->check_description[0], "No check description.");
+    strcpy(new_space->check_description[1], "No check description.");
+    strcpy(new_space->check_description[2], "No check description.");
 
     return new_space;
 }
@@ -109,13 +135,21 @@ STATUS space_destroy(Space *space) {
         free(space->graphic_description);
     }
 
+    if (space->basic_description!= NULL) {
+        for (i = 0; i < MAX_TDESC_R; i++) {
+            if (space->basic_description[i] != NULL) free(space->basic_description[i]);
+        }
+        free(space->basic_description);
+    }
+
     if (space->check_description != NULL) {
-        for (i = 0; i < MAX_CHECK_R; i++) {
+        for (i = 0; i < MAX_TDESC_R; i++) {
             if (space->check_description[i] != NULL) free(space->check_description[i]);
         }
-        free(space->check_description);
-        free(space);
+        free(space->check_description);        
     }
+
+    free(space);
 
     return OK;
 }
@@ -173,13 +207,26 @@ STATUS space_set_graphic_description(Space *space, char graphic_description[MAX_
     return OK;
 }
 
-/*This function sets the space description of the space, to use it on the graphic engine*/
-STATUS space_set_check_description(Space *space, char check_description[MAX_CHECK_R][MAX_CHECK_C]) {
+/*This function sets the basic description of the space, to use it on the graphic engine*/
+STATUS space_set_basic_description(Space *space, char basic_description[MAX_TDESC_R][MAX_TDESC_C]) {
+    int i;
+
+    if (space == NULL || basic_description == NULL) return ERROR;
+
+    for (i = 0; i < MAX_TDESC_R; i++) {
+        strcpy(space->basic_description[i], basic_description[i]);
+    }
+
+    return OK;
+}
+
+/*This function sets the check description of the space, to use it on the graphic engine*/
+STATUS space_set_check_description(Space *space, char check_description[MAX_TDESC_R][MAX_TDESC_C]) {
     int i;
 
     if (space == NULL || check_description == NULL) return ERROR;
 
-    for (i = 0; i < MAX_CHECK_R; i++) {
+    for (i = 0; i < MAX_TDESC_R; i++) {
         strcpy(space->check_description[i], check_description[i]);
     }
 
@@ -210,7 +257,23 @@ const char *space_get_name(Space *space) {
     return space->name;
 }
 
-/*This function gets the description of a space*/
+/*This function is used to get the graphic description of a set to use it in the graphic engine later*/
+char **space_get_graphic_description(Space *space) {
+
+    if (space == NULL) return NULL;
+
+    return space->graphic_description;
+}
+
+/*This function gets the basic description of a space*/
+char **space_get_basic_description(Space *space) {
+
+    if (space == NULL) return NULL;
+
+    return space->basic_description;
+}
+
+/*This function gets the check description of a space*/
 char **space_get_check_description(Space *space) {
 
     if (space == NULL) return NULL;
@@ -271,14 +334,6 @@ int space_get_objects_number(Space *space) {
     if (space == NULL) return 0;
 
     return set_get_ids_number(space->objects_ids);
-}
-
-/*This function is used to get the graphic description of a set to use it in the graphic engine later*/
-char **space_get_graphic_description(Space *space) {
-
-    if (space == NULL) return NULL;
-
-    return space->graphic_description;
 }
 
 /*This function checks if the given object id is stored in the spaces set*/

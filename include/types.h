@@ -10,8 +10,8 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#define MAX_CHECK_C 75              /*!< Maximum columns of the check field*/
-#define MAX_CHECK_R 3               /*!< Maximum rows of the check field*/
+#define MAX_TDESC_C 75              /*!< Maximum columns of the text descriptions*/
+#define MAX_TDESC_R 3               /*!< Maximum rows of the text descriptions*/
 
 #define MAX_GDESC_C 8               /*!< Maximum columns of the graphic description field*/
 #define MAX_GDESC_R 3               /*!< Maximum rows of the graphic description field*/
@@ -65,14 +65,14 @@ typedef enum {
     NO_CMD = -1, /*!< No command */
     UNKNOWN, /*!< Unknown command (beginning)*/
     EXIT, /*!< Exit game */
+    MOVE, /*!< Move to a direction */
     FOLLOWING, /*!< Following space (old)*/
-    PREVIOUS, /*!< Previous space (old) */
+    LEFT, /*!< Left space (old) */ 
+    PREVIOUS, /*!< Previous space (old)*/
+    RIGHT, /*!< Right space (old) */
     GRASP, /*!< Grasp an object */
     DROP, /*!< Drop an object */
-    THROW, /*!< Roll the die */
-    RIGHT, /*!< Right space (old) */
-    LEFT, /*!< Left space (old) */
-    MOVE, /*!< Move to a direction */
+    THROW, /*!< Roll the die */      
     CHECK
 } T_Command;
 

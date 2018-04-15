@@ -42,7 +42,7 @@ struct _Game {
     int players_number; /*Used to store the real amount of players being stored in the game*/
     int objects_number; /*Used to store the amount of objects the game has*/
     int dies_number; /*Used to store the number of dies the game is using*/
-    char **last_check; /*Used to store the last check information printed*/
+    char **last_text_description; /*Used to store the last text description printed*/
     T_Command last_cmd; /*Used to store the last command used by the user for graphic engine purposes*/
     STATUS status_last_cmd; /*Used to store if the last command worked correctly or not*/
 };
@@ -56,33 +56,78 @@ STATUS game_callback_exit(Game *, char *);
 
 /* FUNCTION:
  *
- * @name 		game_callback_following
+ * @name        game_callback_move
  * 
- * @author 		Víctor Yrazusta edited by Eric Morales
- * @version 	2.0 
- * @date		27-02-2018
+ * @author      Eric Morales
+ * @version     1.0 
+ * @date        22-03-2018
+ * @description It allows the player to move to the introducted direction.
+ * @input
+ *              game:       A Game*, where we are playing.
+ *              string:     A char*, which should contain the direction where we are going.
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not. 
+ */
+STATUS game_callback_move(Game *game, char *string);
+
+/* FUNCTION:
+ *
+ * @name        game_callback_previous
+ * 
+ * @author      Víctor Yrazusta edited by Eric Morales
+ * @version     2.0 
+ * @date        27-02-2018
  * @description It allows the player to move to the right.
  * @input
- *				game:		A Game*, whose player will try to move facing south.
- *         		string:    	A char*, which should contain the id of the player who will move.
- * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
+ *              game:       A Game*, whose player will try to move facing north.
+ *              string:     A char*, which should contain the id of the player who will move.
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not. 
+ */
+STATUS game_callback_previous(Game *, char *);
+
+/* FUNCTION:
+ *
+ * @name        game_callback_left
+ * 
+ * @author      Víctor Yrazusta edited by Eric Morales
+ * @version     2.0 
+ * @date        27-02-2018
+ * @description It allows the player to move to the left.
+ * @input
+ *              game:       A Game*, whose player will try to move facing east.
+ *              string:     A char*, which should contain the id of the player who will move.
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not. 
+ */
+STATUS game_callback_left(Game *, char *);
+
+/* FUNCTION:
+ *
+ * @name        game_callback_following
+ * 
+ * @author      Víctor Yrazusta edited by Eric Morales
+ * @version     2.0 
+ * @date        27-02-2018
+ * @description It allows the player to move to the right.
+ * @input
+ *              game:       A Game*, whose player will try to move facing south.
+ *              string:     A char*, which should contain the id of the player who will move.
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not. 
  */
 STATUS game_callback_following(Game *, char *);
 
 /* FUNCTION:
  *
- * @name 		game_callback_previous
+ * @name        game_callback_right
  * 
- * @author 		Víctor Yrazusta edited by Eric Morales
- * @version 	2.0 
- * @date		27-02-2018
+ * @author      Víctor Yrazusta edited by Eric Morales
+ * @version     2.0 
+ * @date        27-02-2018
  * @description It allows the player to move to the right.
  * @input
- *				game:		A Game*, whose player will try to move facing north.
- *         		string:    	A char*, which should contain the id of the player who will move.
- * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
+ *              game:       A Game*, whose player will try to move facing west.
+ *              string:     A char*, which should contain the id of the player who will move.
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not. 
  */
-STATUS game_callback_previous(Game *, char *);
+STATUS game_callback_right(Game *, char *);
 
 /* FUNCTION:
  *
@@ -98,21 +143,6 @@ STATUS game_callback_previous(Game *, char *);
  * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
  */
 STATUS game_callback_check(Game *game, char *string);
-
-/* FUNCTION:
- *
- * @name 		game_callback_move
- * 
- * @author 		Eric Morales
- * @version 	1.0 
- * @date		22-03-2018
- * @description It allows the player to move to the introducted direction.
- * @input
- *				game:		A Game*, where we are playing.
- *              string:     A char*, which should contain the direction where we are going.
- * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
- */
-STATUS game_callback_move(Game *game, char *string);
 
 /* FUNCTION:
  *
@@ -159,48 +189,18 @@ STATUS game_callback_drop(Game *, char *);
  */
 STATUS game_callback_roll(Game *, char *);
 
-/* FUNCTION:
- *
- * @name 		game_callback_left
- * 
- * @author 		Víctor Yrazusta edited by Eric Morales
- * @version 	2.0 
- * @date		27-02-2018
- * @description It allows the player to move to the left.
- * @input
- *				game:		A Game*, whose player will try to move facing east.
- *         		string:    	A char*, which should contain the id of the player who will move.
- * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
- */
-STATUS game_callback_left(Game *, char *);
-
-/* FUNCTION:
- *
- * @name 		game_callback_right
- * 
- * @author 		Víctor Yrazusta edited by Eric Morales
- * @version 	2.0 
- * @date		27-02-2018
- * @description It allows the player to move to the right.
- * @input
- *				game:		A Game*, whose player will try to move facing west.
- *         		string:    	A char*, which should contain the id of the player who will move.
- * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
- */
-STATUS game_callback_right(Game *, char *);
-
 /*We define the callback functions*/
 static callback_fn game_callback_fn_list[N_CALLBACK] = {
     game_callback_unknown,
     game_callback_exit,
-    game_callback_following,
+    game_callback_move,
     game_callback_previous,
+    game_callback_left,    
+    game_callback_following,
+    game_callback_right,
     game_callback_grasp,
     game_callback_drop,
-    game_callback_roll,
-    game_callback_right,
-    game_callback_left,
-    game_callback_move,
+    game_callback_roll,   
     game_callback_check
 };
 
@@ -239,7 +239,7 @@ Game *game_create() {
     game->objects_number = INI;    
     game->dies_number = N_DIES;
     game->links_number = INI;
-    game->last_check = NULL;
+    game->last_text_description = NULL;
 
     for (i = 0; i < game->dies_number; i++) {
         game->dies[i] = die_create(DIE_BASE_ID+game->dies_number-i, DIE_FACES);
@@ -261,7 +261,10 @@ STATUS game_create_from_file(Game *game, char *file_name) {
     if (game_reader_load_spaces(game, file_name) == ERROR) return ERROR;
     if (game_reader_load_players(game, file_name) == ERROR) return ERROR;
     if (game_reader_load_objects(game, file_name) == ERROR) return ERROR;
-    if (game_reader_load_links(game, file_name) == ERROR) return ERROR;    
+    if (game_reader_load_links(game, file_name) == ERROR) return ERROR;
+
+    if (game->players[0] != NULL) game->last_text_description = space_get_basic_description(game_find(game, player_get_location(game->players[0])));
+    if (game->last_text_description == NULL) return ERROR; 
 
     return OK;
 }
@@ -656,12 +659,12 @@ void *game_find_name(Game *game, char *name) {
     return entity;
 }
 
-/*This function returns the last check information for the graphic engine*/
-char **game_get_last_check(Game* game) {
+/*This function returns the last text description for the graphic engine*/
+char **game_get_last_text_description(Game* game) {
 
     if (game == NULL) return NULL;
 
-    return game->last_check;
+    return game->last_text_description;
 }
 
 /*This function is used to get connections between spaces*/
@@ -694,16 +697,29 @@ STATUS game_callback_exit(Game *game, char *string) {
     return OK;
 }
 
-/*The following action is used to move to the next space in older versions*/
-STATUS game_callback_following(Game *game, char *string) {
+/*This action repalces all the older movement actions by one only action, which moves the player in the asked direction*/
+STATUS game_callback_move(Game *game, char *string) {
+    char *direction[N_DIR] = {"North", "West", "South", "East"};
+    char *direction_letter[N_DIR] = {"N", "W", "S", "E"};
+    DIRECTION dir;
     Player *player = NULL;
     Link *link = NULL;
     Id space_id = NO_ID;
+    int i;
 
     if (game == NULL || string == NULL) return ERROR;
 
-    player = (Player *) game_find(game, atoi(string));
+    dir = NO_DIR;
+    i = 0;
+    while (dir == NO_DIR && i <= EAST && string != NULL) {
+        if (!strcasecmp(string, direction[i]) || !strcasecmp(string, direction_letter[i])) {
+            dir = i;
+        } else {
+            i++;
+        }
+    }
 
+    player = (Player *) game_find(game, atoi(string));
     if (player == NULL) {
         player = (Player *) game_find_name(game, string);
 
@@ -712,46 +728,42 @@ STATUS game_callback_following(Game *game, char *string) {
         }
     }
 
-    link = (Link*) game_find(game, space_get_direction((Space *) game_find(game, player_get_location(player)), SOUTH));
-
+    link = (Link*) game_find(game, space_get_direction((Space *) game_find(game, player_get_location(player)), dir));
     if (link_get_status(link) == CLOSED) return ERROR;
 
     space_id = link_get_other_side(link, player_get_location(player));
-
     if (space_id == NO_ID) return ERROR;
 
     player_set_location(player, space_id);
 
-    return OK;
+    game->last_text_description = space_get_basic_description(game_find(game, player_get_location(game->players[0])));
+    if (game->last_text_description == NULL) return ERROR;
+
+    return OK;   
 }
 
 /*The following action was used to move to the previous space in older versions*/
 STATUS game_callback_previous(Game *game, char *string) {
-    Player *player = NULL;
-    Link *link = NULL;
-    Id space_id = NO_ID;
+    
+    return game_callback_move(game, "North");
+}
 
-    if (game == NULL || string == NULL) return ERROR;
+/*This action moves the player to the left in older versions*/
+STATUS game_callback_left(Game *game, char *string) {
+    
+    return game_callback_move(game, "West");
+}
 
-    player = (Player *) game_find(game, atoi(string));
+/*The following action is used to move to the next space in older versions*/
+STATUS game_callback_following(Game *game, char *string) {
+   
+    return game_callback_move(game, "South");
+}
 
-    if (player == NULL) {
-        player = (Player *) game_find_name(game, string);
-
-        if (player == NULL) player = game->players[0];
-    }
-
-    link = (Link*) game_find(game, space_get_direction((Space *) game_find(game, player_get_location(player)), NORTH));
-
-    if (link_get_status(link) == CLOSED) return ERROR;
-
-    space_id = link_get_other_side(link, player_get_location(player));
-
-    if (space_id == NO_ID) return ERROR;
-
-    player_set_location(player, space_id);
-
-    return OK;
+/*This action moves the player to the right in older versions*/
+STATUS game_callback_right(Game *game, char *string) {
+    
+    return game_callback_move(game, "East");
 }
 
 /*This command is used when grasping objects, copying them to the players inventory and then deleting them if they pass all the error control it has*/
@@ -818,101 +830,6 @@ STATUS game_callback_roll(Game *game, char * string) {
     return OK;
 }
 
-/*This action moves the player to the right in older versions*/
-STATUS game_callback_right(Game *game, char *string) {
-    Player *player = NULL;
-    Link *link = NULL;
-    Id space = NO_ID;
-
-    if (game == NULL || string == NULL) return ERROR;
-
-    player = (Player *) game_find(game, atoi(string));
-
-    if (player == NULL) {
-        player = (Player *) game_find_name(game, string);
-
-        if (player == NULL) {
-            player = game->players[0];
-        }
-    }
-
-    link = (Link*) game_find(game, space_get_direction((Space *) game_find(game, player_get_location(player)), EAST));
-
-    if (link_get_status(link) == CLOSED) return ERROR;
-
-    space = link_get_other_side(link, player_get_location(player));
-
-    if (space == NO_ID) return ERROR;
-
-    player_set_location(player, space);
-
-    return OK;
-}
-
-/*This action moves the player to the left in older versions*/
-STATUS game_callback_left(Game *game, char *string) {
-    Player *player = NULL;
-    Link *link = NULL;
-    Id space = NO_ID;
-
-    if (game == NULL || string == NULL) return ERROR;
-
-    player = (Player *) game_find(game, atoi(string));
-
-    if (player == NULL) {
-        player = (Player *) game_find_name(game, string);
-
-        if (player == NULL) player = game->players[0];
-    }
-
-    link = (Link*) game_find(game, space_get_direction((Space *) game_find(game, player_get_location(player)), WEST));
-    if (link_get_status(link) == CLOSED) return ERROR;
-
-    space = link_get_other_side(link, player_get_location(player));
-    if (space == NO_ID) return ERROR;
-
-    player_set_location(player, space);
-
-    return OK;
-}
-
-/*This action repalces all the older movement actions by one only action, which moves the player in the asked direction*/
-STATUS game_callback_move(Game *game, char *string) {
-    char *direction[N_DIR] = {"North", "West", "South", "East"};
-    char *direction_letter[N_DIR] = {"N", "W", "S", "E"};
-    DIRECTION dir;
-    int i;
-
-    dir = NO_DIR;
-    i = 0;
-    while (dir == NO_DIR && i <= EAST && string != NULL) {
-        if (!strcasecmp(string, direction[i]) || !strcasecmp(string, direction_letter[i])) {
-            dir = i;
-        } else {
-            i++;
-        }
-    }
-
-    switch (dir) {
-        case NORTH:
-            if (game_callback_previous(game, string) == ERROR) return ERROR;
-            break;
-        case WEST:
-            if (game_callback_left(game, string) == ERROR) return ERROR;
-            break;
-        case SOUTH:
-            if (game_callback_following(game, string) == ERROR) return ERROR;
-            break;
-        case EAST:
-            if (game_callback_right(game, string) == ERROR) return ERROR;
-            break;
-        default:
-            return ERROR;
-    }
-
-    return OK;
-}
-
 /*This action is used to see the description of a space or an object*/
 STATUS game_callback_check(Game *game, char *string) {
     Object* object;
@@ -920,8 +837,8 @@ STATUS game_callback_check(Game *game, char *string) {
     if (game == NULL || game->players == NULL || game->objects == NULL || string == NULL || atoi(string) < 0 || atoi(string) > ID_RANGE) return ERROR;
 
     if (strcmp(string, "space") == 0 || strcmp(string, "s") == 0) {
-        game->last_check = space_get_check_description(game_find(game, player_get_location(game->players[0])));
-        if (game->last_check == NULL) return ERROR;
+        game->last_text_description = space_get_check_description(game_find(game, player_get_location(game->players[0])));
+        if (game->last_text_description == NULL) return ERROR;
 
         return OK;
     }
@@ -933,8 +850,8 @@ STATUS game_callback_check(Game *game, char *string) {
         if (object == NULL) return ERROR;
     }
 
-    game->last_check = object_get_check(object);
-    if (game->last_check == NULL) return ERROR;
+    game->last_text_description = object_get_check(object);
+    if (game->last_text_description == NULL) return ERROR;
 
     return OK;
 }

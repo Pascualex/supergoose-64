@@ -400,21 +400,21 @@ void test2_game_get_status_last_command();
  * @pre Created Game
  * @post OUTPUT==OBJ_DESC
  */
-void test1_game_get_last_check();
+void test1_game_get_last_text_description();
 
 /**
  * @test Test to see how it works with a NULL Game
  * @pre NULL Game
  * @post OUTPUT==NULL
  */
-void test2_game_get_last_check();
+void test2_game_get_last_text_description();
 
 /**
  * @test Test to see if works in normal conditions with a space
  * @pre Created Game
  * @post OUTPUT==SPACE_DESC
  */
-void test3_game_get_last_check();
+void test3_game_get_last_text_description();
 
 /**
  * @test Test with normal conditions

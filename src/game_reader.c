@@ -13,8 +13,9 @@ STATUS game_reader_load_spaces(Game *game, char *filename) {
     FILE *file = NULL;
     char line[WORD_SIZE] = "";
     char name[WORD_SIZE] = "";
-    char graphic_description[3][8];
-    char check[MAX_CHECK_R][MAX_CHECK_C];
+    char graphic_description[MAX_GDESC_R][MAX_GDESC_C];
+    char basic_description[MAX_TDESC_R][MAX_TDESC_C];
+    char check_description[MAX_TDESC_R][MAX_TDESC_C];
     char *toks = NULL;
     Id id, directions_ids[6];
     Space *space = NULL;
@@ -50,11 +51,17 @@ STATUS game_reader_load_spaces(Game *game, char *filename) {
             toks = strtok(NULL, "|");
             strcpy(graphic_description[2], toks);
             toks = strtok(NULL, "|");
-            strcpy(check[0], toks);
+            strcpy(basic_description[0], toks);
             toks = strtok(NULL, "|");
-            strcpy(check[1], toks);
+            strcpy(basic_description[1], toks);
             toks = strtok(NULL, "|");
-            strcpy(check[2], toks);
+            strcpy(basic_description[2], toks);            
+            toks = strtok(NULL, "|");
+            strcpy(check_description[0], toks);
+            toks = strtok(NULL, "|");
+            strcpy(check_description[1], toks);
+            toks = strtok(NULL, "|");
+            strcpy(check_description[2], toks);
 
             space = space_create(id);
             if (space == NULL) {
@@ -65,7 +72,8 @@ STATUS game_reader_load_spaces(Game *game, char *filename) {
             space_set_name(space, name);
             for (direction = NORTH; direction <= BELOW; direction++) space_set_direction(space, direction, LINK_BASE_ID+directions_ids[direction]);
             space_set_graphic_description(space, graphic_description);
-            space_set_check_description(space, check);
+            space_set_basic_description(space, basic_description);
+            space_set_check_description(space, check_description);
             game_add_space(game, space);            
         }
     }
@@ -138,7 +146,7 @@ STATUS game_reader_load_objects(Game *game, char *filename) {
     FILE *file = NULL;
     char line[WORD_SIZE] = "";
     char name[WORD_SIZE] = "";
-    char check[MAX_CHECK_R][MAX_CHECK_C];
+    char check[MAX_TDESC_R][MAX_TDESC_C];
     char *toks = NULL;
     Id id = NO_ID;
     Id location = NO_ID;

@@ -49,7 +49,7 @@ STATUS object_destroy(Object *);
  * @param               char -> a string with the new check for the object.
  * @return		An STATUS, which could be "ERROR" if one of the passed pointers is NULL or if the rename fails, or "OK" otherwise.
  */
-STATUS object_set_check(Object *, char check[MAX_CHECK_R][MAX_CHECK_C]);
+STATUS object_set_check(Object *, char check[MAX_TDESC_R][MAX_TDESC_C]);
 
 /**
  * @name 		object_set_name
