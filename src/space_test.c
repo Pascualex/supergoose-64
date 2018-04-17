@@ -15,7 +15,7 @@
 #include "../include/space_test.h"
 #include "../include/test.h"
 
-#define MAX_TESTS 56
+#define MAX_TESTS 65
 
 /*
  * Main function for SPACE unit tests. 
@@ -97,7 +97,16 @@ int main(int argc, char** argv) {
     if (all || test == 53) test1_space_check_object();
     if (all || test == 54) test2_space_check_object();
     if (all || test == 55) test3_space_check_object();
-    if (all || test == 56) test3_space_check_object();
+    if (all || test == 56) test1_space_add_tags();
+    if (all || test == 57) test2_space_add_tags();
+    if (all || test == 58) test1_space_check_tag();
+    if (all || test == 59) test2_space_check_tag();
+    if (all || test == 60) test1_space_remove_tags();
+    if (all || test == 61) test2_space_remove_tags();
+    if (all || test == 62) test1_space_get_tags();
+    if (all || test == 63) test2_space_get_tags();
+    if (all || test == 64) test1_space_get_tags_number();
+    if (all || test == 65) test2_space_get_tags_number();
 
     PRINT_PASSED_PERCENTAGE;
 
@@ -542,4 +551,70 @@ void test2_space_check_object() {
 void test3_space_check_object() {
     Space *space = NULL;
     PRINT_TEST_RESULT(space_check_object(space, OBJECT_BASE_ID+1) == FALSE);
+}
+
+void test1_space_add_tags() {
+    Space *space = NULL;
+    space = space_create(SPACE_BASE_ID+1);
+    PRINT_TEST_RESULT(space_add_tags(space, 2, ILLUMINATED, FINAL_ROOM) == OK);
+    space_destroy(space);
+}
+
+void test2_space_add_tags() {
+    Space *space = NULL;
+    PRINT_TEST_RESULT(space_add_tags(space, 2, ILLUMINATED, FINAL_ROOM) == ERROR);
+}
+
+void test1_space_check_tag() {
+    Space *space = NULL;
+    space = space_create(SPACE_BASE_ID+1);
+    space_add_tags(space, 2, ILLUMINATED, FINAL_ROOM);
+    PRINT_TEST_RESULT(space_check_tag(space, ILLUMINATED));
+    space_destroy(space);
+}
+
+void test2_space_check_tag() {
+    Space *space = NULL;
+    space = space_create(SPACE_BASE_ID+1);
+    PRINT_TEST_RESULT(space_check_tag(space, ILLUMINATED) == FALSE);
+    space_destroy(space);
+}
+
+void test1_space_remove_tags() {
+    Space *space = NULL;
+    space = space_create(SPACE_BASE_ID+1);
+    space_add_tags(space, 2, ILLUMINATED, FINAL_ROOM);
+    PRINT_TEST_RESULT(space_remove_tags(space, 2, ILLUMINATED, FINAL_ROOM) == OK);
+    space_destroy(space);
+}
+
+void test2_space_remove_tags() {
+    Space *space = NULL;
+    PRINT_TEST_RESULT(space_remove_tags(space, 2, ILLUMINATED, FINAL_ROOM) == ERROR);
+}
+
+void test1_space_get_tags() {
+    Space *space = NULL;
+    space = space_create(SPACE_BASE_ID+1);
+    space_add_tags(space, 2, ILLUMINATED, FINAL_ROOM);
+    PRINT_TEST_RESULT(space_get_tags(space) != NULL);
+    space_destroy(space);
+}
+
+void test2_space_get_tags() {
+    Space *space = NULL;
+    PRINT_TEST_RESULT(space_get_tags(space) == NULL);
+}
+
+void test1_space_get_tags_number() {
+    Space *space = NULL;
+    space = space_create(SPACE_BASE_ID+1);
+    space_add_tags(space, 2, ILLUMINATED, FINAL_ROOM);
+    PRINT_TEST_RESULT(space_get_tags_number(space) == 2);    
+    space_destroy(space);
+}
+
+void test2_space_get_tags_number() {
+    Space *space = NULL;
+    PRINT_TEST_RESULT(space_get_tags_number(space) == 0);
 }

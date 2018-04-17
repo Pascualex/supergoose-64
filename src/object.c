@@ -20,10 +20,10 @@
 /*We define the object structure as the following:*/
 struct _Object {
     Id id; /*An Id to tell apart from other objects and things*/
-    char name[WORD_SIZE + 1]; /*A string with the objects name*/
+    char name[WORD_SIZE+1]; /*A string with the objects name*/
     char **check; /*A longer char with the description of the object*/
     Id location; /*An Id with the space its being located*/
-    TAG tags[MAX_TAGS]; /*A array of tags that define the propierties of the object*/
+    TAG object_tags[MAX_TAGS]; /*An array of tags that define the propierties of the object*/
     unsigned int num_tags; /*A number that indicates the number of tags*/
 };
 
@@ -34,7 +34,6 @@ Object *object_create(Id id) {
     Object *newObject = NULL;
 
     newObject = (Object *) malloc(sizeof(Object));
-
     if (newObject == NULL) return NULL;
 
     newObject->id = id;
@@ -56,7 +55,7 @@ Object *object_create(Id id) {
     }
 
     for (i = 0; i < MAX_TAGS; i++) {
-        newObject->tags[i] = NO_TAG;
+        newObject->object_tags[i] = NO_TAG;
     }
     newObject->num_tags = 0;
 
@@ -156,84 +155,70 @@ STATUS object_print(Object *object) {
 }
 
 STATUS object_add_tags(Object *object, int num_tags, ...) {
-    TAG tags[MAX_TAGS];
-    va_list tags_list;
+    TAG object_tags[MAX_TAGS];
+    va_list object_tags_list;
     int i;
 
-    if (object == NULL || num_tags == 0 || object->num_tags+num_tags >= MAX_TAGS) {
-        return ERROR;
-    }
+    if (object == NULL || num_tags == 0 || object->num_tags+num_tags > MAX_TAGS) return ERROR;
 
-    va_start(tags_list, num_tags);
+    va_start(object_tags_list, num_tags);
 
     for (i = 0; i < num_tags; i++) {        /*We retrieve the information of all the tags passed*/
-        tags[i] = va_arg(tags_list, TAG);
+        object_tags[i] = va_arg(object_tags_list, TAG);
     }
 
     for (i = 0; i < num_tags; i++) {
-    	if (!object_is(object, tags[i])) {
-    		object->tags[object->num_tags] = tags[i];
+    	if (!object_is(object, object_tags[i])) {
+    		object->object_tags[object->num_tags] = object_tags[i];
     		object->num_tags++;
     	}
     }
 
-    va_end(tags_list);
+    va_end(object_tags_list);
 
     return OK;
 }
 
 TAG *object_get_tags(Object *object) {
     
-    if (object == NULL) {
-        return NULL;
-    }
+    if (object == NULL) return NULL;
 
-    return object->tags;
+    return object->object_tags;
 }
 
 unsigned int object_get_tags_number(Object *object) {
     
-    if (object == NULL) {
-        return 0;
-    }
+    if (object == NULL) return 0;
 
     return object->num_tags;
 }
 
-BOOL object_is(Object *object, TAG tag) {
+BOOL object_is(Object *object, TAG object_tag) {
     int i;
 
-    if (object == NULL) {
-        return FALSE;
-    }
+    if (object == NULL) return FALSE;
 
     for (i = 0; i < object->num_tags; i++) {
-        if (tag == object->tags[i]) {
-            return TRUE;
-        }
+        if (object_tag == object->object_tags[i]) return TRUE;
     }
 
     return FALSE;
 }
 
-STATUS object_remove_tag(Object *object, TAG tag) {
+STATUS object_remove_tag(Object *object, TAG object_tag) {
 	int i, j;
 
-	if (object == NULL || !object_is(object, tag)) {
-		return ERROR;
-	}
+	if (object == NULL || !object_is(object, object_tag)) return ERROR;
 
 	i = 0;
 	while (1) {
-		if (i > MAX_TAGS) {
-			return ERROR;
-		}
+		if (i > MAX_TAGS) return ERROR;
 
-		if (tag == object->tags[i]) {
+		if (object_tag == object->object_tags[i]) {
 			for (j = i; j < object->num_tags; j++) {
-				object->tags[j] = object->tags[j+1];
+				object->object_tags[j] = object->object_tags[j+1];
 			}
-			object->tags[j] = NO_TAG;
+			object->object_tags[j] = NO_TAG;
 			object->num_tags--;
 			return OK;
 		}

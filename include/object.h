@@ -151,7 +151,7 @@ STATUS object_add_tags(Object *, int num_tags, ...);
  * @date		10-04-2018
  * @brief               It returns all the tags that an object has.
  * @param               Object* -> an object whose tags will be returned.
- * @return		A TAG* which will point towards the tags hold by the passed object.
+ * @return		An TAG* which will point towards the tags hold by the passed object.
  */
 TAG *object_get_tags(Object *);
 

@@ -396,4 +396,74 @@ void test2_space_check_object();
  */
 void test3_space_check_object();
 
+/**
+ * @test Test to see if function add_tags works under normal conditions
+ * @pre Created space
+ * @post OUTPUT==OK
+ */
+void test1_space_add_tags();
+
+/**
+ * @test Test to see if function add_tags works under abnormal conditions
+ * @pre NULL space
+ * @post OUTPUT==ERROR
+ */
+void test2_space_add_tags();
+
+/**
+ * @test Test to see if function is works under normal conditions
+ * @pre Created space with correct tags
+ * @post Space is passed tag
+ */
+void test1_space_check_tag();
+
+/**
+ * @test Test to see if function is works under abnormal conditions
+ * @pre Created space with correct tags
+ * @post Space isn't passed tag
+ */
+void test2_space_check_tag();
+
+/**
+ * @test Test to see if function remove_tags works under normal conditions
+ * @pre Created space
+ * @post OUTPUT==OK
+ */
+void test1_space_remove_tags();
+
+/**
+ * @test Test to see if function remove_tags works under abnormal conditions
+ * @pre NULL space
+ * @post OUTPUT==ERROR
+ */
+void test2_space_remove_tags();
+
+/**
+ * @test Test to see if function get_tags works under normal conditions
+ * @pre Created space with correct tags
+ * @post OUTPUT==OK
+ */
+void test1_space_get_tags();
+
+/**
+ * @test Test to see if function get_tags works under abnormal conditions
+ * @pre NULL space
+ * @post OUTPUT==ERROR
+ */
+void test2_space_get_tags();
+
+/**
+ * @test Test to see if function get_tags_number works under normal conditions
+ * @pre Created space with correct tags
+ * @post OUTPUT==TAGS_NUMBER
+ */
+void test1_space_get_tags_number();
+
+/**
+ * @test Test to see if function get_tags works under abnormal conditions
+ * @pre NULL space
+ * @post OUTPUT==0
+ */
+void test2_space_get_tags_number();
+
 #endif

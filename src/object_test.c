@@ -74,142 +74,142 @@ int main(int argc, char** argv) {
 }
 
 void test1_object_create() {
-    Object *o = NULL;
-    o = object_create(OBJECT_BASE_ID+1);
-    PRINT_TEST_RESULT(o != NULL);
-    object_destroy(o);
+    Object *object = NULL;
+    object = object_create(OBJECT_BASE_ID+1);
+    PRINT_TEST_RESULT(object != NULL);
+    object_destroy(object);
 }
 
 void test2_object_create() {
-    Object *o = NULL;
-    o = object_create(OBJECT_BASE_ID+1);
-    PRINT_TEST_RESULT(object_get_id(o) == OBJECT_BASE_ID+1);
-    object_destroy(o);
+    Object *object = NULL;
+    object = object_create(OBJECT_BASE_ID+1);
+    PRINT_TEST_RESULT(object_get_id(object) == OBJECT_BASE_ID+1);
+    object_destroy(object);
 }
 
 void test1_object_set_name() {
-    Object *o = NULL;
-    o = object_create(OBJECT_BASE_ID+1);
-    PRINT_TEST_RESULT(object_set_name(o, "test") == OK);
-    object_destroy(o);
+    Object *object = NULL;
+    object = object_create(OBJECT_BASE_ID+1);
+    PRINT_TEST_RESULT(object_set_name(object, "test") == OK);
+    object_destroy(object);
 }
 
 void test2_object_set_name() {
-    Object *o = NULL;
-    PRINT_TEST_RESULT(object_set_name(o, "test") == ERROR);
+    Object *object = NULL;
+    PRINT_TEST_RESULT(object_set_name(object, "test") == ERROR);
 }
 
 void test3_object_set_name() {
-    Object *o = NULL;
-    o = object_create(OBJECT_BASE_ID+1);
-    PRINT_TEST_RESULT(object_set_name(o, NULL) == ERROR);
-    object_destroy(o);
+    Object *object = NULL;
+    object = object_create(OBJECT_BASE_ID+1);
+    PRINT_TEST_RESULT(object_set_name(object, NULL) == ERROR);
+    object_destroy(object);
 }
 
 void test1_object_set_location() {
-    Object *o = NULL;
-    o = object_create(OBJECT_BASE_ID+1);
-    object_set_location(o, SPACE_BASE_ID+1);
-    PRINT_TEST_RESULT(object_get_location(o) == SPACE_BASE_ID+1);
-    object_destroy(o);
+    Object *object = NULL;
+    object = object_create(OBJECT_BASE_ID+1);
+    object_set_location(object, SPACE_BASE_ID+1);
+    PRINT_TEST_RESULT(object_get_location(object) == SPACE_BASE_ID+1);
+    object_destroy(object);
 }
 
 void test2_object_set_location() {
-    Object *o = NULL;
-    PRINT_TEST_RESULT(object_set_location(o, SPACE_BASE_ID+1) == ERROR);
+    Object *object = NULL;
+    PRINT_TEST_RESULT(object_set_location(object, SPACE_BASE_ID+1) == ERROR);
 }
 
 void test3_object_set_location() {
-    Object *o = NULL;
-    o = object_create(OBJECT_BASE_ID+1);
-    PRINT_TEST_RESULT(object_set_location(o, NO_ID) == ERROR);
-    object_destroy(o);
+    Object *object = NULL;
+    object = object_create(OBJECT_BASE_ID+1);
+    PRINT_TEST_RESULT(object_set_location(object, NO_ID) == ERROR);
+    object_destroy(object);
 }
 
 void test1_object_set_check() {
-    Object *o = NULL;
+    Object *object = NULL;
     char check[MAX_TDESC_R][MAX_TDESC_C];
     int i;
-    o = object_create(OBJECT_BASE_ID+1);
+    object = object_create(OBJECT_BASE_ID+1);
     for (i = 0; i < MAX_TDESC_R; i++) {
         strcpy(check[i], "CHECK");
     }
-    PRINT_TEST_RESULT(object_set_check(o, check) == OK);
-    object_destroy(o);
+    PRINT_TEST_RESULT(object_set_check(object, check) == OK);
+    object_destroy(object);
 }
 
 void test2_object_set_check() {
-    Object *o = NULL;
+    Object *object = NULL;
     char check[MAX_TDESC_R][MAX_TDESC_C];
     int i;
     for (i = 0; i < MAX_TDESC_R; i++) {
         strcpy(check[i], "CHECK");
     }
-    PRINT_TEST_RESULT(object_set_check(o, check) == ERROR);
+    PRINT_TEST_RESULT(object_set_check(object, check) == ERROR);
 }
 
 void test1_object_get_name() {
-    Object *o = NULL;
-    o = object_create(OBJECT_BASE_ID+1);
-    object_set_name(o, "test");
-    PRINT_TEST_RESULT(strcmp(object_get_name(o), "test") == 0);
-    object_destroy(o);
+    Object *object = NULL;
+    object = object_create(OBJECT_BASE_ID+1);
+    object_set_name(object, "test");
+    PRINT_TEST_RESULT(strcmp(object_get_name(object), "test") == 0);
+    object_destroy(object);
 }
 
 void test2_object_get_name() {
-    Object *o = NULL;
-    PRINT_TEST_RESULT(object_get_name(o) == NULL);
+    Object *object = NULL;
+    PRINT_TEST_RESULT(object_get_name(object) == NULL);
 }
 
 void test1_object_get_id() {
-    Object *o = NULL;
-    o = object_create(OBJECT_BASE_ID+1);
-    PRINT_TEST_RESULT(object_get_id(o) == OBJECT_BASE_ID+1);
-    object_destroy(o);
+    Object *object = NULL;
+    object = object_create(OBJECT_BASE_ID+1);
+    PRINT_TEST_RESULT(object_get_id(object) == OBJECT_BASE_ID+1);
+    object_destroy(object);
 }
 
 void test2_object_get_id() {
-    Object *o = NULL;
-    PRINT_TEST_RESULT(object_get_id(o) == NO_ID);
+    Object *object = NULL;
+    PRINT_TEST_RESULT(object_get_id(object) == NO_ID);
 }
 
 void test1_object_get_location() {
-    Object *o = NULL;
-    o = object_create(OBJECT_BASE_ID+1);
-    object_set_location(o, SPACE_BASE_ID+1);
-    PRINT_TEST_RESULT(object_get_location(o) == SPACE_BASE_ID+1);
-    object_destroy(o);
+    Object *object = NULL;
+    object = object_create(OBJECT_BASE_ID+1);
+    object_set_location(object, SPACE_BASE_ID+1);
+    PRINT_TEST_RESULT(object_get_location(object) == SPACE_BASE_ID+1);
+    object_destroy(object);
 }
 
 void test2_object_get_location() {
-    Object *o = NULL;
-    PRINT_TEST_RESULT(object_get_location(o) == NO_ID);
+    Object *object = NULL;
+    PRINT_TEST_RESULT(object_get_location(object) == NO_ID);
 }
 
 void test1_object_get_check() {
-    Object *o = NULL;
+    Object *object = NULL;
     char check[MAX_TDESC_R][MAX_TDESC_C];
     char **checkEnd;
     int i;
     int result = 0;
-    o = object_create(OBJECT_BASE_ID+1);
+    object = object_create(OBJECT_BASE_ID+1);
     for (i = 0; i < MAX_TDESC_R; i++) {
         strcpy(check[i], "CHECK");
     }
-    object_set_check(o, check);
-    checkEnd = object_get_check(o);
+    object_set_check(object, check);
+    checkEnd = object_get_check(object);
     for (i = 0; i < MAX_TDESC_R; i++) {
         if (strcmp(checkEnd[i], "CHECK") != 0) {
             result = 1;
         }
     }
     PRINT_TEST_RESULT(result == 0);
-    object_destroy(o);
+    object_destroy(object);
 }
 
 void test2_object_get_check() {
-    Object *o = NULL;
-    PRINT_TEST_RESULT(object_get_check(o) == NULL);
+    Object *object = NULL;
+    PRINT_TEST_RESULT(object_get_check(object) == NULL);
 }
 
 void test1_object_add_tags() {
@@ -252,7 +252,7 @@ void test2_object_get_tags_number() {
 
 void test1_object_is() {
     Object *object = NULL;
-    object = object_create (OBJECT_BASE_ID+1);
+    object = object_create(OBJECT_BASE_ID+1);
     object_add_tags(object, 2, IS_KEY, MOVABLE);
     PRINT_TEST_RESULT(object_is(object, IS_KEY));
     object_destroy(object);
@@ -260,7 +260,7 @@ void test1_object_is() {
 
 void test2_object_is() {
     Object *object = NULL;
-    object = object_create (OBJECT_BASE_ID+1);
+    object = object_create(OBJECT_BASE_ID+1);
     PRINT_TEST_RESULT(!object_is(object, HIDDEN));
     object_destroy(object);
 }

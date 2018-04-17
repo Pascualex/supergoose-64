@@ -249,6 +249,65 @@ BOOL space_is_empty(Space *);
 BOOL space_is_full(Space *);
 
 /**
+ * @name 		space_add_tags
+ * @author 		Alejandro Pascual 
+ * @version             1.0
+ * @date		15-04-2018 
+ * @brief               It adds the passed tags to the passed space.
+ * @param       Space* which will recieve the tags.
+ * @param       An int with the amount of tags that the funcion will add.
+ * @return		A STATUS that indicates whether the funcion was executed correctly or not.
+ * @details	    NOTE: This funcion has a variable number of input parameters.
+ */
+STATUS space_add_tags(Space *, int num_tags, ...);
+
+/**
+ * @name 		space_check_tag
+ * @author 		Alejandro Pascul
+ * @version             1.0
+ * @date		15-04-2018
+ * @brief       It checks if a space has a specified tag.
+ * @param       Space* which will be checked.
+ * @param       The TAG that the function will look for.
+ * @return		A BOOL, that indicates wheter or not the space has the passed tag.
+ */
+BOOL space_check_tag(Space *, TAG);
+
+/**
+ * @name 		space_remove_tag
+ * @author 		Alejandro Pascual
+ * @version             1.0
+ * @date		15-04-2018
+ * @brief       It removes a specified tag from a space.
+ * @param       Space* who will have one or more of his tags removed.
+ * @param       TAG to remove from the space.
+ * @return		A STATUS that indicates whether the funcion was executed correctly or not.
+ */
+STATUS space_remove_tags(Space *, int num_tags, ...);
+
+/**
+ * @name 		space_get_tags
+ * @author 		Alejandro Pascual
+ * @version             1.0
+ * @date		15-04-2018
+ * @brief       It returns all the tags that a space has.
+ * @param       Space* whose tags will be returned.
+ * @return		An TAG* which will point towards the tags hold by the passed space.
+ */
+TAG *space_get_tags(Space *);
+
+/**
+ * @name 		space_get_tags_number
+ * @author 		Alejandro Pascual
+ * @version             1.0
+ * @date		15-04-2018
+ * @brief       It returns the number of tags a space has.
+ * @param       Space* whose number of tags will be returned.
+ * @return		An int, which is the amount of tags that the passed space has.
+ */
+int space_get_tags_number(Space *);
+
+/**
  * @name 		space_print
  * @author 		Víctor Yrazusta
  * @version             1.0

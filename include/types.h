@@ -112,17 +112,19 @@ typedef enum {
 } COLOR;
 
 /**
- * @brief TAG enumeration (to be used when asigning propierties to objects)
+ * @brief TAG enumeration (to be used when asigning propierties to objects or spaces)
  */
 typedef enum {
-	NO_TAG = 0,		/*!< Tag not specified*/
-	VISIBLE, 		/*!< The object is visible*/
-	MOVABLE,		/*!< The object can be moved*/
-	MOVED,			/*!< The object has been moved*/
-	HIDDEN,			/*!< The object is hidden*/
-	CAN_GLOW,		/*!< The object is able to glow*/
-	GLOWING,		/*!< The object is glowing*/
-	IS_KEY			/*!< The object is a key*/
+	NO_TAG = 0,      /*!< Tag not specified*/
+	VISIBLE, 		 /*!< The object or space is visible*/
+	MOVABLE,		 /*!< The object can be moved*/
+	MOVED,			 /*!< The object has been moved*/
+	HIDDEN,			 /*!< The object is hidden*/
+	CAN_GLOW,		 /*!< The object is able to glow*/
+	GLOWING,	 	 /*!< The object is glowing*/
+	IS_KEY,			 /*!< The object is a key*/
+    ILLUMINATED,     /*!< The space is a illuminated*/
+    FINAL_ROOM       /*!< The space is the final room*/
 } TAG;
 
 #endif
