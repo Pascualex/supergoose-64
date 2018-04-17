@@ -254,4 +254,26 @@ STATUS game_add_link(Game *game, Link *link);
  */
 STATUS game_add_player(Game *game, Player *player, Id location_id);
 
+/**
+ * @name 		game_tag_to_str
+ * @author 		Victor Yrazusta
+ * @version             1.0
+ * @date		17-04-2018
+ * @brief               It passed from a tag to a string.
+ * @param               TAG -> the tag that will be converted to string.
+ * @return		A char*, which will be the conversion to string of the passed tag. 
+ */
+char *game_tag_to_str(TAG);
+
+/**
+ * @name 		game_str_to_tag
+ * @author 		Victor Yrazusta
+ * @version             1.0
+ * @date		17-04-2018
+ * @brief               It passed from a string to a tag.
+ * @param               char* -> the string that will be converted to tag.
+ * @return		A TAG, which will be the conversion to tag of the passed string. 
+ */
+TAG game_str_to_tag(char *);
+
 #endif

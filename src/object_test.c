@@ -241,7 +241,7 @@ void test1_object_get_tags_number() {
     Object *object = NULL;
     object = object_create(OBJECT_BASE_ID+1);
     object_add_tags(object, 2, IS_KEY, GLOWING);
-    PRINT_TEST_RESULT(object_get_tags_number(object) == 4);    
+    PRINT_TEST_RESULT(object_get_tags_number(object) == OBJECT_BASE_TAGS + 2);    
     object_destroy(object);
 }
 

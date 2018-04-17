@@ -19,12 +19,13 @@
 
 /*We define the object structure as the following:*/
 struct _Object {
-    Id id; /*An Id to tell apart from other objects and things*/
-    char name[WORD_SIZE+1]; /*A string with the objects name*/
-    char **check; /*A longer char with the description of the object*/
-    Id location; /*An Id with the space its being located*/
-    TAG object_tags[MAX_TAGS]; /*An array of tags that define the propierties of the object*/
-    unsigned int num_tags; /*A number that indicates the number of tags*/
+    Id id; 						/*An Id to tell apart from other objects and things*/
+    char name[WORD_SIZE+1]; 	/*A string with the objects name*/
+    char **check;				/*A longer char with the description of the object*/
+    char **alt_check;			/*A longer char with the alternative description of the object*/
+    Id location; 				/*An Id with the space its being located*/
+    TAG object_tags[MAX_TAGS];	/*An array of tags that define the propierties of the object*/
+    int num_tags; 				/*A number that indicates the number of tags*/
 };
 
 /*This function is used to allocate memory and create an object with the given Id*/
@@ -54,12 +55,27 @@ Object *object_create(Id id) {
         }
     }
 
+	newObject->alt_check = (char **) malloc(sizeof(char*)*MAX_TDESC_R);
+
+    for (i = 0; i < MAX_TDESC_R; i++) {
+        newObject->alt_check[i] = (char *) malloc(sizeof(char)*MAX_TDESC_C);
+        if (newObject->alt_check[i] == NULL) {
+            for (i = i-1; i >= 0; i--) {
+                free(newObject->alt_check[i]);
+            }
+            free(newObject->alt_check);
+            free(newObject->check);
+            free(newObject);
+            return NULL;
+        }
+    }
+
     for (i = 0; i < MAX_TAGS; i++) {
         newObject->object_tags[i] = NO_TAG;
     }
     newObject->num_tags = 0;
 
-    object_add_tags(newObject, 2, VISIBLE, MOVABLE);
+    object_add_tags(newObject, 1, MOVABLE);
 
     return newObject;
 }
@@ -76,6 +92,14 @@ STATUS object_destroy(Object *object) {
         }
         free(object->check);
     }
+
+    if (object->alt_check != NULL) {
+        for (i = 0; i < MAX_TDESC_R; i++) {
+            if (object->alt_check[i] != NULL) free(object->alt_check[i]);
+        }
+        free(object->alt_check);
+    }
+
     free(object);
 
     return OK;
@@ -102,6 +126,20 @@ STATUS object_set_check(Object *object, char check[MAX_TDESC_R][MAX_TDESC_C]) {
     return OK;
 }
 
+/*The following function is used to set the alternative description of an object*/
+STATUS object_set_alt_check(Object *object, char alt_check[MAX_TDESC_R][MAX_TDESC_C]) {
+    int i;
+
+    if (object == NULL || alt_check == NULL) return ERROR;
+
+    for (i = 0; i < MAX_TDESC_R; i++) {
+        strcpy(object->alt_check[i], alt_check[i]);
+    }
+
+    return OK;
+}
+
+
 /*The next function sets the location of the given object with the given Id*/
 STATUS object_set_location(Object *object, Id location) {
 
@@ -120,12 +158,20 @@ const char *object_get_name(Object *object) {
     return object->name;
 }
 
-/*The following function returns a char with the information of the given object*/
+/*The following function returns a char with the description of the given object*/
 char **object_get_check(Object *object) {
 
     if (object == NULL) return NULL;
 
     return object->check;
+}
+
+/*The following function returns a char with the alternative description of the given object*/
+char **object_get_alt_check(Object *object) {
+
+    if (object == NULL) return NULL;
+
+    return object->alt_check;
 }
 
 /*This function gets an Id from an object and gives it back to the program*/
@@ -186,7 +232,7 @@ TAG *object_get_tags(Object *object) {
     return object->object_tags;
 }
 
-unsigned int object_get_tags_number(Object *object) {
+int object_get_tags_number(Object *object) {
     
     if (object == NULL) return 0;
 

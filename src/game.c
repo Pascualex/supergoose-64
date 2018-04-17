@@ -685,6 +685,76 @@ Link *game_get_connection(Game *game, Space *origin, Space *destination) {
     return NULL;
 }
 
+/*This function is used to pass from tag to string*/
+char *game_tag_to_str(TAG tag) {
+    char *name;
+
+    name = (char *) malloc(WORD_SIZE*sizeof(char));
+
+    if (tag == NO_TAG) {
+        strcpy(name, "NO_TAG");
+        return name;
+    }
+    if (tag == VISIBLE) {
+        strcpy(name, "VISIBLE");
+        return name;
+    }
+    if (tag == MOVABLE) {
+        strcpy(name, "MOVABLE");
+        return name;
+    }
+    if (tag == MOVED) {
+        strcpy(name, "MOVED");
+        return name;
+    }
+    if (tag == HIDDEN) {
+        strcpy(name, "HIDDEN");
+        return name;
+    }
+    if (tag == CAN_GLOW) {
+        strcpy(name, "CAN_GLOW");
+        return name;
+    }
+    if (tag == GLOWING) {
+        strcpy(name, "GLOWING");
+        return name;
+    }
+    if (tag == IS_KEY) {
+        strcpy(name, "IS_KEY");
+        return name;
+    }
+    if (tag == ILLUMINATED) {
+        strcpy(name, "ILLUMINATED");
+        return name;
+    }
+    if (tag == FINAL_ROOM) {
+        strcpy(name, "FINAL_ROOM");
+        return name;
+    }
+
+    return NULL;
+}
+
+TAG game_str_to_tag(char *name) {
+
+    if (name == NULL) {
+        return NO_TAG;
+    }
+
+    if (!strcmp(name, "NO_TAG"))        return NO_TAG;
+    if (!strcmp(name, "VISIBLE"))       return VISIBLE;
+    if (!strcmp(name, "MOVABLE"))       return MOVABLE;
+    if (!strcmp(name, "MOVED"))         return MOVED;
+    if (!strcmp(name, "HIDDEN"))        return HIDDEN;
+    if (!strcmp(name, "CAN_GLOW"))      return CAN_GLOW;
+    if (!strcmp(name, "GLOWING"))       return GLOWING;
+    if (!strcmp(name, "IS_KEY"))        return IS_KEY;
+    if (!strcmp(name, "ILLUMINATED"))   return ILLUMINATED;
+    if (!strcmp(name, "FINAL_ROOM"))    return FINAL_ROOM;
+
+    return NO_TAG;
+}
+
 /*Callbacks implementation for each command/action*/
 
 /*The following action is used when the input doesnt coincide with any other one*/

@@ -17,9 +17,11 @@ STATUS game_reader_load_spaces(Game *game, char *filename) {
     char basic_description[MAX_TDESC_R][MAX_TDESC_C];
     char check_description[MAX_TDESC_R][MAX_TDESC_C];
     char *toks = NULL;
+    TAG tags[MAX_TAGS];
     Id id, directions_ids[6];
     Space *space = NULL;
     DIRECTION direction;
+    int i,j;
 
     if (game == NULL || filename == NULL) return ERROR;
 
@@ -63,6 +65,14 @@ STATUS game_reader_load_spaces(Game *game, char *filename) {
             toks = strtok(NULL, "|");
             strcpy(check_description[2], toks);
 
+            i = 0;
+            toks = strtok(NULL, "|");
+            while (toks != NULL && i <= MAX_TAGS-SPACE_BASE_TAGS) {
+                tags[i] = game_str_to_tag(toks);
+                toks = strtok(NULL, "|");
+                i++;
+            }
+
             space = space_create(id);
             if (space == NULL) {
                 fclose(file);        
@@ -74,6 +84,7 @@ STATUS game_reader_load_spaces(Game *game, char *filename) {
             space_set_graphic_description(space, graphic_description);
             space_set_basic_description(space, basic_description);
             space_set_check_description(space, check_description);
+            for (j = 0; j < i; j++) space_add_tags(space, 1, tags[j]);
             game_add_space(game, space);            
         }
     }
@@ -147,10 +158,13 @@ STATUS game_reader_load_objects(Game *game, char *filename) {
     char line[WORD_SIZE] = "";
     char name[WORD_SIZE] = "";
     char check[MAX_TDESC_R][MAX_TDESC_C];
+    char alt_check[MAX_TDESC_R][MAX_TDESC_C];
     char *toks = NULL;
+    TAG tags[MAX_TAGS];
     Id id = NO_ID;
     Id location = NO_ID;
     Object *object = NULL;
+    int i, j;
 
     if (game == NULL || filename == NULL) return ERROR;
 
@@ -171,6 +185,20 @@ STATUS game_reader_load_objects(Game *game, char *filename) {
             strcpy(check[1], toks);
             toks = strtok(NULL, "|");
             strcpy(check[2], toks);
+            toks = strtok(NULL, "|");
+            strcpy(alt_check[0], toks);
+            toks = strtok(NULL, "|");
+            strcpy(alt_check[1], toks);
+            toks = strtok(NULL, "|");
+            strcpy(alt_check[2], toks);
+
+            i = 0;
+            toks = strtok(NULL, "|");
+            while (toks != NULL && i <= MAX_TAGS-OBJECT_BASE_TAGS) {
+                tags[i] = game_str_to_tag(toks);
+                toks = strtok(NULL, "|");
+                i++;
+            }
 
             object = object_create(OBJECT_BASE_ID+id);
             if (object == NULL) {
@@ -180,6 +208,8 @@ STATUS game_reader_load_objects(Game *game, char *filename) {
 
             object_set_name(object, name);
             object_set_check(object, check);
+            object_set_alt_check(object, alt_check);
+            for (j = 0; j < i; j++) object_add_tags(object, 1, tags[j]);
             game_add_object(game, object, location);            
         }
     }

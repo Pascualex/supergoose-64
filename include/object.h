@@ -52,6 +52,18 @@ STATUS object_destroy(Object *);
 STATUS object_set_check(Object *, char check[MAX_TDESC_R][MAX_TDESC_C]);
 
 /**
+ * @name 		object_set_alt_check
+ * @author 		Victor Yrazusta
+ * @version             1.0
+ * @date		17-04-2018
+ * @brief               It changes the alternative check of the passed object to the passed char**.
+ * @param               Object* -> which must point towards the object that wants to be renamed.
+ * @param               char -> a string with the new alternative check for the object.
+ * @return		An STATUS, which could be "ERROR" if one of the passed pointers is NULL or if the rename fails, or "OK" otherwise.
+ */
+STATUS object_set_alt_check(Object *, char check[MAX_TDESC_R][MAX_TDESC_C]);
+
+/**
  * @name 		object_set_name
  * @author 		Alejandro Pascual
  * @version             1.0
@@ -96,6 +108,17 @@ const char *object_get_name(Object *);
  * @return		A char**, which could be NULL if the pointer passed as an argument is NULL, or the object's check otherwise.
  */
 char **object_get_check(Object *);
+
+/**
+ * @name 		object_get_alt_check
+ * @author 		Victor Yrazusta
+ * @version             1.0
+ * @date		17-04-2018
+ * @brief               It returns the alternative check of the object passed as an argument.
+ * @param               Object* -> an object whose alternative check will be returned.
+ * @return		A char**, which could be NULL if the pointer passed as an argument is NULL, or the object's alternative check otherwise.
+ */
+char **object_get_alt_check(Object *);
 
 /**
  * @name 		object_get_id
@@ -164,7 +187,7 @@ TAG *object_get_tags(Object *);
  * @param               Object* -> an object whose number of tags will be returned.
  * @return		A unsigned int, which is the amount of tags that the passed object has.
  */
-unsigned int object_get_tags_number(Object *);
+int object_get_tags_number(Object *);
 
 /**
  * @name 		object_is
