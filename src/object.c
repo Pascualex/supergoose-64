@@ -75,8 +75,6 @@ Object *object_create(Id id) {
     }
     newObject->num_tags = 0;
 
-    object_add_tags(newObject, 1, MOVABLE);
-
     return newObject;
 }
 
