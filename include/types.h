@@ -37,7 +37,7 @@
 #define DIE_BASE_ID 3000            /*!< Marks where the Dies Ids start*/
 #define LINK_BASE_ID 4000           /*!< Marks where the Links Ids start*/
 
-#define OBJECT_BASE_TAGS 0                 /*!< The number of tags that an object has by default*/
+#define OBJECT_BASE_TAGS 1                 /*!< The number of tags that an object has by default*/
 #define SPACE_BASE_TAGS 0                  /*!< The number of tags that an object has by default*/
 
 /** 
@@ -119,6 +119,7 @@ typedef enum {
  */
 typedef enum {
 	NO_TAG = 0,      /*!< Tag not specified*/
+	VISIBLE, 		 /*!< The object or space is visible*/
 	MOVABLE,		 /*!< The object can be moved*/
 	MOVED,			 /*!< The object has been moved*/
 	HIDDEN,			 /*!< The object is hidden*/
