@@ -695,10 +695,6 @@ char *game_tag_to_str(TAG tag) {
         strcpy(name, "NO_TAG");
         return name;
     }
-    if (tag == VISIBLE) {
-        strcpy(name, "VISIBLE");
-        return name;
-    }
     if (tag == MOVABLE) {
         strcpy(name, "MOVABLE");
         return name;
@@ -742,7 +738,6 @@ TAG game_str_to_tag(char *name) {
     }
 
     if (!strcmp(name, "NO_TAG"))        return NO_TAG;
-    if (!strcmp(name, "VISIBLE"))       return VISIBLE;
     if (!strcmp(name, "MOVABLE"))       return MOVABLE;
     if (!strcmp(name, "MOVED"))         return MOVED;
     if (!strcmp(name, "HIDDEN"))        return HIDDEN;
