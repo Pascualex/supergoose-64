@@ -23,23 +23,21 @@ struct _Graphic_engine {
 
 /*This function is used to allocate the memory the graphic engine is going to use.*/
 Graphic_engine *graphic_engine_create() {
-    static Graphic_engine *ge = NULL;
-
-    if (ge) return ge;
+    Graphic_engine *graphic_engine = NULL;
 
     screen_init(BLACK);
-    ge = (Graphic_engine *) malloc(sizeof (Graphic_engine));
+    graphic_engine = (Graphic_engine *) malloc(sizeof (Graphic_engine));
 
-    ge->banner =   screen_area_init(  2,  0, 79,  6, GREEN, BLACK, FALSE);
-    ge->map =      screen_area_init(  3,  7, 49, 23, BLUE,  BLACK,  TRUE);
-    ge->descript = screen_area_init( 53,  7, 24, 23, WHITE, BLACK,  TRUE);
-    ge->help =     screen_area_init(  3, 31, 52,  5, WHITE, BLACK,  TRUE);
-    ge->feedback = screen_area_init( 56, 31, 21,  5, WHITE, BLACK,  TRUE);
-    ge->chat =     screen_area_init(  3, 37, 74,  3, WHITE, BLACK,  TRUE);
+    graphic_engine->banner =   screen_area_init(  2,  0, 79,  6, GREEN, BLACK, FALSE);
+    graphic_engine->map =      screen_area_init(  3,  7, 49, 23, BLUE,  BLACK,  TRUE);
+    graphic_engine->descript = screen_area_init( 53,  7, 24, 23, WHITE, BLACK,  TRUE);
+    graphic_engine->help =     screen_area_init(  3, 31, 52,  5, WHITE, BLACK,  TRUE);
+    graphic_engine->feedback = screen_area_init( 56, 31, 21,  5, WHITE, BLACK,  TRUE);
+    graphic_engine->chat =     screen_area_init(  3, 37, 74,  4, WHITE, BLACK,  TRUE);
 
     screen_color_box(61, 17, 9, 5, YELLOW, BLACK);
 
-    return ge;
+    return graphic_engine;
 }
 
 /*This function is used to free all the memory used by the graphic engine*/
@@ -216,7 +214,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
     for (i = OBJECT_BASE_ID; i < OBJECT_BASE_ID + MAX_OBJECTS; i++) {
         if ((obj_loc = object_get_location((Object *) game_find(game, i))) != NO_ID && (obj_loc < PLAYER_BASE_ID)) {
-            sprintf(str, "    %6s (%d) -> %d", object_get_name((Object *) game_find(game, i)), i - OBJECT_BASE_ID, (int) obj_loc);
+            sprintf(str, "    %6s (%d) -> %d", object_get_name((Object *) game_find(game, i)), i-OBJECT_BASE_ID, (int) obj_loc);
             screen_area_puts(ge->descript, str);
         }
     }
@@ -243,7 +241,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
 
     for (i = 0; i < game_get_dies_number(game); i++) {
-        sprintf(str, " Last Die Value: %d ", die_get_value((Die *) game_find(game, DIE_BASE_ID + game_get_dies_number(game) - i)));
+        sprintf(str, " Last Die Value: %d ", die_get_value((Die *) game_find(game, DIE_BASE_ID+game_get_dies_number(game) - i)));
         screen_area_puts(ge->descript, str);
     }
     /*We print the last die in a beautiful and visually friendly way*/
@@ -346,20 +344,26 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     /* Paint the in the feedback area */
     last_cmd = game_get_last_command(game);
     if (game_get_status_last_command(game) == OK) {
-        sprintf(str, " %s -> OK", cmd_to_str[last_cmd - NO_CMD]);
+        sprintf(str, " %s -> OK", cmd_to_str[last_cmd-NO_CMD]);
     } else {
-        sprintf(str, " %s -> ERROR", cmd_to_str[last_cmd - NO_CMD]);
+        sprintf(str, " %s -> ERROR", cmd_to_str[last_cmd-NO_CMD]);
     }
     screen_area_puts(ge->feedback, str);
 
     /* Paint the in the chat area */
     screen_area_clear(ge->chat);
     chat = game_get_last_text_description(game);
-    for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(str, chat[i]);
-        screen_area_puts(ge->chat, str);
-    }
-
+	strcpy(str, space_get_name(space_act));
+	screen_area_puts(ge->chat, str);
+	if (game_get_last_command(game) == CHECK && game_get_status_last_command(game) == OK && space_check_tag(game_find(game, player_get_location(player)), ILLUMINATED) == FALSE) {
+		strcpy(str, " It's too dark to see more details.");
+		screen_area_puts(ge->chat, str);
+	} else {
+		for (i = 0; i < MAX_TDESC_R; i++) {
+		    strcpy(str, chat[i]);
+		    screen_area_puts(ge->chat, str);
+		}
+	}
     /* Dump to the terminal */
     screen_paint();
     printf("prompt:> ");

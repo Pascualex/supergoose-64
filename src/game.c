@@ -909,7 +909,6 @@ STATUS game_callback_check(Game *game, char *string) {
     if (strcmp(string, "space") == 0 || strcmp(string, "s") == 0) {
         game->last_text_description = space_get_check_description(game_find(game, player_get_location(game->players[0])));
         if (game->last_text_description == NULL) return ERROR;
-
         return OK;
     }
 

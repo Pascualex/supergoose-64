@@ -18,7 +18,7 @@
 #pragma GCC diagnostic ignored "-Wpedantic"  /*La trampa...*/
 
 /*We define the maximum rows and columns of the screen we are going o use, and the TOTAL_DATA which is one bigger than the product, for memory allocating purposes*/
-#define ROWS 42
+#define ROWS 43
 #define COLUMNS 80
 #define TOTAL_DATA (ROWS * COLUMNS)
 
