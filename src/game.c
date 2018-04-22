@@ -18,7 +18,7 @@
 #include "../include/game_reader.h"
 
 /*We define the number of functions we have related to the different commands.*/
-#define N_CALLBACK 11
+#define N_CALLBACK 12
 /*We define the number of possible directions to move for the move command.*/
 #define N_DIR 4
 /*INI is used to initialize those variable as the starting number of objects when they are 0.*/
@@ -189,6 +189,21 @@ STATUS game_callback_drop(Game *, char *);
  */
 STATUS game_callback_roll(Game *, char *);
 
+/* FUNCTION:
+ *
+ * @name 		game_callback_open
+ * 
+ * @author 		Eric Morales
+ * @version 	1.0 
+ * @date		20-04-2018
+ * @description It allows you to open a Link using an Object.
+ * @input
+ *				game:		A Game*, whose player will open the link.
+ *              string:     A char*, which should contain "<Link> with <Obj>"
+ * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
+ */
+STATUS game_callback_open(Game *, char *);
+
 /*We define the callback functions*/
 static callback_fn game_callback_fn_list[N_CALLBACK] = {
     game_callback_unknown,
@@ -201,7 +216,8 @@ static callback_fn game_callback_fn_list[N_CALLBACK] = {
     game_callback_grasp,
     game_callback_drop,
     game_callback_roll,   
-    game_callback_check
+    game_callback_check,
+	game_callback_open
 };
 
 /*Private functions*/
@@ -846,7 +862,7 @@ STATUS game_callback_grasp(Game *game, char *string) {
         }
     }
 
-    if (player_get_location(game->players[0]) == NO_ID || space_check_object((Space *) game_find(game, player_get_location(game->players[0])), object_get_id(object)) == FALSE || player_is_full(game->players[0]) == TRUE || player_get_location(game->players[0]) != object_get_location(object) || !object_is(object, MOVABLE)) return ERROR;
+    if (player_get_location(game->players[0]) == NO_ID || space_check_object((Space *) game_find(game, player_get_location(game->players[0])), object_get_id(object)) == FALSE || player_is_full(game->players[0]) == TRUE || player_get_location(game->players[0]) != object_get_location(object) || !object_check_tag(object, MOVABLE)) return ERROR;
 
     if (game_set_object_location(game, player_get_id(game->players[0]), object_get_id(object)) == ERROR) return ERROR;
 
@@ -919,3 +935,56 @@ STATUS game_callback_check(Game *game, char *string) {
 
     return OK;
 }
+
+/*Using this command you can Open a Space using an object*/
+STATUS game_callback_open(Game *game, char *string) {
+    Object *obj;
+	Link *link;
+	char *sobj, *slink;
+
+    if (game == NULL || game->players == NULL || game->objects == NULL || string == NULL || strcmp(string, "NO_INFO") == 0) return ERROR;
+
+	slink = strtok(string, " \n");
+	sobj = strtok(NULL, " \n");
+	
+	obj = (Object *) game_find(game, atoi(sobj)+OBJECT_BASE_ID);
+
+    if (obj == NULL) {
+        obj = (Object *) game_find_name(game, sobj);
+        if (obj == NULL) return ERROR;
+    }
+
+	link = (Link *) game_find(game, atoi(slink)+LINK_BASE_ID);
+
+    if (link == NULL) {
+        link = (Link *) game_find_name(game, slink);
+        if (link == NULL) return ERROR;
+    }
+
+	if (object_check_tag(obj, IS_KEY) == FALSE) {
+		return ERROR;
+	}
+
+	if (player_check_object(game->players[0], object_get_id(obj)) == FALSE) {
+		return ERROR;
+	}
+
+	link_set_status(link, OPEN);
+	
+    return OK;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

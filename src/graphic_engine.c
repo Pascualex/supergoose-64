@@ -134,10 +134,11 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
             screen_area_puts(ge->map, str);
             sprintf(str, "                  | %7s   %2d|", player_get_graphic_description((Player *) game_find(game, PLAYER_BASE_ID + 1)), (int) id_act);
             screen_area_puts(ge->map, str);
-            sprintf(str, "                  |   %s   |", graphic_description_act[0]);
-            screen_area_puts(ge->map, str);
             if (space_get_direction(space_act, WEST) != NO_ID) {
                 if (space_get_direction(space_act, EAST) != NO_ID) {
+					sprintf(str, "        %8s  |   %s   |  %-8s", link_get_name((Link*) game_find(game, space_get_direction(space_act, WEST))), graphic_description_act[0], link_get_name((Link*) game_find(game, space_get_direction(space_act, EAST))));
+            		screen_area_puts(ge->map, str);
+
                     if (link_get_status((Link*) game_find(game, space_get_direction(space_act, EAST))) == OPEN) {
                         if (link_get_status((Link*) game_find(game, space_get_direction(space_act, WEST))) == OPEN) {
                             sprintf(str, "        %4ld <--- |   %s   | ---> %ld", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
@@ -152,6 +153,8 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
                         }
                     }
                 } else {
+					sprintf(str, "        %8s  |   %s   |", link_get_name((Link*) game_find(game, space_get_direction(space_act, WEST))), graphic_description_act[0]);
+            		screen_area_puts(ge->map, str);
                     if (link_get_status((Link*) game_find(game, space_get_direction(space_act, EAST))) == OPEN) {
                         sprintf(str, "        %4ld <--- |   %s   |", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1]);
                     } else {
@@ -160,12 +163,16 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
                 }
             } else {
                 if (space_get_direction(space_act, EAST) != NO_ID) {
+					sprintf(str, "                  |   %s   |  %-8s", graphic_description_act[0], link_get_name((Link*) game_find(game, space_get_direction(space_act, EAST))));
+            		screen_area_puts(ge->map, str);
                     if (link_get_status((Link*) game_find(game, space_get_direction(space_act, EAST))) == OPEN) {
                         sprintf(str, "                  |   %s   | ---> %ld", graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                     } else {
                         sprintf(str, "                  |   %s   | -|-> %ld", graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                     }
                 } else {
+					sprintf(str, "                  |   %s   |", graphic_description_act[0]);
+            		screen_area_puts(ge->map, str);
                     sprintf(str, "                  |   %s   |", graphic_description_act[1]);
                 }
             }

@@ -212,7 +212,7 @@ STATUS object_add_tags(Object *object, int num_tags, ...) {
     }
 
     for (i = 0; i < num_tags; i++) {
-    	if (!object_is(object, object_tags[i])) {
+    	if (!object_check_tag(object, object_tags[i])) {
     		object->object_tags[object->num_tags] = object_tags[i];
     		object->num_tags++;
     	}
@@ -237,7 +237,7 @@ int object_get_tags_number(Object *object) {
     return object->num_tags;
 }
 
-BOOL object_is(Object *object, TAG object_tag) {
+BOOL object_check_tag(Object *object, TAG object_tag) {
     int i;
 
     if (object == NULL) return FALSE;
@@ -252,7 +252,7 @@ BOOL object_is(Object *object, TAG object_tag) {
 STATUS object_remove_tag(Object *object, TAG object_tag) {
 	int i, j;
 
-	if (object == NULL || !object_is(object, object_tag)) return ERROR;
+	if (object == NULL || !object_check_tag(object, object_tag)) return ERROR;
 
 	i = 0;
 	while (1) {

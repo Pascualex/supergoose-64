@@ -25,42 +25,42 @@
 #s:0025|Space 25|24|32|-1|32|-1|-1|(\_/)  |( *,*) |(")_(")| GOOSE-ADISE (25)                                                        |                                                                          |                                                                         | GOOSE-ADISE (25):                                                       | Finally... the geese... the geese paradise... This is glorious!          | (Congratulations! You have passed the Alpha game. Keep tuned!)          |
 
 #o:0001|Beak|0001| A metal beak:                                                           | A hard beak that you can use to defend yourself... or to look agresive. | Easy to put. Just wrap it around your goose mouth. Careful with it!     | ALT_DESC1                                                               | ALT_DESC2                                                               | ALT_DESC3                                                               |
-#o:0002|Key| 0002| A key:                                                                  | A lonely key found in the geese kingdom. What will it open?             | (You might learn something interesting near the death box ;])           | ALT_DESC1                                                               | ALT_DESC2                                                               | ALT_DESC3                                                               |IS_KEY|
+#o:0002|Key| 0002| A key:                                                                  | A lonely key found in the geese kingdom. What will it open?             | (You might learn something interesting near the death box ;])           | ALT_DESC1                                                               | ALT_DESC2                                                               | ALT_DESC3                                                               |IS_KEY|MOVABLE|
 #o:0003|Gold|0004| Gold Ingot:                                                             | Some gold that was found by the digger geese. A gift from my family.    | Might be useful, who knows?. Better to carry it.                        | ALT_DESC1                                                               | ALT_DESC2                                                               | ALT_DESC3                                                               |
 #o:0004|Food|0005| Some birdseed:                                                          | Who knows when hunger might attack? Better carry some homemade alpist!  | Mother made it days ago with love.                                      | ALT_DESC1                                                               | ALT_DESC2                                                               | ALT_DESC3                                                               |
 
-#l:0001|Link 1| 0001|0002|OPEN|
-#l:0002|Link 2| 0002|0003|OPEN|
-#l:0003|Link 3| 0003|0004|OPEN|
-#l:0004|Link 4| 0004|0005|OPEN|
-#l:0005|Link 5| 0005|0006|OPEN|
-#l:0006|Link 6| 0006|0007|OPEN|
-#l:0007|Link 7| 0007|0008|OPEN|
-#l:0008|Link 8| 0008|0009|OPEN|
-#l:0009|Link 9| 0009|0010|OPEN|
-#l:0010|Link 10|0010|0011|OPEN|
-#l:0011|Link 11|0011|0012|OPEN|
-#l:0012|Link 12|0012|0013|OPEN|
-#l:0013|Link 13|0013|0014|OPEN|
-#l:0014|Link 14|0014|0015|OPEN|
-#l:0015|Link 15|0015|0016|OPEN|
-#l:0016|Link 16|0016|0017|OPEN|
-#l:0017|Link 17|0017|0018|OPEN|
-#l:0018|Link 18|0018|0019|OPEN|
-#l:0019|Link 19|0019|0020|OPEN|
-#l:0020|Link 20|0020|0021|OPEN|
-#l:0021|Link 21|0021|0022|OPEN|
-#l:0022|Link 22|0022|0023|OPEN|
-#l:0023|Link 23|0023|0024|OPEN|
-#l:0024|Link 24|0024|0025|OPEN|
-#l:0025|Link 25|0005|0009|OPEN|
-#l:0026|Link 26|0009|0013|OPEN|
-#l:0027|Link 27|0013|0017|OPEN|
-#l:0028|Link 28|0017|0021|OPEN|
-#l:0029|Link 29|0021|0025|OPEN|
-#l:0030|Link 30|0008|0016|OPEN|
-#l:0031|Link 31|0022|0001|OPEN|
-#l:0032|Link 32|0001|0025|CLOSED|
+#l:0001|Link1| 0001|0002|OPEN|
+#l:0002|Link2| 0002|0003|OPEN|
+#l:0003|Link3| 0003|0004|OPEN|
+#l:0004|Link4| 0004|0005|OPEN|
+#l:0005|Link5| 0005|0006|OPEN|
+#l:0006|Link6| 0006|0007|OPEN|
+#l:0007|Link7| 0007|0008|OPEN|
+#l:0008|Link8| 0008|0009|OPEN|
+#l:0009|Link9| 0009|0010|OPEN|
+#l:0010|Link10|0010|0011|OPEN|
+#l:0011|Link11|0011|0012|OPEN|
+#l:0012|Link12|0012|0013|OPEN|
+#l:0013|Link13|0013|0014|OPEN|
+#l:0014|Link14|0014|0015|OPEN|
+#l:0015|Link15|0015|0016|OPEN|
+#l:0016|Link16|0016|0017|OPEN|
+#l:0017|Link17|0017|0018|OPEN|
+#l:0018|Link18|0018|0019|OPEN|
+#l:0019|Link19|0019|0020|OPEN|
+#l:0020|Link20|0020|0021|OPEN|
+#l:0021|Link21|0021|0022|OPEN|
+#l:0022|Link22|0022|0023|OPEN|
+#l:0023|Link23|0023|0024|OPEN|
+#l:0024|Link24|0024|0025|OPEN|
+#l:0025|Link25|0005|0009|OPEN|
+#l:0026|Link26|0009|0013|OPEN|
+#l:0027|Link27|0013|0017|OPEN|
+#l:0028|Link28|0017|0021|OPEN|
+#l:0029|Link29|0021|0025|OPEN|
+#l:0030|Link30|0008|0016|OPEN|
+#l:0031|Link31|0022|0001|OPEN|
+#l:0032|Link32|0001|0025|CLOSED|
 
 #p:0001|Player 1|1|5|(* _ *)|
 

@@ -17,7 +17,7 @@
 
 /*We define the command maximum length, the number of commands and the information of the command (north, south, objects, etc) lengths.*/
 #define CMD_LENGHT 50
-#define N_CMD 12
+#define N_CMD 13
 #define INFO_LENGHT 30
 
 /*We define the command structure with the command itself (the order) and the info it has (objects, directions and else).*/
@@ -27,8 +27,8 @@ struct _Command {
 };
 
 /*We define the different commands we can use, in long and short forms*/
-char *cmd_to_str[N_CMD] = {"No command", "Unknown", "Exit", "Move", "Previous", "Left", "Following", "Right", "Grasp", "Drop", "Throw", "Check"};
-char *short_cmd_to_str[N_CMD] = {"", "", "e", "m", "p", "l", "f", "r", "g", "d", "t", "c"};
+char *cmd_to_str[N_CMD] = {"No command", "Unknown", "Exit", "Move", "Previous", "Left", "Following", "Right", "Grasp", "Drop", "Throw", "Check", "Open"};
+char *short_cmd_to_str[N_CMD] = {"", "", "e", "m", "p", "l", "f", "r", "g", "d", "t", "c", "o"};
 
 /*The following function creates commands, allocating memory for them and starting the command to No_CMD and the information as it was empty.*/
 Command *command_create() {
@@ -66,7 +66,7 @@ STATUS command_get_user_input(Command *command) {
     if (fgets(input, CMD_LENGHT+INFO_LENGHT+1, stdin) != NULL) {
         cmd = UNKNOWN;
         inputCommand = strtok(input, " \n");
-        inputInfo = strtok(NULL, " \n");
+		inputInfo = strtok(NULL, " \n");
 
         while (cmd == UNKNOWN && i < N_CMD && inputCommand != NULL) {
             if (!strcasecmp(inputCommand, short_cmd_to_str[i]) || !strcasecmp(inputCommand, cmd_to_str[i])) {
@@ -77,11 +77,26 @@ STATUS command_get_user_input(Command *command) {
         }
 
         command->command = cmd;
+
         if (inputInfo != NULL && strcmp(inputInfo, "-->") != 0) {
-            strcpy(command->info, inputInfo);
+			strcpy(command->info, inputInfo);
+
+			if (cmd == 11) {
+				inputInfo = strtok(NULL, " \n");
+				if (strcasecmp(inputInfo, "with") != 0) {
+					strcpy(command->info, "NO_INFO");
+					return ERROR;
+				}
+				inputInfo = strtok(NULL, " \n");
+
+				strcat(command->info, " ");
+				strcat(command->info, inputInfo);
+			}
         } else {
             strcpy(command->info, "NO_INFO");
         }
+
+
     }
 
     return OK;

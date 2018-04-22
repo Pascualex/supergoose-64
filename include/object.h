@@ -190,7 +190,7 @@ TAG *object_get_tags(Object *);
 int object_get_tags_number(Object *);
 
 /**
- * @name 		object_is
+ * @name 		object_check_tag
  * @author 		Victor Yrazusta
  * @version             1.0
  * @date		10-04-2018
@@ -199,7 +199,7 @@ int object_get_tags_number(Object *);
  * @param               TAG 	-> the tag that the function will look for.
  * @return		A BOOL, that indicates wheter or not the object has the passed tag.
  */
-BOOL object_is(Object *, TAG);
+BOOL object_check_tag(Object *, TAG);
 
 /**
  * @name 		object_remove_tag
