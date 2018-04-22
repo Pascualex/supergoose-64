@@ -18,7 +18,7 @@
 #include "../include/game_reader.h"
 
 /*We define the number of functions we have related to the different commands.*/
-#define N_CALLBACK 12
+#define N_CALLBACK 14
 /*We define the number of possible directions to move for the move command.*/
 #define N_DIR 4
 /*INI is used to initialize those variable as the starting number of objects when they are 0.*/
@@ -195,7 +195,7 @@ STATUS game_callback_roll(Game *, char *);
  * 
  * @author 		Eric Morales
  * @version 	1.0 
- * @date		20-04-2018
+ * @date		22-04-2018
  * @description It allows you to open a Link using an Object.
  * @input
  *				game:		A Game*, whose player will open the link.
@@ -203,6 +203,36 @@ STATUS game_callback_roll(Game *, char *);
  * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
  */
 STATUS game_callback_open(Game *, char *);
+
+/* FUNCTION:
+ *
+ * @name 		game_callback_turnon
+ * 
+ * @author 		Eric Morales
+ * @version 	1.0 
+ * @date		22-04-2018
+ * @description It allows you to turn on an object
+ * @input
+ *				game:		A Game*, whose player will open the link.
+ *              string:     A char*, which should contain object that is going to be turned on.
+ * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
+ */
+STATUS game_callback_turnon(Game *game, char *string);
+
+/* FUNCTION:
+ *
+ * @name 		game_callback_turnon
+ * 
+ * @author 		Eric Morales
+ * @version 	1.0 
+ * @date		22-04-2018
+ * @description It allows you to turn off an object
+ * @input
+ *				game:		A Game*, whose player will open the link.
+ *              string:     A char*, which should contain object that is going to be turned off.
+ * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
+ */
+STATUS game_callback_turnoff(Game *game, char *string);
 
 /*We define the callback functions*/
 static callback_fn game_callback_fn_list[N_CALLBACK] = {
@@ -217,7 +247,9 @@ static callback_fn game_callback_fn_list[N_CALLBACK] = {
     game_callback_drop,
     game_callback_roll,   
     game_callback_check,
-	game_callback_open
+	game_callback_open,
+	game_callback_turnon,
+	game_callback_turnoff
 };
 
 /*Private functions*/
@@ -974,17 +1006,46 @@ STATUS game_callback_open(Game *game, char *string) {
     return OK;
 }
 
+/*This action is used to turn on an object*/
+STATUS game_callback_turnon(Game *game, char *string) {
+    Object* object;
 
+    if (game == NULL || game->players == NULL || game->objects == NULL || string == NULL || atoi(string) < 0 || atoi(string) > ID_RANGE) return ERROR;
 
+    object = (Object *) game_find(game, atoi(string)+OBJECT_BASE_ID);
 
+    if (object == NULL) {
+        object = (Object *) game_find_name(game, string);
+        if (object == NULL) return ERROR;
+    }
+	
+	if (object_check_tag(object, CAN_GLOW) == FALSE) {
+		return ERROR;
+	}
+	
+	if (player_check_object(game->players[0], object_get_id(object)) == FALSE && player_get_location(game->players[0]) != object_get_location(object)) {
+		return ERROR;
+	}
 
+	return object_add_tags(object, 1, GLOWING);
+}
 
+/*This action is used to turn off an object*/
+STATUS game_callback_turnoff(Game *game, char *string) {
+    Object* object;
 
+    if (game == NULL || game->players == NULL || game->objects == NULL || string == NULL || atoi(string) < 0 || atoi(string) > ID_RANGE) return ERROR;
 
+    object = (Object *) game_find(game, atoi(string)+OBJECT_BASE_ID);
 
+    if (object == NULL) {
+        object = (Object *) game_find_name(game, string);
+        if (object == NULL) return ERROR;
+    }
+	
+	if (player_check_object(game->players[0], object_get_id(object)) == FALSE && player_get_location(game->players[0]) != object_get_location(object)) {
+		return ERROR;
+	}
 
-
-
-
-
-
+	return object_remove_tag(object, GLOWING);
+}
