@@ -28,7 +28,7 @@
 #define MAX_OBJECTS 10              /*!< Maximum number of objects a game is prepared to store*/
 #define MAX_DIES 10                 /*!< Maximum number of dies a game is prepared to store*/
 #define MAX_LINKS 50                /*!< Maximum number of links a game is prepared to store*/
-#define MAX_TAGS 10					/*!< Maximun number of tags an object can have*/
+#define MAX_TAGS 10                 /*!< Maximun number of tags an object can have*/
 
 #define ID_RANGE 1000               /*!< Used to define the maximum amount of elements from each type we can manage*/
 #define SPACE_BASE_ID 0000          /*!< Marks where the Spaces Ids start*/
@@ -40,12 +40,12 @@
 #define OBJECT_BASE_TAGS 0                 /*!< The number of tags that an object has by default*/
 #define SPACE_BASE_TAGS 0                  /*!< The number of tags that an object has by default*/
 
-/** 
+/**
  * @brief Id (to store Ids of objects, players, etc)
  */
 typedef long Id;
 
-/** 
+/**
  * @brief Boolean (to store boolean values that are or not)
  */
 typedef enum {
@@ -53,7 +53,7 @@ typedef enum {
     TRUE /*!< If the condition is correct and real*/
 } BOOL;
 
-/** 
+/**
  * @brief Status (to store all the executions, if correct or not)
  */
 typedef enum {
@@ -70,16 +70,16 @@ typedef enum {
     EXIT, /*!< Exit game */
     MOVE, /*!< Move to a direction */
     FOLLOWING, /*!< Following space (old)*/
-    LEFT, /*!< Left space (old) */ 
+    LEFT, /*!< Left space (old) */
     PREVIOUS, /*!< Previous space (old)*/
     RIGHT, /*!< Right space (old) */
     GRASP, /*!< Grasp an object */
     DROP, /*!< Drop an object */
-    THROW, /*!< Roll the die */      
+    THROW, /*!< Roll the die */
     CHECK
 } T_Command;
 
-/** 
+/**
  * @brief Direction (to be used when moving through the board)
  */
 typedef enum {
@@ -142,19 +142,19 @@ typedef enum {
  * @section install_sec The creators
  *
  * @subsection step1 Eric Morales:
- *  
+ *
  * 	eric.morales@estudiante.uam.es
  *
  * @subsection step2 Victor Yrazusta:
- *  
+ *
  * 	victor.yrazusta@estudiante.uam.es
  *
  * @subsection step3 Alejandro Pascual:
- *  
+ *
  * 	alejandro.pascualp@estudiante.uam.es
  *
  * @subsection step4 Javier Lougedo:
- *  
+ *
  * 	javier.lougedo@estudiante.uam.es
  *
  */

@@ -3,8 +3,8 @@
  * for each command
  * @file game.c
  * @author Profesores PPROG
- * @version 1.0 
- * @date 13-01-2015 
+ * @version 1.0
+ * @date 13-01-2015
  * @copyright GNU Public License
  */
 
@@ -43,8 +43,9 @@ struct _Game {
     int objects_number; /*Used to store the amount of objects the game has*/
     int dies_number; /*Used to store the number of dies the game is using*/
     char **last_text_description; /*Used to store the last text description printed*/
-    T_Command last_cmd; /*Used to store the last command used by the user for graphic engine purposes*/
     STATUS status_last_cmd; /*Used to store if the last command worked correctly or not*/
+    T_Command last_cmd; /*Used to store the last command used by the user for graphic engine purposes*/
+    int consec_error_num; /*Used to know the number of consecutive errors made while playing.*/
 };
 
 /*Define the function type for the callbacks*/
@@ -57,180 +58,180 @@ STATUS game_callback_exit(Game *, char *);
 /* FUNCTION:
  *
  * @name        game_callback_move
- * 
+ *
  * @author      Eric Morales
- * @version     1.0 
+ * @version     1.0
  * @date        22-03-2018
  * @description It allows the player to move to the introducted direction.
  * @input
  *              game:       A Game*, where we are playing.
  *              string:     A char*, which should contain the direction where we are going.
- * @output      A STATUS, which indicates whether the command was executed succesfully or not. 
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_move(Game *game, char *string);
 
 /* FUNCTION:
  *
  * @name        game_callback_previous
- * 
+ *
  * @author      Víctor Yrazusta edited by Eric Morales
- * @version     2.0 
+ * @version     2.0
  * @date        27-02-2018
  * @description It allows the player to move to the right.
  * @input
  *              game:       A Game*, whose player will try to move facing north.
  *              string:     A char*, which should contain the id of the player who will move.
- * @output      A STATUS, which indicates whether the command was executed succesfully or not. 
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_previous(Game *, char *);
 
 /* FUNCTION:
  *
  * @name        game_callback_left
- * 
+ *
  * @author      Víctor Yrazusta edited by Eric Morales
- * @version     2.0 
+ * @version     2.0
  * @date        27-02-2018
  * @description It allows the player to move to the left.
  * @input
  *              game:       A Game*, whose player will try to move facing east.
  *              string:     A char*, which should contain the id of the player who will move.
- * @output      A STATUS, which indicates whether the command was executed succesfully or not. 
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_left(Game *, char *);
 
 /* FUNCTION:
  *
  * @name        game_callback_following
- * 
+ *
  * @author      Víctor Yrazusta edited by Eric Morales
- * @version     2.0 
+ * @version     2.0 int consec_error_num;
  * @date        27-02-2018
  * @description It allows the player to move to the right.
  * @input
  *              game:       A Game*, whose player will try to move facing south.
  *              string:     A char*, which should contain the id of the player who will move.
- * @output      A STATUS, which indicates whether the command was executed succesfully or not. 
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_following(Game *, char *);
 
 /* FUNCTION:
  *
  * @name        game_callback_right
- * 
+ *
  * @author      Víctor Yrazusta edited by Eric Morales
- * @version     2.0 
+ * @version     2.0
  * @date        27-02-2018
  * @description It allows the player to move to the right.
  * @input
  *              game:       A Game*, whose player will try to move facing west.
  *              string:     A char*, which should contain the id of the player who will move.
- * @output      A STATUS, which indicates whether the command was executed succesfully or not. 
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_right(Game *, char *);
 
 /* FUNCTION:
  *
  * @name 		game_callback_check
- * 
+ *
  * @author 		Eric Morales
- * @version 	1.0 
+ * @version 	1.0
  * @date		26-03-2018
  * @description It allows get the graphic description (object or game).
  * @input
  *				game:		A Game*, where we are playing.
  *              string:     A char*, which should contain the direction where we are going.
- * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
+ * @output		A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_check(Game *game, char *string);
 
 /* FUNCTION:
  *
  * @name 		game_callback_grasp Edited by Eric Morales
- * 
+ *
  * @author 		Alejandro Pascual
- * @version 	2.0 
+ * @version 	2.0
  * @date		19-02-2018
  * @description It allows the player to pick up an object. In order to pick up the object, the player must be in the same space as the object, and should not be carrying an object.
  * @input
  *		game:		A Game*, whose player will pick up the object if the previous mentioned conditions are met.
  *      string:   A char*, which should contain the id of the object to pick up.
- * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
+ * @output		A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_grasp(Game *, char *);
 
 /* FUNCTION:
  *
  * @name 		game_callback_drop
- * 
+ *
  * @author 		Alejandro Pascual Edited by Eric Morales
- * @version 	2.0 
+ * @version 	2.0
  * @date		19-02-2018
  * @description It allows the player to drop an object. In order to drop the object, the player should be carring that object.
  * @input
  *				game:		A Game*, whose player will pick up the object if the previous mentioned conditions are met.
  *              string:     A char*, which should contain the id of the player whose object will de dropped.
- * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
+ * @output		A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_drop(Game *, char *);
 
 /* FUNCTION:
  *
  * @name 		game_callback_roll
- * 
+ *
  * @author 		Víctor Yrazusta
- * @version 	1.0 
+ * @version 	1.0
  * @date		26-02-2018
  * @description It allows the player to roll a die.
  * @input
  *				game:		A Game*, whose player will pick up the object if the previous mentioned conditions are met.
  *              string:     A char*, which should contain the id of the die to roll.
- * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
+ * @output		A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_roll(Game *, char *);
 
 /* FUNCTION:
  *
  * @name 		game_callback_open
- * 
+ *
  * @author 		Eric Morales
- * @version 	1.0 
+ * @version 	1.0
  * @date		22-04-2018
  * @description It allows you to open a Link using an Object.
  * @input
  *				game:		A Game*, whose player will open the link.
  *              string:     A char*, which should contain "<Link> with <Obj>"
- * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
+ * @output		A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_open(Game *, char *);
 
 /* FUNCTION:
  *
  * @name 		game_callback_turnon
- * 
+ *
  * @author 		Eric Morales
- * @version 	1.0 
+ * @version 	1.0
  * @date		22-04-2018
  * @description It allows you to turn on an object
  * @input
  *				game:		A Game*, whose player will open the link.
  *              string:     A char*, which should contain object that is going to be turned on.
- * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
+ * @output		A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_turnon(Game *game, char *string);
 
 /* FUNCTION:
  *
  * @name 		game_callback_turnon
- * 
+ *
  * @author 		Eric Morales
- * @version 	1.0 
+ * @version 	1.0
  * @date		22-04-2018
  * @description It allows you to turn off an object
  * @input
  *				game:		A Game*, whose player will open the link.
  *              string:     A char*, which should contain object that is going to be turned off.
- * @output		A STATUS, which indicates whether the command was executed succesfully or not. 
+ * @output		A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_turnoff(Game *game, char *string);
 
@@ -240,12 +241,12 @@ static callback_fn game_callback_fn_list[N_CALLBACK] = {
     game_callback_exit,
     game_callback_move,
     game_callback_previous,
-    game_callback_left,    
+    game_callback_left,
     game_callback_following,
     game_callback_right,
     game_callback_grasp,
     game_callback_drop,
-    game_callback_roll,   
+    game_callback_roll,
     game_callback_check,
 	game_callback_open,
 	game_callback_turnon,
@@ -282,9 +283,9 @@ Game *game_create() {
         game->links[i] = NULL;
     }
 
-    game->spaces_number = INI;    
+    game->spaces_number = INI;
     game->players_number = INI;
-    game->objects_number = INI;    
+    game->objects_number = INI;
     game->dies_number = N_DIES;
     game->links_number = INI;
     game->last_text_description = NULL;
@@ -297,7 +298,7 @@ Game *game_create() {
     die_roll((Die *) game_find(game, DIE_BASE_ID+game->dies_number));
     game->last_cmd = NO_CMD;
     game->status_last_cmd = ERROR;
-
+    game->consec_error_num = 0;
     return game;
 }
 
@@ -312,7 +313,7 @@ STATUS game_create_from_file(Game *game, char *file_name) {
     if (game_reader_load_links(game, file_name) == ERROR) return ERROR;
 
     if (game->players[0] != NULL) game->last_text_description = space_get_basic_description(game_find(game, player_get_location(game->players[0])));
-    if (game->last_text_description == NULL) return ERROR; 
+    if (game->last_text_description == NULL) return ERROR;
 
     return OK;
 }
@@ -447,7 +448,7 @@ STATUS game_set_object_location(Game *game, Id location_id, Id object_id) {
             if (player_add_object((Player *) new_holder, object_id) == OK && space_del_object((Space *) previous_holder, object_id) == OK && object_set_location(object, location_id) == OK) {
                 return OK;
             } else {
-				
+
                 return ERROR;
             }
         }
@@ -548,11 +549,23 @@ int game_get_dies_number(Game *game) {
 
 /*This function is used to update the command related game fields*/
 STATUS game_update(Game *game, Command *command) {
-
+    STATUS prev_cmd_status;
+    T_Command prev_cmd;
     if (game == NULL || command == NULL) return ERROR;
+
+    prev_cmd = game->last_cmd;
+    prev_cmd_status = game->status_last_cmd;
 
     game->last_cmd = command_get_command(command);
     game->status_last_cmd = (*game_callback_fn_list[command_get_command(command)])(game, command_get_info(command));
+
+    if (game->status_last_cmd == ERROR && prev_cmd_status == ERROR){
+      if (game->last_cmd == (UNKNOWN || prev_cmd)) game->consec_error_num++;
+    } else if (game->status_last_cmd == ERROR){
+      game->consec_error_num = 1;
+    } else {
+      game->consec_error_num = 0;
+    }
 
     return game->status_last_cmd;
 }
@@ -729,7 +742,7 @@ Link *game_get_connection(Game *game, Space *origin, Space *destination) {
             if (link_get_other_side(link, space_get_id(origin)) == space_get_id(destination)) return link;
         }
     }
-    
+
     return NULL;
 }
 
@@ -852,30 +865,30 @@ STATUS game_callback_move(Game *game, char *string) {
     game->last_text_description = space_get_basic_description(game_find(game, player_get_location(game->players[0])));
     if (game->last_text_description == NULL) return ERROR;
 
-    return OK;   
+    return OK;
 }
 
 /*The following action was used to move to the previous space in older versions*/
 STATUS game_callback_previous(Game *game, char *string) {
-    
+
     return game_callback_move(game, "North");
 }
 
 /*This action moves the player to the left in older versions*/
 STATUS game_callback_left(Game *game, char *string) {
-    
+
     return game_callback_move(game, "West");
 }
 
 /*The following action is used to move to the next space in older versions*/
 STATUS game_callback_following(Game *game, char *string) {
-   
+
     return game_callback_move(game, "South");
 }
 
 /*This action moves the player to the right in older versions*/
 STATUS game_callback_right(Game *game, char *string) {
-    
+
     return game_callback_move(game, "East");
 }
 
@@ -982,7 +995,7 @@ STATUS game_callback_open(Game *game, char *string) {
 
 	slink = strtok(string, " \n");
 	sobj = strtok(NULL, " \n");
-	
+
 	obj = (Object *) game_find(game, atoi(sobj)+OBJECT_BASE_ID);
 
     if (obj == NULL) {
@@ -1006,7 +1019,7 @@ STATUS game_callback_open(Game *game, char *string) {
 	}
 
 	link_set_status(link, OPEN);
-	
+
     return OK;
 }
 
@@ -1022,11 +1035,11 @@ STATUS game_callback_turnon(Game *game, char *string) {
         object = (Object *) game_find_name(game, string);
         if (object == NULL) return ERROR;
     }
-	
+
 	if (object_check_tag(object, CAN_GLOW) == FALSE) {
 		return ERROR;
 	}
-	
+
 	if (player_check_object(game->players[0], object_get_id(object)) == FALSE && player_get_location(game->players[0]) != object_get_location(object)) {
 		return ERROR;
 	}
@@ -1046,7 +1059,7 @@ STATUS game_callback_turnoff(Game *game, char *string) {
         object = (Object *) game_find_name(game, string);
         if (object == NULL) return ERROR;
     }
-	
+
 	if (player_check_object(game->players[0], object_get_id(object)) == FALSE && player_get_location(game->players[0]) != object_get_location(object)) {
 		return ERROR;
 	}
