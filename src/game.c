@@ -962,6 +962,10 @@ STATUS game_callback_check(Game *game, char *string) {
         if (object == NULL) return ERROR;
     }
 
+	if (player_check_object(game->players[0], object_get_id(object)) == FALSE && player_get_location(game->players[0]) != object_get_location(object)) {
+		return ERROR;
+	}
+
     game->last_text_description = object_get_check(object);
     if (game->last_text_description == NULL) return ERROR;
 
