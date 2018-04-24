@@ -22,7 +22,8 @@ int main(int argc, char *argv[]) {
     Graphic_engine *gengine;
     FILE *log = NULL;
 	Menu *menu;
-	
+	char input;
+	int selectedOption;
 
     if (argc < 2 || argc == 3) { /* Check if we have data file. */
         fprintf(stderr, "Use: %s <game_data_file> (normal use) or %s <game_data_file> -l <game_log_file> (using log file)\n", argv[0], argv[0]);
@@ -53,14 +54,30 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-
     menu = menu_create();
     if (menu == NULL) {
         fprintf(stderr, "Error while initializing the menu.\n");
         game_destroy(game);
         return 1;
     }
-	menu_paint(menu);
+
+	selectedOption = 0;
+	do {
+		menu_paint(menu, selectedOption);
+		system("/bin/stty raw");
+		input = getchar();
+		system("/bin/stty cooked");
+
+		switch (input) {
+			case 'w': 
+				if (selectedOption > 0) selectedOption--;
+				break;
+			case 's':
+				if (selectedOption < 5) selectedOption++;
+				break;
+		}
+	} while (input != ' ');
+	printf("%d", selectedOption);
 	menu_destroy(menu);
 
     gengine = graphic_engine_create();
@@ -77,7 +94,6 @@ int main(int argc, char *argv[]) {
         game_destroy(game);
         return 1;
     }
-
 
     while ((command_get_command(command) != EXIT) && !game_is_over(game)) {
         graphic_engine_paint_game(gengine, game);

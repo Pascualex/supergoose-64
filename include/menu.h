@@ -40,7 +40,7 @@ Menu* menu_create();
  * @param               Menu* -> a menu to be freed.
  * @return		A void.
  */
-void menu_destroy(Menu *ge);
+void menu_destroy(Menu *menu);
 
 /** 
  * @name 		menu_paint
@@ -51,7 +51,7 @@ void menu_destroy(Menu *ge);
  * @param               Menu* -> a menu that will define where to print.
  * @return		A void.
  */
-void menu_paint(Menu *menu);
+void menu_paint(Menu *menu, int position);
 
 
 #endif

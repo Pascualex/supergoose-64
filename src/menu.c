@@ -29,12 +29,12 @@ Menu *menu_create() {
     menu = (Menu *) malloc(sizeof (Menu));
 
 	menu->title =   screen_area_init(  2,  2, 77, 21, GREEN, BLACK, FALSE);
-    menu->new =     screen_area_init( 25, 27, 30, 1, BLUE, BLACK, TRUE);
-    menu->load =    screen_area_init( 25, 29, 30, 1, BLUE,  BLACK, TRUE);
-    menu->guide =   screen_area_init( 25, 31, 30, 1, BLUE,  BLACK, TRUE);
-    menu->terms =   screen_area_init( 25, 33, 30, 1, BLUE,  BLACK, TRUE);
-    menu->options = screen_area_init( 25, 35, 30, 1, BLUE,  BLACK, TRUE);
-    menu->exit =    screen_area_init( 25, 37, 30, 1, BLUE,  BLACK, TRUE);
+    menu->new =     screen_area_init( 25, 27, 30,  1,  BLUE, BLACK,  TRUE);
+    menu->load =    screen_area_init( 25, 29, 30,  1,  BLUE, BLACK,  TRUE);
+    menu->guide =   screen_area_init( 25, 31, 30,  1,  BLUE, BLACK,  TRUE);
+    menu->terms =   screen_area_init( 25, 33, 30,  1,  BLUE, BLACK,  TRUE);
+    menu->options = screen_area_init( 25, 35, 30,  1,  BLUE, BLACK,  TRUE);
+    menu->exit =    screen_area_init( 25, 37, 30,  1,  BLUE, BLACK,  TRUE);
 
     return menu;
 }
@@ -56,7 +56,7 @@ void menu_destroy(Menu *menu) {
 }
 
 /*This function is the one responsible of painting the menu*/
-void menu_paint(Menu *menu) {
+void menu_paint(Menu *menu, int position) {
     char str[255];
 
     /* Paint the in the title area */
@@ -127,6 +127,8 @@ void menu_paint(Menu *menu) {
 
 */
 
+	screen_color_box(24, 26, 32, 13, WHITE, BLACK);
+	screen_color_box(25, 27+position*2, 30, 1, YELLOW, BLACK);	
 
 	screen_area_clear(menu->new);
 	sprintf(str, "NEW GAME");
