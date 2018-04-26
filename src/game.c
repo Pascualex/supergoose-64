@@ -16,9 +16,11 @@
 /*Own libraries*/
 #include "../include/game.h"
 #include "../include/game_reader.h"
+#include "../include/menu.h"
+#include "nfd.h"
 
 /*We define the number of functions we have related to the different commands.*/
-#define N_CALLBACK 14
+#define N_CALLBACK 15
 /*We define the number of possible directions to move for the move command.*/
 #define N_DIR 4
 /*INI is used to initialize those variable as the starting number of objects when they are 0.*/
@@ -235,6 +237,8 @@ STATUS game_callback_turnon(Game *game, char *string);
  */
 STATUS game_callback_turnoff(Game *game, char *string);
 
+STATUS game_callback_load(Game *game, char *string);
+
 /*We define the callback functions*/
 static callback_fn game_callback_fn_list[N_CALLBACK] = {
     game_callback_unknown,
@@ -250,7 +254,8 @@ static callback_fn game_callback_fn_list[N_CALLBACK] = {
     game_callback_check,
 	game_callback_open,
 	game_callback_turnon,
-	game_callback_turnoff
+	game_callback_turnoff,
+	game_callback_load
 };
 
 /*Private functions*/
@@ -811,6 +816,53 @@ TAG game_str_to_tag(char *name) {
     return NO_TAG;
 }
 
+/*The following funciton displays and implements the menu*/
+
+STATUS game_menu(Game *game) {
+	Menu *menu;
+	char input;
+	int selectedOption;
+	menu = menu_create();
+
+    if (menu == NULL) {
+        fprintf(stderr, "Error while initializing the menu.\n");
+        game_destroy(game);
+        return ERROR;
+    }
+
+	selectedOption = 0;
+	do {
+		menu_paint(menu, selectedOption);
+		system("/bin/stty raw");
+		input = getchar();
+		system("/bin/stty cooked");
+
+		switch (input) {
+			case 'w': 
+				if (selectedOption > 0) selectedOption--;
+				break;
+			case 's':
+				if (selectedOption < 5) selectedOption++;
+				break;
+		}
+	} while (input != ' ');
+	printf("%d", selectedOption);
+	menu_destroy(menu);
+
+	switch (selectedOption) {
+		case 0:
+			game_create_from_file(game, "./datafiles/data.dat");
+			printf("Juego cargado.\n");
+			return OK;
+		case 1:
+			return game_callback_load(game, "NO_INFO");
+	}
+
+	return OK;
+}
+
+
+
 /*Callbacks implementation for each command/action*/
 
 /*The following action is used when the input doesnt coincide with any other one*/
@@ -1065,4 +1117,23 @@ STATUS game_callback_turnoff(Game *game, char *string) {
 	}
 
 	return object_remove_tag(object, GLOWING);
+}
+
+STATUS game_callback_load(Game *game, char *string) {
+	nfdchar_t *outPath = NULL;
+	char aux[256];
+
+	if (game == NULL || string == NULL){
+		return ERROR;
+	}
+
+    strcpy(aux, string);
+
+	if (strcmp(aux, "NO_INFO") == 0){
+    	if (NFD_OpenDialog( NULL, NULL, &outPath ) == NFD_OKAY){
+    		strcpy(aux, (char *) outPath);
+    	}
+	}
+
+	return game_create_from_file(game, aux);
 }

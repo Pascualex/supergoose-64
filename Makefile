@@ -51,7 +51,7 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 ./obj/die.o: ./src/die.c ./include/die.h ./include/types.h
 	$(MAKE) -c ./src/die.c -o ./obj/die.o 
 
-./obj/game.o: ./src/game.c ./include/game.h ./include/types.h
+./obj/game.o: ./src/game.c ./include/game.h ./include/types.h ./include/menu.h
 	$(MAKE) -c ./src/game.c -o ./obj/game.o
 
 ./obj/game_loop.o: ./src/game_loop.c 
@@ -120,7 +120,7 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 
 #=====================================UTILS=====================================#
 run:
-	./SuperGoose_64 ./datafiles/data.dat
+	./SuperGoose_64
 
 valgrind:
 	valgrind -v -q --leak-check=full ./SuperGoose_64 ./datafiles/data.dat

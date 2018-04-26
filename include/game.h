@@ -276,4 +276,6 @@ char *game_tag_to_str(TAG);
  */
 TAG game_str_to_tag(char *);
 
+STATUS game_menu(Game *game);
+
 #endif
