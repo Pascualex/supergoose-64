@@ -12,6 +12,8 @@
 #include <string.h>
 /*Own libraries*/
 #include "../include/graphic_engine.h"
+#include "../include/menu.h"
+
 
 /*This is the main program of the game, where the aaction takes place. It is responsible of calling all the other function and advises if anythin is going wrong*/
 int main(int argc, char *argv[]) {
@@ -19,6 +21,9 @@ int main(int argc, char *argv[]) {
     Command *command = NULL;
     Graphic_engine *gengine;
     FILE *log = NULL;
+	Menu *menu;
+	char input;
+	int selectedOption;
 
     if (argc < 2 || argc == 3) { /* Check if we have data file. */
         fprintf(stderr, "Use: %s <game_data_file> (normal use) or %s <game_data_file> -l <game_log_file> (using log file)\n", argv[0], argv[0]);
@@ -48,6 +53,32 @@ int main(int argc, char *argv[]) {
         game_destroy(game);
         return 1;
     }
+
+    menu = menu_create();
+    if (menu == NULL) {
+        fprintf(stderr, "Error while initializing the menu.\n");
+        game_destroy(game);
+        return 1;
+    }
+
+	selectedOption = 0;
+	do {
+		menu_paint(menu, selectedOption);
+		system("/bin/stty raw");
+		input = getchar();
+		system("/bin/stty cooked");
+
+		switch (input) {
+			case 'w': 
+				if (selectedOption > 0) selectedOption--;
+				break;
+			case 's':
+				if (selectedOption < 5) selectedOption++;
+				break;
+		}
+	} while (input != ' ');
+	printf("%d", selectedOption);
+	menu_destroy(menu);
 
     gengine = graphic_engine_create();
     if (gengine == NULL) {

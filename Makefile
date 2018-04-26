@@ -1,7 +1,7 @@
 #===================================HEADERS===================================#
 MAKE=gcc -g -Wall -pedantic -ansi
-OBJ= ./obj/command.o ./obj/die.o ./obj/game.o ./obj/game_loop.o ./obj/game_reader.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o 
-OBJGAME= ./obj/command.o ./obj/die.o ./obj/game.o ./obj/game_reader.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o 
+OBJ= ./obj/command.o ./obj/die.o ./obj/game.o ./obj/game_loop.o ./obj/game_reader.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o
+OBJGAME= ./obj/command.o ./obj/die.o ./obj/game.o ./obj/game_reader.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o
 
 
 #=====================================ALL=====================================#
@@ -62,6 +62,9 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 
 ./obj/graphic_engine.o: ./src/graphic_engine.c ./include/graphic_engine.h ./include/types.h
 	$(MAKE) -c ./src/graphic_engine.c -o ./obj/graphic_engine.o
+
+./obj/menu.o: ./src/menu.c ./include/menu.h ./include/types.h
+	$(MAKE) -c ./src/menu.c -o ./obj/menu.o
 
 ./obj/inventory.o: ./src/inventory.c ./include/inventory.h ./include/types.h
 	$(MAKE) -c ./src/inventory.c -o ./obj/inventory.o

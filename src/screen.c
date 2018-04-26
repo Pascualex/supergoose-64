@@ -334,9 +334,9 @@ void screen_add_border(int x, int y, int width, int height, int fg_color, int bg
     }
 }
 
-const unsigned char* unicode_to_utf8(wchar_t c) {
+const unsigned char *unicode_to_utf8(wchar_t c) {
     static unsigned char b_static[5];
-    unsigned char* b = b_static;
+    unsigned char *b = b_static;
 
     if (c < (1 << 7)) {
         *b++ = (unsigned char) (c);
