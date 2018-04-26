@@ -62,49 +62,49 @@ void menu_paint(Menu *menu, int position) {
     /* Paint the in the title area */
 	screen_area_clear(menu->title);
     sprintf(str, "    _____                        ______                         _____ __ __");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "   / ___/ __  ______  ___  _____/ ____/___  ____  ________     / ___// // /");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "   \\__  \\/ / / / __ \\/ _ \\/ ___/ / __/ __ \\/ __ \\/  ___/_ \\   / __ \\/ // /_");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "   ___/ / /_/ / /_/ /  __/ /  / /_/ / /_/ / /_/ (__  )  __/  / /_/ /__  __/");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "  /____/\\____/ ____/\\___/_/   \\____/\\____/\\____/____/\\__/____\\____/  /_/");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "            /_/                                         /___/");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
 
     sprintf(str, " ");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
 
     sprintf(str, "                                                             /\\");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "                                                            /  \\  /\\");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "                                ___________________      /\\/    \\/  \\");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "                       /\\      /\\        ______    \\    /   /\\/\\  /\\/\\");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "                      /  \\    //_\\       \\    /\\    \\  /\\/\\/    \\/    \\");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "               /\\    / /\\/\\  //___\\       \\__/  \\    \\/");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "              /  \\  /\\/    \\//_____\\       \\ |[]|     \\");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "             /\\/\\/\\/       //_______\\       \\|__|      \\");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "            /      \\      /XXXXXXXXXX\\                  \\");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "                    \\    /_I_II  I__I_\\__________________\\");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "                           I_I|  I__I_____[]_|_[]_____I");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "                           I_II  I__I_____[]_|_[]_____I");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "                           I II__I  I     XXXXXXX     I");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
     sprintf(str, "                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    screen_area_puts(menu->title, str);
+    screen_area_puts_char(menu->title, str);
 
 
 
@@ -132,27 +132,27 @@ void menu_paint(Menu *menu, int position) {
 
 	screen_area_clear(menu->new);
 	sprintf(str, "NEW GAME");
-	screen_area_puts(menu->new, str);
+	screen_area_puts_char(menu->new, str);
 
 	screen_area_clear(menu->load);
 	sprintf(str, "LOAD GAME");
-	screen_area_puts(menu->load, str);
+	screen_area_puts_char(menu->load, str);
 
 	screen_area_clear(menu->guide);
 	sprintf(str, "Guide and controls");
-	screen_area_puts(menu->guide, str);
+	screen_area_puts_char(menu->guide, str);
 
 	screen_area_clear(menu->terms);
 	sprintf(str, "Terms of use");
-	screen_area_puts(menu->terms, str);
+	screen_area_puts_char(menu->terms, str);
 
 	screen_area_clear(menu->options);
 	sprintf(str, "Options");
-	screen_area_puts(menu->options, str);
+	screen_area_puts_char(menu->options, str);
 
 	screen_area_clear(menu->exit);
 	sprintf(str, "EXIT");
-	screen_area_puts(menu->exit, str);
+	screen_area_puts_char(menu->exit, str);
 
     /* Dump to the terminal */
     screen_paint();

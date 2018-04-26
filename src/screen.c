@@ -1,11 +1,11 @@
 /** 
- * @brief It defines the screen functions
- * @file screen.c
- * @author Profesores PPROG, edited by Alejandro Pascual
- * @version 2.0 
- * @date 
- * @updated 
- * @copyright GNU Public License
+*@brief It defines the screen functions
+*@file screen.c
+*@author Profesores PPROG, edited by Alejandro Pascual
+*@version 2.0 
+*@date 
+*@updated 
+*@copyright GNU Public License
  */
 
 /*C libraries*/
@@ -20,73 +20,57 @@
 /*We define the maximum rows and columns of the screen we are going o use, and the TOTAL_DATA which is one bigger than the product, for memory allocating purposes*/
 #define ROWS 43
 #define COLUMNS 80
-#define TOTAL_DATA (ROWS * COLUMNS)
+#define TOTAL_DATA (ROWS*COLUMNS)
 
 #define BORDER_FG_COLOR WHITE
 #define BORDER_BG_COLOR BLACK
 
 #define PROMPT " prompt:> "
 
-/*We define the ACCESS to use it in the memset and simplify things*/
-#define ACCESS(d, x, y) (d + ((y) * COLUMNS) + (x))
-
 /*We define the area with two coordinates to define the starting point and the width and height of it*/
 struct _Area {
     int x, y, width, height;
-    char *cursor;
+    int currentRow;
 };
+
 /*We globally define the data used*/
-char *data;
+wchar_t *data;
 int *data_fg_color;
 int *data_bg_color;
-
 BOOL *borders;
-wchar_t *borders_unicode;
 
 /****************************/
 /*     Private functions    */
 /****************************/
-int screen_area_cursor_is_out_of_bounds(Area *);
 void screen_area_scroll_up(Area *);
-void screen_utils_replaces_special_chars(char *);
-const unsigned char* unicode_to_utf8(wchar_t);
+const unsigned char *unicode_to_utf8(wchar_t);
 
 /****************************/
 /* Functions implementation */
-
 /****************************/
 void screen_init(int color) {
     int i, j;
 
     screen_destroy(); /* Dispose if previously initialized */
 
-    data = (char *) malloc(sizeof (char)*(TOTAL_DATA));
+    data = (wchar_t *) malloc(sizeof(wchar_t)*(TOTAL_DATA));
     if (data == NULL) return;
 
-    data_fg_color = (int *) malloc(sizeof (int)*TOTAL_DATA);
+    data_fg_color = (int *) malloc(sizeof(int)*TOTAL_DATA);
     if (data_fg_color == NULL) {
         free(data);
         return;
     }
 
-    data_bg_color = (int *) malloc(sizeof (int)*TOTAL_DATA);
+    data_bg_color = (int *) malloc(sizeof(int)*TOTAL_DATA);
     if (data_bg_color == NULL) {
         free(data_fg_color);
         free(data);
         return;
     }
 
-    borders = (BOOL *) malloc(sizeof (BOOL) * TOTAL_DATA);
+    borders = (BOOL *) malloc(sizeof(BOOL)*TOTAL_DATA);
     if (borders == NULL) {
-        free(data_bg_color);
-        free(data_fg_color);
-        free(data);
-        return;
-    }
-
-    borders_unicode = (wchar_t *) malloc(sizeof (wchar_t) * TOTAL_DATA);
-    if (borders_unicode == NULL) {
-        free(borders);
         free(data_bg_color);
         free(data_fg_color);
         free(data);
@@ -95,11 +79,10 @@ void screen_init(int color) {
 
     for (i = 0; i < ROWS; i++) {
         for (j = 0; j < COLUMNS; j++) {
-            data[i * COLUMNS + j] = ' ';
-            data_fg_color[i * COLUMNS + j] = color;
-            data_bg_color[i * COLUMNS + j] = color;
-            borders[i * COLUMNS + j] = FALSE;
-            borders_unicode[i * COLUMNS + j] = L'☒';
+            data[i*COLUMNS+j] = L' ';
+            data_fg_color[i*COLUMNS+j] = color;
+            data_bg_color[i*COLUMNS+j] = color;
+            borders[i*COLUMNS+j] = FALSE;
         }
     }
 }
@@ -110,7 +93,6 @@ void screen_destroy() {
     if (data_fg_color != NULL) free(data_fg_color);
     if (data_bg_color != NULL) free(data_bg_color);
     if (borders != NULL) free(borders);
-    if (borders_unicode != NULL) free(borders_unicode);
 }
 
 void screen_paint() {
@@ -122,11 +104,7 @@ void screen_paint() {
 
         for (i = 0; i < ROWS; i++) {
             for (j = 0; j < COLUMNS; j++) {
-                if (borders[i * COLUMNS + j] == TRUE) {
-                    printf("\033[1;3%d;4%dm%s\033[0m", data_fg_color[i * COLUMNS + j], data_bg_color[i * COLUMNS + j], unicode_to_utf8(borders_unicode[i * COLUMNS + j]));
-                } else {
-                    printf("\033[1;3%d;4%dm%c\033[0m", data_fg_color[i * COLUMNS + j], data_bg_color[i * COLUMNS + j], data[i * COLUMNS + j]);
-                }
+                printf("\033[1;3%d;4%dm%s\033[0m", data_fg_color[i*COLUMNS+j], data_bg_color[i*COLUMNS+j], unicode_to_utf8(data[i*COLUMNS+j]));
             }
 
             printf("\n");
@@ -138,25 +116,25 @@ void screen_gets(char *str) {
 
     fprintf(stdout, PROMPT);
     if (fgets(str, COLUMNS, stdin)) {
-        *(str + strlen(str) - 1) = 0; /* Replaces newline character with '\0' */
+        *(str+strlen(str)-1) = 0; /* Replaces newline character with '\0' */
     }
 }
 
 Area *screen_area_init(int x, int y, int width, int height, int fg_color, int bg_color, BOOL has_border) {
     Area* area = NULL;
 
-    area = (Area *) malloc(sizeof (struct _Area));
+    area = (Area *) malloc(sizeof(struct _Area));
 
     if (area == NULL) {
         return NULL;
     }
 
-    *area = (struct _Area){x, y, width, height, ACCESS(data, x, y)};
+    *area = (struct _Area){x, y, width, height, 0};
 
     screen_color_box(x, y, width, height, fg_color, bg_color);
 
     if (has_border == TRUE) {
-        screen_add_border(x - 1, y - 1, width + 2, height + 2, BORDER_FG_COLOR, BORDER_BG_COLOR);
+        screen_add_border(x-1, y-1, width+2, height+2, BORDER_FG_COLOR, BORDER_BG_COLOR);
     }
 
     return area;
@@ -172,61 +150,50 @@ void screen_area_destroy(Area *area) {
 }
 
 void screen_area_clear(Area *area) {
-    int i = 0;
+    int i, j;
 
     if (area != NULL) {
-        screen_area_reset_cursor(area);
+        area->currentRow = 0;
 
         for (i = 0; i < area->height; i++) {
-            memset(ACCESS(area->cursor, 0, i), (int) ' ', (size_t) area->width);
+            for (j = 0; j < area->width; j++) {
+                data[(area->y+i)*ROWS+(area->x+j)] = L' ';
+            }
         }
     }
 }
 
-void screen_area_reset_cursor(Area *area) {
+void screen_area_puts_char(Area *area, char *str) {
+    int i;
 
-    if (area != NULL) {
-        area->cursor = ACCESS(data, area->x, area->y);
-    }
-}
-
-void screen_area_puts(Area *area, char *str) {
-    int len = 0;
-    char *ptr = NULL;
-
-    if (screen_area_cursor_is_out_of_bounds(area)) {
+    if (area->currentRow >= area->height) {
         screen_area_scroll_up(area);
     }
 
-    screen_utils_replaces_special_chars(str);
-
-    for (ptr = str; ptr < (str + strlen(str)); ptr += area->width) {
-        memset(area->cursor, ' ', area->width);
-        len = (strlen(ptr) < area->width) ? strlen(ptr) : area->width;
-        memcpy(area->cursor, ptr, len);
-        area->cursor += COLUMNS;
+    for (i = 0; i < area->width-1; i++) {
+        if (i < strlen(str)) {
+            data[(area->y+area->currentRow)*COLUMNS+(area->x+i)] = str[i];
+        } else {
+            data[(area->y+area->currentRow)*COLUMNS+(area->x+i)] = L'*';
+        }        
     }
-}
 
-int screen_area_cursor_is_out_of_bounds(Area *area) {
-
-    return area->cursor > ACCESS(data, area->x + area->width, area->y + area->height - 1);
+    area->currentRow++;
 }
 
 void screen_area_scroll_up(Area *area) {
+    int i, j;
 
-    for (area->cursor = ACCESS(data, area->x, area->y); area->cursor < ACCESS(data, area->x + area->width, area->y + area->height - 2); area->cursor += COLUMNS) {
-        memcpy(area->cursor, area->cursor + COLUMNS, area->width);
+    for (i = 0; i < area->height-1; i++) {
+        for (j = 0; j < area->width; j++) {
+            data[(area->y+i)*COLUMNS+(area->x+j)] = data[(area->y+i+1)*COLUMNS+(area->x+i)];
+        }
     }
-}
-
-void screen_utils_replaces_special_chars(char *str) {
-    char *pch = NULL;
-
-    /* Replaces acutes and tilde with '??' */
-    while ((pch = strpbrk(str, "ÁÉÍÓÚÑáéíóúñ"))) {
-        memcpy(pch, "??", 2);
+    for (i = 0; i < area->width; i++) {
+        data[(area->y+area->height-1)*COLUMNS+(area->x+i)] = L' ';
     }
+
+    if (area->currentRow > 0) area->currentRow--;
 }
 
 void screen_color_box(int x, int y, int width, int height, int fg_color, int bg_color) {
@@ -234,8 +201,8 @@ void screen_color_box(int x, int y, int width, int height, int fg_color, int bg_
 
     for (i = 0; i < height; i++) {
         for (j = 0; j < width; j++) {
-            data_fg_color[(y + i) * COLUMNS + x + j] = fg_color;
-            data_bg_color[(y + i) * COLUMNS + x + j] = bg_color;
+            data_fg_color[(y+i)*COLUMNS+x+j] = fg_color;
+            data_bg_color[(y+i)*COLUMNS+x+j] = bg_color;
         }
     }
 }
@@ -244,91 +211,89 @@ void screen_add_border(int x, int y, int width, int height, int fg_color, int bg
     int i, j;
 
     for (i = 0; i < height; i++) {
-        borders[(y + i) * COLUMNS + x] = TRUE;
-        data_fg_color[(y + i) * COLUMNS + x] = fg_color;
-        data_bg_color[(y + i) * COLUMNS + x] = bg_color;
+        borders[(y+i)*COLUMNS+x] = TRUE;
+        data_fg_color[(y+i)*COLUMNS+x] = fg_color;
+        data_bg_color[(y+i)*COLUMNS+x] = bg_color;
 
-        borders[(y + i) * COLUMNS + x + width - 1] = TRUE;
-        data_fg_color[(y + i) * COLUMNS + x + width - 1] = fg_color;
-        data_bg_color[(y + i) * COLUMNS + x + width - 1] = bg_color;
+        borders[(y+i)*COLUMNS+x+width-1] = TRUE;
+        data_fg_color[(y+i)*COLUMNS+x+width-1] = fg_color;
+        data_bg_color[(y+i)*COLUMNS+x+width-1] = bg_color;
     }
 
-    for (i = 1; i < width - 1; i++) {
-        borders[y * COLUMNS + x + i] = TRUE;
-        data_fg_color[y * COLUMNS + x + i] = fg_color;
-        data_bg_color[y * COLUMNS + x + i] = bg_color;
+    for (i = 1; i < width-1; i++) {
+        borders[y*COLUMNS+x+i] = TRUE;
+        data_fg_color[y*COLUMNS+x+i] = fg_color;
+        data_bg_color[y*COLUMNS+x+i] = bg_color;
 
-        borders[(y + height - 1) * COLUMNS + x + i] = TRUE;
-        data_fg_color[(y + height - 1) * COLUMNS + x + i] = fg_color;
-        data_bg_color[(y + height - 1) * COLUMNS + x + i] = bg_color;
+        borders[(y+height-1)*COLUMNS+x+i] = TRUE;
+        data_fg_color[(y+height-1)*COLUMNS+x+i] = fg_color;
+        data_bg_color[(y+height-1)*COLUMNS+x+i] = bg_color;
     }
 
     for (i = 0; i < ROWS; i++) {
         for (j = 0; j < COLUMNS; j++) {
-            if (borders[i * COLUMNS + j] == TRUE) {
-                if (borders[(i - 1) * COLUMNS + j] == TRUE) {
-                    if (borders[i * COLUMNS + j - 1] == TRUE) {
-                        if (borders[(i + 1) * COLUMNS + j] == TRUE) {
-                            if (borders[i * COLUMNS + j + 1] == TRUE) {
-                                borders_unicode[i * COLUMNS + j] = L'╋';
+            if (borders[i*COLUMNS+j] == TRUE) {
+                if (borders[(i-1)*COLUMNS+j] == TRUE) {
+                    if (borders[i*COLUMNS+j-1] == TRUE) {
+                        if (borders[(i+1)*COLUMNS+j] == TRUE) {
+                            if (borders[i*COLUMNS+j+1] == TRUE) {
+                                data[i*COLUMNS+j] = L'╋';
                             } else {
-                                borders_unicode[i * COLUMNS + j] = L'┫';
+                                data[i*COLUMNS+j] = L'┫';
                             }
                         } else {
-                            if (borders[i * COLUMNS + j + 1] == TRUE) {
-                                borders_unicode[i * COLUMNS + j] = L'┻';
+                            if (borders[i*COLUMNS+j+1] == TRUE) {
+                                data[i*COLUMNS+j] = L'┻';
                             } else {
-                                borders_unicode[i * COLUMNS + j] = L'┛';
+                                data[i*COLUMNS+j] = L'┛';
                             }
                         }
                     } else {
-                        if (borders[(i + 1) * COLUMNS + j] == TRUE) {
-                            if (borders[i * COLUMNS + j + 1] == TRUE) {
-                                borders_unicode[i * COLUMNS + j] = L'┣';
+                        if (borders[(i+1)*COLUMNS+j] == TRUE) {
+                            if (borders[i*COLUMNS+j+1] == TRUE) {
+                                data[i*COLUMNS+j] = L'┣';
                             } else {
-                                borders_unicode[i * COLUMNS + j] = L'┃';
+                                data[i*COLUMNS+j] = L'┃';
                             }
                         } else {
-                            if (borders[i * COLUMNS + j + 1] == TRUE) {
-                                borders_unicode[i * COLUMNS + j] = L'┗';
+                            if (borders[i*COLUMNS+j+1] == TRUE) {
+                                data[i*COLUMNS+j] = L'┗';
                             } else {
-                                borders_unicode[i * COLUMNS + j] = L'☒';
+                                data[i*COLUMNS+j] = L'☒';
                             }
                         }
                     }
                 } else {
-                    if (borders[i * COLUMNS + j - 1] == TRUE) {
-                        if (borders[(i + 1) * COLUMNS + j] == TRUE) {
-                            if (borders[i * COLUMNS + j + 1] == TRUE) {
-                                borders_unicode[i * COLUMNS + j] = L'┳';
+                    if (borders[i*COLUMNS+j-1] == TRUE) {
+                        if (borders[(i+1)*COLUMNS+j] == TRUE) {
+                            if (borders[i*COLUMNS+j+1] == TRUE) {
+                                data[i*COLUMNS+j] = L'┳';
                             } else {
-                                borders_unicode[i * COLUMNS + j] = L'┓';
+                                data[i*COLUMNS+j] = L'┓';
                             }
                         } else {
-                            if (borders[i * COLUMNS + j + 1] == TRUE) {
-                                borders_unicode[i * COLUMNS + j] = L'━';
+                            if (borders[i*COLUMNS+j+1] == TRUE) {
+                                data[i*COLUMNS+j] = L'━';
                             } else {
-                                borders_unicode[i * COLUMNS + j] = L'☒';
+                                data[i*COLUMNS+j] = L'☒';
                             }
                         }
                     } else {
-                        if (borders[(i + 1) * COLUMNS + j] == TRUE) {
-                            if (borders[i * COLUMNS + j + 1] == TRUE) {
-                                borders_unicode[i * COLUMNS + j] = L'┏';
+                        if (borders[(i+1)*COLUMNS+j] == TRUE) {
+                            if (borders[i*COLUMNS+j+1] == TRUE) {
+                                data[i*COLUMNS+j] = L'┏';
                             } else {
-                                borders_unicode[i * COLUMNS + j] = L'☒';
+                                data[i*COLUMNS+j] = L'☒';
                             }
                         } else {
-                            if (borders[i * COLUMNS + j + 1] == TRUE) {
-                                borders_unicode[i * COLUMNS + j] = L'☒';
+                            if (borders[i*COLUMNS+j+1] == TRUE) {
+                                data[i*COLUMNS+j] = L'☒';
                             } else {
-                                borders_unicode[i * COLUMNS + j] = L'☒';
+                                data[i*COLUMNS+j] = L'☒';
                             }
                         }
                     }
                 }
-            } else {
-                borders_unicode[i * COLUMNS + j] = L'☒';
             }
         }
     }

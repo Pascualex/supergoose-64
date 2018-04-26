@@ -97,26 +97,26 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
             }
 
             sprintf(str, "                  +-------------+");
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  |           %2d|", (int) id_back);
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  |   %s   |", graphic_description_back[0]);
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  |   %s   |", graphic_description_back[1]);
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  |   %s   |", graphic_description_back[2]);
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  | %s   |", obj);
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  +-------------+");
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                         ^");
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
         } else {
             sprintf(str, " ");
 
             for (i = 0; i < 8; i++) {
-                screen_area_puts(ge->map, str);
+                screen_area_puts_char(ge->map, str);
             }
         }
 
@@ -131,13 +131,13 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
 
             sprintf(str, "                  +-------------+");
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  | %7s   %2d|", player_get_graphic_description((Player *) game_find(game, PLAYER_BASE_ID + 1)), (int) id_act);
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             if (space_get_direction(space_act, WEST) != NO_ID) {
                 if (space_get_direction(space_act, EAST) != NO_ID) {
 					sprintf(str, "        %8s  |   %s   |  %-8s", link_get_name((Link*) game_find(game, space_get_direction(space_act, WEST))), graphic_description_act[0], link_get_name((Link*) game_find(game, space_get_direction(space_act, EAST))));
-            		screen_area_puts(ge->map, str);
+            		screen_area_puts_char(ge->map, str);
 
                     if (link_get_status((Link*) game_find(game, space_get_direction(space_act, EAST))) == OPEN) {
                         if (link_get_status((Link*) game_find(game, space_get_direction(space_act, WEST))) == OPEN) {
@@ -154,7 +154,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
                     }
                 } else {
 					sprintf(str, "        %8s  |   %s   |", link_get_name((Link*) game_find(game, space_get_direction(space_act, WEST))), graphic_description_act[0]);
-            		screen_area_puts(ge->map, str);
+            		screen_area_puts_char(ge->map, str);
                     if (link_get_status((Link*) game_find(game, space_get_direction(space_act, EAST))) == OPEN) {
                         sprintf(str, "        %4ld <--- |   %s   |", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1]);
                     } else {
@@ -164,7 +164,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
             } else {
                 if (space_get_direction(space_act, EAST) != NO_ID) {
 					sprintf(str, "                  |   %s   |  %-8s", graphic_description_act[0], link_get_name((Link*) game_find(game, space_get_direction(space_act, EAST))));
-            		screen_area_puts(ge->map, str);
+            		screen_area_puts_char(ge->map, str);
                     if (link_get_status((Link*) game_find(game, space_get_direction(space_act, EAST))) == OPEN) {
                         sprintf(str, "                  |   %s   | ---> %ld", graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                     } else {
@@ -172,17 +172,17 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
                     }
                 } else {
 					sprintf(str, "                  |   %s   |", graphic_description_act[0]);
-            		screen_area_puts(ge->map, str);
+            		screen_area_puts_char(ge->map, str);
                     sprintf(str, "                  |   %s   |", graphic_description_act[1]);
                 }
             }
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  |   %s   |", graphic_description_act[2]);
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  | %s   |", obj);
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  +-------------+");
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
         }
 
         if (id_next != NO_ID) {
@@ -196,157 +196,158 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
 
             sprintf(str, "                         v");
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  +-------------+");
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  |           %2d|", (int) id_next);
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  |   %s   |", graphic_description_next[0]);
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  |   %s   |", graphic_description_next[1]);
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  |   %s   |", graphic_description_next[2]);
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  | %s   |", obj);
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
             sprintf(str, "                  +-------------+");
-            screen_area_puts(ge->map, str);
+            screen_area_puts_char(ge->map, str);
         }
     }
 
     /* Paint the in the description area */
     screen_area_clear(ge->descript);
     sprintf(str, " Objects locations:");
-    screen_area_puts(ge->descript, str);
+    screen_area_puts_char(ge->descript, str);
 
     for (i = OBJECT_BASE_ID; i < OBJECT_BASE_ID + MAX_OBJECTS; i++) {
         if ((obj_loc = object_get_location((Object *) game_find(game, i))) != NO_ID && (obj_loc < PLAYER_BASE_ID)) {
             sprintf(str, "    %6s (%d) -> %d", object_get_name((Object *) game_find(game, i)), i-OBJECT_BASE_ID, (int) obj_loc);
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
         }
     }
 
     obj[0] = 0;
     sprintf(str, " ");
-    screen_area_puts(ge->descript, str);
+    screen_area_puts_char(ge->descript, str);
     if (player_is_empty(player) == FALSE) {
         sprintf(str, " Inventory:");
-        screen_area_puts(ge->descript, str);
+        screen_area_puts_char(ge->descript, str);
 
         for (i = 0; i < player_get_objects_number(player); i++) {
             sprintf(str, "    %6s (%ld)", object_get_name((Object *) game_find(game, player_get_object(player, i))), player_get_object(player, i) - OBJECT_BASE_ID);
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
         }
     } else {
         sprintf(str, " The inventory is empty ");
-        screen_area_puts(ge->descript, str);
+        screen_area_puts_char(ge->descript, str);
     }
 
     sprintf(str, " ");
-    screen_area_puts(ge->descript, str);
+    screen_area_puts_char(ge->descript, str);
 
 
 
     for (i = 0; i < game_get_dies_number(game); i++) {
         sprintf(str, " Last Die Value: %d ", die_get_value((Die *) game_find(game, DIE_BASE_ID+game_get_dies_number(game) - i)));
-        screen_area_puts(ge->descript, str);
+        screen_area_puts_char(ge->descript, str);
     }
     /*We print the last die in a beautiful and visually friendly way*/
     sprintf(str, " ");
-    screen_area_puts(ge->descript, str);
+    screen_area_puts_char(ge->descript, str);
 
     sprintf(str, "        +-------+");
-    screen_area_puts(ge->descript, str);
+    screen_area_puts_char(ge->descript, str);
 
     switch (die_get_value((Die *) game_find(game, DIE_BASE_ID + game_get_dies_number(game)))) {
         case 1:
             sprintf(str, "        |       |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             sprintf(str, "        |   o   |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             sprintf(str, "        |       |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             break;
 
         case 2:
             sprintf(str, "        | o     |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             sprintf(str, "        |       |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             sprintf(str, "        |     o |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             break;
 
         case 3:
             sprintf(str, "        | o     |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             sprintf(str, "        |   o   |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             sprintf(str, "        |     o |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             break;
 
         case 4:
             sprintf(str, "        | o   o |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             sprintf(str, "        |       |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             sprintf(str, "        | o   o |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             break;
 
         case 5:
             sprintf(str, "        | o   o |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             sprintf(str, "        |   o   |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             sprintf(str, "        | o   o |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             break;
 
         case 6:
             sprintf(str, "        | o   o |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             sprintf(str, "        | o   o |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             sprintf(str, "        | o   o |");
-            screen_area_puts(ge->descript, str);
+            screen_area_puts_char(ge->descript, str);
             break;
     }
 
     sprintf(str, "        +-------+");
-    screen_area_puts(ge->descript, str);
+    screen_area_puts_char(ge->descript, str);
 
 
     /* Paint the in the banner area */
+    screen_area_clear(ge->banner);
     sprintf(str, "    _____                        ______                         _____ __ __");
-    screen_area_puts(ge->banner, str);
+    screen_area_puts_char(ge->banner, str);
     sprintf(str, "   / ___/ __  ______  ___  _____/ ____/___  ____  ________     / ___// // /");
-    screen_area_puts(ge->banner, str);
+    screen_area_puts_char(ge->banner, str);
     sprintf(str, "   \\__  \\/ / / / __ \\/ _ \\/ ___/ / __/ __ \\/ __ \\/  ___/_ \\   / __ \\/ // /_");
-    screen_area_puts(ge->banner, str);
+    screen_area_puts_char(ge->banner, str);
     sprintf(str, "   ___/ / /_/ / /_/ /  __/ /  / /_/ / /_/ / /_/ (__  )  __/  / /_/ /__  __/");
-    screen_area_puts(ge->banner, str);
+    screen_area_puts_char(ge->banner, str);
     sprintf(str, "  /____/\\____/ ____/\\___/_/   \\____/\\____/\\____/____/\\__/____\\____/  /_/");
-    screen_area_puts(ge->banner, str);
+    screen_area_puts_char(ge->banner, str);
     sprintf(str, "            /_/                                         /___/");
-    screen_area_puts(ge->banner, str);
+    screen_area_puts_char(ge->banner, str);
 
 
     /* Paint the in the help area */
     screen_area_clear(ge->help);
     sprintf(str, " ");
-    screen_area_puts(ge->help, str);
+    screen_area_puts_char(ge->help, str);
     sprintf(str, "                           +-+-+-+-+      G - Grasp");
-    screen_area_puts(ge->help, str);
+    screen_area_puts_char(ge->help, str);
     sprintf(str, "                           |   N   |      D - Drop");
-    screen_area_puts(ge->help, str);
+    screen_area_puts_char(ge->help, str);
     sprintf(str, "     Movement-> M - Move + + W + E +      T - Roll");
-    screen_area_puts(ge->help, str);
+    screen_area_puts_char(ge->help, str);
     sprintf(str, "                           |   S   |      C - Check");
-    screen_area_puts(ge->help, str);
+    screen_area_puts_char(ge->help, str);
     sprintf(str, "                           +-+-+-+-+      E - Exit");
-    screen_area_puts(ge->help, str);
+    screen_area_puts_char(ge->help, str);
 
     /* Paint the in the feedback area */
     last_cmd = game_get_last_command(game);
@@ -355,54 +356,55 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     } else {
         sprintf(str, " %s -> ERROR", cmd_to_str[last_cmd-NO_CMD]);
     }
-    screen_area_puts(ge->feedback, str);
+    screen_area_puts_char(ge->feedback, str);
 
     /* Paint the in the chat area */
     screen_area_clear(ge->chat);
     chat = game_get_last_text_description(game);
     sprintf(str, " %s", space_get_name(space_act));
-	screen_area_puts(ge->chat, str);
+	screen_area_puts_char(ge->chat, str);
     switch (game_get_last_command(game)) {
         case CHECK:
             switch (game_get_status_last_command(game)) {
                 case ERROR:
-                    strcpy(str, " There was a problem with the check.");
-                    screen_area_puts(ge->chat, str);
+                    sprintf(str, " There was a problem with the check.");
+                    screen_area_puts_char(ge->chat, str);
                     break;
                 case DARK:
-                    strcpy(str, " It's too dark to see more details.");
-                    screen_area_puts(ge->chat, str);
+                    sprintf(str, " It's too dark to see more details.");
+                    screen_area_puts_char(ge->chat, str);
                     break;
                 case FAR:
-                    strcpy(str, " The object is not in your inventory or space.");
-                    screen_area_puts(ge->chat, str);
+                    sprintf(str, " The object is not in your inventory or space.");
+                    screen_area_puts_char(ge->chat, str);
                     break;
                 default:                     
                     for (i = 0; i < MAX_TDESC_R; i++) {
-                        strcpy(str, chat[i]);
-                        screen_area_puts(ge->chat, str);
+                        sprintf(str, "%s", chat[i]);
+                        screen_area_puts_char(ge->chat, str);
                     }
             }
             break;
         case GRASP:
             switch (game_get_status_last_command(game)) {
                 case UNMOVABLE:
-                    strcpy(str, " This object will not move any time soon.");
-                    screen_area_puts(ge->chat, str);
+                    sprintf(str, " This object will not move any time soon.");
+                    screen_area_puts_char(ge->chat, str);
                     break;
                 default:
                     for (i = 0; i < MAX_TDESC_R; i++) {
-                        strcpy(str, chat[i]);
-                        screen_area_puts(ge->chat, str);
+                        sprintf(str, "%s", chat[i]);
+                        screen_area_puts_char(ge->chat, str);
                     }
             }
             break;
         default:
             for (i = 0; i < MAX_TDESC_R; i++) {
-                strcpy(str, chat[i]);
-                screen_area_puts(ge->chat, str);
+                sprintf(str, "%s", chat[i]);
+                screen_area_puts_char(ge->chat, str);
             }
     }
+
     /* Dump to the terminal */
     screen_paint();
     printf("prompt:> ");

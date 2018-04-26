@@ -101,27 +101,16 @@ void screen_area_destroy(Area *);
 void screen_area_clear(Area *);
 
 /**
- * @name 		screen_area_reset_cursor
- * @author 		Profesores PPROG
- * @version             1.0
- * @date		11-01-2017
- * @brief 		It resets the cursor.
- * @param 		Area* -> the area to reset cursor.
- * @return		A void, without any relevant information.
- */
-void screen_area_reset_cursor(Area *);
-
-/**
- * @name 		screen_area_puts
+ * @name 		screen_area_puts_char
  * @author 		Profesores PPROG
  * @version             1.0
  * @date		11-01-2017
  * @brief 		It puts on the area the given info.
  * @param 		Area* -> to print in.
- * @param               char* -> a string with the info to print.
+ * @param       char* -> a string with the info to print.
  * @return		A void, without any relevant information.
  */
-void screen_area_puts(Area *, char *);
+void screen_area_puts_char(Area *, char *);
 
 /**
  * @name 		screen_color_box
