@@ -360,17 +360,49 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     /* Paint the in the chat area */
     screen_area_clear(ge->chat);
     chat = game_get_last_text_description(game);
-	strcpy(str, space_get_name(space_act));
+    sprintf(str, " %s", space_get_name(space_act));
 	screen_area_puts(ge->chat, str);
-	if (game_get_last_command(game) == CHECK && game_get_status_last_command(game) == OK && space_check_tag(game_find(game, player_get_location(player)), ILLUMINATED) == FALSE) {
-		strcpy(str, " It's too dark to see more details.");
-		screen_area_puts(ge->chat, str);
-	} else {
-		for (i = 0; i < MAX_TDESC_R; i++) {
-		    strcpy(str, chat[i]);
-		    screen_area_puts(ge->chat, str);
-		}
-	}
+    switch (game_get_last_command(game)) {
+        case CHECK:
+            switch (game_get_status_last_command(game)) {
+                case ERROR:
+                    strcpy(str, " There was a problem with the check.");
+                    screen_area_puts(ge->chat, str);
+                    break;
+                case DARK:
+                    strcpy(str, " It's too dark to see more details.");
+                    screen_area_puts(ge->chat, str);
+                    break;
+                case FAR:
+                    strcpy(str, " The object is not in your inventory or space.");
+                    screen_area_puts(ge->chat, str);
+                    break;
+                default:                     
+                    for (i = 0; i < MAX_TDESC_R; i++) {
+                        strcpy(str, chat[i]);
+                        screen_area_puts(ge->chat, str);
+                    }
+            }
+            break;
+        case GRASP:
+            switch (game_get_status_last_command(game)) {
+                case UNMOVABLE:
+                    strcpy(str, " This object will not move any time soon.");
+                    screen_area_puts(ge->chat, str);
+                    break;
+                default:
+                    for (i = 0; i < MAX_TDESC_R; i++) {
+                        strcpy(str, chat[i]);
+                        screen_area_puts(ge->chat, str);
+                    }
+            }
+            break;
+        default:
+            for (i = 0; i < MAX_TDESC_R; i++) {
+                strcpy(str, chat[i]);
+                screen_area_puts(ge->chat, str);
+            }
+    }
     /* Dump to the terminal */
     screen_paint();
     printf("prompt:> ");

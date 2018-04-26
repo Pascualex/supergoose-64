@@ -907,11 +907,10 @@ STATUS game_callback_grasp(Game *game, char *string) {
         }
     }
 
-    if (player_get_location(game->players[0]) == NO_ID || space_check_object((Space *) game_find(game, player_get_location(game->players[0])), object_get_id(object)) == FALSE || player_is_full(game->players[0]) == TRUE || player_get_location(game->players[0]) != object_get_location(object) || !object_check_tag(object, MOVABLE)) return ERROR;
+    if (player_get_location(game->players[0]) == NO_ID || space_check_object((Space *) game_find(game, player_get_location(game->players[0])), object_get_id(object)) == FALSE || player_is_full(game->players[0]) == TRUE || player_get_location(game->players[0]) != object_get_location(object)) return ERROR;
+    if (object_check_tag(object, MOVABLE) == FALSE) return UNMOVABLE;
 
-    if (game_set_object_location(game, player_get_id(game->players[0]), object_get_id(object)) == ERROR) return ERROR;
-
-    return OK;
+    return game_set_object_location(game, player_get_id(game->players[0]), object_get_id(object)) == ERROR;
 }
 
 /*The next command is used when players drop their objects. It copies them to the space where they are and then destroys them from the players inventory*/
@@ -975,9 +974,10 @@ STATUS game_callback_check(Game *game, char *string) {
         if (object == NULL) return ERROR;
     }
 
-	if (player_check_object(game->players[0], object_get_id(object)) == FALSE && player_get_location(game->players[0]) != object_get_location(object)) {
-		return ERROR;
-	}
+	if (player_check_object(game->players[0], object_get_id(object)) == FALSE) {
+		if (player_get_location(game->players[0]) != object_get_location(object)) return FAR;
+		if (space_check_tag(game_find(game, player_get_location(game->players[0])), ILLUMINATED) == FALSE) return DARK;		
+	}	
 
     game->last_text_description = object_get_check(object);
     if (game->last_text_description == NULL) return ERROR;
