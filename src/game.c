@@ -20,7 +20,7 @@
 #include "nfd.h"
 
 /*We define the number of functions we have related to the different commands.*/
-#define N_CALLBACK 15
+#define N_CALLBACK 16
 /*We define the number of possible directions to move for the move command.*/
 #define N_DIR 4
 /*INI is used to initialize those variable as the starting number of objects when they are 0.*/
@@ -238,6 +238,7 @@ STATUS game_callback_turnon(Game *game, char *string);
 STATUS game_callback_turnoff(Game *game, char *string);
 
 STATUS game_callback_load(Game *game, char *string);
+STATUS game_callback_save(Game *game, char *string);
 
 /*We define the callback functions*/
 static callback_fn game_callback_fn_list[N_CALLBACK] = {
@@ -255,7 +256,8 @@ static callback_fn game_callback_fn_list[N_CALLBACK] = {
 	game_callback_open,
 	game_callback_turnon,
 	game_callback_turnoff,
-	game_callback_load
+	game_callback_load,
+    game_callback_save
 };
 
 /*Private functions*/
@@ -591,29 +593,25 @@ STATUS game_get_status_last_command(Game* game) {
     return game->status_last_cmd;
 }
 
-/*This function prints all the game data for debugging purposes.*/
-void game_print_data(Game *game) {
+void game_print_data(FILE *f, Game *game) {
     int i = 0;
 
     if (game == NULL) return;
 
-    printf("\n\n-------------\n\n");
-
-    printf("=> Spaces: \n");
-    for (i = 0; i < MAX_SPACES; i++) {
-        space_print(game->spaces[i]);
+    for (i = 0; i < game->spaces_number; i++) {
+        space_print(f, game->spaces[i]);
     }
-    printf("=> Objects: \n");
+    fprintf(f, "\n");
     for (i = 0; i < game->objects_number; i++) {
-        object_print(game->objects[i]);
+        object_print(f, game->objects[i]);
     }
-    printf("=> Players: \n");
-    for (i = 0; i < game->players_number; i++) {
-        player_print(game->players[i]);
-    }
-    printf("=> Links: \n");
+    fprintf(f, "\n");
     for (i = 0; i < game->links_number; i++) {
-        link_print(game->links[i]);
+        link_print(f, game->links[i]);
+    }
+    fprintf(f, "\n");
+    for (i = 0; i < game->players_number; i++) {
+        player_print(f, game->players[i]);
     }
 }
 
@@ -826,38 +824,51 @@ STATUS game_menu(Game *game) {
 
     if (menu == NULL) {
         fprintf(stderr, "Error while initializing the menu.\n");
-        game_destroy(game);
         return ERROR;
     }
 
 	selectedOption = 0;
 	do {
-		menu_paint(menu, selectedOption);
-		system("/bin/stty raw");
-		input = getchar();
-		system("/bin/stty cooked");
+		do {
+			menu_paint(menu, selectedOption);
+			system("/bin/stty raw");
+			input = getchar();
+			system("/bin/stty cooked");
 
-		switch (input) {
-			case 'w': 
-				if (selectedOption > 0) selectedOption--;
+			switch (input) {
+				case 'w': 
+					if (selectedOption > 0) selectedOption--;
+					break;
+				case 's':
+					if (selectedOption < 5) selectedOption++;
+					break;
+			}
+		} while (input != ' ');
+
+		switch (selectedOption) {
+			case 0:
+				game_create_from_file(game, "./datafiles/data.dat");
+				printf("Juego cargado.\n");
 				break;
-			case 's':
-				if (selectedOption < 5) selectedOption++;
+			case 1:
+				game_callback_load(game, "NO_INFO");
 				break;
+			case 2:
+				system("man gcc");									/*Cambiar por el man de los controles*/
+				break;
+			case 3:
+				system("man gcc");									/*Cambiar por el man de los terminos de uso*/
+				break;
+            case 4:
+                game_callback_save(game, "jaja");
+                break;
+			case 5:
+				menu_destroy(menu);
+				return ERROR;
 		}
-	} while (input != ' ');
-	printf("%d", selectedOption);
+	} while (selectedOption != 0 && selectedOption != 1);
+	
 	menu_destroy(menu);
-
-	switch (selectedOption) {
-		case 0:
-			game_create_from_file(game, "./datafiles/data.dat");
-			printf("Juego cargado.\n");
-			return OK;
-		case 1:
-			return game_callback_load(game, "NO_INFO");
-	}
-
 	return OK;
 }
 
@@ -1129,11 +1140,38 @@ STATUS game_callback_load(Game *game, char *string) {
 
     strcpy(aux, string);
 
-	if (strcmp(aux, "NO_INFO") == 0){
-    	if (NFD_OpenDialog( NULL, NULL, &outPath ) == NFD_OKAY){
+	if (strcmp(aux, "NO_INFO") == 0) {
+    	if (NFD_OpenDialog( NULL, "./save_games/", &outPath ) == NFD_OKAY) {
     		strcpy(aux, (char *) outPath);
     	}
+		else {
+			return ERROR;
+		}
 	}
 
-	return game_create_from_file(game, aux);
+    if (game_create_from_file(game, aux) == ERROR){
+        game_create_from_file(game, "./datafiles/data.dat");
+        return ERROR;
+    } 
+
+    return OK;
+}
+
+STATUS game_callback_save(Game *game, char *string){
+	FILE *f = NULL;
+    char aux[WORD_SIZE];
+
+    strcpy(aux, "./save_games/");
+    strcat(aux, string);
+
+	f = fopen(aux, "w");
+    if (f == NULL){
+        return ERROR;
+    }
+
+    game_print_data(f, game);
+	
+    fclose(f);
+
+    return OK;
 }

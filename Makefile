@@ -120,7 +120,7 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 
 #=====================================UTILS=====================================#
 run:
-	./SuperGoose_64
+	./SuperGoose_64 || true
 
 valgrind:
 	valgrind -v -q --leak-check=full ./SuperGoose_64 ./datafiles/data.dat

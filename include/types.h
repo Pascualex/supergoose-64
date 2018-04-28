@@ -76,9 +76,13 @@ typedef enum {
     GRASP, /*!< Grasp an object */
     DROP, /*!< Drop an object */
     THROW, /*!< Roll the die */
-    CHECK
+    CHECK,
+    OPEN_L,
+    TURN_ON,
+    TURN_OFF,
+    LOAD,
+    SAVE
 } T_Command;
-
 /**
  * @brief Direction (to be used when moving through the board)
  */

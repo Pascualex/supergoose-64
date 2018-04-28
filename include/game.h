@@ -90,7 +90,7 @@ BOOL game_is_over(Game *);
  * @param               Game* -> which information will be printed (not graphic engine).
  * @return		A void without any relevant information.
  */
-void game_print_data(Game *);
+void game_print_data(FILE *f, Game *game);
 
 /**
  * @name 		game_add_space

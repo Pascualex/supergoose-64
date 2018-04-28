@@ -130,6 +130,6 @@ LINK_STATUS link_get_status(Link *);
  * @return		A STATUS which indicates whether the operation could be executed correctly.
  * @details             NOTE: This function was created for debugging purposes only and it is not used in the normal execution of the game.
  */
-STATUS link_print(Link *);
+STATUS link_print(FILE *, Link *);
 
 #endif
