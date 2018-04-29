@@ -68,7 +68,11 @@ STATUS game_reader_load_spaces(Game *game, char *filename) {
             i = 0;
             toks = strtok(NULL, "|");
             while (toks != NULL && i <= MAX_TAGS-SPACE_BASE_TAGS) {
-                tags[i] = game_str_to_tag(toks);
+            	if(strlen(toks) > 3) {
+                	tags[i] = game_str_to_tag(toks);
+                } else {
+                	tags[i] = atoi(toks);
+                }
                 toks = strtok(NULL, "|");
                 i++;
             }
@@ -195,7 +199,12 @@ STATUS game_reader_load_objects(Game *game, char *filename) {
             i = 0;
             toks = strtok(NULL, "|");
             while (toks != NULL && i <= MAX_TAGS-OBJECT_BASE_TAGS) {
-                tags[i] = game_str_to_tag(toks);
+            	printf("%s", toks);
+                if(strlen(toks) > 3) {
+                	tags[i] = game_str_to_tag(toks);
+                } else {
+                	tags[i] = atoi(toks);
+                }
                 toks = strtok(NULL, "|");
                 i++;
             }
@@ -252,10 +261,14 @@ STATUS game_reader_load_links(Game *game, char *filename) {
             toks = strtok(NULL, "|");
             space2_id = atol(toks);
             toks = strtok(NULL, "|");
-            if (!strcmp(toks, "OPEN")) {
+            if (strcmp(toks, "OPEN") == 0) {
                 status = OPEN;
-            } else {
+            } else if (strcmp(toks, "CLOSED") == 0) {
                 status = CLOSED;
+            } else if (atoi(toks) == CLOSED) {
+                status = CLOSED;
+            } else {
+            	status = OPEN;
             }
 
             link = link_create(LINK_BASE_ID+id);

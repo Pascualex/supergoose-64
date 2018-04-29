@@ -127,7 +127,7 @@ STATUS link_print(FILE *f, Link *link) {
 
     if (link == NULL) return ERROR;
 
-    fprintf(f, "#l:%04ld|%s|", link->id - LINK_BASE_ID, link->name);
+    fprintf(f, "#l:%04ld|%-8s|", link->id - LINK_BASE_ID, link->name);
 
     if (link->space1 == NO_ID) {
         fprintf(f, "%04ld|", link->space1);

@@ -187,7 +187,7 @@ STATUS player_print(FILE *f, Player *player) {
 
     if (player == NULL) return ERROR;
 
-    fprintf(f, "#p:%04ld|%s|", player->id - PLAYER_BASE_ID, player->name);
+    fprintf(f, "#p:%04ld|%-8s|", player->id - PLAYER_BASE_ID, player->name);
 
     if (player->location == NO_ID) {
         fprintf(f, "%04ld|", player->location);

@@ -472,7 +472,7 @@ STATUS space_print(FILE *f, Space *space) {
 
     num_tags = space_get_tags_number(space);
 
-    fprintf(f, "#s:%04ld|%s|",    space->id - SPACE_BASE_ID, space->name);
+    fprintf(f, "#s:%04ld|%-8s|",    space->id - SPACE_BASE_ID, space->name);
 
     for (i = 0; i < 6; i++) {
         if (space_get_direction(space, i) != NO_ID) {

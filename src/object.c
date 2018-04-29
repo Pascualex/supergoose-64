@@ -274,7 +274,7 @@ STATUS object_print(FILE *f, Object *object) {
 
     num_tags = object_get_tags_number(object);
 
-    fprintf(f, "#o:%04ld|%s|%d|",   object->id - OBJECT_BASE_ID,
+    fprintf(f, "#o:%04ld|%-8s|%04ld|",   object->id - OBJECT_BASE_ID,
                                     object->name,
                                     object->location);
 
