@@ -11,15 +11,13 @@
 /*C libraries*/
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <wchar.h>
 /*Own libraries*/
 #include "../include/screen.h"
 
 #pragma GCC diagnostic ignored "-Wpedantic"  /*La trampa...*/
 
-/*We define the maximum rows and columns of the screen we are going o use, and the TOTAL_DATA which is one bigger than the product, for memory allocating purposes*/
-#define ROWS 43
-#define COLUMNS 80
+/*We define TOTAL_DATA, for memory allocating purposes*/
 #define TOTAL_DATA (ROWS*COLUMNS)
 
 #define BORDER_FG_COLOR WHITE
@@ -51,9 +49,9 @@ const unsigned char *unicode_to_utf8(wchar_t);
 void screen_init(int color) {
     int i, j;
 
-    screen_destroy(); /* Dispose if previously initialized */
+    screen_destroy(); 
 
-    data = (wchar_t *) malloc(sizeof(wchar_t)*(TOTAL_DATA));
+    data = (wchar_t *) malloc(sizeof(wchar_t)*TOTAL_DATA);
     if (data == NULL) return;
 
     data_fg_color = (int *) malloc(sizeof(int)*TOTAL_DATA);
@@ -100,23 +98,15 @@ void screen_paint() {
 
     if (data != NULL || data_fg_color != NULL || data_bg_color != NULL) {
 
-        puts("\033[2J"); /*Clear the terminal*/
+        puts("\033[2J");
 
         for (i = 0; i < ROWS; i++) {
             for (j = 0; j < COLUMNS; j++) {
-                printf("\033[1;3%d;4%dm%s\033[0m", data_fg_color[i*COLUMNS+j], data_bg_color[i*COLUMNS+j], unicode_to_utf8(data[i*COLUMNS+j]));
+                printf("\033[1;3%d;4%dm%s\033[0m", data_fg_color[i*COLUMNS+j], data_bg_color[i*COLUMNS+j], unicode_to_utf8(data[i*COLUMNS+j]));                         
             }
 
             printf("\n");
         }
-    }
-}
-
-void screen_gets(char *str) {
-
-    fprintf(stdout, PROMPT);
-    if (fgets(str, COLUMNS, stdin)) {
-        *(str+strlen(str)-1) = 0; /* Replaces newline character with '\0' */
     }
 }
 
@@ -157,25 +147,25 @@ void screen_area_clear(Area *area) {
 
         for (i = 0; i < area->height; i++) {
             for (j = 0; j < area->width; j++) {
-                data[(area->y+i)*ROWS+(area->x+j)] = L' ';
+                data[(area->y+i)*COLUMNS+(area->x+j)] = L' ';
             }
         }
     }
 }
 
-void screen_area_puts_char(Area *area, char *str) {
+void screen_area_puts(Area *area, wchar_t *str) {
     int i;
 
     if (area->currentRow >= area->height) {
         screen_area_scroll_up(area);
     }
 
-    for (i = 0; i < area->width-1; i++) {
-        if (i < strlen(str)) {
+    for (i = 0; i < area->width; i++) {
+        if (i < wcslen(str)) {
             data[(area->y+area->currentRow)*COLUMNS+(area->x+i)] = str[i];
         } else {
-            data[(area->y+area->currentRow)*COLUMNS+(area->x+i)] = L'*';
-        }        
+            break;
+        }
     }
 
     area->currentRow++;
@@ -186,7 +176,7 @@ void screen_area_scroll_up(Area *area) {
 
     for (i = 0; i < area->height-1; i++) {
         for (j = 0; j < area->width; j++) {
-            data[(area->y+i)*COLUMNS+(area->x+j)] = data[(area->y+i+1)*COLUMNS+(area->x+i)];
+            data[(area->y+i)*COLUMNS+(area->x+j)] = data[(area->y+i+1)*COLUMNS+(area->x+j)];
         }
     }
     for (i = 0; i < area->width; i++) {

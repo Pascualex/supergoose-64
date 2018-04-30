@@ -11,8 +11,6 @@
 #ifndef __MENU__
 #define __MENU__
 
-/*C libraries*/
-#include <stdio.h>
 /*Own libraries*/
 #include "../include/types.h"
 
@@ -29,7 +27,7 @@ typedef struct _Menu Menu;
  * @brief               It allocates memory for a Menu we will be using to print.
  * @return		A Menu.
  */
-Menu* menu_create();
+Menu *menu_create();
 
 /**
  * @name 		menu_destroy
