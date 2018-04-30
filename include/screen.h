@@ -12,7 +12,8 @@
 
 #include "types.h"
 
-#define SCREEN_MAX_STR 80               /*!< The maximum size of an string to print*/
+#define ROWS 43
+#define COLUMNS 80
 
 /**
  * @brief               It holds the necessary data to manage areas.
@@ -49,17 +50,6 @@ void screen_destroy();
  * @return		A void, without any relevant information.
  */
 void screen_paint();
-
-/**
- * @name 		screen_gets
- * @author 		Profesores PPROG
- * @version             1.0
- * @date		11-01-2017
- * @brief 		It gets the information to print on the screen from a character string.
- * @param 		char* -> a string with the data to print on the screen.
- * @return		A void, without any information.
- */
-void screen_gets(char *);
 
 /**
  * @name 		screen_area_init
@@ -101,33 +91,22 @@ void screen_area_destroy(Area *);
 void screen_area_clear(Area *);
 
 /**
- * @name 		screen_area_reset_cursor
- * @author 		Profesores PPROG
- * @version             1.0
- * @date		11-01-2017
- * @brief 		It resets the cursor.
- * @param 		Area* -> the area to reset cursor.
- * @return		A void, without any relevant information.
- */
-void screen_area_reset_cursor(Area *);
-
-/**
  * @name 		screen_area_puts
- * @author 		Profesores PPROG
+ * @author 		Alejandro Pascual
  * @version             1.0
- * @date		11-01-2017
- * @brief 		It puts on the area the given info.
+ * @date		30-04-2018
+ * @brief 		It puts on the area the given unicode string.
  * @param 		Area* -> to print in.
- * @param               char* -> a string with the info to print.
- * @return		A void, without any relevant information.
+ * @param       wchar_t* -> an unicode string with the info to print.
+ * @return		Nothing
  */
-void screen_area_puts(Area *, char *);
+void screen_area_puts(Area *, wchar_t *);
 
 /**
  * @name 		screen_color_box
  * @author 		Alejandro Pascual
  * @version             1.0
- * @date		04-04-2017
+ * @date		04-04-2018
  * @brief 		It paints a colored square on the given coordinates.
  * @param 		int -> an integer with the X coordinates to start from.
  * @param 		int -> an integer with the Y coordinates to start from.
@@ -135,7 +114,7 @@ void screen_area_puts(Area *, char *);
  * @param 		int -> an integer with the height of the area.
  * @param		int -> an integer with the foreground color of the area.
  * @param		int -> an integer with the background color of the area.
- * @return		A void, without any relevant information.
+ * @return		Nothing
  */
 void screen_color_box(int x, int y, int width, int height, int fg_color, int bg_color);
 
@@ -151,7 +130,7 @@ void screen_color_box(int x, int y, int width, int height, int fg_color, int bg_
  * @param 		int -> an integer with the height of the area.
  * @param		int -> an integer with the foreground color of the area.
  * @param		int -> an integer with the background color of the area.
- * @return		A void, without any relevant information.
+ * @return		Nothing
  */
 void screen_add_border(int x, int y, int width, int height, int fg_color, int bg_color);
 

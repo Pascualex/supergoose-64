@@ -58,7 +58,10 @@ typedef enum {
  */
 typedef enum {
     ERROR, /*!< If something went wrong*/
-    OK /*!< If all worked correctly*/
+    OK, /*!< If all worked correctly*/
+    DARK, /*< If the space is not illuminated*/
+    FAR, /*< If the object is not in the same room*/
+    UNMOVABLE /*< If the object is not movable*/
 } STATUS;
 
 /**
