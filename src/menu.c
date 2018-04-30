@@ -158,5 +158,4 @@ void menu_paint(Menu *menu, int position) {
 
     /* Dump to the terminal */
     screen_paint();
-    printf("prompt:> ");
 }

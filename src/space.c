@@ -461,60 +461,43 @@ int space_get_tags_number(Space *space) {
     return space->num_tags;
 }
 
-/*This function prints the space information for debuggin purposes*/
-STATUS space_print(Space *space) {
-    Id idaux = NO_ID;
+STATUS space_print(FILE *f, Space *space) {
     TAG *space_tags = NULL;
     int num_tags, i;
 
     if (space == NULL) return ERROR;
-
-    fprintf(stdout, "--> Space (Id: %ld; Name: %s)\n", space->id, space->name);
-
-    idaux = space_get_direction(space, NORTH);
-    if (NO_ID != idaux) {
-        fprintf(stdout, "---> North link: %ld.\n", idaux);
-    } else {
-        fprintf(stdout, "---> No north link.\n");
-    }
-
-    idaux = space_get_direction(space, WEST);
-    if (NO_ID != idaux) {
-        fprintf(stdout, "---> West link: %ld.\n", idaux);
-    } else {
-        fprintf(stdout, "---> No west link.\n");
-    }
-
-    idaux = space_get_direction(space, SOUTH);
-    if (NO_ID != idaux) {
-        fprintf(stdout, "---> South link: %ld.\n", idaux);
-    } else {
-        fprintf(stdout, "---> No south link.\n");
-    }
-
-    idaux = space_get_direction(space, EAST);
-    if (NO_ID != idaux) {
-        fprintf(stdout, "---> East link: %ld.\n", idaux);
-    } else {
-        fprintf(stdout, "---> No east link.\n");
-    }
-
-    set_print(space->objects_ids);
-
-    fprintf(stdout, "---> Graphic description:\n");
-    fprintf(stdout, "     %s\n", space->graphic_description[0]);
-    fprintf(stdout, "     %s\n", space->graphic_description[1]);
-    fprintf(stdout, "     %s\n", space->graphic_description[2]);
 
     space_tags = space_get_tags(space);
     if (space_tags == NULL) return ERROR;
 
     num_tags = space_get_tags_number(space);
 
-    fprintf(stdout, "---> Tags:\n");
-    for (i = 0; i < num_tags; i++) {
-    	fprintf(stdout, "     %d\n", space_tags[i]);
+    fprintf(f, "#s:%04ld|%s|",    space->id - SPACE_BASE_ID, space->name);
+
+    for (i = 0; i < 6; i++) {
+        if (space_get_direction(space, i) != NO_ID) {
+            fprintf(f, "%02ld|", space_get_direction(space, i) - LINK_BASE_ID);
+        } else {
+            fprintf(f, "%02ld|", space_get_direction(space, i));
+        }
     }
+
+    fprintf(f, "%s|%s|%s|%s|%s|%s|%s|%s|%s|",   space->graphic_description[0],
+                                                space->graphic_description[1],
+                                                space->graphic_description[2],
+                                                space->basic_description[0],
+                                                space->basic_description[1],
+                                                space->basic_description[2],
+                                                space->check_description[0],
+                                                space->check_description[1],
+                                                space->check_description[2]);
+
+    for (i = 0; i < num_tags; i++) {
+        if (space_tags[i] != NO_TAG){
+    	   fprintf(f, "%d|", space_tags[i]);
+        }
+    }
+    fprintf(f, "\n");
 
     return OK;
 }

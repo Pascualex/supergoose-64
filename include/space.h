@@ -316,6 +316,6 @@ int space_get_tags_number(Space *);
  * @param 		Space* with the space whose data will be printed.
  * @return		A STATUS which indicates whether the operation could be executed correctly.
  */
-STATUS space_print(Space *);
+STATUS space_print(FILE *, Space *);
 
 #endif

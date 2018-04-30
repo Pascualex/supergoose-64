@@ -224,6 +224,6 @@ BOOL player_is_full(Player *);
  * @return		A STATUS, which could be "ERROR" if the pointer passed as an argument is NULL, or "OK" otherwise.
  * @details             NOTE: This function was created for debugging purposes only and it is not used in the normal execution of the game.
  */
-STATUS player_print(Player *);
+STATUS player_print(FILE *, Player *);
 
 #endif

@@ -23,6 +23,7 @@ struct _Player {
     char graphic_description[MAX_GDESC_C]; /*A char to give a grapgic description to the player*/
     Id location; /*A location to store where the player is*/
     Inventory *inventory; /*An object_id to store the object the player carries*/
+    int inventory_size;     /*AThe max. num. objects of the inventory*/
 };
 
 /*This function is used to allocate memory for a player and create it with a given Id*/
@@ -38,6 +39,7 @@ Player *player_create(Id id, int inventory_size) {
         return NULL;
     }
 
+    newPlayer->inventory_size = inventory_size;
     newPlayer->id = id;
     newPlayer->name[0] = '\0';
     newPlayer->graphic_description[0] = '\0';
@@ -181,21 +183,19 @@ BOOL player_is_full(Player *player) {
     return inventory_is_full(player->inventory);
 }
 
-/*This function is used to print the players information, for debuggin purposes.*/
-STATUS player_print(Player *player) {
+STATUS player_print(FILE *f, Player *player) {
 
     if (player == NULL) return ERROR;
 
-    fprintf(stdout, "--> Player (Id: %ld; Name: %s; Space Id: %ld)", player->id, player->name, player->location);
+    fprintf(f, "#p:%04ld|%s|", player->id - PLAYER_BASE_ID, player->name);
 
-    if (player->inventory != NULL) {
-        fprintf(stdout, "\n");
-        inventory_print(player->inventory);
+    if (player->location == NO_ID) {
+        fprintf(f, "%04ld|", player->location);
     } else {
-        fprintf(stdout, " (No inventory)\n");
+        fprintf(f, "%04ld|", player->location - SPACE_BASE_ID);
     }
 
-    fprintf(stdout, "Graphic Description: %s", player->graphic_description);
+    fprintf(f, "%d|%s|\n", player->inventory_size, player->graphic_description);
 
     return OK;
 }

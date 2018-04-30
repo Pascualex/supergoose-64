@@ -12,32 +12,28 @@
 #include <string.h>
 /*Own libraries*/
 #include "../include/graphic_engine.h"
-#include "../include/menu.h"
 
 
-/*This is the main program of the game, where the aaction takes place. It is responsible of calling all the other function and advises if anythin is going wrong*/
+/*This is the main program of the game, where the action takes place. It is responsible of calling all the other function and advises if anythin is going wrong*/
 int main(int argc, char *argv[]) {
     Game *game = NULL;
     Command *command = NULL;
     Graphic_engine *gengine;
     FILE *log = NULL;
-	Menu *menu;
-	char input;
-	int selectedOption;
 
-    if (argc < 2 || argc == 3) { /* Check if we have data file. */
-        fprintf(stderr, "Use: %s <game_data_file> (normal use) or %s <game_data_file> -l <game_log_file> (using log file)\n", argv[0], argv[0]);
+    if (argc != 3 && argc != 1) { /* Check if we have log file. */
+        fprintf(stderr, "Use: %s (normal use) or %s -l <game_log_file> (using log file)\n", argv[0], argv[0]);
         return 1;
     }
-    if (argc == 4) {
-        if (strcmp(argv[2], "-l") == 0) {
-            log = fopen(argv[3], "w");
+    if (argc == 3) {
+        if (strcmp(argv[1], "-l") == 0) {
+            log = fopen(argv[2], "w");
             if (log == NULL) {
                 fprintf(stderr, "Error while opening the file.\n");
                 return 1;
             }
         } else {
-            fprintf(stderr, "Use: %s <game_data_file> (normal use) or %s <game_data_file> -l <game_log_file> (using log file)\n", argv[0], argv[0]);
+            fprintf(stderr, "Use: %s (normal use) or %s -l <game_log_file> (using log file)\n", argv[0], argv[0]);
             return 1;
         }
     }
@@ -48,37 +44,10 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    if (game_create_from_file(game, argv[1]) == ERROR) {
-        fprintf(stderr, "Error while loading the game.\n");
-        game_destroy(game);
-        return 1;
-    }
-
-    menu = menu_create();
-    if (menu == NULL) {
-        fprintf(stderr, "Error while initializing the menu.\n");
-        game_destroy(game);
-        return 1;
-    }
-
-	selectedOption = 0;
-	do {
-		menu_paint(menu, selectedOption);
-		system("/bin/stty raw");
-		input = getchar();
-		system("/bin/stty cooked");
-
-		switch (input) {
-			case 'w': 
-				if (selectedOption > 0) selectedOption--;
-				break;
-			case 's':
-				if (selectedOption < 5) selectedOption++;
-				break;
-		}
-	} while (input != ' ');
-	printf("%d", selectedOption);
-	menu_destroy(menu);
+    if (game_menu(game) == ERROR) {
+		game_destroy(game);
+		return 1;
+	}
 
     gengine = graphic_engine_create();
     if (gengine == NULL) {
@@ -98,6 +67,10 @@ int main(int argc, char *argv[]) {
     while ((command_get_command(command) != EXIT) && !game_is_over(game)) {
         graphic_engine_paint_game(gengine, game);
         command_get_user_input(command);
+        if (command_get_command(command) == LOAD){
+            game_destroy(game);
+            game_create(game);
+        }
         game_update(game, command);
 
         if (log != NULL) {

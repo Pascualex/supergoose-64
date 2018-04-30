@@ -123,16 +123,25 @@ LINK_STATUS link_get_status(Link *link) {
     return link->status;
 }
 
-/*This function is used in debugging purposes to print all the link information*/
-STATUS link_print(Link *link) {
+STATUS link_print(FILE *f, Link *link) {
 
     if (link == NULL) return ERROR;
 
-    if (link->status == CLOSED) {
-        fprintf(stdout, "--> Link (Id: %ld; Name: %s; Space 1: %ld; Space 2: %ld; Status: CLOSED)\n", link->id, link->name, link->space1, link->space2);
+    fprintf(f, "#l:%04ld|%s|", link->id - LINK_BASE_ID, link->name);
+
+    if (link->space1 == NO_ID) {
+        fprintf(f, "%04ld|", link->space1);
     } else {
-        fprintf(stdout, "--> Link (Id: %ld; Name: %s; Space 1: %ld; Space 2: %ld; Status: OPEN)\n", link->id, link->name, link->space1, link->space2);
+        fprintf(f, "%04ld|", link->space1 - SPACE_BASE_ID);
     }
+
+    if (link->space2 == NO_ID) {
+        fprintf(f, "%04ld|", link->space2);
+    } else {
+        fprintf(f, "%04ld|", link->space2 - SPACE_BASE_ID);
+    }
+
+    fprintf(f, "%d|\n", link->status);
 
     return OK;
 }

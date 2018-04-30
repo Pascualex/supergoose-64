@@ -152,7 +152,7 @@ Id object_get_location(Object *);
  * @return		An STATUS, which could be "ERROR" if the pointer passed as an argument is NULL, or "OK" otherwise.
  * @details             NOTE: This function was created for debugging purposes only and it is not used in the normal execution of the game.
  */
-STATUS object_print(Object *);
+STATUS object_print(FILE *, Object *);
 
 /**
  * @name 		object_add_tags

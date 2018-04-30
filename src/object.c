@@ -188,16 +188,6 @@ Id object_get_location(Object *object) {
     return object->location;
 }
 
-/*This function is used for debugging purposes. It prints all the object data.*/
-STATUS object_print(Object *object) {
-
-    if (object == NULL) return ERROR;
-
-    fprintf(stdout, "--> Object (Id: %ld; Name: %s; Location: %ld)\n", object->id, object->name, object->location);
-
-    return OK;
-}
-
 STATUS object_add_tags(Object *object, int num_tags, ...) {
     TAG object_tags[MAX_TAGS];
     va_list object_tags_list;
@@ -270,4 +260,36 @@ STATUS object_remove_tag(Object *object, TAG object_tag) {
 	}
 
 	return ERROR;
+}
+
+/*It prints all the object data.*/
+STATUS object_print(FILE *f, Object *object) {
+    TAG *object_tags = NULL;
+    int num_tags, i;
+
+    if (object == NULL) return ERROR;
+
+    object_tags = object_get_tags(object);
+    if (object_tags == NULL) return ERROR;
+
+    num_tags = object_get_tags_number(object);
+
+    fprintf(f, "#o:%04ld|%s|%d|",   object->id - OBJECT_BASE_ID,
+                                    object->name,
+                                    object->location);
+
+    fprintf(f, "%s|%s|%s|%s|%s|%s|",    object->check[0],
+                                        object->check[1],
+                                        object->check[2],
+                                        object->alt_check[0],
+                                        object->alt_check[1],
+                                        object->alt_check[2]);
+
+    for (i = 0; i < num_tags; i++) {
+        if (object_tags[i] != NO_TAG){
+            fprintf(f, "%d|", object_tags[i]);
+        }
+    }
+    fprintf(f, "\n");
+    return OK;
 }
