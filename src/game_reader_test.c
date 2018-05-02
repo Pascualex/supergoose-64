@@ -8,6 +8,7 @@
 #include "../include/game.h"
 #include "../include/test.h"
 #include "../include/types.h"
+#include "nfd.h"
 
 /*We define the maximun amount of tests we will do*/
 #define MAX_TESTS 34

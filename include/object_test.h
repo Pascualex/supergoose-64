@@ -183,14 +183,56 @@ void test2_object_get_tags_number();
  * @pre Created object with correct tags
  * @post Object is passed tag
  */
-void test1_object_is();
+void test1_object_check_tag();
 
 /**
  * @test Test to see if function is works under abnormal conditions
  * @pre Created object with correct tags
  * @post Object isn't passed tag
  */
-void test2_object_is();
+void test2_object_check_tag();
+
+/**
+ * @test Test to see if function is works under normal conditions
+ * @pre Created object with correct tags
+ * @post OUTPUT==OK
+ */
+void test1_object_remove_tag();
+
+/**
+ * @test Test to see if function is works under abnormal conditions
+ * @pre NULL object
+ * @post OUTPUT==OK
+ */
+void test2_object_remove_tag();
+
+/**
+ * @test Test to see if function is works under normal conditions
+ * @pre Created object and correct alternative check
+ * @post OUTPUT==OK
+ */
+void test1_object_set_alt_check();
+
+/**
+ * @test Test to see if function is works under abnormal conditions
+ * @pre NULL object and NULL alternative check
+ * @post OUTPUT==ERROR
+ */
+void test2_object_set_alt_check();
+
+/**
+ * @test Test to see if function is works under normal conditions
+ * @pre Created object and correct alternative check
+ * @post Registered alternative check is expected alternative check
+ */
+void test1_object_get_alt_check();
+
+/**
+ * @test Test to see if function is works under normal conditions
+ * @pre NULL object and NULL alternative check
+ * @post OUTPUT==NULL
+ */
+void test2_object_get_alt_check();
 
 #endif
 
