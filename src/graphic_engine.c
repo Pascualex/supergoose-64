@@ -184,7 +184,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
             screen_area_puts(ge->map, unicode_str);
             swprintf(unicode_str, COLUMNS, L"                  | %s   |", obj);
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  +-------------+");
+            swprintf(unicode_str, COLUMNS, L"                  +-------------+   🐦   🐤    🐥   🇪🇸");
             screen_area_puts(ge->map, unicode_str);
         }
 

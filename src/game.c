@@ -15,9 +15,8 @@
 #include <strings.h>
 /*Own libraries*/
 #include "../include/game.h"
-#include "../include/game_reader.h"
+#include "../include/game_management.h"
 #include "../include/menu.h"
-#include "nfd.h"
 
 /*We define the number of functions we have related to the different commands.*/
 #define N_CALLBACK 16
@@ -309,15 +308,15 @@ Game *game_create() {
     return game;
 }
 
-/*This function is used to create a new game (that already had memory allocated) from a the given fil (it works shoulder to shoulder with game_reader.*/
+/*This function is used to create a new game (that already had memory allocated) from a the given fil (it works shoulder to shoulder with game_management.*/
 STATUS game_create_from_file(Game *game, char *file_name) {
 
     if (game == NULL || file_name == NULL) return ERROR;
 
-    if (game_reader_load_spaces(game, file_name) == ERROR) return ERROR;
-    if (game_reader_load_players(game, file_name) == ERROR) return ERROR;
-    if (game_reader_load_objects(game, file_name) == ERROR) return ERROR;
-    if (game_reader_load_links(game, file_name) == ERROR) return ERROR;
+    if (game_management_load_spaces(game, file_name) == ERROR) return ERROR;
+    if (game_management_load_players(game, file_name) == ERROR) return ERROR;
+    if (game_management_load_objects(game, file_name) == ERROR) return ERROR;
+    if (game_management_load_links(game, file_name) == ERROR) return ERROR;
 
     if (game->players[0] != NULL) game->last_text_description = space_get_basic_description(game_find(game, player_get_location(game->players[0])));
     if (game->last_text_description == NULL) return ERROR;
@@ -352,7 +351,7 @@ STATUS game_destroy(Game *game) {
     return OK;
 }
 
-/*This function is used to add spaces, usually used in game_reader as its logic*/
+/*This function is used to add spaces, usually used in game_management as its logic*/
 STATUS game_add_space(Game *game, Space *space) {
 
     if (game == NULL || space == NULL || game->spaces_number >= MAX_SPACES || space_get_id(space) <= SPACE_BASE_ID || space_get_id(space) >= SPACE_BASE_ID+ID_RANGE) return ERROR;
@@ -363,7 +362,7 @@ STATUS game_add_space(Game *game, Space *space) {
     return OK;
 }
 
-/*This function is used to add objects on the given location. As usual, its used by game_reader*/
+/*This function is used to add objects on the given location. As usual, its used by game_management*/
 STATUS game_add_object(Game *game, Object *object, Id location_id) {
 
     if (game == NULL || object == NULL || game->objects_number >= MAX_OBJECTS || location_id == NO_ID || object_get_id(object) <= OBJECT_BASE_ID || object_get_id(object) >= OBJECT_BASE_ID+ID_RANGE) return ERROR;
@@ -380,7 +379,7 @@ STATUS game_add_object(Game *game, Object *object, Id location_id) {
     return OK;
 }
 
-/*This function is used to add new links. Again, is used by game_reader normally*/
+/*This function is used to add new links. Again, is used by game_management normally*/
 STATUS game_add_link(Game *game, Link *link) {
 
     if (game == NULL || link == NULL || game->links_number >= MAX_LINKS || link_get_id(link) <= LINK_BASE_ID || link_get_id(link) >= LINK_BASE_ID+ID_RANGE) return ERROR;
@@ -391,7 +390,7 @@ STATUS game_add_link(Game *game, Link *link) {
     return OK;
 }
 
-/*This function is used to add players, usually used in game_reader as its logic*/
+/*This function is used to add players, usually used in game_management as its logic*/
 STATUS game_add_player(Game *game, Player *player, Id location_id) {
 
     if (game == NULL || player == NULL || game->players_number >= MAX_PLAYERS || player_get_id(player) <= PLAYER_BASE_ID || player_get_id(player) >= PLAYER_BASE_ID+ID_RANGE) return ERROR;
@@ -817,9 +816,10 @@ TAG game_str_to_tag(char *name) {
 /*The following funciton displays and implements the menu*/
 
 STATUS game_menu(Game *game) {
-	Menu *menu;
+	Menu *menu = NULL;
 	char input;
 	int selectedOption;
+    int exit = 0;
 	menu = menu_create();
 
     if (menu == NULL) {
@@ -847,12 +847,15 @@ STATUS game_menu(Game *game) {
 
 		switch (selectedOption) {
 			case 0:
-				game_create_from_file(game, "./datafiles/data.dat");
-				printf("Juego cargado.\n");
-				break;
+                if(game_callback_load(game, "./datafiles/data.dat") == OK){
+                    exit = 1;
+                } 
+                break;
 			case 1:
-				game_callback_load(game, "NO_INFO");
-				break;
+				if(game_callback_load(game, "NO_INFO") == OK){
+				    exit = 1;
+                }
+                break;
 			case 2:
 				system("man gcc");									/*Cambiar por el man de los controles*/
 				break;
@@ -860,13 +863,13 @@ STATUS game_menu(Game *game) {
 				system("man gcc");									/*Cambiar por el man de los terminos de uso*/
 				break;
             case 4:
-                game_callback_save(game, "jaja");
+                printf("Aun no se que hacer aqui jaja");
                 break;
 			case 5:
 				menu_destroy(menu);
 				return ERROR;
 		}
-	} while (selectedOption != 0 && selectedOption != 1);
+	} while (exit != 1);
 	
 	menu_destroy(menu);
 	return OK;
@@ -1131,47 +1134,9 @@ STATUS game_callback_turnoff(Game *game, char *string) {
 }
 
 STATUS game_callback_load(Game *game, char *string) {
-	nfdchar_t *outPath = NULL;
-	char aux[256];
-
-	if (game == NULL || string == NULL){
-		return ERROR;
-	}
-
-    strcpy(aux, string);
-
-	if (strcmp(aux, "NO_INFO") == 0) {
-    	if (NFD_OpenDialog( NULL, "./save_games/", &outPath ) == NFD_OKAY) {
-    		strcpy(aux, (char *) outPath);
-    	}
-		else {
-			return ERROR;
-		}
-	}
-
-    if (game_create_from_file(game, aux) == ERROR){
-        game_create_from_file(game, "./datafiles/data.dat");
-        return ERROR;
-    } 
-
-    return OK;
+	return game_management_load(game, string);
 }
 
 STATUS game_callback_save(Game *game, char *string){
-	FILE *f = NULL;
-    char aux[WORD_SIZE];
-
-    strcpy(aux, "./save_games/");
-    strcat(aux, string);
-
-	f = fopen(aux, "w");
-    if (f == NULL){
-        return ERROR;
-    }
-
-    game_print_data(f, game);
-	
-    fclose(f);
-
-    return OK;
+    return game_management_save(game, string);
 }

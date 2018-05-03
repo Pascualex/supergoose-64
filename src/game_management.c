@@ -6,10 +6,11 @@
 /**/
 
 #include "../include/game.h"
-#include "../include/game_reader.h"
+#include "../include/game_management.h"
+#include "nfd.h"
 
 /*This function is used to load the spaces from the given file. It works side by side with game create from file.*/
-STATUS game_reader_load_spaces(Game *game, char *filename) {
+STATUS game_management_load_spaces(Game *game, char *filename) {
     FILE *file = NULL;
     char line[WORD_SIZE] = "";
     char name[WORD_SIZE] = "";
@@ -104,7 +105,7 @@ STATUS game_reader_load_spaces(Game *game, char *filename) {
 }
 
 /*This function is used to load the players from the given file. It works side by side with game create from file.*/
-STATUS game_reader_load_players(Game *game, char *filename) {
+STATUS game_management_load_players(Game *game, char *filename) {
     FILE *file = NULL;
     char line[WORD_SIZE] = "";
     char name[WORD_SIZE] = "";
@@ -157,7 +158,7 @@ STATUS game_reader_load_players(Game *game, char *filename) {
 }
 
 /*This function is used to load the objects from the given file. It works side by side with game create from file.*/
-STATUS game_reader_load_objects(Game *game, char *filename) {
+STATUS game_management_load_objects(Game *game, char *filename) {
     FILE *file = NULL;
     char line[WORD_SIZE] = "";
     char name[WORD_SIZE] = "";
@@ -234,7 +235,7 @@ STATUS game_reader_load_objects(Game *game, char *filename) {
 }
 
 /*This function is used to load the links from the given file. It works side by side with game create from file.*/
-STATUS game_reader_load_links(Game *game, char *filename) {
+STATUS game_management_load_links(Game *game, char *filename) {
     FILE *file = NULL;
     char line[WORD_SIZE] = "";
     char name[WORD_SIZE] = "";
@@ -291,6 +292,56 @@ STATUS game_reader_load_links(Game *game, char *filename) {
     }
 
     fclose(file);
+
+    return OK;
+}
+
+STATUS game_management_load(Game *game, char *filename){
+    nfdchar_t *outPath = NULL;
+    char aux[256];
+
+    if (game == NULL || filename == NULL){
+        return ERROR;
+    }
+
+    strcpy(aux, filename);
+
+    if (strcmp(aux, "NO_INFO") == 0) {
+        if (NFD_OpenDialog( NULL, "./save_games/", &outPath ) == NFD_OKAY) {
+            strcpy(aux, (char *) outPath);
+        }
+        else {
+            return ERROR;
+        }
+    }
+
+    if (game_create_from_file(game, aux) == ERROR){
+        game_create_from_file(game, "./datafiles/data.dat");
+        return ERROR;
+    } 
+
+    return OK;
+}
+
+STATUS game_management_save(Game *game, char *filename){
+    FILE *f = NULL;
+    char aux[WORD_SIZE];
+
+    if (game == NULL || filename == NULL){
+        return ERROR;
+    }
+
+    strcpy(aux, "./save_games/");
+    strcat(aux, filename);
+
+    f = fopen(aux, "w");
+    if (f == NULL){
+        return ERROR;
+    }
+
+    game_print_data(f, game);
+    
+    fclose(f);
 
     return OK;
 }
