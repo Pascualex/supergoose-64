@@ -14,6 +14,7 @@
 #include "../include/game.h"
 #include "../include/game_test.h"
 #include "../include/test.h"
+#include "nfd.h"
 
 
 #define MAX_TESTS 60

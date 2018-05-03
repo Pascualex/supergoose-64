@@ -14,7 +14,7 @@
 #include "../include/object_test.h"
 #include "../include/test.h"
 
-#define MAX_TESTS 26
+#define MAX_TESTS 32
 
 /*
  * Main function for Object unit tests. 
@@ -65,8 +65,14 @@ int main(int argc, char** argv) {
     if (all || test == 22) test2_object_get_tags();
     if (all || test == 23) test1_object_get_tags_number();
     if (all || test == 24) test2_object_get_tags_number();
-    if (all || test == 25) test1_object_is();
-    if (all || test == 26) test2_object_is();
+    if (all || test == 25) test1_object_check_tag();
+    if (all || test == 26) test2_object_check_tag();
+    if (all || test == 27) test1_object_remove_tag();
+    if (all || test == 28) test2_object_remove_tag();
+    if (all || test == 29) test1_object_set_alt_check();
+    if (all || test == 30) test2_object_set_alt_check();
+    if (all || test == 31) test1_object_get_alt_check();
+    if (all || test == 32) test2_object_get_alt_check();
 
     PRINT_PASSED_PERCENTAGE;
 
@@ -215,19 +221,19 @@ void test2_object_get_check() {
 void test1_object_add_tags() {
     Object *object = NULL;
     object = object_create (OBJECT_BASE_ID+1);
-    PRINT_TEST_RESULT(object_add_tags(object, 5, VISIBLE, MOVABLE, MOVED, HIDDEN, IS_KEY) == OK);
+    PRINT_TEST_RESULT(object_add_tags(object, 5, ILLUMINATED, MOVABLE, MOVED, HIDDEN, IS_KEY) == OK);
     object_destroy(object);
 }
 
 void test2_object_add_tags() {
     Object *object = NULL;
-    PRINT_TEST_RESULT(object_add_tags(object, 5, VISIBLE, MOVABLE, MOVED, HIDDEN, IS_KEY) == ERROR);
+    PRINT_TEST_RESULT(object_add_tags(object, 5, ILLUMINATED, MOVABLE, MOVED, HIDDEN, IS_KEY) == ERROR);
 }
 
 void test1_object_get_tags() {
     Object *object = NULL;
     object = object_create (OBJECT_BASE_ID+1);
-    object_add_tags(object, 2, VISIBLE, MOVABLE);
+    object_add_tags(object, 2, ILLUMINATED, MOVABLE);
     PRINT_TEST_RESULT(object_get_tags(object) != NULL);
     object_destroy(object);
 }
@@ -250,17 +256,77 @@ void test2_object_get_tags_number() {
     PRINT_TEST_RESULT(object_get_tags_number(object) == 0);
 }
 
-void test1_object_is() {
+void test1_object_check_tag() {
     Object *object = NULL;
     object = object_create(OBJECT_BASE_ID+1);
     object_add_tags(object, 2, IS_KEY, MOVABLE);
-    PRINT_TEST_RESULT(object_is(object, IS_KEY));
+    PRINT_TEST_RESULT(object_check_tag(object, IS_KEY));
     object_destroy(object);
 }
 
-void test2_object_is() {
+void test2_object_check_tag() {
     Object *object = NULL;
     object = object_create(OBJECT_BASE_ID+1);
-    PRINT_TEST_RESULT(!object_is(object, HIDDEN));
+    PRINT_TEST_RESULT(!object_check_tag(object, HIDDEN));
     object_destroy(object);
+}
+
+void test1_object_remove_tag() {
+    Object *object = NULL;
+    object = object_create(OBJECT_BASE_ID+1);
+    object_add_tags(object, 2, IS_KEY, MOVABLE);
+    PRINT_TEST_RESULT(object_remove_tag(object, IS_KEY) == OK);
+    object_destroy(object);
+}
+
+void test2_object_remove_tag() {
+    Object *object = NULL;
+    object = object_create(OBJECT_BASE_ID+1);
+    PRINT_TEST_RESULT(object_remove_tag(object, HIDDEN) == ERROR);
+    object_destroy(object);
+}
+
+
+void test1_object_set_alt_check(){
+    Object *object = NULL;
+    char alt_check[MAX_TDESC_R][MAX_TDESC_C];
+    int i;
+    for (i = 0; i < MAX_TDESC_R; i++) {
+        strcpy(alt_check[i], "ALT_CHECK");
+    }
+    object = object_create(OBJECT_BASE_ID+1);
+    PRINT_TEST_RESULT(object_set_alt_check(object, alt_check) == OK);
+    object_destroy(object);
+}
+
+void test2_object_set_alt_check(){
+    Object *object = NULL;
+    char alt_check[MAX_TDESC_R][MAX_TDESC_C];
+    PRINT_TEST_RESULT(object_set_alt_check(object, alt_check) == ERROR);
+}
+
+void test1_object_get_alt_check() {
+    Object *object = NULL;
+    char alt_check[MAX_TDESC_R][MAX_TDESC_C];
+    char **checkEnd;
+    int i;
+    int result = 0;
+    object = object_create(OBJECT_BASE_ID+1);
+    for (i = 0; i < MAX_TDESC_R; i++) {
+        strcpy(alt_check[i], "ALT_CHECK");
+    }
+    object_set_alt_check(object, alt_check);
+    checkEnd = object_get_alt_check(object);
+    for (i = 0; i < MAX_TDESC_R; i++) {
+        if (strcmp(checkEnd[i], "ALT_CHECK") != 0) {
+            result = 1;
+        }
+    }
+    PRINT_TEST_RESULT(result == 0);
+    object_destroy(object);
+}
+
+void test2_object_get_alt_check() {
+    Object *object = NULL;
+    PRINT_TEST_RESULT(object_get_alt_check(object) == NULL);
 }
