@@ -17,7 +17,7 @@
 
 /*We define the command maximum length, the number of commands and the information of the command (north, south, objects, etc) lengths.*/
 #define CMD_LENGHT 50
-#define N_CMD 17
+#define N_CMD 18
 #define INFO_LENGHT 30
 
 /*We define the command structure with the command itself (the order) and the info it has (objects, directions and else).*/
@@ -27,8 +27,8 @@ struct _Command {
 };
 
 /*We define the different commands we can use, in long and short forms*/
-char *cmd_to_str[N_CMD] = {"No command", "Unknown", "Exit", "Move", "Previous", "Left", "Following", "Right", "Grasp", "Drop", "Throw", "Check", "Open", "TurnOn", "TurnOff", "Load", "Save"};
-char *short_cmd_to_str[N_CMD] = {"", "", "e", "m", "p", "l", "f", "r", "g", "d", "t", "c", "o", "ton", "toff", "ld", "sv"};
+char *cmd_to_str[N_CMD] = {"No command", "Unknown", "Exit", "Move", "Previous", "Left", "Following", "Right", "Grasp", "Drop", "Throw", "Check", "Open", "TurnOn", "TurnOff", "Load", "Save", "ProMode"};
+char *short_cmd_to_str[N_CMD] = {"", "", "e", "m", "p", "l", "f", "r", "g", "d", "t", "c", "o", "ton", "toff", "ld", "sv", "k"};
 
 /*The following function creates commands, allocating memory for them and starting the command to No_CMD and the information as it was empty.*/
 Command *command_create() {
@@ -99,6 +99,81 @@ STATUS command_get_user_input(Command *command) {
 
     }
 
+    return OK;
+}
+
+/*This function gets the input directly from the user and gives it to the program, but only in ProMode .*/
+STATUS command_proMode(Command *command) {
+    T_Command cmd = NO_CMD;
+    char input = '\0';
+    int i = UNKNOWN-NO_CMD+1;
+    char inputCommand[CMD_LENGHT];
+
+    if (command == NULL) return ERROR;
+
+    system("/bin/stty raw");
+    input = getchar();
+    /* Este if parece que lo esta ignorando un poco xd*/
+    if (input == '^'){
+        getchar();
+        getchar();
+        input = getchar();
+    }
+    system("/bin/stty cooked");
+
+    cmd = UNKNOWN;
+
+    switch (input) {
+        case 'A': 
+            cmd = FOLLOWING;
+            break;
+        case 'B':
+            cmd = PREVIOUS;
+            break;
+        case 'C':
+            cmd = RIGHT;
+            break;
+        case 'D':
+            cmd = LEFT;
+            break;
+    }
+        switch (input) {
+        case 'w': 
+            cmd = FOLLOWING;
+            break;
+        case 's':
+            cmd = PREVIOUS;
+            break;
+        case 'd':
+            cmd = RIGHT;
+            break;
+        case 'a':
+            cmd = LEFT;
+            break;
+    }
+
+    if (cmd != UNKNOWN){
+        command->command = cmd;
+        return OK;
+    }
+
+    inputCommand[0] = input;
+    inputCommand[1] = '\0';
+
+    while (cmd == UNKNOWN && i < N_CMD && inputCommand != NULL) {
+        if (!strcasecmp(inputCommand, short_cmd_to_str[i])) {
+            cmd = i+NO_CMD;
+        } else {
+            i++;
+        }
+    }
+
+
+
+    command->command = cmd;
+
+
+    strcpy(command->info, "NO_INFO");
     return OK;
 }
 

@@ -50,6 +50,17 @@ STATUS command_destroy(Command *);
 STATUS command_get_user_input(Command *);
 
 /**
+ * @name 		command_proMode
+ * @author 		Eric Morales
+ * @version             1.0
+ * @date		03-05-2018
+ * @brief               It gets an input command from the use, but only one character.
+ * @param               Command* -> a command in which the input from the user will be stored. 
+ * @return		A STATUS, which indicates if the process was executed successfully or not. 
+ */
+STATUS command_proMode(Command *command);
+
+/**
  * @name 		command_get_command
  * @author 		Víctor Yrazusta
  * @version             1.0

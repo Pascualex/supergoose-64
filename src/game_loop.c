@@ -66,7 +66,12 @@ int main(int argc, char *argv[]) {
 
     while ((command_get_command(command) != EXIT) && !game_is_over(game)) {
         graphic_engine_paint_game(gengine, game);
-        command_get_user_input(command);
+        if (game_check_mode(game) == FALSE){
+            command_get_user_input(command);
+        } else{
+            command_proMode(command);
+        } 
+        
         if (command_get_command(command) == LOAD){
             game_destroy(game);
             game_create(game);

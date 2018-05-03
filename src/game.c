@@ -19,7 +19,7 @@
 #include "../include/menu.h"
 
 /*We define the number of functions we have related to the different commands.*/
-#define N_CALLBACK 16
+#define N_CALLBACK 17
 /*We define the number of possible directions to move for the move command.*/
 #define N_DIR 4
 /*INI is used to initialize those variable as the starting number of objects when they are 0.*/
@@ -47,6 +47,7 @@ struct _Game {
     STATUS status_last_cmd; /*Used to store if the last command worked correctly or not*/
     T_Command last_cmd; /*Used to store the last command used by the user for graphic engine purposes*/
     int consec_error_num; /*Used to know the number of consecutive errors made while playing.*/
+    BOOL proMode;
 };
 
 /*Define the function type for the callbacks*/
@@ -238,6 +239,7 @@ STATUS game_callback_turnoff(Game *game, char *string);
 
 STATUS game_callback_load(Game *game, char *string);
 STATUS game_callback_save(Game *game, char *string);
+STATUS game_callback_promode(Game *game, char *string);
 
 /*We define the callback functions*/
 static callback_fn game_callback_fn_list[N_CALLBACK] = {
@@ -256,7 +258,8 @@ static callback_fn game_callback_fn_list[N_CALLBACK] = {
 	game_callback_turnon,
 	game_callback_turnoff,
 	game_callback_load,
-    game_callback_save
+    game_callback_save,
+    game_callback_promode
 };
 
 /*Private functions*/
@@ -295,6 +298,7 @@ Game *game_create() {
     game->dies_number = N_DIES;
     game->links_number = INI;
     game->last_text_description = NULL;
+    game->proMode = FALSE;
 
     for (i = 0; i < game->dies_number; i++) {
         game->dies[i] = die_create(DIE_BASE_ID+game->dies_number-i, DIE_FACES);
@@ -574,6 +578,12 @@ STATUS game_update(Game *game, Command *command) {
     }
 
     return game->status_last_cmd;
+}
+
+/*This function give us the result of the boolean proMode */
+BOOL game_check_mode(Game *game){     /* TRUE = ProMode and FALSE = NormalMode */
+    if (game == NULL) return FALSE;
+    return game->proMode;
 }
 
 /*This function returns the last command used by the player (the command itself, without the info*/
@@ -1080,9 +1090,9 @@ STATUS game_callback_open(Game *game, char *string) {
 		return ERROR;
 	}
 
-	if (player_check_object(game->players[0], object_get_id(obj)) == FALSE) {
-		return ERROR;
-	}
+    if (player_check_object(game->players[0], object_get_id(obj)) == FALSE && player_get_location(game->players[0]) != object_get_location(obj)) {
+        return ERROR;
+    }
 
 	link_set_status(link, OPEN);
 
@@ -1139,4 +1149,16 @@ STATUS game_callback_load(Game *game, char *string) {
 
 STATUS game_callback_save(Game *game, char *string){
     return game_management_save(game, string);
+}
+
+STATUS game_callback_promode(Game *game, char *string){
+    if (game == NULL) return ERROR;
+    
+    if (game->proMode == FALSE){
+        game->proMode = TRUE;
+    } else {
+        game->proMode = FALSE;
+    }
+
+    return OK;
 }

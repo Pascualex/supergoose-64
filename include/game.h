@@ -59,6 +59,17 @@ STATUS game_create_from_file(Game *, char *file_name);
 STATUS game_update(Game *, Command *);
 
 /**
+ * @name 		game_check_mode
+ * @author 		Eric Morales
+ * @version             1.0
+ * @date		03-05-2018
+ * @brief               This function give us the result of the boolean proMode.
+ * @param               Game* -> a game which will be updated depending on the last introduced command.
+ * @return		A BOOLEAN, TRUE = ProMode and FALSE = NormalMode.
+ */
+BOOL game_check_mode(Game *);
+
+/**
  * @name 		game_destroy
  * @author 		Victor Yrazusta edited by Eric Morales
  * @version             2.0
