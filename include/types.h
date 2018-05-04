@@ -30,12 +30,12 @@
 #define MAX_LINKS 50                /*!< Maximum number of links a game is prepared to store*/
 #define MAX_TAGS 10                 /*!< Maximun number of tags an object can have*/
 
-#define ID_RANGE 1000               /*!< Used to define the maximum amount of elements from each type we can manage*/
-#define SPACE_BASE_ID 0000          /*!< Marks where the Spaces Ids start*/
-#define PLAYER_BASE_ID 1000         /*!< Marks where the Players Ids start*/
-#define OBJECT_BASE_ID 2000         /*!< Marks where the Objects Ids start*/
-#define DIE_BASE_ID 3000            /*!< Marks where the Dies Ids start*/
-#define LINK_BASE_ID 4000           /*!< Marks where the Links Ids start*/
+#define ID_RANGE 10000               /*!< Used to define the maximum amount of elements from each type we can manage*/
+#define SPACE_BASE_ID 00000          /*!< Marks where the Spaces Ids start*/
+#define PLAYER_BASE_ID 10000         /*!< Marks where the Players Ids start*/
+#define OBJECT_BASE_ID 20000         /*!< Marks where the Objects Ids start*/
+#define DIE_BASE_ID 30000            /*!< Marks where the Dies Ids start*/
+#define LINK_BASE_ID 40000           /*!< Marks where the Links Ids start*/
 
 #define OBJECT_BASE_TAGS 0                 /*!< The number of tags that an object has by default*/
 #define SPACE_BASE_TAGS 0                  /*!< The number of tags that an object has by default*/

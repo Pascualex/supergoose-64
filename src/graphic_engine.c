@@ -135,7 +135,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
             swprintf(unicode_str, COLUMNS, L"                  +-------------+");
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  | %7s   %2d|", player_get_graphic_description((Player *) game_find(game, PLAYER_BASE_ID + 1)), (int) id_act);
+            swprintf(unicode_str, COLUMNS, L"                  | %7s %2d|", player_get_graphic_description((Player *) game_find(game, PLAYER_BASE_ID + 1)), (int) id_act);
             screen_area_puts(ge->map, unicode_str);
             if (space_get_direction(space_act, WEST) != NO_ID) {
                 if (space_get_direction(space_act, EAST) != NO_ID) {
@@ -184,7 +184,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
             screen_area_puts(ge->map, unicode_str);
             swprintf(unicode_str, COLUMNS, L"                  | %s   |", obj);
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  +-------------+   🐦   🐤    🐥   🇪🇸");
+            swprintf(unicode_str, COLUMNS, L"                  +-------------+ ");
             screen_area_puts(ge->map, unicode_str);
         }
 
