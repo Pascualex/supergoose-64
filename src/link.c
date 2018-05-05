@@ -22,9 +22,10 @@ struct _Link {
     char name[MAX_NAME]; /*A string with the name of the Link*/
     Id space1, space2; /*Two Ids storing the Ids of the linked spaces*/
     LINK_STATUS status; /*The Link status, which will tell us if a link is closed or not*/
+    TAG opener;
 };
 
-/*The following function is used to create (allocating memory) a link with the given Id. We will later define which spaces it ocnnects*/
+/*The following function is used to create (allocating memory) a link with the given Id. We will later define which spaces it connects*/
 Link *link_create(Id id) {
     Link *link;
 
@@ -58,6 +59,15 @@ STATUS link_set_name(Link *link, char name[MAX_NAME]) {
     if (link == NULL || name == NULL) return ERROR;
 
     strcpy(link->name, name);
+
+    return OK;
+}
+
+STATUS link_set_opener(Link *link, TAG opener) {
+
+    if (link == NULL) return ERROR;
+
+    link->opener = opener;
 
     return OK;
 }
@@ -123,6 +133,13 @@ LINK_STATUS link_get_status(Link *link) {
     return link->status;
 }
 
+TAG link_get_opener(Link *link) {
+
+    if (link == NULL) return NO_TAG;
+
+    return link->opener;
+}
+
 STATUS link_print(FILE *f, Link *link) {
 
     if (link == NULL) return ERROR;
@@ -141,7 +158,8 @@ STATUS link_print(FILE *f, Link *link) {
         fprintf(f, "%04ld|", link->space2 - SPACE_BASE_ID);
     }
 
-    fprintf(f, "%d|\n", link->status);
+    fprintf(f, "%d|", link->status);
+    fprintf(f, "%s|\n", game_tag_to_str(link->opener));
 
     return OK;
 }

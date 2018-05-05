@@ -33,21 +33,21 @@
 
 /*We declare the structure of the game: */
 struct _Game {
-    Space *spaces[MAX_SPACES+1]; /*We define the spaces array for the MAX_SPACES we want to have*/
-    Player *players[MAX_PLAYERS]; /*We define the players array, in case we want to handle more than one player in the future*/
-    Object *objects[MAX_OBJECTS]; /*We define the objects array, to store all the objects of the game*/
-    Die *dies[MAX_DIES]; /*We define the dies array to store all the dies we will be using*/
-    Link *links[MAX_LINKS]; /*We define the links array for all the links we will be using*/
-    int links_number; /*Used to store the real amount of links being stored in the game*/
-    int spaces_number; /*Used to store the real amount of spaces in the game*/
-    int players_number; /*Used to store the real amount of players being stored in the game*/
-    int objects_number; /*Used to store the amount of objects the game has*/
-    int dies_number; /*Used to store the number of dies the game is using*/
-    char **last_text_description; /*Used to store the last text description printed*/
-    STATUS status_last_cmd; /*Used to store if the last command worked correctly or not*/
-    T_Command last_cmd; /*Used to store the last command used by the user for graphic engine purposes*/
-    int consec_error_num; /*Used to know the number of consecutive errors made while playing.*/
-    BOOL proMode;
+    Space *spaces[MAX_SPACES+1];    /*We define the spaces array for the MAX_SPACES we want to have*/
+    Player *players[MAX_PLAYERS];   /*We define the players array, in case we want to handle more than one player in the future*/
+    Object *objects[MAX_OBJECTS];   /*We define the objects array, to store all the objects of the game*/
+    Die *dies[MAX_DIES];            /*We define the dies array to store all the dies we will be using*/
+    Link *links[MAX_LINKS];         /*We define the links array for all the links we will be using*/
+    int links_number;               /*Used to store the real amount of links being stored in the game*/
+    int spaces_number;              /*Used to store the real amount of spaces in the game*/
+    int players_number;             /*Used to store the real amount of players being stored in the game*/
+    int objects_number;             /*Used to store the amount of objects the game has*/
+    int dies_number;                /*Used to store the number of dies the game is using*/
+    char **last_text_description;   /*Used to store the last text description printed*/
+    STATUS status_last_cmd;         /*Used to store if the last command worked correctly or not*/
+    T_Command last_cmd;             /*Used to store the last command used by the user for graphic engine purposes*/
+    int consec_error_num;           /*Used to know the number of consecutive errors made while playing.*/
+    BOOL proMode;                   /*Used to know whether the command mode is on proMode or not.*/
 };
 
 /*Define the function type for the callbacks*/
@@ -804,11 +804,10 @@ char *game_tag_to_str(TAG tag) {
     return NULL;
 }
 
+/*This function is used to pass from string to tag*/
 TAG game_str_to_tag(char *name) {
 
-    if (name == NULL) {
-        return NO_TAG;
-    }
+    if (name == NULL) return NO_TAG;
 
     if (!strcmp(name, "NO_TAG"))        return NO_TAG;
     if (!strcmp(name, "MOVABLE"))       return MOVABLE;
@@ -1061,7 +1060,7 @@ STATUS game_callback_check(Game *game, char *string) {
     return OK;
 }
 
-/*Using this command you can Open a Space using an object*/
+/*Using this command you can open a link using an object*/
 STATUS game_callback_open(Game *game, char *string) {
     Object *obj;
 	Link *link;
@@ -1086,7 +1085,9 @@ STATUS game_callback_open(Game *game, char *string) {
         if (link == NULL) return ERROR;
     }
 
-	if (object_check_tag(obj, IS_KEY) == FALSE) {
+
+
+	if (object_check_tag(obj, link_get_opener(link)) == FALSE) {
 		return ERROR;
 	}
 

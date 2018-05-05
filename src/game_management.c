@@ -244,6 +244,7 @@ STATUS game_management_load_links(Game *game, char *filename) {
     Id space1_id = NO_ID;
     Id space2_id = NO_ID;
     LINK_STATUS status;
+    TAG opener = NO_TAG;
     Link *link = NULL;
 
     if (game == NULL || filename == NULL) return ERROR;
@@ -271,6 +272,8 @@ STATUS game_management_load_links(Game *game, char *filename) {
             } else {
             	status = OPEN;
             }
+            toks = strtok(NULL, "|");
+            opener = game_str_to_tag(toks);
 
             link = link_create(LINK_BASE_ID+id);
             if (link == NULL) {
@@ -282,6 +285,7 @@ STATUS game_management_load_links(Game *game, char *filename) {
             link_add_space(link, space1_id+SPACE_BASE_ID);
             link_add_space(link, space2_id+SPACE_BASE_ID);
             link_set_status(link, status);
+            link_set_opener(link, opener);
             game_add_link(game, link);            
         }
     }

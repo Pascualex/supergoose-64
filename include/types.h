@@ -37,8 +37,8 @@
 #define DIE_BASE_ID 30000            /*!< Marks where the Dies Ids start*/
 #define LINK_BASE_ID 40000           /*!< Marks where the Links Ids start*/
 
-#define OBJECT_BASE_TAGS 0                 /*!< The number of tags that an object has by default*/
-#define SPACE_BASE_TAGS 0                  /*!< The number of tags that an object has by default*/
+#define OBJECT_BASE_TAGS 0           /*!< The number of tags that an object has by default*/
+#define SPACE_BASE_TAGS 0            /*!< The number of tags that an object has by default*/
 
 /**
  * @brief Id (to store Ids of objects, players, etc)
@@ -49,92 +49,92 @@ typedef long Id;
  * @brief Boolean (to store boolean values that are or not)
  */
 typedef enum {
-    FALSE, /*!< If the condition is not fullfilled*/
-    TRUE /*!< If the condition is correct and real*/
+    FALSE,          /*!< If the condition is not fullfilled */
+    TRUE            /*!< If the condition is correct and real */
 } BOOL;
 
 /**
  * @brief Status (to store all the executions, if correct or not)
  */
 typedef enum {
-    ERROR, /*!< If something went wrong*/
-    OK, /*!< If all worked correctly*/
-    DARK, /*< If the space is not illuminated*/
-    FAR, /*< If the object is not in the same room*/
-    UNMOVABLE /*< If the object is not movable*/
+    ERROR,          /*!< If something went wrong */
+    OK,             /*!< If all worked correctly */
+    DARK,           /*!< If the space is not illuminated */
+    FAR,            /*!< If the object is not in the same room */
+    UNMOVABLE       /*!< If the object is not movable */
 } STATUS;
 
 /**
  * @brief Command enumeration (to be used on command.c
  */
 typedef enum {
-    NO_CMD = -1, /*!< No command */
-    UNKNOWN, /*!< Unknown command (beginning)*/
-    EXIT, /*!< Exit game */
-    MOVE, /*!< Move to a direction */
-    FOLLOWING, /*!< Following space (old)*/
-    LEFT, /*!< Left space (old) */
-    PREVIOUS, /*!< Previous space (old)*/
-    RIGHT, /*!< Right space (old) */
-    GRASP, /*!< Grasp an object */
-    DROP, /*!< Drop an object */
-    THROW, /*!< Roll the die */
-    CHECK,
-    OPEN_L,
-    TURN_ON,
-    TURN_OFF,
-    LOAD,
-    SAVE,
-    PROMODE
+    NO_CMD = -1,    /*!< No command */
+    UNKNOWN,        /*!< Unknown command (beginning)*/
+    EXIT,           /*!< Exit game */
+    MOVE,           /*!< Move to a direction */
+    FOLLOWING,      /*!< Following space (old)*/
+    LEFT,           /*!< Left space (old) */
+    PREVIOUS,       /*!< Previous space (old)*/
+    RIGHT,          /*!< Right space (old)*/
+    GRASP,          /*!< Grasp an object */
+    DROP,           /*!< Drop an object */
+    THROW,          /*!< Roll the die */
+    CHECK,          /*!< Check an object or a space */
+    OPEN_L,         /*!< Open a link */
+    TURN_ON,        /*!< Turn on an object */
+    TURN_OFF,       /*!< Turn off an object */
+    LOAD,           /*!< Load a game from a file */
+    SAVE,           /*!< Save the current game to a file */
+    PROMODE         /*!< Enter proMode */
 } T_Command;
 /**
  * @brief Direction (to be used when moving through the board)
  */
 typedef enum {
-    NO_DIR = -1, /*!< If something went wrong*/
-    NORTH,       /*!< When going north*/
-    WEST,        /*!< When going east*/
-    SOUTH,       /*!< When going south*/
-    EAST,        /*!< When going east*/
-    ABOVE,       /*!< When going above*/
-    BELOW        /*!< When going below*/
+    NO_DIR = -1,    /*!< If something went wrong */
+    NORTH,          /*!< When going north */
+    WEST,           /*!< When going east */
+    SOUTH,          /*!< When going south */
+    EAST,           /*!< When going east */
+    ABOVE,          /*!< When going above */
+    BELOW           /*!< When going below */
 } DIRECTION;
 
 /**
  * @brief LINK_STATUS enumeration (to be used on links)
  */
 typedef enum {
-    OPEN = 0, /*!< Open link*/
-    CLOSED = 1 /*!< Closed link*/
+    OPEN = 0,       /*!< Open link */
+    CLOSED = 1      /*!< Closed link */
 } LINK_STATUS;
 
 /**
  * @brief COLOR enumeration (to be used when painting the graphic engine)
  */
 typedef enum {
-    BLACK, /*!< BLACK COLOR*/
-    RED, /*!< RED COLOR*/
-    GREEN, /*!< GREEN COLOR*/
-    YELLOW, /*!< YELLOW COLOR*/
-    BLUE, /*!< BLUE COLOR*/
-    PURPLE, /*!< PURPLE COLOR*/
-    CYAN, /*!< CYAN COLOR*/
-    WHITE /*!< WHITE COLOR*/
+    BLACK,          /*!< BLACK COLOR */
+    RED,            /*!< RED COLOR */
+    GREEN,          /*!< GREEN COLOR */
+    YELLOW,         /*!< YELLOW COLOR */
+    BLUE,           /*!< BLUE COLOR */
+    PURPLE,         /*!< PURPLE COLOR */
+    CYAN,           /*!< CYAN COLOR */
+    WHITE           /*!< WHITE COLOR */
 } COLOR;
 
 /**
  * @brief TAG enumeration (to be used when asigning propierties to objects or spaces)
  */
 typedef enum {
-	NO_TAG = 0,      /*!< Tag not specified*/
-	MOVABLE,		 /*!< The object can be moved*/
-	MOVED,			 /*!< The object has been moved*/
-	HIDDEN,			 /*!< The object is hidden*/
-	CAN_GLOW,		 /*!< The object is able to glow*/
-	GLOWING,	 	 /*!< The object is glowing*/
-	IS_KEY,			 /*!< The object is a key*/
-    ILLUMINATED,     /*!< The space is a illuminated*/
-    FINAL_ROOM       /*!< The space is the final room*/
+	NO_TAG = 0,      /*!< Tag not specified */
+	MOVABLE,		 /*!< The object can be moved */
+	MOVED,			 /*!< The object has been moved */
+	HIDDEN,			 /*!< The object is hidden */
+	CAN_GLOW,		 /*!< The object is able to glow */
+	GLOWING,	 	 /*!< The object is glowing */
+	IS_KEY,			 /*!< The object is a key */
+    ILLUMINATED,     /*!< The space is a illuminated */
+    FINAL_ROOM       /*!< The space is the final room */
 } TAG;
 
 #endif

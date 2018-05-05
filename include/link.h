@@ -46,10 +46,22 @@ STATUS link_destroy(Link *);
  * @date		26-03-2018
  * @brief 		It changes the name of the passed link.
  * @param 		Link* -> the link whose name will be changed.
- * @param 		char -> a string with the new name for the link.
+ * @param 		char  -> a string with the new name for the link.
  * @return		A STATUS which indicates whether the operation could be executed correctly.
  */
 STATUS link_set_name(Link *, char name[MAX_NAME]);
+
+/**
+ * @name 		link_set_opener
+ * @author 		Víctor Yrazusta
+ * @version             1.0
+ * @date		05-05-2018
+ * @brief 		It changes the opener of the passed link.
+ * @param 		Link* -> the link whose opener will be changed.
+ * @param 		TAG   -> a TAG with the new opener for the link.
+ * @return		A STATUS which indicates whether the operation could be executed correctly.
+ */
+STATUS link_set_opener(Link *, TAG opener);
 
 /**
  * @name 		link_add_space
@@ -119,6 +131,17 @@ Id link_get_other_side(Link *, Id);
  * @return		A STATUS of the link passed.
  */
 LINK_STATUS link_get_status(Link *);
+
+/**
+ * @name 		link_get_opener
+ * @author 		Víctor Yrazusta
+ * @version             1.0
+ * @date		05-05-2018
+ * @brief 		It returns the opener of the link passed.
+ * @param 		Link* -> the link whose opener will be returned.
+ * @return		The opener of the link passed.
+ */
+TAG link_get_opener(Link *);
 
 /**
  * @name 		link_print
