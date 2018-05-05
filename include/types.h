@@ -10,35 +10,35 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#define MAX_TDESC_C 75              /*!< Maximum columns of the text descriptions*/
-#define MAX_TDESC_R 3               /*!< Maximum rows of the text descriptions*/
+#define MAX_TDESC_C 75              /*!< Maximum columns of the text descriptions */
+#define MAX_TDESC_R 3               /*!< Maximum rows of the text descriptions */
 
-#define MAX_GDESC_C 8               /*!< Maximum columns of the graphic description field*/
-#define MAX_GDESC_R 3               /*!< Maximum rows of the graphic description field*/
+#define MAX_GDESC_C 8               /*!< Maximum columns of the graphic description field */
+#define MAX_GDESC_R 3               /*!< Maximum rows of the graphic description field */
 
-#define MAX_NAME 128                /*!< Maximum characters of a link name*/
+#define MAX_NAME 128                /*!< Maximum characters of a link name */
 #define WORD_SIZE 1000              /*!< Maximum size of some of the names (players, objects and else)*/
 
-#define NO_ID -1                    /*!< Default Id used when there is no Id or something works as it shouldn't*/
-#define NOT_FOUND -1                /*!< Used when a set doesnt found the given Id position*/
+#define NO_ID -1                    /*!< Default Id used when there is no Id or something works as it shouldn't */
+#define NOT_FOUND -1                /*!< Used when a set doesnt found the given Id position */
 
-#define SET_MAX_IDS 5               /*!< Maximum number of Ids a set can store*/
-#define MAX_SPACES 100              /*!< Maximum number of spaces a game is prepared to store*/
-#define MAX_PLAYERS 10              /*!< Maximum number of players a game is prepared to store*/
-#define MAX_OBJECTS 10              /*!< Maximum number of objects a game is prepared to store*/
-#define MAX_DIES 10                 /*!< Maximum number of dies a game is prepared to store*/
-#define MAX_LINKS 50                /*!< Maximum number of links a game is prepared to store*/
-#define MAX_TAGS 10                 /*!< Maximun number of tags an object can have*/
+#define SET_MAX_IDS 5               /*!< Maximum number of Ids a set can store */
+#define MAX_SPACES 100              /*!< Maximum number of spaces a game is prepared to store */
+#define MAX_PLAYERS 10              /*!< Maximum number of players a game is prepared to store */
+#define MAX_OBJECTS 10              /*!< Maximum number of objects a game is prepared to store */
+#define MAX_DIES 10                 /*!< Maximum number of dies a game is prepared to store */
+#define MAX_LINKS 50                /*!< Maximum number of links a game is prepared to store */
+#define MAX_TAGS 10                 /*!< Maximun number of tags an object can have */
 
-#define ID_RANGE 10000               /*!< Used to define the maximum amount of elements from each type we can manage*/
-#define SPACE_BASE_ID 00000          /*!< Marks where the Spaces Ids start*/
-#define PLAYER_BASE_ID 10000         /*!< Marks where the Players Ids start*/
-#define OBJECT_BASE_ID 20000         /*!< Marks where the Objects Ids start*/
-#define DIE_BASE_ID 30000            /*!< Marks where the Dies Ids start*/
-#define LINK_BASE_ID 40000           /*!< Marks where the Links Ids start*/
+#define ID_RANGE 10000               /*!< Used to define the maximum amount of elements from each type we can manage */
+#define SPACE_BASE_ID 00000          /*!< Marks where the Spaces Ids start */
+#define PLAYER_BASE_ID 10000         /*!< Marks where the Players Ids start */
+#define OBJECT_BASE_ID 20000         /*!< Marks where the Objects Ids start */
+#define DIE_BASE_ID 30000            /*!< Marks where the Dies Ids start */
+#define LINK_BASE_ID 40000           /*!< Marks where the Links Ids start */
 
-#define OBJECT_BASE_TAGS 0           /*!< The number of tags that an object has by default*/
-#define SPACE_BASE_TAGS 0            /*!< The number of tags that an object has by default*/
+#define OBJECT_BASE_TAGS 0           /*!< The number of tags that an object has by default */
+#define SPACE_BASE_TAGS 0            /*!< The number of tags that an object has by default */
 
 /**
  * @brief Id (to store Ids of objects, players, etc)
@@ -133,6 +133,9 @@ typedef enum {
 	CAN_GLOW,		 /*!< The object is able to glow */
 	GLOWING,	 	 /*!< The object is glowing */
 	IS_KEY,			 /*!< The object is a key */
+    IS_CROWBAR,      /*!< The object is a crowbar */
+    IS_BASE_ID_CARD, /*!< The object is a base ID card */
+    IS_FULL_ID_CARD, /*!< The object is a full ID card */
     ILLUMINATED,     /*!< The space is a illuminated */
     FINAL_ROOM       /*!< The space is the final room */
 } TAG;

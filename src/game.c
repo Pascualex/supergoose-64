@@ -21,7 +21,7 @@
 /*We define the number of functions we have related to the different commands.*/
 #define N_CALLBACK 17
 /*We define the number of possible directions to move for the move command.*/
-#define N_DIR 4
+#define N_DIR 6
 /*INI is used to initialize those variable as the starting number of objects when they are 0.*/
 #define INI 0
 /*Used to define the number of dies. By the moment we can handle different dies, but with no purpose.*/
@@ -792,6 +792,18 @@ char *game_tag_to_str(TAG tag) {
         strcpy(name, "IS_KEY");
         return name;
     }
+    if (tag == IS_CROWBAR) {
+        strcpy(name, "IS_CROWBAR");
+        return name;
+    }
+    if (tag == IS_BASE_ID_CARD) {
+        strcpy(name, "IS_BASE_ID_CARD");
+        return name;
+    }
+    if (tag == IS_FULL_ID_CARD) {
+        strcpy(name, "IS_FULL_ID_CARD");
+        return name;
+    }
     if (tag == ILLUMINATED) {
         strcpy(name, "ILLUMINATED");
         return name;
@@ -809,15 +821,18 @@ TAG game_str_to_tag(char *name) {
 
     if (name == NULL) return NO_TAG;
 
-    if (!strcmp(name, "NO_TAG"))        return NO_TAG;
-    if (!strcmp(name, "MOVABLE"))       return MOVABLE;
-    if (!strcmp(name, "MOVED"))         return MOVED;
-    if (!strcmp(name, "HIDDEN"))        return HIDDEN;
-    if (!strcmp(name, "CAN_GLOW"))      return CAN_GLOW;
-    if (!strcmp(name, "GLOWING"))       return GLOWING;
-    if (!strcmp(name, "IS_KEY"))        return IS_KEY;
-    if (!strcmp(name, "ILLUMINATED"))   return ILLUMINATED;
-    if (!strcmp(name, "FINAL_ROOM"))    return FINAL_ROOM;
+    if (!strcmp(name, "NO_TAG"))          return NO_TAG;
+    if (!strcmp(name, "MOVABLE"))         return MOVABLE;
+    if (!strcmp(name, "MOVED"))           return MOVED;
+    if (!strcmp(name, "HIDDEN"))          return HIDDEN;
+    if (!strcmp(name, "CAN_GLOW"))        return CAN_GLOW;
+    if (!strcmp(name, "GLOWING"))         return GLOWING;
+    if (!strcmp(name, "IS_KEY"))          return IS_KEY;
+    if (!strcmp(name, "IS_CROWBAR"))      return IS_CROWBAR;
+    if (!strcmp(name, "IS_BASE_ID_CARD")) return IS_BASE_ID_CARD;
+    if (!strcmp(name, "IS_FULL_ID_CARD")) return IS_FULL_ID_CARD;
+    if (!strcmp(name, "ILLUMINATED"))     return ILLUMINATED;
+    if (!strcmp(name, "FINAL_ROOM"))      return FINAL_ROOM;
 
     return NO_TAG;
 }
@@ -900,8 +915,8 @@ STATUS game_callback_exit(Game *game, char *string) {
 
 /*This action repalces all the older movement actions by one only action, which moves the player in the asked direction*/
 STATUS game_callback_move(Game *game, char *string) {
-    char *direction[N_DIR] = {"North", "West", "South", "East"};
-    char *direction_letter[N_DIR] = {"N", "W", "S", "E"};
+    char *direction[N_DIR] = {"North", "West", "South", "East", "Above", "Below"};
+    char *direction_letter[N_DIR] = {"N", "W", "S", "E", "A", "B"};
     DIRECTION dir;
     Player *player = NULL;
     Link *link = NULL;
@@ -912,7 +927,7 @@ STATUS game_callback_move(Game *game, char *string) {
 
     dir = NO_DIR;
     i = 0;
-    while (dir == NO_DIR && i <= EAST && string != NULL) {
+    while (dir == NO_DIR && i <= BELOW && string != NULL) {
         if (!strcasecmp(string, direction[i]) || !strcasecmp(string, direction_letter[i])) {
             dir = i;
         } else {

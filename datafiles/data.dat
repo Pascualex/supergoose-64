@@ -27,27 +27,27 @@
 #s:0124|Power core laboratory        (floor 1)|-1|-1|-1|26|-1|-1|(\_/)  |( *,*) |(")_(")| Power core laboratory        (floor 1)                               |                                                                          |                                                                         | GOOSE-ADISE (25):                                                       | Finally... the geese... the geese paradise... This is glorious!          | (Congratulations! You have passed the Alpha game. Keep tuned!)          |ILLUMINATED|
 #s:0125|Technical room               (floor 1)|27|-1|-1|-1|-1|-1|(\_/)  |( *,*) |(")_(")| Technical room               (floor 1)                               |                                                                          |                                                                         | GOOSE-ADISE (25):                                                       | Finally... the geese... the geese paradise... This is glorious!          | (Congratulations! You have passed the Alpha game. Keep tuned!)          |ILLUMINATED|
 
-#o:0001|Beak|0013| A metal beak:                                                           | A hard beak that you can use to defend yourself... or to look agresive. | Easy to put. Just wrap it around your goose mouth. Careful with it!     | ALT_DESC1                                                               | ALT_DESC2                                                               | ALT_DESC3                                                               |MOVABLE|
-#o:0002|Key| 1101| A key:                                                                  | A lonely key found in the geese kingdom. What will it open?             | (You might learn something interesting near the death box ;])           | ALT_DESC1                                                               | ALT_DESC2                                                               | ALT_DESC3                                                               |IS_KEY|MOVABLE|
-#o:0003|Gold|0013| Gold Ingot:                                                             | Some gold that was found by the digger geese. A gift from my family.    | Might be useful, who knows?. Better to carry it.                        | ALT_DESC1                                                               | ALT_DESC2                                                               | ALT_DESC3                                                               |CAN_GLOW|
-#o:0004|Food|0013| Some birdseed:                                                          | Who knows when hunger might attack? Better carry some homemade alpist!  | Mother made it days ago with love.                                      | ALT_DESC1                                                               | ALT_DESC2                                                               | ALT_DESC3                                                               |
+#o:0001|Key|                1105| A key:                                                                  | A rusty key with a strange form, was laying on the floor near a granite | wall. It has a decolored tag in which you can barely read "Li?rar?".    | ALT_DESC1                                                               | ALT_DESC2                                                               | ALT_DESC3                                                               |IS_KEY|MOVABLE|
+#o:0002|Crowbar|            1104| A crowbar:                                                              | A hard piece of metal covered with rust. It has many utilities, from    | opening door by force to defending yourself.                            | ALT_DESC1                                                               | ALT_DESC2                                                               | ALT_DESC3                                                               |IS_CROWBAR|MOVABLE|
+#o:0003|ID Card|            1106| An ID card:                                                             | From what you can tell this must be an ID card of a visitor. You doubt  | if this will be of any use, but it has a magnetic bad attached to it.   | ALT_DESC1                                                               | ALT_DESC2                                                               | ALT_DESC3                                                               |IS_BASE_ID_CARD|MOVABLE|
+#o:0004|Scientist ID Card|  0125| A scientist ID card:                                                    | This is an ID card of a scientist called "Hans Zilmann". May grant you  | access to certain parts of the building.                                | ALT_DESC1                                                               | ALT_DESC2                                                               | ALT_DESC3                                                               |IS_FULL_ID_CARD|MOVABLE|
 
-#l:0001|Link1| 1101|1102|CLOSED|IS_KEY|
+#l:0001|Link1| 1101|1102|OPEN|
 #l:0002|Link2| 1102|1103|OPEN|
 #l:0003|Link3| 1103|1104|OPEN|
 #l:0004|Link4| 1103|1105|OPEN|
-#l:0005|Link5| 1105|1106|OPEN|
+#l:0005|Link5| 1105|1106|CLOSED|IS_KEY|
 #l:0006|Link6| 1102|1107|OPEN|
-#l:0007|Link7| 1107|1108|OPEN|
-#l:0009|Link9| 1102|1109|OPEN|
+#l:0007|Link7| 1107|1108|CLOSED|IS_BASE_ID_CARD|
+#l:0009|Link9| 1102|1109|CLOSED|IS_CROWBAR|
 #l:0010|Link10|0009|0010|OPEN|
 #l:0011|Link11|0010|0011|OPEN|
 #l:0012|Link12|0010|0012|OPEN|
 #l:0013|Link13|0012|0013|OPEN|
 #l:0014|Link14|0013|0014|OPEN|
-#l:0015|Link15|0014|0016|OPEN|
-#l:0016|Link16|0014|0015|OPEN|
-#l:0017|Link17|0015|0116|OPEN|
+#l:0015|Link15|0014|0016|CLOSED|IS_CROWBAR|
+#l:0016|Link16|0014|0015|CLOSED|IS_BASE_ID_CARD|
+#l:0017|Link17|0015|0116|CLOSED|IS_BASE_ID_CARD|
 #l:0019|Link19|0116|0117|OPEN|
 #l:0020|Link20|0117|0122|OPEN|
 #l:0021|Link21|0117|0118|OPEN|
@@ -55,10 +55,9 @@
 #l:0023|Link23|0118|0120|OPEN|
 #l:0024|Link24|0120|0121|OPEN|
 #l:0025|Link25|0122|0123|OPEN|
-#l:0026|Link26|0122|0124|OPEN|
-#l:0027|Link27|0122|0125|OPEN|
+#l:0026|Link26|0122|0124|CLOSED|IS_FULL_ID_CARD|
+#l:0027|Link27|0122|0125|CLOSED|IS_CROWBAR|
 #l:0050|Link50|1109|0008|OPEN|
 #l:0051|Link51|0008|0009|OPEN|
 
 #p:0001|Player 1|1101|5|(* _ *)|
-
