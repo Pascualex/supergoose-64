@@ -101,7 +101,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
             swprintf(unicode_str, COLUMNS, L"                  +-------------+");
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  |           %2d|", (int) id_back);
+            swprintf(unicode_str, COLUMNS, L"                  |         %2d|", (int) id_back);
             screen_area_puts(ge->map, unicode_str);
             swprintf(unicode_str, COLUMNS, L"                  |   %s   |", graphic_description_back[0]);
             screen_area_puts(ge->map, unicode_str);
@@ -202,7 +202,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
             screen_area_puts(ge->map, unicode_str);
             swprintf(unicode_str, COLUMNS, L"                  +-------------+");
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  |           %2d|", (int) id_next);
+            swprintf(unicode_str, COLUMNS, L"                  |         %2d|", (int) id_next);
             screen_area_puts(ge->map, unicode_str);
             swprintf(unicode_str, COLUMNS, L"                  |   %s   |", graphic_description_next[0]);
             screen_area_puts(ge->map, unicode_str);
