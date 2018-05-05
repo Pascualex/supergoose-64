@@ -312,7 +312,7 @@ Game *game_create() {
     return game;
 }
 
-/*This function is used to create a new game (that already had memory allocated) from a the given fil (it works shoulder to shoulder with game_management.*/
+/*This function is used to create a new game (that already had memory allocated) from a the given file (it works shoulder to shoulder with game_management).*/
 STATUS game_create_from_file(Game *game, char *file_name) {
 
     if (game == NULL || file_name == NULL) return ERROR;
@@ -328,7 +328,7 @@ STATUS game_create_from_file(Game *game, char *file_name) {
     return OK;
 }
 
-/*The following function frees ALL the memory used by a game, so that we left nothing non-freed (we leave no prisioners*/
+/*The following function frees all of the memory used by a game*/
 STATUS game_destroy(Game *game) {
     int i = 0;
 
@@ -592,6 +592,13 @@ T_Command game_get_last_command(Game *game) {
     if (game == NULL) return NO_CMD;
 
     return game->last_cmd;
+}
+
+Object *game_get_object(Game *game, int index) {
+
+    if (game == NULL || game->objects == NULL || index < 0 || index >= game->objects_number) return NULL;
+
+    return game->objects[i];
 }
 
 /*This function returns the status of the last command used in the game*/
