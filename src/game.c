@@ -330,8 +330,6 @@ STATUS game_create_from_file(Game *game, char *file_name) {
     if (game->players[0] != NULL) game->last_text_description = space_get_basic_description(game_find(game, player_get_location(game->players[0])));
     if (game->last_text_description == NULL) return ERROR;
 
-    printf("%d - %d - %d - %d\n", game->spaces_number, game->players_number, game->objects_number, game->links_number);
-
     return OK;
 }
 

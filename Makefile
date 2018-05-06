@@ -57,7 +57,7 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 ./obj/game_loop.o: ./src/game_loop.c 
 	$(MAKE) -c ./src/game_loop.c -o ./obj/game_loop.o
 
-./obj/game_management.o: ./src/game_management.c ./include/game_management.h ./include/types.h 
+./obj/game_management.o: ./src/game_management.c ./include/game_management.h ./include/types.h ./include/graphic_descriptions.h
 	$(MAKE) -c ./src/game_management.c -o ./obj/game_management.o 
 
 ./obj/graphic_engine.o: ./src/graphic_engine.c ./include/graphic_engine.h ./include/types.h
@@ -123,7 +123,7 @@ run:
 	./SuperGoose_64 || true			#This is so that we ensure the makefile doesnt scream when exiting on the menu.
 
 valgrind:
-	valgrind -v -q --leak-check=full ./SuperGoose_64 ./datafiles/data.dat
+	valgrind -v -q --leak-check=full ./SuperGoose_64 || true
 
 clear:
 	rm SuperGoose_64* ./testfiles/* ./obj/*

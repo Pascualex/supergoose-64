@@ -98,7 +98,7 @@ STATUS space_del_object(Space *, Id object_id);
  * @param 		wchar_t with the new graphich description for the space.
  * @return		A STATUS which indicates whether the operation could be executed correctly.
  */
-STATUS space_set_graphic_description(Space *, wchar_t graphic_description[3][8]);
+STATUS space_set_graphic_description(Space *, wchar_t graphic_description[MAX_GDESC_R][MAX_GDESC_C]);
 
 /** 
  * @name 		space_set_basic_description
