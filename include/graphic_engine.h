@@ -62,16 +62,4 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game);
  */
 void graphic_engine_write_command(Graphic_engine *ge, char *str);
 
-/**
- * @name 		graphic_engine_write_command
- * @author 		Alejandro Pascual.
- * @version             3.0
- * @date		02-03-2018
- * @brief               It writes the last command and if it worked on the screen.
- * @param               Game* -> a game to get the objects from.
- * @param               Space* -> a space where we will 'extract' the objects to print.
- * @return		A wchar_t with the symbol of the object (its initial).
- */
-wchar_t *graphic_engine_get_objects_symbols(Game *, Space *);
-
 #endif

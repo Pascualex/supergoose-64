@@ -1,7 +1,7 @@
 #===================================HEADERS===================================#
 MAKE=gcc -g -Wall -pedantic -ansi -I./lib/ 
-OBJ= ./obj/command.o ./obj/die.o ./obj/game.o ./obj/game_loop.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o
-OBJGAME= ./obj/command.o ./obj/die.o ./obj/game.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o
+OBJ= ./obj/command.o ./obj/die.o ./obj/game.o ./obj/game_loop.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o ./obj/dialogue.o
+OBJGAME= ./obj/command.o ./obj/die.o ./obj/game.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o ./obj/dialogue.o
 NFD=-m64 -no-pie -s -lnfd `pkg-config --libs gtk+-3.0` -L/usr/lib64 -L./lib/ ./lib/libnfd.a
 
 #=====================================ALL=====================================#
@@ -48,6 +48,9 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 ./obj/command.o: ./src/command.c ./include/command.h ./include/types.h
 	$(MAKE) -c ./src/command.c -o ./obj/command.o
 
+./obj/dialogue.o: ./src/dialogue.c ./include/dialogue.h ./include/types.h
+	$(MAKE) -c ./src/dialogue.c -o ./obj/dialogue.o 
+
 ./obj/die.o: ./src/die.c ./include/die.h ./include/types.h
 	$(MAKE) -c ./src/die.c -o ./obj/die.o 
 
@@ -60,7 +63,7 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 ./obj/game_management.o: ./src/game_management.c ./include/game_management.h ./include/types.h ./include/graphic_descriptions.h
 	$(MAKE) -c ./src/game_management.c -o ./obj/game_management.o 
 
-./obj/graphic_engine.o: ./src/graphic_engine.c ./include/graphic_engine.h ./include/types.h
+./obj/graphic_engine.o: ./src/graphic_engine.c ./include/graphic_engine.h ./include/dialogue.h ./include/types.h
 	$(MAKE) -c ./src/graphic_engine.c -o ./obj/graphic_engine.o
 
 ./obj/menu.o: ./src/menu.c ./include/menu.h ./include/types.h

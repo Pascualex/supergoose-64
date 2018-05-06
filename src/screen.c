@@ -100,7 +100,7 @@ void screen_paint() {
 
     if (data != NULL || data_fg_color != NULL || data_bg_color != NULL) {
 
-        printf("\033[2J");
+        puts("\033[2J");
 
         for (i = 0; i < ROWS; i++) {
             for (j = 0; j < COLUMNS; j++) {

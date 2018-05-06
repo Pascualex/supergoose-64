@@ -1005,7 +1005,7 @@ STATUS game_callback_grasp(Game *game, char *string) {
     if (player_get_location(game->players[0]) == NO_ID || space_check_object((Space *) game_find(game, player_get_location(game->players[0])), object_get_id(object)) == FALSE || player_is_full(game->players[0]) == TRUE || player_get_location(game->players[0]) != object_get_location(object)) return ERROR;
     if (object_check_tag(object, MOVABLE) == FALSE) return UNMOVABLE;
 
-    return game_set_object_location(game, player_get_id(game->players[0]), object_get_id(object)) == ERROR;
+    return game_set_object_location(game, player_get_id(game->players[0]), object_get_id(object));
 }
 
 /*The next command is used when players drop their objects. It copies them to the space where they are and then destroys them from the players inventory*/
@@ -1024,7 +1024,6 @@ STATUS game_callback_drop(Game *game, char *string) {
     }
 
     if (player_get_location(game->players[0]) == NO_ID || space_is_full((Space *) game_find(game, player_get_location(game->players[0]))) == TRUE || player_is_empty(game->players[0]) == TRUE || player_check_object(game->players[0], object_get_id(object)) == FALSE) return ERROR;
-
     if (game_set_object_location(game, player_get_location(game->players[0]), object_get_id(object)) == ERROR) return ERROR;
 
     return OK;
@@ -1056,6 +1055,8 @@ STATUS game_callback_check(Game *game, char *string) {
 
     if (game == NULL || game->players == NULL || game->objects == NULL || string == NULL || atoi(string) < 0 || atoi(string) > ID_RANGE) return ERROR;
 
+    if (space_check_tag(game_find(game, player_get_location(game->players[0])), ILLUMINATED) == FALSE) return DARK; 
+    
     if (strcmp(string, "space") == 0 || strcmp(string, "s") == 0) {
         game->last_text_description = space_get_check_description(game_find(game, player_get_location(game->players[0])));
         if (game->last_text_description == NULL) return ERROR;
@@ -1070,8 +1071,7 @@ STATUS game_callback_check(Game *game, char *string) {
     }
 
 	if (player_check_object(game->players[0], object_get_id(object)) == FALSE) {
-		if (player_get_location(game->players[0]) != object_get_location(object)) return FAR;
-		if (space_check_tag(game_find(game, player_get_location(game->players[0])), ILLUMINATED) == FALSE) return DARK;		
+		if (player_get_location(game->players[0]) != object_get_location(object)) return FAR;		
 	}	
 
     game->last_text_description = object_get_check(object);

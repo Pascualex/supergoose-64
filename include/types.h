@@ -10,7 +10,10 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#define MAX_TDESC_C 75              /*!< Maximum columns of the text descriptions */
+#define MAX_DIA_C 84                /*!< Maximum columns of the text dialogue */
+#define MAX_DIA_R 8                 /*!< Maximum rows of the text dialogue */
+
+#define MAX_TDESC_C 84              /*!< Maximum columns of the text descriptions */
 #define MAX_TDESC_R 3               /*!< Maximum rows of the text descriptions */
 
 #define MAX_GDESC_C 21              /*!< Maximum columns of the graphic description field */
