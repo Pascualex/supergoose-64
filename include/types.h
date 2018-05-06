@@ -10,12 +10,13 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+
 #define SAFE_MODE 0                 /*!< Safe mode, to avoid possibly leaks of memmory: (1) ON or (0) OFF */
 
-#define MAX_DIA_C 84                /*!< Maximum columns of the text dialogue */
+#define MAX_DIA_C 85                /*!< Maximum columns of the text dialogue */
 #define MAX_DIA_R 8                 /*!< Maximum rows of the text dialogue */
 
-#define MAX_TDESC_C 84              /*!< Maximum columns of the text descriptions */
+#define MAX_TDESC_C 85              /*!< Maximum columns of the text descriptions */
 #define MAX_TDESC_R 3               /*!< Maximum rows of the text descriptions */
 
 #define MAX_GDESC_C 21              /*!< Maximum columns of the graphic description field */
@@ -27,7 +28,7 @@
 #define NO_ID -1                    /*!< Default Id used when there is no Id or something works as it shouldn't */
 #define NOT_FOUND -1                /*!< Used when a set doesnt found the given Id position */
 
-#define SET_MAX_IDS 5               /*!< Maximum number of Ids a set can store */
+#define SET_MAX_IDS 10               /*!< Maximum number of Ids a set can store */
 #define MAX_SPACES 100              /*!< Maximum number of spaces a game is prepared to store */
 #define MAX_PLAYERS 10              /*!< Maximum number of players a game is prepared to store */
 #define MAX_OBJECTS 10              /*!< Maximum number of objects a game is prepared to store */
@@ -66,7 +67,8 @@ typedef enum {
     OK,             /*!< If all worked correctly */
     DARK,           /*!< If the space is not illuminated */
     FAR,            /*!< If the object is not in the same room */
-    UNMOVABLE       /*!< If the object is not movable */
+    UNMOVABLE,      /*!< If the object is not movable */
+    CLOSED_LINK     /*!< If the link is closed */
 } STATUS;
 
 /**

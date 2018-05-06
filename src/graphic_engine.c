@@ -325,16 +325,21 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
     /* Paint the in the objects_in_room areas */
     screen_area_clear(graphic_engine->objects_in_room_1);
     screen_area_clear(graphic_engine->objects_in_room_2);
-    screen_area_clear(graphic_engine->objects_in_room_3);
-    swprintf(unicode_str, COLUMNS, L" Objects in this room:");
-    screen_area_puts(graphic_engine->objects_in_room_1, unicode_str);
-    for (i = 0; i < space_get_objects_number(space_act); i++) {        
-        swprintf(unicode_str, COLUMNS, L"-%-14S", object_get_name((Object *) game_find(game, space_get_object_id(space_act, i))));
-        if (i%2 == 0) {
-            screen_area_puts(graphic_engine->objects_in_room_2, unicode_str);
-        } else {
-            screen_area_puts(graphic_engine->objects_in_room_3, unicode_str);
-        }       
+    screen_area_clear(graphic_engine->objects_in_room_3);    
+    if (space_check_tag(space_act, ILLUMINATED) == TRUE) {
+        swprintf(unicode_str, COLUMNS, L" Objects in this room:");
+        screen_area_puts(graphic_engine->objects_in_room_1, unicode_str);
+        for (i = 0; i < space_get_objects_number(space_act); i++) {        
+            swprintf(unicode_str, COLUMNS, L"-%-14S", object_get_name((Object *) game_find(game, space_get_object_id(space_act, i))));
+            if (i%2 == 0) {
+                screen_area_puts(graphic_engine->objects_in_room_2, unicode_str);
+            } else {
+                screen_area_puts(graphic_engine->objects_in_room_3, unicode_str);
+            }       
+        }
+    } else {
+        swprintf(unicode_str, COLUMNS, L" You can't see objects in the dark.");
+        screen_area_puts(graphic_engine->objects_in_room_1, unicode_str);
     }
 
     /* Paint the in the inventory areas */
@@ -385,50 +390,6 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
     for (i = 0; i < MAX_DIA_R; i++) {        
         screen_area_puts(graphic_engine->chat, dialogue[i]);
     }
-    /*chat = game_get_last_text_description(game);
-    swprintf(unicode_str, COLUMNS, L" %S", space_get_name(space_act));
-	screen_area_puts(graphic_engine->chat, unicode_str);
-    switch (game_get_last_command(game)) {
-        case CHECK:
-            switch (game_get_status_last_command(game)) {
-                case ERROR:
-                    swprintf(unicode_str, COLUMNS, L" There was a problem with the check.");
-                    screen_area_puts(graphic_engine->chat, unicode_str);
-                    break;
-                case DARK:
-                    swprintf(unicode_str, COLUMNS, L" It's too dark to see more details.");
-                    screen_area_puts(graphic_engine->chat, unicode_str);
-                    break;
-                case FAR:
-                    swprintf(unicode_str, COLUMNS, L" The object is not in your inventory or space.");
-                    screen_area_puts(graphic_engine->chat, unicode_str);
-                    break;
-                default:                     
-                    for (i = 0; i < MAX_TDESC_R; i++) {
-                        swprintf(unicode_str, COLUMNS, L"%S", chat[i]);
-                        screen_area_puts(graphic_engine->chat, unicode_str);
-                    }
-            }
-            break;
-        case GRASP:
-            switch (game_get_status_last_command(game)) {
-                case UNMOVABLE:
-                    swprintf(unicode_str, COLUMNS, L" This object will not move any time soon.");
-                    screen_area_puts(graphic_engine->chat, unicode_str);
-                    break;
-                default:
-                    for (i = 0; i < MAX_TDESC_R; i++) {
-                        swprintf(unicode_str, COLUMNS, L"%S", chat[i]);
-                        screen_area_puts(graphic_engine->chat, unicode_str);
-                    }
-            }
-            break;
-        default:
-            for (i = 0; i < MAX_TDESC_R; i++) {
-                swprintf(unicode_str, COLUMNS, L"%S", chat[i]);
-                screen_area_puts(graphic_engine->chat, unicode_str);
-            }
-    }*/
 
     /* Dump to the terminal */
     screen_paint();

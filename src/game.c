@@ -36,7 +36,7 @@
 
 /*We declare the structure of the game: */
 struct _Game {
-    Space *spaces[MAX_SPACES+1];    /*We define the spaces array for the MAX_SPACES we want to have*/
+    Space *spaces[MAX_SPACES];      /*We define the spaces array for the MAX_SPACES we want to have*/
     Player *players[MAX_PLAYERS];   /*We define the players array, in case we want to handle more than one player in the future*/
     Object *objects[MAX_OBJECTS];   /*We define the objects array, to store all the objects of the game*/
     Die *dies[MAX_DIES];            /*We define the dies array to store all the dies we will be using*/
@@ -46,10 +46,9 @@ struct _Game {
     int players_number;             /*Used to store the real amount of players being stored in the game*/
     int objects_number;             /*Used to store the amount of objects the game has*/
     int dies_number;                /*Used to store the number of dies the game is using*/
-    wchar_t **last_text_description;   /*Used to store the last text description printed*/
+    wchar_t **last_text_description;/*Used to store the last text description printed*/
     STATUS status_last_cmd;         /*Used to store if the last command worked correctly or not*/
     T_Command last_cmd;             /*Used to store the last command used by the user for graphic engine purposes*/
-    int consec_error_num;           /*Used to know the number of consecutive errors made while playing.*/
     BOOL proMode;                   /*Used to know whether the command mode is on proMode or not.*/
 };
 
@@ -110,7 +109,7 @@ STATUS game_callback_left(Game *, char *);
  * @name        game_callback_following
  *
  * @author      Víctor Yrazusta edited by Eric Morales
- * @version     2.0 int consec_error_num;
+ * @version     2.0 
  * @date        27-02-2018
  * @description It allows the player to move to the right.
  * @input
@@ -368,7 +367,6 @@ Game *game_create() {
     die_roll((Die *) game_find(game, DIE_BASE_ID+game->dies_number));
     game->last_cmd = NO_CMD;
     game->status_last_cmd = ERROR;
-    game->consec_error_num = 0;
     return game;
 }
 
@@ -619,23 +617,10 @@ int game_get_dies_number(Game *game) {
 
 /*This function is used to update the command related game fields*/
 STATUS game_update(Game *game, Command *command) {
-    STATUS prev_cmd_status;
-    T_Command prev_cmd;
     if (game == NULL || command == NULL) return ERROR;
-
-    prev_cmd = game->last_cmd;
-    prev_cmd_status = game->status_last_cmd;
 
     game->last_cmd = command_get_command(command);
     game->status_last_cmd = (*game_callback_fn_list[command_get_command(command)])(game, command_get_info(command));
-
-    if (game->status_last_cmd == ERROR && prev_cmd_status == ERROR){
-      if (game->last_cmd == (UNKNOWN || prev_cmd)) game->consec_error_num++;
-    } else if (game->status_last_cmd == ERROR){
-      game->consec_error_num = 1;
-    } else {
-      game->consec_error_num = 0;
-    }
 
     return game->status_last_cmd;
 }
@@ -1008,7 +993,8 @@ STATUS game_callback_move(Game *game, char *string) {
     }
 
     link = (Link*) game_find(game, space_get_direction((Space *) game_find(game, player_get_location(player)), dir));
-    if (link_get_status(link) == CLOSED) return ERROR;
+    if (link == NULL) return ERROR;
+    if (link_get_status(link) == CLOSED) return CLOSED_LINK;
 
     space_id = link_get_other_side(link, player_get_location(player));
     if (space_id == NO_ID) return ERROR;
