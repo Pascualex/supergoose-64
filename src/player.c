@@ -154,7 +154,7 @@ int player_get_max_objects(Player *player) {
 }
 
 /*This function is used to get the object id of the specified position on the set of the inventory.*/
-Id player_get_object(Player *player, int position) {
+Id player_get_object_id(Player *player, int position) {
 
     if (player == NULL || player->inventory == NULL || position < 0) return NO_ID;
 

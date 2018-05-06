@@ -169,7 +169,7 @@ int player_get_objects_number(Player *);
 int player_get_max_objects(Player *);
 
 /**
- * @name 		player_get_object
+ * @name 		player_get_object_id
  * @author 		Alejandro Pascual
  * @version             1.0
  * @date		01-04-2018
@@ -178,7 +178,7 @@ int player_get_max_objects(Player *);
  * @param		int -> an integer that specifies the postion in the set.
  * @return		The Id, which could be NO_ID if the pointer passed as an argument is NULL, of the object in the specified position on the set.
  */
-Id player_get_object(Player *, int position);
+Id player_get_object_id(Player *, int position);
 
 /**
  * @name 		player_check_object

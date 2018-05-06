@@ -384,6 +384,7 @@ BOOL space_is_full(Space *space) {
     }
 }
 
+/*This function adds a variable number of tags to a space*/
 STATUS space_add_tags(Space *space, int num_tags, ...) {
     TAG space_tags[MAX_TAGS];
     va_list space_tags_list;
@@ -409,6 +410,7 @@ STATUS space_add_tags(Space *space, int num_tags, ...) {
     return OK;
 }
 
+/*This function checks if a space has a determinated tag*/
 BOOL space_check_tag(Space *space, TAG space_tag) {
     int i;
 
@@ -421,6 +423,7 @@ BOOL space_check_tag(Space *space, TAG space_tag) {
     return FALSE;
 }
 
+/*This function removes a variable number of tags from a space*/
 STATUS space_remove_tags(Space *space, int num_tags, ...) {
 	TAG space_tags[MAX_TAGS];
 	va_list space_tags_list;
@@ -450,6 +453,7 @@ STATUS space_remove_tags(Space *space, int num_tags, ...) {
 	return ERROR;
 }
 
+/*This function returns the tags of a space*/
 TAG *space_get_tags(Space *space) {
     
     if (space == NULL) return NULL;
@@ -457,6 +461,7 @@ TAG *space_get_tags(Space *space) {
     return space->space_tags;
 }
 
+/*This function returns the number of tags in a space*/
 int space_get_tags_number(Space *space) {
     
     if (space == NULL) return 0;

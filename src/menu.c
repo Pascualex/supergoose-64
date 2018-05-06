@@ -30,13 +30,13 @@ Menu *menu_create() {
     screen_init(BLACK);
     menu = (Menu *) malloc(sizeof (Menu));
 
-	menu->title =   screen_area_init(  2,  2, 77, 21, GREEN, BLACK, FALSE);
-    menu->new =     screen_area_init( 25, 27, 30,  1,  BLUE, BLACK,  TRUE);
-    menu->load =    screen_area_init( 25, 29, 30,  1,  BLUE, BLACK,  TRUE);
-    menu->guide =   screen_area_init( 25, 31, 30,  1,  BLUE, BLACK,  TRUE);
-    menu->terms =   screen_area_init( 25, 33, 30,  1,  BLUE, BLACK,  TRUE);
-    menu->options = screen_area_init( 25, 35, 30,  1,  BLUE, BLACK,  TRUE);
-    menu->exit =    screen_area_init( 25, 37, 30,  1,  BLUE, BLACK,  TRUE);
+	menu->title =   screen_area_init(25,  6, 78, 21, GREEN, BLACK, FALSE);
+    menu->new =     screen_area_init(49, 32, 30,  1,  BLUE, BLACK,  TRUE);
+    menu->load =    screen_area_init(49, 34, 30,  1,  BLUE, BLACK,  TRUE);
+    menu->guide =   screen_area_init(49, 36, 30,  1,  BLUE, BLACK,  TRUE);
+    menu->terms =   screen_area_init(49, 38, 30,  1,  BLUE, BLACK,  TRUE);
+    menu->options = screen_area_init(49, 40, 30,  1,  BLUE, BLACK,  TRUE);
+    menu->exit =    screen_area_init(49, 42, 30,  1,  BLUE, BLACK,  TRUE);
 
     return menu;
 }
@@ -105,33 +105,11 @@ void menu_paint(Menu *menu, int position) {
     screen_area_puts(menu->title, unicode_str);
     swprintf(unicode_str, COLUMNS, L"                           I II__I  I     XXXXXXX     I");
     screen_area_puts(menu->title, unicode_str);
-    swprintf(unicode_str, COLUMNS, L"                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    swprintf(unicode_str, COLUMNS, L"                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     screen_area_puts(menu->title, unicode_str);
 
-
-
-
-/*
-                                                 /\
-                                                /  \  /\
-                    ___________________      /\/    \/  \
-           /\      /\        ______    \    /   /\/\  /\/\
-          /  \    //_\       \    /\    \  /\/\/    \/    \
-   /\    / /\/\  //___\       \__/  \    \/
-  /  \  /\/    \//_____\       \ |[]|     \
- /\/\/\/       //_______\       \|__|      \
-/      \      /XXXXXXXXXX\                  \
-        \    /_I_II  I__I_\__________________\
-               I_I|  I__I_____[]_|_[]_____I
-               I_II  I__I_____[]_|_[]_____I
-               I II__I  I     XXXXXXX     I
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-*/
-
-	screen_color_box(24, 26, 32, 13, WHITE, BLACK);
-	screen_color_box(25, 27+position*2, 30, 1, YELLOW, BLACK);	
-
+    screen_color_box(48, 31, 32, 13, WHITE, BLACK);
+    screen_color_box(49, 32+position*2, 30, 1, YELLOW, BLACK);  
 	screen_area_clear(menu->new);
 	swprintf(unicode_str, COLUMNS, L"NEW GAME");
 	screen_area_puts(menu->new, unicode_str);

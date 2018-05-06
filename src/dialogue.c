@@ -7,61 +7,59 @@
  * @copyright GNU Public License
  */
 
+#undef __STRICT_ANSI__
+
 /*C libraries*/
 #include <stdio.h>
-#include <string.h>
-#include <strings.h>
+#include <wchar.h>
 #include <stdlib.h>
 
 /*Own libraries*/
 #include "../include/dialogue.h"
+#include "../include/space.h"
+#include "../include/command.h"
 
-/*We define the size of the arrays of chars we will be using.*/
-#define
+/*typedef enum {
+    NO_CMD = -1,    
+    UNKNOWN,       
+    EXIT,          
+    MOVE,         
+    FOLLOWING,    
+    LEFT,           
+    PREVIOUS,      
+    RIGHT,         
+    GRASP,          
+    DROP,         
+    THROW,        
+    CHECK,       
+    OPEN_L,         
+    TURN_ON,       
+    TURN_OFF,    
+    LOAD,          
+    SAVE,           
+    PROMODE        
+} T_Command;*/
 
-char* dialogue(Game *g){
-  T_Command cmd;
-  int ran, errs;
-  char str[MAX_DIA];
+void dialogue_generate(Game *game, wchar_t dialogue[MAX_DIA_R][MAX_DIA_C]) {
+    int current_row, i;
 
-  cmd = game->last_cmd;
-  errs = game->consec_error_num;
+    current_row = 0;
 
-  switch (cmd) {
-/*FEEDBACK MÁS SENCILLO*/
-    case NO_CMD:
-      return DIA_ERROR;
-    case UNKNOWN:
-      return DIA_UNKNOWN[errs][ran%MAX_DIA_UNKNOWN];
-    case EXIT:
-      return DIA_EXIT[errs][ran%MAX_DIA_EXIT];
-    case THROW:
-      return DIA_THROW[errs][ran%MAX_DIA_THROW];
-    case LOAD:
-      return DIA_LOAD[errs][ran%MAX_DIA_LOAD];
-    case SAVE:
-      return DIA_SAVE[errs][ran%MAX_DIA_SAVE];
-/*TIENEN UN FEEDBACK MAS COMPLETO QUE IMPLEMENTAR*/
-    case TURNON:
-      if (errs > 0) return DIA_TURNON[errs][ran%MAX_DIA_TURNON];
-      fprintf(str, "");
-    case TURNOFF:
-      if (errs > 0) return DIA_TURNOFF[errs][ran%MAX_DIA_TURNOFF];
-      fprintf(str, "");
-    case OPEN:
-      if (errs > 0) return DIA_OPEN[errs][ran%MAX_DIA_OPEN];
-      fprintf(str, "");
-    case CHECK:
-      if (errs > 0) return DIA_CHECK[errs][ran%MAX_DIA_CHECK];
-      fprintf(str, "");
-    case GRASP:
-      if (errs > 0) return DIA_GRASP[errs][ran%MAX_DIA_GRASP];
-      fprintf(str, "");
-    case DROP:
-      if (errs > 0) return DIA_DROP[errs][ran%MAX_DIA_DROP];
-      fprintf(str, "");
-/*FEEDBACK RELATIVO AL MOVIMIENTO*/
-    default:
-      return DIA_MOVE[errs][ran%MAX_DIA_MOVE];
-  }
+    switch (game_get_last_command(game)) {
+        case NO_CMD : 
+            swprintf(dialogue[current_row], MAX_DIA_C, L"Welcome to our game!");
+            current_row++;
+            break;
+        case MOVE :
+            swprintf(dialogue[current_row], MAX_DIA_C, L"You moved to %S successful",);
+        default :
+            swprintf(dialogue[current_row], MAX_DIA_C, L"That command doesn't exists!");
+            current_row++;
+    }
+    
+    for (i = current_row; i < MAX_DIA_R; i++) {
+        swprintf(dialogue[i], MAX_DIA_C, L" ");
+    }
+
+    return;
 }
