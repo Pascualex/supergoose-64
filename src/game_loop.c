@@ -106,6 +106,7 @@ int main(int argc, char *argv[]) {
     game_destroy(game);
 
     if (log) fclose(log);
+    system("killall make");
 
     return 0;
 }

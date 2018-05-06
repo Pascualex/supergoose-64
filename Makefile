@@ -124,8 +124,9 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 #=====================================UTILS=====================================#
 run:
 	chmod 777 run.sh
+	chmod 777 music.sh
 	gnome-terminal --window --full-screen --command=./run.sh
-	aplay -q gamemusic.wav
+	./music.sh
 valgrind:
 	valgrind -v -q --leak-check=full ./SuperGoose_64
 
