@@ -212,37 +212,92 @@ STATUS game_callback_open(Game *, char *);
 
 /* FUNCTION:
  *
- * @name 		game_callback_turnon
+ * @name        game_callback_turnon
  *
- * @author 		Eric Morales
- * @version 	1.0
- * @date		22-04-2018
+ * @author      Eric Morales
+ * @version     1.0
+ * @date        22-04-2018
  * @description It allows you to turn on an object
  * @input
- *				game:		A Game*, whose player will open the link.
+ *              game:       A Game*, where the player turn on an object.
  *              string:     A char*, which should contain object that is going to be turned on.
- * @output		A STATUS, which indicates whether the command was executed succesfully or not.
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_turnon(Game *game, char *string);
 
 /* FUNCTION:
  *
- * @name 		game_callback_turnon
+ * @name        game_callback_turnon
  *
- * @author 		Eric Morales
- * @version 	1.0
- * @date		22-04-2018
+ * @author      Eric Morales
+ * @version     1.0
+ * @date        22-04-2018
  * @description It allows you to turn off an object
  * @input
- *				game:		A Game*, whose player will open the link.
+ *              game:       A Game*, where the player turn on an object.
  *              string:     A char*, which should contain object that is going to be turned off.
- * @output		A STATUS, which indicates whether the command was executed succesfully or not.
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not.
  */
 STATUS game_callback_turnoff(Game *game, char *string);
 
+/* FUNCTION:
+ *
+ * @name        game_callback_load
+ *
+ * @author      Eric Morales
+ * @version     1.0
+ * @date        22-04-2018
+ * @description It allows you to load a new game.
+ * @input
+ *              game:       A Game*, whose is going to be loaded
+ *              string:     A char*, which should contain the name of the file that you are going to load.
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not.
+ */
 STATUS game_callback_load(Game *game, char *string);
+
+/* FUNCTION:
+ *
+ * @name        game_callback_promode
+ *
+ * @author      Eric Morales
+ * @version     1.0
+ * @date        22-04-2018
+ * @description It allows you to activate the ProMode.
+ * @input
+ *              game:       A Game*, where you are playing.
+ *              string:     A char*, nothing important.
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not.
+ */
 STATUS game_callback_save(Game *game, char *string);
+
+/* FUNCTION:
+ *
+ * @name        game_callback_promode
+ *
+ * @author      Eric Morales
+ * @version     1.0
+ * @date        22-04-2018
+ * @description It allows you to activate the ProMode.
+ * @input
+ *              game:       A Game*, where you are playing.
+ *              string:     A char*, nothing important.
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not.
+ */
 STATUS game_callback_promode(Game *game, char *string);
+
+/* FUNCTION:
+ *
+ * @name        game_callback_help
+ *
+ * @author      Eric Morales
+ * @version     1.0
+ * @date        22-04-2018
+ * @description It allows you to open a help guide with all the commands.
+ * @input
+ *              game:       A Game*, where you are playing.
+ *              string:     A char*, nothing important.
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not.
+ */
 STATUS game_callback_help(Game *game, char *string);
 
 /*We define the callback functions*/
@@ -896,7 +951,7 @@ STATUS game_menu(Game *game) {
 				system("man lib/termsofuse.1");      						
 				break;
             case 4:
-                printf("Aun no se que hacer aqui jaja");
+                system("google-chrome doc/html/index.html"); 
                 break;
 			case 5:
 				menu_destroy(menu);

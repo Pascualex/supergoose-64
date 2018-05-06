@@ -316,12 +316,19 @@ STATUS game_management_load(Game *game, char *filename){
 
     strcpy(aux, filename);
 
-    if (strcmp(aux, "NO_INFO") == 0) {
-        if (NFD_OpenDialog( NULL, "./save_games/", &outPath ) == NFD_OKAY) {
-            strcpy(aux, (char *) outPath);
-        }
-        else {
-            return ERROR;
+    if (SAFE_MODE) {
+        printf("You are using the Safe Mode, some features are disabled, we are loading the initial datafile.");
+        strcpy(aux, "./datafiles/data.dat");
+    } else {
+        if (strcmp(aux, "NO_INFO") == 0) {
+            if (NFD_OpenDialog( NULL, "./save_games/", &outPath ) == NFD_OKAY) {
+                strcpy(aux, (char *) outPath);
+                free(outPath);
+            }
+            else {
+                free(outPath);
+                return ERROR;
+            }
         }
     }
 

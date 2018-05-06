@@ -287,6 +287,15 @@ wchar_t *game_tag_to_str(TAG);
  */
 TAG game_str_to_tag(wchar_t *);
 
+/**
+ * @name 		game_menu
+ * @author 		Eric Morales
+ * @version             1.0
+ * @date		30-04-2018
+ * @brief               It open a menu and run the selected option.
+ * @param               Game* -> the game where you are playing.
+ * @return		A STATUS, which indicates whether the command was executed succesfully or not.
+ */
 STATUS game_menu(Game *game);
 
 #endif

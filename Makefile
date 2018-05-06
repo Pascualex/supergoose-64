@@ -123,10 +123,15 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 
 #=====================================UTILS=====================================#
 run:
-	./SuperGoose_64 || true			#This is so that we ensure the makefile doesnt scream when exiting on the menu.
-
+	chmod 777 run.sh
+	gnome-terminal --window --full-screen --command=./run.sh
+	aplay -q gamemusic.wav
 valgrind:
-	valgrind -v -q --leak-check=full ./SuperGoose_64 || true
+	valgrind -v -q --leak-check=full ./SuperGoose_64
+
+install:
+	sudo apt install gtk+-3.0
+	sudo apt install xdotool
 
 clear:
 	rm SuperGoose_64* ./testfiles/* ./obj/*

@@ -127,7 +127,7 @@ void menu_paint(Menu *menu, int position) {
 	screen_area_puts(menu->terms, unicode_str);
 
 	screen_area_clear(menu->options);
-	swprintf(unicode_str, COLUMNS, L"Options");
+	swprintf(unicode_str, COLUMNS, L"Documentation");
 	screen_area_puts(menu->options, unicode_str);
 
 	screen_area_clear(menu->exit);

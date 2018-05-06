@@ -51,7 +51,7 @@ void dialogue_generate(Game *game, wchar_t dialogue[MAX_DIA_R][MAX_DIA_C]) {
             current_row++;
             break;
         case MOVE :
-            swprintf(dialogue[current_row], MAX_DIA_C, L"You moved to %S successful",);
+            swprintf(dialogue[current_row], MAX_DIA_C, L"You moved successful");
         default :
             swprintf(dialogue[current_row], MAX_DIA_C, L"That command doesn't exists!");
             current_row++;
