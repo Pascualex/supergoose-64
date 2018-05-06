@@ -44,36 +44,36 @@ STATUS object_destroy(Object *);
  * @author 		Eric Morales
  * @version             1.0
  * @date		26-03-2018
- * @brief               It changes the check of the passed object to the passed char**.
+ * @brief               It changes the check of the passed object to the passed wchar_t**.
  * @param               Object* -> which must point towards the object that wants to be renamed.
- * @param               char -> a string with the new check for the object.
+ * @param               wchar_t -> a string with the new check for the object.
  * @return		An STATUS, which could be "ERROR" if one of the passed pointers is NULL or if the rename fails, or "OK" otherwise.
  */
-STATUS object_set_check(Object *, char check[MAX_TDESC_R][MAX_TDESC_C]);
+STATUS object_set_check(Object *, wchar_t check[MAX_TDESC_R][MAX_TDESC_C]);
 
 /**
  * @name 		object_set_alt_check
  * @author 		Victor Yrazusta
  * @version             1.0
  * @date		17-04-2018
- * @brief               It changes the alternative check of the passed object to the passed char**.
+ * @brief               It changes the alternative check of the passed object to the passed wchar_t**.
  * @param               Object* -> which must point towards the object that wants to be renamed.
- * @param               char -> a string with the new alternative check for the object.
+ * @param               wchar_t -> a string with the new alternative check for the object.
  * @return		An STATUS, which could be "ERROR" if one of the passed pointers is NULL or if the rename fails, or "OK" otherwise.
  */
-STATUS object_set_alt_check(Object *, char check[MAX_TDESC_R][MAX_TDESC_C]);
+STATUS object_set_alt_check(Object *, wchar_t check[MAX_TDESC_R][MAX_TDESC_C]);
 
 /**
  * @name 		object_set_name
  * @author 		Alejandro Pascual
  * @version             1.0
  * @date		19-02-2018
- * @brief               It changes the name of the passed object to the passed char*.
+ * @brief               It changes the name of the passed object to the passed wchar_t*.
  * @param               Object* -> which must point towards the object that wants to be renamed.
- * @param               char -> a string with the new name for the object.
+ * @param               wchar_t -> a string with the new name for the object.
  * @return		An STATUS, which could be "ERROR" if one of the passed pointers is NULL or if the rename fails, or "OK" otherwise.
  */
-STATUS object_set_name(Object *, char *name);
+STATUS object_set_name(Object *, wchar_t *name);
 
 /**
  * @name 		object_set_location
@@ -94,9 +94,9 @@ STATUS object_set_location(Object *, Id location);
  * @date		19-02-2018
  * @brief               It returns the name of the object passed as an argument.
  * @param               Object* -> an object whose name will be returned.
- * @return		A const char*, which could be NULL if the pointer passed as an argument is NULL, or the object's name otherwise.
+ * @return		A const wchar_t*, which could be NULL if the pointer passed as an argument is NULL, or the object's name otherwise.
  */
-const char *object_get_name(Object *);
+const wchar_t *object_get_name(Object *);
 
 /**
  * @name 		object_get_check
@@ -105,9 +105,9 @@ const char *object_get_name(Object *);
  * @date		26-03-2018
  * @brief               It returns the check of the object passed as an argument.
  * @param               Object* -> an object whose check will be returned.
- * @return		A char**, which could be NULL if the pointer passed as an argument is NULL, or the object's check otherwise.
+ * @return		A wchar_t**, which could be NULL if the pointer passed as an argument is NULL, or the object's check otherwise.
  */
-char **object_get_check(Object *);
+wchar_t **object_get_check(Object *);
 
 /**
  * @name 		object_get_alt_check
@@ -116,9 +116,9 @@ char **object_get_check(Object *);
  * @date		17-04-2018
  * @brief               It returns the alternative check of the object passed as an argument.
  * @param               Object* -> an object whose alternative check will be returned.
- * @return		A char**, which could be NULL if the pointer passed as an argument is NULL, or the object's alternative check otherwise.
+ * @return		A wchar_t**, which could be NULL if the pointer passed as an argument is NULL, or the object's alternative check otherwise.
  */
-char **object_get_alt_check(Object *);
+wchar_t **object_get_alt_check(Object *);
 
 /**
  * @name 		object_get_id
@@ -127,7 +127,7 @@ char **object_get_alt_check(Object *);
  * @date		19-02-2018
  * @brief               It returns the id of the object passed as an argument.
  * @param               Object* -> an object whose id will be returned.
- * @return		A const char*, which could be NO_ID if the pointer passed as an argument is NULL, or the object's id otherwise.
+ * @return		A const wchar_t*, which could be NO_ID if the pointer passed as an argument is NULL, or the object's id otherwise.
  */
 Id object_get_id(Object *);
 

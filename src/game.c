@@ -8,11 +8,14 @@
  * @copyright GNU Public License
  */
 
+#undef __STRICT_ANSI__
+
 /*C libraries*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
+#include <wchar.h>
 /*Own libraries*/
 #include "../include/game.h"
 #include "../include/game_management.h"
@@ -43,7 +46,7 @@ struct _Game {
     int players_number;             /*Used to store the real amount of players being stored in the game*/
     int objects_number;             /*Used to store the amount of objects the game has*/
     int dies_number;                /*Used to store the number of dies the game is using*/
-    char **last_text_description;   /*Used to store the last text description printed*/
+    wchar_t **last_text_description;   /*Used to store the last text description printed*/
     STATUS status_last_cmd;         /*Used to store if the last command worked correctly or not*/
     T_Command last_cmd;             /*Used to store the last command used by the user for graphic engine purposes*/
     int consec_error_num;           /*Used to know the number of consecutive errors made while playing.*/
@@ -312,7 +315,7 @@ Game *game_create() {
     return game;
 }
 
-/*This function is used to create a new game (that already had memory allocated) from a the given file (it works shoulder to shoulder with game_management).*/
+/*This function is used to create a new game (that already had memory allocated) from a the given fil (it works shoulder to shoulder with game_management.*/
 STATUS game_create_from_file(Game *game, char *file_name) {
 
     if (game == NULL || file_name == NULL) return ERROR;
@@ -325,10 +328,12 @@ STATUS game_create_from_file(Game *game, char *file_name) {
     if (game->players[0] != NULL) game->last_text_description = space_get_basic_description(game_find(game, player_get_location(game->players[0])));
     if (game->last_text_description == NULL) return ERROR;
 
+    printf("%d - %d - %d - %d\n", game->spaces_number, game->players_number, game->objects_number, game->links_number);
+
     return OK;
 }
 
-/*The following function frees all of the memory used by a game*/
+/*The following function frees ALL the memory used by a game, so that we left nothing non-freed (we leave no prisioners*/
 STATUS game_destroy(Game *game) {
     int i = 0;
 
@@ -594,13 +599,6 @@ T_Command game_get_last_command(Game *game) {
     return game->last_cmd;
 }
 
-Object *game_get_object(Game *game, int index) {
-
-    if (game == NULL || game->objects == NULL || index < 0 || index >= game->objects_number) return NULL;
-
-    return game->objects[i];
-}
-
 /*This function returns the status of the last command used in the game*/
 STATUS game_get_status_last_command(Game* game) {
 
@@ -610,7 +608,7 @@ STATUS game_get_status_last_command(Game* game) {
 }
 
 void game_print_data(FILE *f, Game *game) {
-    int i = 0;
+    /*int i = 0;
 
     if (game == NULL) return;
 
@@ -628,7 +626,7 @@ void game_print_data(FILE *f, Game *game) {
     fprintf(f, "\n");
     for (i = 0; i < game->players_number; i++) {
         player_print(f, game->players[i]);
-    }
+    }*/
 }
 
 /*This function checks if the game is over or not. By the moment, its always false (unless it receives wrong arguments) as there are no losing conditions*/
@@ -692,12 +690,17 @@ void *game_find(Game *game, Id id) {
 void *game_find_name(Game *game, char *name) {
     int i;
     void *entity = NULL;
+    wchar_t unicode_name[WORD_SIZE];
 
-    if (game == NULL || name == NULL || strcmp(name, "NO_INFO") == 0) return NULL;
+    if (game == NULL || name == NULL) return NULL;
+
+    swprintf(unicode_name, WORD_SIZE, L"%s", name);
+
+    if (wcscmp(unicode_name, L"NO_INFO") == 0) return NULL;
 
     if (game->spaces) {
         for (i = 0; i < game->spaces_number; i++) {
-            if (strcasecmp(space_get_name(game->spaces[i]), name) == 0) {
+            if (wcscasecmp(space_get_name(game->spaces[i]), unicode_name) == 0) {
                 entity = game->spaces[i];
             }
         }
@@ -705,7 +708,7 @@ void *game_find_name(Game *game, char *name) {
 
     if (game->players) {
         for (i = 0; i < game->players_number; i++) {
-            if (strcasecmp(player_get_name(game->players[i]), name) == 0) {
+            if (wcscasecmp(player_get_name(game->players[i]), unicode_name) == 0) {
                 if (entity != NULL) {
                     return NULL;
                 }
@@ -716,7 +719,7 @@ void *game_find_name(Game *game, char *name) {
 
     if (game->objects) {
         for (i = 0; i < game->objects_number; i++) {
-            if (strcasecmp(object_get_name(game->objects[i]), name) == 0) {
+            if (wcscasecmp(object_get_name(game->objects[i]), unicode_name) == 0) {
                 if (entity != NULL) {
                     return NULL;
                 }
@@ -727,7 +730,7 @@ void *game_find_name(Game *game, char *name) {
 
     if (game->links) {
         for (i = 0; i < game->links_number; i++) {
-            if (strcasecmp(link_get_name(game->links[i]), name) == 0) {
+            if (wcscasecmp(link_get_name(game->links[i]), unicode_name) == 0) {
                 if (entity != NULL) {
                     return NULL;
                 }
@@ -740,7 +743,7 @@ void *game_find_name(Game *game, char *name) {
 }
 
 /*This function returns the last text description for the graphic engine*/
-char **game_get_last_text_description(Game* game) {
+wchar_t **game_get_last_text_description(Game* game) {
 
     if (game == NULL) return NULL;
 
@@ -766,57 +769,57 @@ Link *game_get_connection(Game *game, Space *origin, Space *destination) {
 }
 
 /*This function is used to pass from tag to string*/
-char *game_tag_to_str(TAG tag) {
-    char *name;
+wchar_t *game_tag_to_str(TAG tag) {
+    wchar_t *name;
 
-    name = (char *) malloc(WORD_SIZE*sizeof(char));
+    name = (wchar_t *) malloc(WORD_SIZE*sizeof(wchar_t));
 
     if (tag == NO_TAG) {
-        strcpy(name, "NO_TAG");
+        wcscpy(name, L"NO_TAG");
         return name;
     }
     if (tag == MOVABLE) {
-        strcpy(name, "MOVABLE");
+        wcscpy(name, L"MOVABLE");
         return name;
     }
     if (tag == MOVED) {
-        strcpy(name, "MOVED");
+        wcscpy(name, L"MOVED");
         return name;
     }
     if (tag == HIDDEN) {
-        strcpy(name, "HIDDEN");
+        wcscpy(name, L"HIDDEN");
         return name;
     }
     if (tag == CAN_GLOW) {
-        strcpy(name, "CAN_GLOW");
+        wcscpy(name, L"CAN_GLOW");
         return name;
     }
     if (tag == GLOWING) {
-        strcpy(name, "GLOWING");
+        wcscpy(name, L"GLOWING");
         return name;
     }
     if (tag == IS_KEY) {
-        strcpy(name, "IS_KEY");
+        wcscpy(name, L"IS_KEY");
         return name;
     }
     if (tag == IS_CROWBAR) {
-        strcpy(name, "IS_CROWBAR");
+        wcscpy(name, L"IS_CROWBAR");
         return name;
     }
     if (tag == IS_BASE_ID_CARD) {
-        strcpy(name, "IS_BASE_ID_CARD");
+        wcscpy(name, L"IS_BASE_ID_CARD");
         return name;
     }
     if (tag == IS_FULL_ID_CARD) {
-        strcpy(name, "IS_FULL_ID_CARD");
+        wcscpy(name, L"IS_FULL_ID_CARD");
         return name;
     }
     if (tag == ILLUMINATED) {
-        strcpy(name, "ILLUMINATED");
+        wcscpy(name, L"ILLUMINATED");
         return name;
     }
     if (tag == FINAL_ROOM) {
-        strcpy(name, "FINAL_ROOM");
+        wcscpy(name, L"FINAL_ROOM");
         return name;
     }
 
@@ -824,28 +827,27 @@ char *game_tag_to_str(TAG tag) {
 }
 
 /*This function is used to pass from string to tag*/
-TAG game_str_to_tag(char *name) {
+TAG game_str_to_tag(wchar_t *name) {
 
     if (name == NULL) return NO_TAG;
 
-    if (!strcmp(name, "NO_TAG"))          return NO_TAG;
-    if (!strcmp(name, "MOVABLE"))         return MOVABLE;
-    if (!strcmp(name, "MOVED"))           return MOVED;
-    if (!strcmp(name, "HIDDEN"))          return HIDDEN;
-    if (!strcmp(name, "CAN_GLOW"))        return CAN_GLOW;
-    if (!strcmp(name, "GLOWING"))         return GLOWING;
-    if (!strcmp(name, "IS_KEY"))          return IS_KEY;
-    if (!strcmp(name, "IS_CROWBAR"))      return IS_CROWBAR;
-    if (!strcmp(name, "IS_BASE_ID_CARD")) return IS_BASE_ID_CARD;
-    if (!strcmp(name, "IS_FULL_ID_CARD")) return IS_FULL_ID_CARD;
-    if (!strcmp(name, "ILLUMINATED"))     return ILLUMINATED;
-    if (!strcmp(name, "FINAL_ROOM"))      return FINAL_ROOM;
+    if (!wcscmp(name, L"NO_TAG"))          return NO_TAG;
+    if (!wcscmp(name, L"MOVABLE"))         return MOVABLE;
+    if (!wcscmp(name, L"MOVED"))           return MOVED;
+    if (!wcscmp(name, L"HIDDEN"))          return HIDDEN;
+    if (!wcscmp(name, L"CAN_GLOW"))        return CAN_GLOW;
+    if (!wcscmp(name, L"GLOWING"))         return GLOWING;
+    if (!wcscmp(name, L"IS_KEY"))          return IS_KEY;
+    if (!wcscmp(name, L"IS_CROWBAR"))      return IS_CROWBAR;
+    if (!wcscmp(name, L"IS_BASE_ID_CARD")) return IS_BASE_ID_CARD;
+    if (!wcscmp(name, L"IS_FULL_ID_CARD")) return IS_FULL_ID_CARD;
+    if (!wcscmp(name, L"ILLUMINATED"))     return ILLUMINATED;
+    if (!wcscmp(name, L"FINAL_ROOM"))      return FINAL_ROOM;
 
     return NO_TAG;
 }
 
-/*The following funciton displays and implements the menu*/
-
+/*The following function displays and implements the menu*/
 STATUS game_menu(Game *game) {
 	Menu *menu = NULL;
 	char input;
@@ -905,8 +907,6 @@ STATUS game_menu(Game *game) {
 	menu_destroy(menu);
 	return OK;
 }
-
-
 
 /*Callbacks implementation for each command/action*/
 
@@ -1054,7 +1054,7 @@ STATUS game_callback_roll(Game *game, char * string) {
 
 /*This action is used to see the description of a space or an object*/
 STATUS game_callback_check(Game *game, char *string) {
-    Object* object;
+    Object *object;
 
     if (game == NULL || game->players == NULL || game->objects == NULL || string == NULL || atoi(string) < 0 || atoi(string) > ID_RANGE) return ERROR;
 
@@ -1107,8 +1107,6 @@ STATUS game_callback_open(Game *game, char *string) {
         if (link == NULL) return ERROR;
     }
 
-
-
 	if (object_check_tag(obj, link_get_opener(link)) == FALSE) {
 		return ERROR;
 	}
@@ -1124,7 +1122,7 @@ STATUS game_callback_open(Game *game, char *string) {
 
 /*This action is used to turn on an object*/
 STATUS game_callback_turnon(Game *game, char *string) {
-    Object* object;
+    Object *object;
 
     if (game == NULL || game->players == NULL || game->objects == NULL || string == NULL || atoi(string) < 0 || atoi(string) > ID_RANGE) return ERROR;
 
@@ -1148,7 +1146,7 @@ STATUS game_callback_turnon(Game *game, char *string) {
 
 /*This action is used to turn off an object*/
 STATUS game_callback_turnoff(Game *game, char *string) {
-    Object* object;
+    Object *object;
 
     if (game == NULL || game->players == NULL || game->objects == NULL || string == NULL || atoi(string) < 0 || atoi(string) > ID_RANGE) return ERROR;
 
@@ -1167,14 +1165,17 @@ STATUS game_callback_turnoff(Game *game, char *string) {
 }
 
 STATUS game_callback_load(Game *game, char *string) {
+
 	return game_management_load(game, string);
 }
 
 STATUS game_callback_save(Game *game, char *string){
+
     return game_management_save(game, string);
 }
 
 STATUS game_callback_promode(Game *game, char *string){
+
     if (game == NULL) return ERROR;
     
     if (game->proMode == FALSE){

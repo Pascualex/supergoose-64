@@ -8,10 +8,12 @@
  * @copyright GNU Public License
  */
 
+#undef __STRICT_ANSI__
+
 /*C libraries*/
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <wchar.h>
 /*Own libraries*/
 #include "../include/link.h"
 #include "../include/game.h"
@@ -19,7 +21,7 @@
 /*We define the Link structure with the different fields it will need*/
 struct _Link {
     Id id; /*An Id with to distinguish this link from the others*/
-    char name[MAX_NAME]; /*A string with the name of the Link*/
+    wchar_t name[MAX_NAME]; /*An unicode string with the name of the Link*/
     Id space1, space2; /*Two Ids storing the Ids of the linked spaces*/
     LINK_STATUS status; /*The Link status, which will tell us if a link is closed or not*/
     TAG opener;
@@ -54,11 +56,11 @@ STATUS link_destroy(Link *link) {
 }
 
 /*This function sets the name of a link*/
-STATUS link_set_name(Link *link, char name[MAX_NAME]) {
+STATUS link_set_name(Link *link, wchar_t name[MAX_NAME]) {
 
     if (link == NULL || name == NULL) return ERROR;
 
-    strcpy(link->name, name);
+    wcscpy(link->name, name);
 
     return OK;
 }
@@ -107,7 +109,7 @@ Id link_get_id(Link *link) {
 }
 
 /*This function is used to get the name of a link*/
-char *link_get_name(Link *link) {
+wchar_t *link_get_name(Link *link) {
 
     if (link == NULL) return NULL;
 
@@ -140,26 +142,26 @@ TAG link_get_opener(Link *link) {
     return link->opener;
 }
 
-STATUS link_print(FILE *f, Link *link) {
+/*STATUS link_print(FILE *f, Link *link) {
 
     if (link == NULL) return ERROR;
 
-    fprintf(f, "#l:%04ld|%-8s|", link->id - LINK_BASE_ID, link->name);
+    fwprintf(f, L"#l:%04ld|%-8s|", link->id - LINK_BASE_ID, link->name);
 
     if (link->space1 == NO_ID) {
-        fprintf(f, "%04ld|", link->space1);
+        fwprintf(f, L"%04ld|", link->space1);
     } else {
-        fprintf(f, "%04ld|", link->space1 - SPACE_BASE_ID);
+        fwprintf(f, L"%04ld|", link->space1 - SPACE_BASE_ID);
     }
 
     if (link->space2 == NO_ID) {
-        fprintf(f, "%04ld|", link->space2);
+        fwprintf(f, L"%04ld|", link->space2);
     } else {
-        fprintf(f, "%04ld|", link->space2 - SPACE_BASE_ID);
+        fwprintf(f, L"%04ld|", link->space2 - SPACE_BASE_ID);
     }
 
-    fprintf(f, "%d|", link->status);
-    fprintf(f, "%s|\n", game_tag_to_str(link->opener));
+    fwprintf(f, L"%d|", link->status);
+    fwprintf(f, L"%s|\n", game_tag_to_str(link->opener));
 
     return OK;
-}
+}*/

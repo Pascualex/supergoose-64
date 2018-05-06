@@ -8,10 +8,12 @@
  * @copyright GNU Public License
  */
 
+#undef __STRICT_ANSI__
+
 /*C libraries*/
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <wchar.h>
 #include <stdarg.h>
 /*Own libraries*/
 #include "../include/types.h"
@@ -21,12 +23,12 @@
 /*We define the Space structure as the following:*/
 struct _Space {
     Id id; /*An Id to distinguish the space from other spaces or things*/
-    char name[WORD_SIZE + 1]; /*A char used to name the space*/
+    wchar_t name[WORD_SIZE]; /*A wchar_t used to name the space*/
     Id directions_ids[6];
     Set *objects_ids; /*A set to store the objects it has*/
-    char **graphic_description; /*A graphic description to use in the graphic engine*/
-    char **basic_description; /*A field to store the basic information of the space.*/
-    char **check_description; /*A field to store the information of the space and give it when asked playing.*/
+    wchar_t **graphic_description; /*A graphic description to use in the graphic engine*/
+    wchar_t **basic_description; /*A field to store the basic information of the space.*/
+    wchar_t **check_description; /*A field to store the information of the space and give it when asked playing.*/
     TAG space_tags[MAX_TAGS]; /*An array of tags that define the propierties of the space*/
     int num_tags; /*A number that indicates the number of tags*/
 };
@@ -50,9 +52,9 @@ Space *space_create(Id id) {
         return NULL;
     }
 
-    space->graphic_description = (char **) malloc(sizeof(char*)*MAX_GDESC_R);
+    space->graphic_description = (wchar_t **) malloc(sizeof(wchar_t *)*MAX_GDESC_R);
     for (i = 0; i < MAX_GDESC_R; i++) {
-        space->graphic_description[i] = (char *) malloc(sizeof(char)*MAX_GDESC_C);
+        space->graphic_description[i] = (wchar_t *) malloc(sizeof(wchar_t)*MAX_GDESC_C);
         if (space->graphic_description[i] == NULL) {
             for (i = i - 1; i >= 0; i--) {
                 free(space->graphic_description[i]);
@@ -64,9 +66,9 @@ Space *space_create(Id id) {
         }
     }
 
-    space->basic_description = (char **) malloc(sizeof(char*)*MAX_TDESC_R);
+    space->basic_description = (wchar_t **) malloc(sizeof(wchar_t*)*MAX_TDESC_R);
     for (i = 0; i < MAX_TDESC_R; i++) {
-        space->basic_description[i] = (char *) malloc(sizeof(char)*MAX_TDESC_C);
+        space->basic_description[i] = (wchar_t *) malloc(sizeof(wchar_t)*MAX_TDESC_C);
         if (space->basic_description[i] == NULL) {
             for (i = i - 1; i >= 0; i--) {
                 free(space->basic_description[i]);
@@ -82,9 +84,9 @@ Space *space_create(Id id) {
         }
     }
 
-    space->check_description = (char **) malloc(sizeof(char*)*MAX_TDESC_R);
+    space->check_description = (wchar_t **) malloc(sizeof(wchar_t*)*MAX_TDESC_R);
     for (i = 0; i < MAX_TDESC_R; i++) {
-        space->check_description[i] = (char *) malloc(sizeof(char)*MAX_TDESC_C);
+        space->check_description[i] = (wchar_t *) malloc(sizeof(wchar_t)*MAX_TDESC_C);
         if (space->check_description[i] == NULL) {
             for (i = i - 1; i >= 0; i--) {
                 free(space->check_description[i]);
@@ -108,17 +110,17 @@ Space *space_create(Id id) {
 
     for (direction = NORTH; direction <= BELOW; direction++) space->directions_ids[direction] = NO_ID;
 
-    strcpy(space->graphic_description[0], "NO_GDES");
-    strcpy(space->graphic_description[1], "NO_GDES");
-    strcpy(space->graphic_description[2], "NO_GDES");
+    wcscpy(space->graphic_description[0], L"NO_GDES");
+    wcscpy(space->graphic_description[1], L"NO_GDES");
+    wcscpy(space->graphic_description[2], L"NO_GDES");
 
-    strcpy(space->basic_description[0], "No basic description.");
-    strcpy(space->basic_description[1], "No basic description.");
-    strcpy(space->basic_description[2], "No basic description.");
+    wcscpy(space->basic_description[0], L"No basic description.");
+    wcscpy(space->basic_description[1], L"No basic description.");
+    wcscpy(space->basic_description[2], L"No basic description.");
 
-    strcpy(space->check_description[0], "No check description.");
-    strcpy(space->check_description[1], "No check description.");
-    strcpy(space->check_description[2], "No check description.");
+    wcscpy(space->check_description[0], L"No check description.");
+    wcscpy(space->check_description[1], L"No check description.");
+    wcscpy(space->check_description[2], L"No check description.");
 
     space->num_tags = 0;
 
@@ -164,11 +166,11 @@ STATUS space_destroy(Space *space) {
 }
 
 /*This function sets the space name*/
-STATUS space_set_name(Space *space, char *name) {
+STATUS space_set_name(Space *space, wchar_t *name) {
 
     if (space == NULL || name == NULL) return ERROR;
 
-    if (strcpy(space->name, name) == 0) return ERROR;
+    if (wcscpy(space->name, name) == 0) return ERROR;
 
     return OK;
 }
@@ -205,38 +207,38 @@ STATUS space_set_direction(Space *space, DIRECTION direction, Id id) {
 }
 
 /*This function sets the graphic description of the space, to use it on the graphic engine*/
-STATUS space_set_graphic_description(Space *space, char graphic_description[MAX_GDESC_R][MAX_GDESC_C]) {
+STATUS space_set_graphic_description(Space *space, wchar_t graphic_description[MAX_GDESC_R][MAX_GDESC_C]) {
 
     if (space == NULL || graphic_description == NULL) return ERROR;
 
-    strcpy(space->graphic_description[0], graphic_description[0]);
-    strcpy(space->graphic_description[1], graphic_description[1]);
-    strcpy(space->graphic_description[2], graphic_description[2]);
+    wcscpy(space->graphic_description[0], graphic_description[0]);
+    wcscpy(space->graphic_description[1], graphic_description[1]);
+    wcscpy(space->graphic_description[2], graphic_description[2]);
 
     return OK;
 }
 
 /*This function sets the basic description of the space, to use it on the graphic engine*/
-STATUS space_set_basic_description(Space *space, char basic_description[MAX_TDESC_R][MAX_TDESC_C]) {
+STATUS space_set_basic_description(Space *space, wchar_t basic_description[MAX_TDESC_R][MAX_TDESC_C]) {
     int i;
 
     if (space == NULL || basic_description == NULL) return ERROR;
 
     for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(space->basic_description[i], basic_description[i]);
+        wcscpy(space->basic_description[i], basic_description[i]);
     }
 
     return OK;
 }
 
 /*This function sets the check description of the space, to use it on the graphic engine*/
-STATUS space_set_check_description(Space *space, char check_description[MAX_TDESC_R][MAX_TDESC_C]) {
+STATUS space_set_check_description(Space *space, wchar_t check_description[MAX_TDESC_R][MAX_TDESC_C]) {
     int i;
 
     if (space == NULL || check_description == NULL) return ERROR;
 
     for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(space->check_description[i], check_description[i]);
+        wcscpy(space->check_description[i], check_description[i]);
     }
 
     return OK;
@@ -259,7 +261,7 @@ STATUS space_del_object(Space *space, Id object_id) {
 }
 
 /*This function returns the name of a space*/
-const char *space_get_name(Space *space) {
+const wchar_t *space_get_name(Space *space) {
 
     if (space == NULL) return NULL;
 
@@ -267,7 +269,7 @@ const char *space_get_name(Space *space) {
 }
 
 /*This function is used to get the graphic description of a set to use it in the graphic engine later*/
-char **space_get_graphic_description(Space *space) {
+wchar_t **space_get_graphic_description(Space *space) {
 
     if (space == NULL) return NULL;
 
@@ -275,7 +277,7 @@ char **space_get_graphic_description(Space *space) {
 }
 
 /*This function gets the basic description of a space*/
-char **space_get_basic_description(Space *space) {
+wchar_t **space_get_basic_description(Space *space) {
 
     if (space == NULL) return NULL;
 
@@ -283,7 +285,7 @@ char **space_get_basic_description(Space *space) {
 }
 
 /*This function gets the check description of a space*/
-char **space_get_check_description(Space *space) {
+wchar_t **space_get_check_description(Space *space) {
 
     if (space == NULL) return NULL;
 
@@ -461,7 +463,7 @@ int space_get_tags_number(Space *space) {
     return space->num_tags;
 }
 
-STATUS space_print(FILE *f, Space *space) {
+/*STATUS space_print(FILE *f, Space *space) {
     TAG *space_tags = NULL;
     int num_tags, i;
 
@@ -472,32 +474,24 @@ STATUS space_print(FILE *f, Space *space) {
 
     num_tags = space_get_tags_number(space);
 
-    fprintf(f, "#s:%04ld|%-8s|",    space->id - SPACE_BASE_ID, space->name);
+    fwprintf(f, L"#s:%04ld|%-8s|",    space->id - SPACE_BASE_ID, space->name);
 
     for (i = 0; i < 6; i++) {
         if (space_get_direction(space, i) != NO_ID) {
-            fprintf(f, "%02ld|", space_get_direction(space, i) - LINK_BASE_ID);
+            fwprintf(f, L"%02ld|", space_get_direction(space, i) - LINK_BASE_ID);
         } else {
-            fprintf(f, "%02ld|", space_get_direction(space, i));
+            fwprintf(f, L"%02ld|", space_get_direction(space, i));
         }
     }
 
-    fprintf(f, "%s|%s|%s|%s|%s|%s|%s|%s|%s|",   space->graphic_description[0],
-                                                space->graphic_description[1],
-                                                space->graphic_description[2],
-                                                space->basic_description[0],
-                                                space->basic_description[1],
-                                                space->basic_description[2],
-                                                space->check_description[0],
-                                                space->check_description[1],
-                                                space->check_description[2]);
+    fwprintf(f, L"%s|%s|%s|%s|%s|%s|%s|%s|%s|", space->graphic_description[0], space->graphic_description[1], space->graphic_description[2], space->basic_description[0], space->basic_description[1], space->basic_description[2], space->check_description[0], space->check_description[1], space->check_description[2]);
 
     for (i = 0; i < num_tags; i++) {
         if (space_tags[i] != NO_TAG){
-    	   fprintf(f, "%d|", space_tags[i]);
+    	   fwprintf(f, L"%d|", space_tags[i]);
         }
     }
-    fprintf(f, "\n");
+    fwprintf(f, L"\n");
 
     return OK;
-}
+}*/

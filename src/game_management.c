@@ -1,23 +1,34 @@
+#undef __STRICT_ANSI__
+
 /*C libraries*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <wchar.h>
+#include <iconv.h>
 /*Own libraries*/
-/**/
-
 #include "../include/game.h"
 #include "../include/game_management.h"
 #include "nfd.h"
 
+#define STD_ROOM_GDESC_1 L" ┏━━━┓ "
+#define STD_ROOM_GDESC_2 L" ┃   ┃ "
+#define STD_ROOM_GDESC_3 L" ┗━━━┛ "
+#define ERROR_ROOM_GDESC_1 L" ERROR "
+#define ERROR_ROOM_GDESC_2 L" ERROR "
+#define ERROR_ROOM_GDESC_3 L" ERROR "
+
 /*This function is used to load the spaces from the given file. It works side by side with game create from file.*/
 STATUS game_management_load_spaces(Game *game, char *filename) {
     FILE *file = NULL;
-    char line[WORD_SIZE] = "";
-    char name[WORD_SIZE] = "";
-    char graphic_description[MAX_GDESC_R][MAX_GDESC_C];
-    char basic_description[MAX_TDESC_R][MAX_TDESC_C];
-    char check_description[MAX_TDESC_R][MAX_TDESC_C];
-    char *toks = NULL;
+    wchar_t line_unicode[WORD_SIZE];
+    wchar_t name[WORD_SIZE];
+    wchar_t graphic_description_type[WORD_SIZE];
+    wchar_t graphic_description[MAX_GDESC_R][MAX_GDESC_C];
+    wchar_t basic_description[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t check_description[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t *toks = NULL;
+    wchar_t *buffer;
     TAG tags[MAX_TAGS];
     Id id, directions_ids[6];
     Space *space = NULL;
@@ -28,71 +39,76 @@ STATUS game_management_load_spaces(Game *game, char *filename) {
 
     file = fopen(filename, "r");
     if (file == NULL) return ERROR;
-
-    while (fgets(line, WORD_SIZE, file)) {
-        if (strncmp("#s:", line, 3) == 0) {
-            toks = strtok(line+3, "|");
-            id = atol(toks);
-            toks = strtok(NULL, "|");
-            strcpy(name, toks);
-            toks = strtok(NULL, "|");
-            directions_ids[0] = atol(toks);
-            toks = strtok(NULL, "|");
-            directions_ids[1] = atol(toks);
-            toks = strtok(NULL, "|");
-            directions_ids[2] = atol(toks);
-            toks = strtok(NULL, "|");
-            directions_ids[3] = atol(toks);
-            toks = strtok(NULL, "|");
-            directions_ids[4] = atol(toks);
-            toks = strtok(NULL, "|");
-            directions_ids[5] = atol(toks);
-            toks = strtok(NULL, "|");
-            strcpy(graphic_description[0], toks);
-            toks = strtok(NULL, "|");
-            strcpy(graphic_description[1], toks);
-            toks = strtok(NULL, "|");
-            strcpy(graphic_description[2], toks);
-            toks = strtok(NULL, "|");
-            strcpy(basic_description[0], toks);
-            toks = strtok(NULL, "|");
-            strcpy(basic_description[1], toks);
-            toks = strtok(NULL, "|");
-            strcpy(basic_description[2], toks);            
-            toks = strtok(NULL, "|");
-            strcpy(check_description[0], toks);
-            toks = strtok(NULL, "|");
-            strcpy(check_description[1], toks);
-            toks = strtok(NULL, "|");
-            strcpy(check_description[2], toks);
+ 
+    while (fgetws(line_unicode, WORD_SIZE, file)) {
+        if (wcsncmp(L"#s:", line_unicode, 3) == 0) {
+            toks = wcstok(line_unicode+3, L"|", &buffer);
+            id = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(name, toks);   
+            toks = wcstok(NULL, L"|", &buffer);
+            directions_ids[0] = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            directions_ids[1] = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            directions_ids[2] = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            directions_ids[3] = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            directions_ids[4] = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            directions_ids[5] = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(graphic_description_type, toks);            
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(basic_description[0], toks);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(basic_description[1], toks);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(basic_description[2], toks);            
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(check_description[0], toks);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(check_description[1], toks);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(check_description[2], toks);
 
             i = 0;
-            toks = strtok(NULL, "|");
+            toks = wcstok(NULL, L"|", &buffer);
             while (toks != NULL && i <= MAX_TAGS-SPACE_BASE_TAGS) {
-            	if(strlen(toks) > 3) {
+            	if(wcslen(toks) > 3) {
                 	tags[i] = game_str_to_tag(toks);
                 } else {
-                	tags[i] = atoi(toks);
+                	tags[i] = wcstol(toks, &toks, 10);
                 }
-                toks = strtok(NULL, "|");
+                toks = wcstok(NULL, L"|", &buffer);
                 i++;
             }
 
             space = space_create(id);
             if (space == NULL) {
-                fclose(file);        
+                fclose(file);
                 return ERROR;
             }
             
             space_set_name(space, name);
             for (direction = NORTH; direction <= BELOW; direction++) space_set_direction(space, direction, LINK_BASE_ID+directions_ids[direction]);
+            if (wcscmp(graphic_description_type, L"STD_ROOM") == 0) {
+                wcscpy(graphic_description[0], STD_ROOM_GDESC_1);
+                wcscpy(graphic_description[1], STD_ROOM_GDESC_2);
+                wcscpy(graphic_description[2], STD_ROOM_GDESC_3);
+            } else {
+                wcscpy(graphic_description[0], ERROR_ROOM_GDESC_1);
+                wcscpy(graphic_description[1], ERROR_ROOM_GDESC_2);
+                wcscpy(graphic_description[2], ERROR_ROOM_GDESC_3);
+            }
             space_set_graphic_description(space, graphic_description);
             space_set_basic_description(space, basic_description);
             space_set_check_description(space, check_description);
             for (j = 0; j < i; j++) space_add_tags(space, 1, tags[j]);
             game_add_space(game, space);            
         }
-    }
+    }  
 
     if (ferror(file)) {
         fclose(file);        
@@ -107,10 +123,11 @@ STATUS game_management_load_spaces(Game *game, char *filename) {
 /*This function is used to load the players from the given file. It works side by side with game create from file.*/
 STATUS game_management_load_players(Game *game, char *filename) {
     FILE *file = NULL;
-    char line[WORD_SIZE] = "";
-    char name[WORD_SIZE] = "";
-    char graphic_description[WORD_SIZE] = "";
-    char *toks = NULL;
+    wchar_t line_unicode[WORD_SIZE];
+    wchar_t name[WORD_SIZE];
+    wchar_t graphic_description[WORD_SIZE];
+    wchar_t *toks = NULL;
+    wchar_t *buffer;
     Id id = NO_ID;
     int inventory_size = 0;
     Id location = NO_ID;
@@ -121,18 +138,18 @@ STATUS game_management_load_players(Game *game, char *filename) {
     file = fopen(filename, "r");
     if (file == NULL) return ERROR;
 
-    while (fgets(line, WORD_SIZE, file)) {
-        if (strncmp("#p:", line, 3) == 0) {
-            toks = strtok(line+3, "|");
-            id = atol(toks);
-            toks = strtok(NULL, "|");
-            strcpy(name, toks);
-            toks = strtok(NULL, "|");
-            location = atol(toks);
-            toks = strtok(NULL, "|");
-            inventory_size = atoi(toks);
-            toks = strtok(NULL, "|");
-            strcpy(graphic_description, toks);
+    while (fgetws(line_unicode, WORD_SIZE, file)) {
+        if (wcsncmp(L"#p:", line_unicode, 3) == 0) {
+            toks = wcstok(line_unicode+3, L"|", &buffer);
+            id = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(name, toks);
+            toks = wcstok(NULL, L"|", &buffer);
+            location = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            inventory_size = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(graphic_description, toks);
 
             player = player_create(PLAYER_BASE_ID+id, inventory_size);
             if (player == NULL) {
@@ -160,11 +177,12 @@ STATUS game_management_load_players(Game *game, char *filename) {
 /*This function is used to load the objects from the given file. It works side by side with game create from file.*/
 STATUS game_management_load_objects(Game *game, char *filename) {
     FILE *file = NULL;
-    char line[WORD_SIZE] = "";
-    char name[WORD_SIZE] = "";
-    char check[MAX_TDESC_R][MAX_TDESC_C];
-    char alt_check[MAX_TDESC_R][MAX_TDESC_C];
-    char *toks = NULL;
+    wchar_t line_unicode[WORD_SIZE];
+    wchar_t name[WORD_SIZE];
+    wchar_t check[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t alt_check[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t *toks = NULL;
+    wchar_t *buffer;
     TAG tags[MAX_TAGS];
     Id id = NO_ID;
     Id location = NO_ID;
@@ -176,37 +194,36 @@ STATUS game_management_load_objects(Game *game, char *filename) {
     file = fopen(filename, "r");
     if (file == NULL) return ERROR;
 
-    while (fgets(line, WORD_SIZE, file)) {
-        if (strncmp("#o:", line, 3) == 0) {
-            toks = strtok(line+3, "|");
-            id = atol(toks);
-            toks = strtok(NULL, "|");
-            strcpy(name, toks);
-            toks = strtok(NULL, "|");
-            location = atol(toks);
-            toks = strtok(NULL, "|");
-            strcpy(check[0], toks);
-            toks = strtok(NULL, "|");
-            strcpy(check[1], toks);
-            toks = strtok(NULL, "|");
-            strcpy(check[2], toks);
-            toks = strtok(NULL, "|");
-            strcpy(alt_check[0], toks);
-            toks = strtok(NULL, "|");
-            strcpy(alt_check[1], toks);
-            toks = strtok(NULL, "|");
-            strcpy(alt_check[2], toks);
+    while (fgetws(line_unicode, WORD_SIZE, file)) {
+        if (wcsncmp(L"#o:", line_unicode, 3) == 0) {
+            toks = wcstok(line_unicode+3, L"|", &buffer);
+            id = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(name, toks);
+            toks = wcstok(NULL, L"|", &buffer);
+            location = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(check[0], toks);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(check[1], toks);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(check[2], toks);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(alt_check[0], toks);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(alt_check[1], toks);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(alt_check[2], toks);
 
             i = 0;
-            toks = strtok(NULL, "|");
+            toks = wcstok(NULL, L"|", &buffer);
             while (toks != NULL && i <= MAX_TAGS-OBJECT_BASE_TAGS) {
-            	printf("%s", toks);
-                if(strlen(toks) > 3) {
+                if(wcslen(toks) > 3) {
                 	tags[i] = game_str_to_tag(toks);
                 } else {
-                	tags[i] = atoi(toks);
+                	tags[i] = wcstol(toks, &toks, 10);
                 }
-                toks = strtok(NULL, "|");
+                toks = wcstok(NULL, L"|", &buffer);
                 i++;
             }
 
@@ -237,9 +254,10 @@ STATUS game_management_load_objects(Game *game, char *filename) {
 /*This function is used to load the links from the given file. It works side by side with game create from file.*/
 STATUS game_management_load_links(Game *game, char *filename) {
     FILE *file = NULL;
-    char line[WORD_SIZE] = "";
-    char name[WORD_SIZE] = "";
-    char *toks = NULL;
+    wchar_t line_unicode[WORD_SIZE];
+    wchar_t name[WORD_SIZE];
+    wchar_t *toks = NULL;
+    wchar_t *buffer;
     Id id = NO_ID;
     Id space1_id = NO_ID;
     Id space2_id = NO_ID;
@@ -252,27 +270,27 @@ STATUS game_management_load_links(Game *game, char *filename) {
     file = fopen(filename, "r");
     if (file == NULL) return ERROR;
 
-    while (fgets(line, WORD_SIZE, file)) {
-        if (strncmp("#l:", line, 3) == 0) {
-            toks = strtok(line+3, "|");
-            id = atol(toks);
-            toks = strtok(NULL, "|");
-            strcpy(name, toks);
-            toks = strtok(NULL, "|");
-            space1_id = atol(toks);
-            toks = strtok(NULL, "|");
-            space2_id = atol(toks);
-            toks = strtok(NULL, "|");
-            if (strcmp(toks, "OPEN") == 0) {
+    while (fgetws(line_unicode, WORD_SIZE, file)) {
+        if (wcsncmp(L"#l:", line_unicode, 3) == 0) {
+            toks = wcstok(line_unicode+3, L"|", &buffer);
+            id = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            wcscpy(name, toks);
+            toks = wcstok(NULL, L"|", &buffer);
+            space1_id = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            space2_id = wcstol(toks, &toks, 10);
+            toks = wcstok(NULL, L"|", &buffer);
+            if (wcscmp(toks, L"OPEN") == 0) {
                 status = OPEN;
-            } else if (strcmp(toks, "CLOSED") == 0) {
+            } else if (wcscmp(toks, L"CLOSED") == 0) {
                 status = CLOSED;
-            } else if (atoi(toks) == CLOSED) {
+            } else if (wcstol(toks, &toks, 10) == CLOSED) {
                 status = CLOSED;
             } else {
             	status = OPEN;
             }
-            toks = strtok(NULL, "|");
+            toks = wcstok(NULL, L"|", &buffer);
             opener = game_str_to_tag(toks);
 
             link = link_create(LINK_BASE_ID+id);
@@ -320,7 +338,6 @@ STATUS game_management_load(Game *game, char *filename){
     }
 
     if (game_create_from_file(game, aux) == ERROR){
-        game_create_from_file(game, "./datafiles/data.dat");
         return ERROR;
     } 
 

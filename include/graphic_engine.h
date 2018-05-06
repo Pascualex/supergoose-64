@@ -70,8 +70,8 @@ void graphic_engine_write_command(Graphic_engine *ge, char *str);
  * @brief               It writes the last command and if it worked on the screen.
  * @param               Game* -> a game to get the objects from.
  * @param               Space* -> a space where we will 'extract' the objects to print.
- * @return		A char with the symbol of the object (its initial).
+ * @return		A wchar_t with the symbol of the object (its initial).
  */
-char *graphic_engine_get_objects_symbols(Game *, Space *);
+wchar_t *graphic_engine_get_objects_symbols(Game *, Space *);
 
 #endif

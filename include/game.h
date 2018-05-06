@@ -236,10 +236,10 @@ STATUS game_get_status_last_command(Game* game);
  * @version             1.0
  * @date		26-03-2018
  * @brief               It gives us the last text description ordered by the user.
- * @param               Game* -> a game  which will give us the text description we are asking for.
- * @return		A const char* with the text description.
+ * @param               wchar_t* -> a game  which will give us the text description we are asking for.
+ * @return		A const wchar_t* with the text description.
  */
-char **game_get_last_text_description(Game* game);
+wchar_t **game_get_last_text_description(Game* game);
 
 /**
  * @name 		game_add_link
@@ -272,9 +272,9 @@ STATUS game_add_player(Game *game, Player *player, Id location_id);
  * @date		17-04-2018
  * @brief               It passed from a tag to a string.
  * @param               TAG -> the tag that will be converted to string.
- * @return		A char*, which will be the conversion to string of the passed tag. 
+ * @return		A wchar_t*, which will be the conversion to string of the passed tag. 
  */
-char *game_tag_to_str(TAG);
+wchar_t *game_tag_to_str(TAG);
 
 /**
  * @name 		game_str_to_tag
@@ -282,10 +282,10 @@ char *game_tag_to_str(TAG);
  * @version             1.0
  * @date		17-04-2018
  * @brief               It passed from a string to a tag.
- * @param               char* -> the string that will be converted to tag.
+ * @param               wchar_t* -> the string that will be converted to tag.
  * @return		A TAG, which will be the conversion to tag of the passed string. 
  */
-TAG game_str_to_tag(char *);
+TAG game_str_to_tag(wchar_t *);
 
 STATUS game_menu(Game *game);
 

@@ -40,8 +40,6 @@
 #define OBJECT_BASE_TAGS 0           /*!< The number of tags that an object has by default */
 #define SPACE_BASE_TAGS 0            /*!< The number of tags that an object has by default */
 
-#define FAILING_SPACE_ID 666         /*!< The ID of the space whose light is broken */
-
 /**
  * @brief Id (to store Ids of objects, players, etc)
  */
@@ -141,14 +139,6 @@ typedef enum {
     ILLUMINATED,     /*!< The space is a illuminated */
     FINAL_ROOM       /*!< The space is the final room */
 } TAG;
-
-typedef enum {
-    ERROR = 0,          /*!< Error when aplying the rules */
-    NO_MODIFICATION,    /*!< Game not modified */
-    HIDDEN_OBJECT,      /*!< Object hidden */
-    MOVED_OBJECT,       /*!< Object moved */
-    SPACE_ILLUMINATED   /*!< Space illuminated */
-}
 
 #endif
 

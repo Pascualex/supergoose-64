@@ -8,10 +8,12 @@
  * @copyright GNU Public License
  */
 
+#undef __STRICT_ANSI__
+
 /*C libraries*/
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <wchar.h>
 /*Own libraries*/
 #include "../include/types.h"
 #include "../include/player.h"
@@ -19,8 +21,8 @@
 /*The following defines the structure of th eplayer, as the next:*/
 struct _Player {
     Id id; /*An Id to distinguish it from other players or things that might be on the game*/
-    char name[WORD_SIZE+1]; /*A char to give a name to the player*/
-    char graphic_description[MAX_GDESC_C]; /*A char to give a grapgic description to the player*/
+    wchar_t name[WORD_SIZE]; /*A wchar_t to give a name to the player*/
+    wchar_t graphic_description[MAX_GDESC_C]; /*A wchar_t to give a grapgic description to the player*/
     Id location; /*A location to store where the player is*/
     Inventory *inventory; /*An object_id to store the object the player carries*/
     int inventory_size;     /*AThe max. num. objects of the inventory*/
@@ -62,17 +64,17 @@ STATUS player_destroy(Player *player) {
 }
 
 /*This function is used to set the name of a player*/
-STATUS player_set_name(Player *player, char *name) {
+STATUS player_set_name(Player *player, wchar_t *name) {
 
-    if (player == NULL || name == NULL || strcpy(player->name, name) == 0) return ERROR;
+    if (player == NULL || name == NULL || wcscpy(player->name, name) == 0) return ERROR;
 
     return OK;
 }
 
 /*This function is used to set the graphic description of a player*/
-STATUS player_set_graphic_description(Player *player, char *graphic_description) {
+STATUS player_set_graphic_description(Player *player, wchar_t *graphic_description) {
 
-    if (player == NULL || graphic_description == NULL || strcpy(player->graphic_description, graphic_description) == 0) return ERROR;
+    if (player == NULL || graphic_description == NULL || wcscpy(player->graphic_description, graphic_description) == 0) return ERROR;
 
     return OK;
 }
@@ -104,7 +106,7 @@ STATUS player_del_object(Player *player, Id object_id) {
 }
 
 /*This function is used to get a players name*/
-const char *player_get_name(Player *player) {
+const wchar_t *player_get_name(Player *player) {
 
     if (player == NULL) return NULL;
 
@@ -112,7 +114,7 @@ const char *player_get_name(Player *player) {
 }
 
 /*This function is used to get a players graphic description*/
-const char *player_get_graphic_description(Player *player) {
+const wchar_t *player_get_graphic_description(Player *player) {
 
     if (player == NULL) return NULL;
 
@@ -183,19 +185,19 @@ BOOL player_is_full(Player *player) {
     return inventory_is_full(player->inventory);
 }
 
-STATUS player_print(FILE *f, Player *player) {
+/*STATUS player_print(FILE *f, Player *player) {
 
     if (player == NULL) return ERROR;
 
-    fprintf(f, "#p:%04ld|%-8s|", player->id - PLAYER_BASE_ID, player->name);
+    fwprintf(f, L"#p:%04ld|%-8s|", player->id - PLAYER_BASE_ID, player->name);
 
     if (player->location == NO_ID) {
-        fprintf(f, "%04ld|", player->location);
+        fwprintf(f, L"%04ld|", player->location);
     } else {
-        fprintf(f, "%04ld|", player->location - SPACE_BASE_ID);
+        fwprintf(f, L"%04ld|", player->location - SPACE_BASE_ID);
     }
 
-    fprintf(f, "%d|%s|\n", player->inventory_size, player->graphic_description);
+    fwprintf(f, L"%d|%s|\n", player->inventory_size, player->graphic_description);
 
     return OK;
-}
+}*/

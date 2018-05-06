@@ -64,11 +64,11 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, obj_loc = NO_ID;
     Space *space_act = NULL, *space_back = NULL, *space_next = NULL;
     Player *player = NULL;
-    char obj[10];
-    char *auxiliarString = NULL;
+    wchar_t obj[10];
+    wchar_t *auxiliarString = NULL;
     wchar_t unicode_str[COLUMNS];
-    char **chat;
-    char **graphic_description_act, **graphic_description_back, **graphic_description_next;
+    wchar_t **chat;
+    wchar_t **graphic_description_act, **graphic_description_back, **graphic_description_next;
     T_Command last_cmd = UNKNOWN;
     extern char *cmd_to_str[];
     int i;
@@ -93,23 +93,23 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
         if (id_back != NO_ID) {
             if (space_is_empty(space_back) == FALSE) {
                 auxiliarString = graphic_engine_get_objects_symbols(game, space_back);
-                strcpy(obj, auxiliarString);
+                wcscpy(obj, auxiliarString);
                 free(auxiliarString);
             } else {
-                strcpy(obj, "         ");
+                wcscpy(obj, L"         ");
             }
 
             swprintf(unicode_str, COLUMNS, L"                  +-------------+");
             screen_area_puts(ge->map, unicode_str);
             swprintf(unicode_str, COLUMNS, L"                  |         %2d|", (int) id_back);
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  |   %s   |", graphic_description_back[0]);
+            swprintf(unicode_str, COLUMNS, L"                  |   %S   |", graphic_description_back[0]);
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  |   %s   |", graphic_description_back[1]);
+            swprintf(unicode_str, COLUMNS, L"                  |   %S   |", graphic_description_back[1]);
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  |   %s   |", graphic_description_back[2]);
+            swprintf(unicode_str, COLUMNS, L"                  |   %S   |", graphic_description_back[2]);
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  | %s   |", obj);
+            swprintf(unicode_str, COLUMNS, L"                  | %S   |", obj);
             screen_area_puts(ge->map, unicode_str);
             swprintf(unicode_str, COLUMNS, L"                  +-------------+");
             screen_area_puts(ge->map, unicode_str);
@@ -126,63 +126,62 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
         if (id_act != NO_ID) {
             if (space_is_empty(space_act) == FALSE) {
                 auxiliarString = graphic_engine_get_objects_symbols(game, space_act);
-                strcpy(obj, auxiliarString);
+                wcscpy(obj, auxiliarString);
                 free(auxiliarString);
             } else {
-                strcpy(obj, "         ");
+                wcscpy(obj, L"         ");
             }
-
 
             swprintf(unicode_str, COLUMNS, L"                  +-------------+");
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  | %7s %2d|", player_get_graphic_description((Player *) game_find(game, PLAYER_BASE_ID + 1)), (int) id_act);
+            swprintf(unicode_str, COLUMNS, L"                  | %-7S %2d|", player_get_graphic_description((Player *) game_find(game, PLAYER_BASE_ID + 1)), (int) id_act);
             screen_area_puts(ge->map, unicode_str);
             if (space_get_direction(space_act, WEST) != NO_ID) {
                 if (space_get_direction(space_act, EAST) != NO_ID) {
-					swprintf(unicode_str, COLUMNS, L"        %8s  |   %s   |  %-8s", link_get_name((Link*) game_find(game, space_get_direction(space_act, WEST))), graphic_description_act[0], link_get_name((Link*) game_find(game, space_get_direction(space_act, EAST))));
+					swprintf(unicode_str, COLUMNS, L"        %8S  |   %S   |  %-8S", link_get_name((Link*) game_find(game, space_get_direction(space_act, WEST))), graphic_description_act[0], link_get_name((Link*) game_find(game, space_get_direction(space_act, EAST))));
             		screen_area_puts(ge->map, unicode_str);
 
                     if (link_get_status((Link*) game_find(game, space_get_direction(space_act, EAST))) == OPEN) {
                         if (link_get_status((Link*) game_find(game, space_get_direction(space_act, WEST))) == OPEN) {
-                            swprintf(unicode_str, COLUMNS, L"        %4ld <--- |   %s   | ---> %ld", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
+                            swprintf(unicode_str, COLUMNS, L"        %4ld <--- |   %S   | ---> %ld", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                         } else {
-                            swprintf(unicode_str, COLUMNS, L"        %4ld <--- |   %s   | -|-> %ld", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
+                            swprintf(unicode_str, COLUMNS, L"        %4ld <--- |   %S   | -|-> %ld", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                         }
                     } else {
                         if (link_get_status((Link*) game_find(game, space_get_direction(space_act, WEST))) == OPEN) {
-                            swprintf(unicode_str, COLUMNS, L"        %4ld <-|- |   %s   | ---> %ld", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
+                            swprintf(unicode_str, COLUMNS, L"        %4ld <-|- |   %S   | ---> %ld", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                         } else {
-                            swprintf(unicode_str, COLUMNS, L"        %4ld <-|- |   %s   | -|-> %ld", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
+                            swprintf(unicode_str, COLUMNS, L"        %4ld <-|- |   %S   | -|-> %ld", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                         }
                     }
                 } else {
-					swprintf(unicode_str, COLUMNS, L"        %8s  |   %s   |", link_get_name((Link*) game_find(game, space_get_direction(space_act, WEST))), graphic_description_act[0]);
+					swprintf(unicode_str, COLUMNS, L"        %8S  |   %S   |", link_get_name((Link*) game_find(game, space_get_direction(space_act, WEST))), graphic_description_act[0]);
             		screen_area_puts(ge->map, unicode_str);
                     if (link_get_status((Link*) game_find(game, space_get_direction(space_act, EAST))) == OPEN) {
-                        swprintf(unicode_str, COLUMNS, L"        %4ld <--- |   %s   |", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1]);
+                        swprintf(unicode_str, COLUMNS, L"        %4ld <--- |   %S   |", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1]);
                     } else {
-                        swprintf(unicode_str, COLUMNS, L"        %4ld <-|- |   %s   |", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1]);
+                        swprintf(unicode_str, COLUMNS, L"        %4ld <-|- |   %S   |", link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act), graphic_description_act[1]);
                     }
                 }
             } else {
                 if (space_get_direction(space_act, EAST) != NO_ID) {
-					swprintf(unicode_str, COLUMNS, L"                  |   %s   |  %-8s", graphic_description_act[0], link_get_name((Link*) game_find(game, space_get_direction(space_act, EAST))));
+					swprintf(unicode_str, COLUMNS, L"                  |   %S   |  %-8S", graphic_description_act[0], link_get_name((Link*) game_find(game, space_get_direction(space_act, EAST))));
             		screen_area_puts(ge->map, unicode_str);
                     if (link_get_status((Link*) game_find(game, space_get_direction(space_act, EAST))) == OPEN) {
-                        swprintf(unicode_str, COLUMNS, L"                  |   %s   | ---> %ld", graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
+                        swprintf(unicode_str, COLUMNS, L"                  |   %S   | ---> %ld", graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                     } else {
-                        swprintf(unicode_str, COLUMNS, L"                  |   %s   | -|-> %ld", graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
+                        swprintf(unicode_str, COLUMNS, L"                  |   %S   | -|-> %ld", graphic_description_act[1], link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act));
                     }
                 } else {
-					swprintf(unicode_str, COLUMNS, L"                  |   %s   |", graphic_description_act[0]);
+					swprintf(unicode_str, COLUMNS, L"                  |   %S   |", graphic_description_act[0]);
             		screen_area_puts(ge->map, unicode_str);
-                    swprintf(unicode_str, COLUMNS, L"                  |   %s   |", graphic_description_act[1]);
+                    swprintf(unicode_str, COLUMNS, L"                  |   %S   |", graphic_description_act[1]);
                 }
             }
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  |   %s   |", graphic_description_act[2]);
+            swprintf(unicode_str, COLUMNS, L"                  |   %S   |", graphic_description_act[2]);
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  | %s   |", obj);
+            swprintf(unicode_str, COLUMNS, L"                  | %S   |", obj);
             screen_area_puts(ge->map, unicode_str);
             swprintf(unicode_str, COLUMNS, L"                  +-------------+ ");
             screen_area_puts(ge->map, unicode_str);
@@ -191,12 +190,11 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
         if (id_next != NO_ID) {
             if (space_is_empty(space_next) == FALSE) {
                 auxiliarString = graphic_engine_get_objects_symbols(game, space_next);
-                strcpy(obj, auxiliarString);
+                wcscpy(obj, auxiliarString);
                 free(auxiliarString);
             } else {
-                strcpy(obj, "         ");
+                wcscpy(obj, L"         ");
             }
-
 
             swprintf(unicode_str, COLUMNS, L"                         v");
             screen_area_puts(ge->map, unicode_str);
@@ -204,13 +202,13 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
             screen_area_puts(ge->map, unicode_str);
             swprintf(unicode_str, COLUMNS, L"                  |         %2d|", (int) id_next);
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  |   %s   |", graphic_description_next[0]);
+            swprintf(unicode_str, COLUMNS, L"                  |   %S   |", graphic_description_next[0]);
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  |   %s   |", graphic_description_next[1]);
+            swprintf(unicode_str, COLUMNS, L"                  |   %S   |", graphic_description_next[1]);
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  |   %s   |", graphic_description_next[2]);
+            swprintf(unicode_str, COLUMNS, L"                  |   %S   |", graphic_description_next[2]);
             screen_area_puts(ge->map, unicode_str);
-            swprintf(unicode_str, COLUMNS, L"                  | %s   |", obj);
+            swprintf(unicode_str, COLUMNS, L"                  | %S   |", obj);
             screen_area_puts(ge->map, unicode_str);
             swprintf(unicode_str, COLUMNS, L"                  +-------------+");
             screen_area_puts(ge->map, unicode_str);
@@ -224,7 +222,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
     for (i = OBJECT_BASE_ID; i < OBJECT_BASE_ID + MAX_OBJECTS; i++) {
         if ((obj_loc = object_get_location((Object *) game_find(game, i))) != NO_ID && (obj_loc < PLAYER_BASE_ID)) {
-            swprintf(unicode_str, COLUMNS, L"    %6s (%d) -> %d", object_get_name((Object *) game_find(game, i)), i-OBJECT_BASE_ID, (int) obj_loc);
+            swprintf(unicode_str, COLUMNS, L"  %9S (%ld) -> %d", object_get_name((Object *) game_find(game, i)), i-OBJECT_BASE_ID, (int) obj_loc);
             screen_area_puts(ge->descript, unicode_str);
         }
     }
@@ -237,7 +235,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
         screen_area_puts(ge->descript, unicode_str);
 
         for (i = 0; i < player_get_objects_number(player); i++) {
-            swprintf(unicode_str, COLUMNS, L"    %6s (%ld)", object_get_name((Object *) game_find(game, player_get_object(player, i))), player_get_object(player, i) - OBJECT_BASE_ID);
+            swprintf(unicode_str, COLUMNS, L"  %9S (%ld)", object_get_name((Object *) game_find(game, player_get_object(player, i))), player_get_object(player, i) - OBJECT_BASE_ID);
             screen_area_puts(ge->descript, unicode_str);
         }
     } else {
@@ -247,8 +245,6 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
     swprintf(unicode_str, COLUMNS, L" ");
     screen_area_puts(ge->descript, unicode_str);
-
-
 
     for (i = 0; i < game_get_dies_number(game); i++) {
         swprintf(unicode_str, COLUMNS, L" Last Die Value: %d ", die_get_value((Die *) game_find(game, DIE_BASE_ID+game_get_dies_number(game) - i)));
@@ -362,7 +358,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     /* Paint the in the chat area */
     screen_area_clear(ge->chat);
     chat = game_get_last_text_description(game);
-    swprintf(unicode_str, COLUMNS, L" %s", space_get_name(space_act));
+    swprintf(unicode_str, COLUMNS, L" %S", space_get_name(space_act));
 	screen_area_puts(ge->chat, unicode_str);
     switch (game_get_last_command(game)) {
         case CHECK:
@@ -381,7 +377,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
                     break;
                 default:                     
                     for (i = 0; i < MAX_TDESC_R; i++) {
-                        swprintf(unicode_str, COLUMNS, L"%s", chat[i]);
+                        swprintf(unicode_str, COLUMNS, L"%S", chat[i]);
                         screen_area_puts(ge->chat, unicode_str);
                     }
             }
@@ -394,14 +390,14 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
                     break;
                 default:
                     for (i = 0; i < MAX_TDESC_R; i++) {
-                        swprintf(unicode_str, COLUMNS, L"%s", chat[i]);
+                        swprintf(unicode_str, COLUMNS, L"%S", chat[i]);
                         screen_area_puts(ge->chat, unicode_str);
                     }
             }
             break;
         default:
             for (i = 0; i < MAX_TDESC_R; i++) {
-                swprintf(unicode_str, COLUMNS, L"%s", chat[i]);
+                swprintf(unicode_str, COLUMNS, L"%S", chat[i]);
                 screen_area_puts(ge->chat, unicode_str);
             }
     }
@@ -412,20 +408,20 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 }
 
 /*This function is used to get the object symbols that are printed on the spaces*/
-char *graphic_engine_get_objects_symbols(Game *game, Space *space) {
-    char *objects_symbols = NULL, auxiliar_name[WORD_SIZE + 1];
+wchar_t *graphic_engine_get_objects_symbols(Game *game, Space *space) {
+    wchar_t *objects_symbols = NULL, auxiliar_name[WORD_SIZE + 1];
     int objects_number, position, i;
 
-    if (space == NULL) return "         ";
+    if (space == NULL) return L"         ";
 
-    objects_symbols = (char *) malloc(sizeof (char)*10);
-    if (objects_symbols == NULL) return "         ";
+    objects_symbols = (wchar_t *) malloc(sizeof(wchar_t)*10);
+    if (objects_symbols == NULL) return L"         ";
 
     objects_number = space_get_objects_number(space);
     position = 0;
 
     for (i = 0; i < objects_number; i++) {
-        strcpy(auxiliar_name, object_get_name((Object *) game_find(game, space_get_object_id(space, i))));
+        wcscpy(auxiliar_name, object_get_name((Object *) game_find(game, space_get_object_id(space, i))));
 
         objects_symbols[position] = auxiliar_name[0];
         position++;

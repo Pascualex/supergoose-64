@@ -99,8 +99,8 @@ STATUS command_print(Command *);
  * @author 		Eric Morales edited by Victor Yrazusta
  * @version             2.0
  * @date		19-02-2018
- * @brief               This function gets the Command as a char to be used on the graphic_engine.
- * @param               Command* -> a command we will get the string from.
+ * @brief       This function gets the Command as a char to be used on the graphic_engine.
+ * @param       Command* -> a command we will get the string from.
  * @return		A const char* with the string of the command.
  */
 const char *command_get_str(T_Command);

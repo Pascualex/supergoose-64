@@ -1,5 +1,5 @@
 #===================================HEADERS===================================#
-MAKE=gcc -g -Wall -pedantic -ansi -I./lib/
+MAKE=gcc -g -Wall -pedantic -ansi -I./lib/ 
 OBJ= ./obj/command.o ./obj/die.o ./obj/game.o ./obj/game_loop.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o
 OBJGAME= ./obj/command.o ./obj/die.o ./obj/game.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o
 NFD=-m64 -no-pie -s -lnfd `pkg-config --libs gtk+-3.0` -L/usr/lib64 -L./lib/ ./lib/libnfd.a
@@ -57,8 +57,8 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 ./obj/game_loop.o: ./src/game_loop.c 
 	$(MAKE) -c ./src/game_loop.c -o ./obj/game_loop.o
 
-./obj/game_management.o: ./src/game_management.c ./include/game_management.h ./include/types.h
-	$(MAKE) -c ./src/game_management.c -o ./obj/game_management.o
+./obj/game_management.o: ./src/game_management.c ./include/game_management.h ./include/types.h 
+	$(MAKE) -c ./src/game_management.c -o ./obj/game_management.o 
 
 ./obj/graphic_engine.o: ./src/graphic_engine.c ./include/graphic_engine.h ./include/types.h
 	$(MAKE) -c ./src/graphic_engine.c -o ./obj/graphic_engine.o
@@ -98,7 +98,7 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 	$(MAKE) -c ./src/game_test.c -o ./obj/game_test.o
 
 ./obj/game_management_test.o: ./src/game_management_test.c
-	$(MAKE) -c ./src/game_management_test.c -o ./obj/game_management_test.o
+	$(MAKE) -c ./src/game_management_test.c -o ./obj/game_management_test.o 
 
 ./obj/inventory_test.o: ./src/inventory_test.c
 	$(MAKE) -c ./src/inventory_test.c -o ./obj/inventory_test.o

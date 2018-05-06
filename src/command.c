@@ -168,10 +168,7 @@ STATUS command_proMode(Command *command) {
         }
     }
 
-
-
     command->command = cmd;
-
 
     strcpy(command->info, "NO_INFO");
     return OK;

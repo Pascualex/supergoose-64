@@ -46,10 +46,10 @@ STATUS link_destroy(Link *);
  * @date		26-03-2018
  * @brief 		It changes the name of the passed link.
  * @param 		Link* -> the link whose name will be changed.
- * @param 		char  -> a string with the new name for the link.
+ * @param 		wchar_t  -> a string with the new name for the link.
  * @return		A STATUS which indicates whether the operation could be executed correctly.
  */
-STATUS link_set_name(Link *, char name[MAX_NAME]);
+STATUS link_set_name(Link *, wchar_t name[MAX_NAME]);
 
 /**
  * @name 		link_set_opener
@@ -105,9 +105,9 @@ Id link_get_id(Link *);
  * @date		26-03-2018
  * @brief 		It returns the name of the passed link.
  * @param 		Link* -> the link whose name will be returned.
- * @return		A char with the name of the link passed.
+ * @return		A wchar_t with the name of the link passed.
  */
-char *link_get_name(Link *);
+wchar_t *link_get_name(Link *);
 
 /**
  * @name 		link_get_other_side
