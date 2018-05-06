@@ -955,6 +955,7 @@ STATUS game_menu(Game *game) {
                 break;
 			case 5:
 				menu_destroy(menu);
+                system("killall make");
 				return ERROR;
 		}
 	} while (exit != 1);
