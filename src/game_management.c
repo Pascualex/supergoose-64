@@ -400,6 +400,17 @@ void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][M
         wcscpy(graphic_description[7], HIBERNATION_ROOM_7);
         wcscpy(graphic_description[8], HIBERNATION_ROOM_8);
         wcscpy(graphic_description[9], HIBERNATION_ROOM_9);
+    } else if (wcscmp(graphic_description_type, L"STAIRS_ROOM_2") == 0) {
+        wcscpy(graphic_description[0], STAIRS_ROOM_2_0);
+        wcscpy(graphic_description[1], STAIRS_ROOM_2_1);
+        wcscpy(graphic_description[2], STAIRS_ROOM_2_2);
+        wcscpy(graphic_description[3], STAIRS_ROOM_2_3);
+        wcscpy(graphic_description[4], STAIRS_ROOM_2_4);
+        wcscpy(graphic_description[5], STAIRS_ROOM_2_5);
+        wcscpy(graphic_description[6], STAIRS_ROOM_2_6);
+        wcscpy(graphic_description[7], STAIRS_ROOM_2_7);
+        wcscpy(graphic_description[8], STAIRS_ROOM_2_8);
+        wcscpy(graphic_description[9], STAIRS_ROOM_2_9);
     } else if (wcscmp(graphic_description_type, L"ELEVATOR_HALL") == 0) {
         wcscpy(graphic_description[0], ELEVATOR_HALL_0);
         wcscpy(graphic_description[1], ELEVATOR_HALL_1);

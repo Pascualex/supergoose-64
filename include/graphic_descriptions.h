@@ -54,6 +54,17 @@
 #define HIBERNATION_ROOM_8 L"┃ ┗━━━━━━━━━━━━━━┛ ┃"
 #define HIBERNATION_ROOM_9 L"┗━━━━━━━━━━━━━━━━━━┛"
 
+#define STAIRS_ROOM_2_0 L"┏━━━━━━━━━━━━━━━━━━┓"
+#define STAIRS_ROOM_2_1 L"┃ ┏━━━━━━━━━━┳━━━┓ ┃"
+#define STAIRS_ROOM_2_2 L"┃ ┃          ┣━━━┫ ┃"
+#define STAIRS_ROOM_2_3 L"┗━┛          ┣━━━┫ ┃"
+#define STAIRS_ROOM_2_4 L"•            ┣━━━┫ ┃"
+#define STAIRS_ROOM_2_5 L"•            ┣━━━┫ ┃"
+#define STAIRS_ROOM_2_6 L"┏━┓    ┏━┳━┳━╋━━━┫ ┃"
+#define STAIRS_ROOM_2_7 L"┃ ┃    ┃ ┃ ┃ ┃   ┃ ┃"
+#define STAIRS_ROOM_2_8 L"┃ ┗━━━━┻━┻━┻━┻━━━┛ ┃"
+#define STAIRS_ROOM_2_9 L"┗━━━━━━━━━━━━━━━━━━┛"
+
 #define ELEVATOR_HALL_0 L"┏━━━━━┓ •  • ┏━━━━━┓"
 #define ELEVATOR_HALL_1 L"┃     ┃      ┃     ┃"
 #define ELEVATOR_HALL_2 L"┃     ┃      ┃     ┃"
