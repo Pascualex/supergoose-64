@@ -13,8 +13,8 @@
 #define MAX_TDESC_C 75              /*!< Maximum columns of the text descriptions */
 #define MAX_TDESC_R 3               /*!< Maximum rows of the text descriptions */
 
-#define MAX_GDESC_C 8               /*!< Maximum columns of the graphic description field */
-#define MAX_GDESC_R 3               /*!< Maximum rows of the graphic description field */
+#define MAX_GDESC_C 21              /*!< Maximum columns of the graphic description field */
+#define MAX_GDESC_R 10              /*!< Maximum rows of the graphic description field */
 
 #define MAX_NAME 128                /*!< Maximum characters of a link name */
 #define WORD_SIZE 1000              /*!< Maximum size of some of the names (players, objects and else)*/

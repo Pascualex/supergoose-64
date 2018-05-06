@@ -9,14 +9,10 @@
 /*Own libraries*/
 #include "../include/game.h"
 #include "../include/game_management.h"
+#include "../include/graphic_descriptions.h"
 #include "nfd.h"
 
-#define STD_ROOM_GDESC_1 L" ┏━━━┓ "
-#define STD_ROOM_GDESC_2 L" ┃   ┃ "
-#define STD_ROOM_GDESC_3 L" ┗━━━┛ "
-#define ERROR_ROOM_GDESC_1 L" ERROR "
-#define ERROR_ROOM_GDESC_2 L" ERROR "
-#define ERROR_ROOM_GDESC_3 L" ERROR "
+void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][MAX_GDESC_C], wchar_t graphic_description_type[WORD_SIZE]);
 
 /*This function is used to load the spaces from the given file. It works side by side with game create from file.*/
 STATUS game_management_load_spaces(Game *game, char *filename) {
@@ -91,17 +87,9 @@ STATUS game_management_load_spaces(Game *game, char *filename) {
                 return ERROR;
             }
             
-            space_set_name(space, name);
+            space_set_name(space, name);            
             for (direction = NORTH; direction <= BELOW; direction++) space_set_direction(space, direction, LINK_BASE_ID+directions_ids[direction]);
-            if (wcscmp(graphic_description_type, L"STD_ROOM") == 0) {
-                wcscpy(graphic_description[0], STD_ROOM_GDESC_1);
-                wcscpy(graphic_description[1], STD_ROOM_GDESC_2);
-                wcscpy(graphic_description[2], STD_ROOM_GDESC_3);
-            } else {
-                wcscpy(graphic_description[0], ERROR_ROOM_GDESC_1);
-                wcscpy(graphic_description[1], ERROR_ROOM_GDESC_2);
-                wcscpy(graphic_description[2], ERROR_ROOM_GDESC_3);
-            }
+            select_space_graphic_description(graphic_description, graphic_description_type);
             space_set_graphic_description(space, graphic_description);
             space_set_basic_description(space, basic_description);
             space_set_check_description(space, check_description);
@@ -365,4 +353,74 @@ STATUS game_management_save(Game *game, char *filename){
     fclose(f);
 
     return OK;
+}
+
+void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][MAX_GDESC_C], wchar_t graphic_description_type[WORD_SIZE]) {
+    if (wcscmp(graphic_description_type, L"STD_ROOM") == 0) {
+        wcscpy(graphic_description[0], STD_ROOM_0);
+        wcscpy(graphic_description[1], STD_ROOM_1);
+        wcscpy(graphic_description[2], STD_ROOM_2);
+        wcscpy(graphic_description[3], STD_ROOM_3);
+        wcscpy(graphic_description[4], STD_ROOM_4);
+        wcscpy(graphic_description[5], STD_ROOM_5);
+        wcscpy(graphic_description[6], STD_ROOM_6);
+        wcscpy(graphic_description[7], STD_ROOM_7);
+        wcscpy(graphic_description[8], STD_ROOM_8);
+        wcscpy(graphic_description[9], STD_ROOM_9);
+    } else if (wcscmp(graphic_description_type, L"HALLWAY_1") == 0) {
+        wcscpy(graphic_description[0], HALLWAY_1_0);
+        wcscpy(graphic_description[1], HALLWAY_1_1);
+        wcscpy(graphic_description[2], HALLWAY_1_2);
+        wcscpy(graphic_description[3], HALLWAY_1_3);
+        wcscpy(graphic_description[4], HALLWAY_1_4);
+        wcscpy(graphic_description[5], HALLWAY_1_5);
+        wcscpy(graphic_description[6], HALLWAY_1_6);
+        wcscpy(graphic_description[7], HALLWAY_1_7);
+        wcscpy(graphic_description[8], HALLWAY_1_8);
+        wcscpy(graphic_description[9], HALLWAY_1_9);
+    } else if (wcscmp(graphic_description_type, L"HALLWAY_2") == 0) {
+        wcscpy(graphic_description[0], HALLWAY_2_0);
+        wcscpy(graphic_description[1], HALLWAY_2_1);
+        wcscpy(graphic_description[2], HALLWAY_2_2);
+        wcscpy(graphic_description[3], HALLWAY_2_3);
+        wcscpy(graphic_description[4], HALLWAY_2_4);
+        wcscpy(graphic_description[5], HALLWAY_2_5);
+        wcscpy(graphic_description[6], HALLWAY_2_6);
+        wcscpy(graphic_description[7], HALLWAY_2_7);
+        wcscpy(graphic_description[8], HALLWAY_2_8);
+        wcscpy(graphic_description[9], HALLWAY_2_9);
+    } else if (wcscmp(graphic_description_type, L"HIBERNATION_ROOM") == 0) {
+        wcscpy(graphic_description[0], HIBERNATION_ROOM_0);
+        wcscpy(graphic_description[1], HIBERNATION_ROOM_1);
+        wcscpy(graphic_description[2], HIBERNATION_ROOM_2);
+        wcscpy(graphic_description[3], HIBERNATION_ROOM_3);
+        wcscpy(graphic_description[4], HIBERNATION_ROOM_4);
+        wcscpy(graphic_description[5], HIBERNATION_ROOM_5);
+        wcscpy(graphic_description[6], HIBERNATION_ROOM_6);
+        wcscpy(graphic_description[7], HIBERNATION_ROOM_7);
+        wcscpy(graphic_description[8], HIBERNATION_ROOM_8);
+        wcscpy(graphic_description[9], HIBERNATION_ROOM_9);
+    } else if (wcscmp(graphic_description_type, L"ELEVATOR_HALL") == 0) {
+        wcscpy(graphic_description[0], ELEVATOR_HALL_0);
+        wcscpy(graphic_description[1], ELEVATOR_HALL_1);
+        wcscpy(graphic_description[2], ELEVATOR_HALL_2);
+        wcscpy(graphic_description[3], ELEVATOR_HALL_3);
+        wcscpy(graphic_description[4], ELEVATOR_HALL_4);
+        wcscpy(graphic_description[5], ELEVATOR_HALL_5);
+        wcscpy(graphic_description[6], ELEVATOR_HALL_6);
+        wcscpy(graphic_description[7], ELEVATOR_HALL_7);
+        wcscpy(graphic_description[8], ELEVATOR_HALL_8);
+        wcscpy(graphic_description[9], ELEVATOR_HALL_9);
+    } else {
+        wcscpy(graphic_description[0], ERROR_ROOM_0);
+        wcscpy(graphic_description[1], ERROR_ROOM_1);
+        wcscpy(graphic_description[2], ERROR_ROOM_2);
+        wcscpy(graphic_description[3], ERROR_ROOM_3);
+        wcscpy(graphic_description[4], ERROR_ROOM_4);
+        wcscpy(graphic_description[5], ERROR_ROOM_5);
+        wcscpy(graphic_description[6], ERROR_ROOM_6);
+        wcscpy(graphic_description[7], ERROR_ROOM_7);
+        wcscpy(graphic_description[8], ERROR_ROOM_8);
+        wcscpy(graphic_description[9], ERROR_ROOM_9);
+    }
 }

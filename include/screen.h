@@ -12,8 +12,8 @@
 
 #include "types.h"
 
-#define ROWS 43
-#define COLUMNS 80
+#define ROWS 60
+#define COLUMNS 128
 
 /**
  * @brief               It holds the necessary data to manage areas.

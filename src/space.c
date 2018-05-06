@@ -208,12 +208,13 @@ STATUS space_set_direction(Space *space, DIRECTION direction, Id id) {
 
 /*This function sets the graphic description of the space, to use it on the graphic engine*/
 STATUS space_set_graphic_description(Space *space, wchar_t graphic_description[MAX_GDESC_R][MAX_GDESC_C]) {
+    int i;
 
     if (space == NULL || graphic_description == NULL) return ERROR;
 
-    wcscpy(space->graphic_description[0], graphic_description[0]);
-    wcscpy(space->graphic_description[1], graphic_description[1]);
-    wcscpy(space->graphic_description[2], graphic_description[2]);
+    for (i = 0; i < MAX_GDESC_R; i++) {
+        wcscpy(space->graphic_description[i], graphic_description[i]);
+    }
 
     return OK;
 }
