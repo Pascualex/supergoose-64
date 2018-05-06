@@ -22,7 +22,7 @@
 #include "../include/menu.h"
 
 /*We define the number of functions we have related to the different commands.*/
-#define N_CALLBACK 17
+#define N_CALLBACK 18
 /*We define the number of possible directions to move for the move command.*/
 #define N_DIR 6
 /*INI is used to initialize those variable as the starting number of objects when they are 0.*/
@@ -243,6 +243,7 @@ STATUS game_callback_turnoff(Game *game, char *string);
 STATUS game_callback_load(Game *game, char *string);
 STATUS game_callback_save(Game *game, char *string);
 STATUS game_callback_promode(Game *game, char *string);
+STATUS game_callback_help(Game *game, char *string);
 
 /*We define the callback functions*/
 static callback_fn game_callback_fn_list[N_CALLBACK] = {
@@ -262,7 +263,8 @@ static callback_fn game_callback_fn_list[N_CALLBACK] = {
 	game_callback_turnoff,
 	game_callback_load,
     game_callback_save,
-    game_callback_promode
+    game_callback_promode,
+    game_callback_help
 };
 
 /*Private functions*/
@@ -890,10 +892,10 @@ STATUS game_menu(Game *game) {
                 }
                 break;
 			case 2:
-				system("man gcc");									/*Cambiar por el man de los controles*/
+				system("man lib/guide.1");									
 				break;
 			case 3:
-				system("man gcc");									/*Cambiar por el man de los terminos de uso*/
+				system("man lib/termsofuse.1");      						
 				break;
             case 4:
                 printf("Aun no se que hacer aqui jaja");
@@ -1184,5 +1186,10 @@ STATUS game_callback_promode(Game *game, char *string){
         game->proMode = FALSE;
     }
 
+    return OK;
+}
+
+STATUS game_callback_help(Game *game, char *string){
+    system("man lib/controls.1"); 
     return OK;
 }

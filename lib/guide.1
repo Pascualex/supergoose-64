@@ -1,0 +1,93 @@
+.TH SuperGoose 6 "Eric Morales, Victor Yrazusta, Alejandro Pascual y Javier Lougedo" "version 3.0" "Proyecto de Programacion"
+." This is our manual page. It will be used to give the player a description for our game and all its utilities, walkthrough and else.
+." Created by Javier Lougedo
+
+
+.SH NAME
+.R SuperGoose. A game to be remembered.
+
+.SH DESCRIPTION
+.R SuperGoose is a game created by Javier Lougedo, Eric Morales, Victor Yrazusta and Alejandro Pascual for the programming project assignement on their first engeneering graduate year. Created with passion, hard work and of course, humor, SuperGoose is a game easy and fun to play, with a cool Graphic Engine that will make you love the game, based on Unicode.
+.P
+.R This game will tell you the story of Hugo, the goose that saved the Geese Kingdom and the Geese Princess from the DUCKALYPSE. Will you be able to survive the adventure as Hugo did? Come and see it, because the ducks wont go easy with you, mate!
+.SH
+
+.SH COMMANDS
+.SS MOVING COMMANDS
+You have two ways to move: you can press "K" and intro to enter the pro-moving mode. Here, by pressing W, A, S or D, you will move inmedeately. Outside pro-moving, use "move south" or "m s", followed by any cardinal direction or up and down.
+.P
+.SS GRASP
+This command is used to grasp objects from the floor and put them in your inventory. It will only work with nearby, visible and moveable objects.
+.P
+	To use it, type "grasp" or "g", followed by an objects name or identificator.
+.P
+.SS DROP
+This command is used to drop objects from the inventory to the floor. Carefull, cause it works with dark rooms.
+.P
+	To use it, type "drop" or "d", followed by an objects name or identificator.
+.P
+.SS CHECK
+This command will check the space if no object is added after it or the given object.
+.P
+	To use it, type "check" or "c", followed by an objects name or identificator. Leave empty to check space.
+.P
+.SS OPEN
+Used to open closed paths, like doors or blowable walls.
+.P
+	To use it, type "open <path> with <key-object>". Carefull, sometimes this will mean loosing the object!
+.P
+
+.SS TURN ON - TURN OFF
+Turn on works to light up or down rooms. You will only be able to use it with gloweable objects or sometimes with buttons.
+.P
+	To use it, type "turnon <gloweable-object>" or "turnoff...".
+.P
+.SS SAVE
+This command will save your game and store on the save_games folder.
+.P
+	To use it, type "save" or "sv", followed by the name you want to give the file. (Default: "autosave.game").
+.P
+.SS LOAD
+This command will load a game from the save_games folder.
+.P
+	To use it, type "load" or "ld", and then choose the file you will want to load.
+.P
+
+.SH FILES
+.I ./Game
+.RS
+Game file. Just run it to have hours of fun!
+.RE
+.I ./test/*_test
+.RS
+Test files. If anything is working wrong, you will know when running it.
+.RE
+.I ./src/*.c
+.RS
+This are our source files. You better not touch them! (Please :D)
+.RE
+.I ./include/*.h
+.RS
+This are our header files. You better not touch them! (Please :D)
+.RE
+.I ./datafiles/*.dat
+.RS
+This are our data files. Here you will find your saved games, the history and else. You better not touch them too much! (Please :D)
+.RE
+.I ./logiles/*.log
+.RS
+This are our log files. They will serve to check our game. You better not touch them too much! (Please :D)
+.RE
+.I ./SuperGoose.pdf
+.RS
+This is the game description. Use it when you are desperate or if you want to know more about the game.
+.RE
+
+.SH OPTION
+.BI -l " logfile"
+.P
+	Specifies the file you want to generate with the input commands you give. This option is optional.
+.P
+.BI -h
+.P
+	Hardcore mode. Only for the brave.

@@ -17,7 +17,7 @@
 
 /*We define the command maximum length, the number of commands and the information of the command (north, south, objects, etc) lengths.*/
 #define CMD_LENGHT 50
-#define N_CMD 18
+#define N_CMD 19
 #define INFO_LENGHT 30
 
 /*We define the command structure with the command itself (the order) and the info it has (objects, directions and else).*/
@@ -27,8 +27,8 @@ struct _Command {
 };
 
 /*We define the different commands we can use, in long and short forms*/
-char *cmd_to_str[N_CMD] = {"No command", "Unknown", "Exit", "Move", "Previous", "Left", "Following", "Right", "Grasp", "Drop", "Throw", "Check", "Open", "TurnOn", "TurnOff", "Load", "Save", "ProMode"};
-char *short_cmd_to_str[N_CMD] = {"", "", "e", "m", "p", "l", "f", "r", "g", "d", "t", "c", "o", "ton", "toff", "ld", "sv", "k"};
+char *cmd_to_str[N_CMD] = {"No command", "Unknown", "Exit", "Move", "Previous", "Left", "Following", "Right", "Grasp", "Drop", "Throw", "Check", "Open", "TurnOn", "TurnOff", "Load", "Save", "ProMode", "Help"};
+char *short_cmd_to_str[N_CMD] = {"", "", "e", "m", "p", "l", "f", "r", "g", "d", "t", "c", "o", "ton", "toff", "ld", "sv", "k", "h"};
 
 /*The following function creates commands, allocating memory for them and starting the command to No_CMD and the information as it was empty.*/
 Command *command_create() {

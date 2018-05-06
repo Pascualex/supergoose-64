@@ -348,12 +348,19 @@ STATUS game_management_save(Game *game, char *filename){
     FILE *f = NULL;
     char aux[WORD_SIZE];
 
-    if (game == NULL || filename == NULL){
+    if (game == NULL){
         return ERROR;
     }
 
     strcpy(aux, "./save_games/");
-    strcat(aux, filename);
+
+    if (filename == NULL || strcmp(filename, "NO_INFO") == 0){
+        strcat(aux, "autosave");
+    } else {
+        strcat(aux, filename);
+    }
+
+    strcat(aux, ".game");
 
     f = fopen(aux, "w");
     if (f == NULL){
