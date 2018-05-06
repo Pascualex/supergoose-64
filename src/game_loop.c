@@ -43,10 +43,17 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Error while initializing game.\n");
         return 1;
     }
-
-    if (game_menu(game) == ERROR) {
-		game_destroy(game);
-		return 1;
+    if (log == NULL){
+	    if (game_menu(game) == ERROR) {
+			game_destroy(game);
+			return 1;
+		}
+	} else {
+		if (game_create_from_file(game, "./datafiles/data.dat") == ERROR) {
+			game_destroy(game);
+			fclose(log);
+			return 1;
+		}
 	}
 
     gengine = graphic_engine_create();
@@ -79,16 +86,18 @@ int main(int argc, char *argv[]) {
         game_update(game, command);
 
         if (log != NULL) {
-            if (strcmp(command_get_info(command), "NO_INFO") == 0) {
-                fprintf(log, "%s", command_get_str(game_get_last_command(game)));
-            } else {
-                fprintf(log, "%s %s", command_get_str(game_get_last_command(game)), command_get_info(command));
-            }
-            if (game_get_status_last_command(game) == OK) {
-                fprintf(log, " --> OK\n");
-            } else {
-                fprintf(log, " --> ERROR\n");
-            }
+        	if (command_get_command(command) != PROMODE){
+	            if (strcmp(command_get_info(command), "NO_INFO") == 0) {
+	                fprintf(log, "%s", command_get_str(game_get_last_command(game)));
+	            } else {
+	                fprintf(log, "%s %s", command_get_str(game_get_last_command(game)), command_get_info(command));
+	            }
+	            if (game_get_status_last_command(game) == OK) {
+	                fprintf(log, " --> OK\n");
+	            } else {
+	                fprintf(log, " --> ERROR\n");
+	            }
+	        }
         }
     }
 
