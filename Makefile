@@ -126,6 +126,10 @@ run:
 	chmod 777 run.sh
 	chmod 777 music.sh
 	gnome-terminal --window --full-screen --command=./run.sh
+music:
+	chmod 777 run.sh
+	chmod 777 music.sh
+	gnome-terminal --window --full-screen --command=./run.sh
 	./music.sh
 valgrind:
 	valgrind -v -q --leak-check=full ./SuperGoose_64
