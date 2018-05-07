@@ -745,6 +745,50 @@ void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][M
         wcscpy(graphic_description[7], GEAR_ROOM_7);
         wcscpy(graphic_description[8], GEAR_ROOM_8);
         wcscpy(graphic_description[9], GEAR_ROOM_9);
+    } else if (wcscmp(graphic_description_type, L"ELEVATOR_13") == 0) {
+        wcscpy(graphic_description[0], ELEVATOR_13_0);
+        wcscpy(graphic_description[1], ELEVATOR_13_1);
+        wcscpy(graphic_description[2], ELEVATOR_13_2);
+        wcscpy(graphic_description[3], ELEVATOR_13_3);
+        wcscpy(graphic_description[4], ELEVATOR_13_4);
+        wcscpy(graphic_description[5], ELEVATOR_13_5);
+        wcscpy(graphic_description[6], ELEVATOR_13_6);
+        wcscpy(graphic_description[7], ELEVATOR_13_7);
+        wcscpy(graphic_description[8], ELEVATOR_13_8);
+        wcscpy(graphic_description[9], ELEVATOR_13_9);
+    } else if (wcscmp(graphic_description_type, L"ELEVATOR_HALL_3") == 0) {
+        wcscpy(graphic_description[0], ELEVATOR_HALL_3_0);
+        wcscpy(graphic_description[1], ELEVATOR_HALL_3_1);
+        wcscpy(graphic_description[2], ELEVATOR_HALL_3_2);
+        wcscpy(graphic_description[3], ELEVATOR_HALL_3_3);
+        wcscpy(graphic_description[4], ELEVATOR_HALL_3_4);
+        wcscpy(graphic_description[5], ELEVATOR_HALL_3_5);
+        wcscpy(graphic_description[6], ELEVATOR_HALL_3_6);
+        wcscpy(graphic_description[7], ELEVATOR_HALL_3_7);
+        wcscpy(graphic_description[8], ELEVATOR_HALL_3_8);
+        wcscpy(graphic_description[9], ELEVATOR_HALL_3_9);
+    } else if (wcscmp(graphic_description_type, L"CORE_HALL") == 0) {
+        wcscpy(graphic_description[0], CORE_HALL_0);
+        wcscpy(graphic_description[1], CORE_HALL_1);
+        wcscpy(graphic_description[2], CORE_HALL_2);
+        wcscpy(graphic_description[3], CORE_HALL_3);
+        wcscpy(graphic_description[4], CORE_HALL_4);
+        wcscpy(graphic_description[5], CORE_HALL_5);
+        wcscpy(graphic_description[6], CORE_HALL_6);
+        wcscpy(graphic_description[7], CORE_HALL_7);
+        wcscpy(graphic_description[8], CORE_HALL_8);
+        wcscpy(graphic_description[9], CORE_HALL_9);
+    } else if (wcscmp(graphic_description_type, L"P_CORE_ROOM") == 0) {
+        wcscpy(graphic_description[0], P_CORE_ROOM_0);
+        wcscpy(graphic_description[1], P_CORE_ROOM_1);
+        wcscpy(graphic_description[2], P_CORE_ROOM_2);
+        wcscpy(graphic_description[3], P_CORE_ROOM_3);
+        wcscpy(graphic_description[4], P_CORE_ROOM_4);
+        wcscpy(graphic_description[5], P_CORE_ROOM_5);
+        wcscpy(graphic_description[6], P_CORE_ROOM_6);
+        wcscpy(graphic_description[7], P_CORE_ROOM_7);
+        wcscpy(graphic_description[8], P_CORE_ROOM_8);
+        wcscpy(graphic_description[9], P_CORE_ROOM_9);
     } else {
         wcscpy(graphic_description[0], ERROR_ROOM_0);
         wcscpy(graphic_description[1], ERROR_ROOM_1);
