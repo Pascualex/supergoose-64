@@ -886,6 +886,14 @@ wchar_t *game_tag_to_str(TAG tag) {
         wcscpy(name, L"IS_FULL_ID_CARD");
         return name;
     }
+    if (tag == IS_FUSE_KEY) {
+        wcscpy(name, L"IS_FUSE_KEY");
+        return name;
+    }
+    if (tag == IS_TRANS_CORE_KEY) {
+        wcscpy(name, L"IS_TRANS_CORE_KEY");
+        return name;
+    }
     if (tag == ILLUMINATED) {
         wcscpy(name, L"ILLUMINATED");
         return name;
@@ -913,6 +921,8 @@ TAG game_str_to_tag(wchar_t *name) {
     if (!wcscmp(name, L"IS_CROWBAR"))      return IS_CROWBAR;
     if (!wcscmp(name, L"IS_BASE_ID_CARD")) return IS_BASE_ID_CARD;
     if (!wcscmp(name, L"IS_FULL_ID_CARD")) return IS_FULL_ID_CARD;
+    if (!wcscmp(name, L"IS_FUSE_KEY"))     return IS_FUSE_KEY;
+    if (!wcscmp(name, L"IS_TRANS_CORE_KEY"))return IS_TRANS_CORE_KEY;
     if (!wcscmp(name, L"ILLUMINATED"))     return ILLUMINATED;
     if (!wcscmp(name, L"FINAL_ROOM"))      return FINAL_ROOM;
 
@@ -1176,6 +1186,8 @@ STATUS game_callback_open(Game *game, char *string) {
 
 	slink = strtok(string, " \n");
 	sobj = strtok(NULL, " \n");
+
+    if (sobj == NULL || slink == NULL) return ERROR;
 
 	obj = (Object *) game_find(game, atoi(sobj)+OBJECT_BASE_ID);
 

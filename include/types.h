@@ -145,6 +145,8 @@ typedef enum {
     IS_CROWBAR,      /*!< The object is a crowbar */
     IS_BASE_ID_CARD, /*!< The object is a base ID card */
     IS_FULL_ID_CARD, /*!< The object is a full ID card */
+    IS_FUSE_KEY,     /*!< The object is a key for the fuse room */
+    IS_TRANS_CORE_KEY,/*!< The object is a key for the trans core room */
     ILLUMINATED,     /*!< The space is a illuminated */
     FINAL_ROOM       /*!< The space is the final room */
 } TAG;
