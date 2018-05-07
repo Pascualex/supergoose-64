@@ -180,8 +180,34 @@ void final_paint(Final *final, RULES_STATUS rule) {
 
         swprintf(unicode_str, COLUMNS, L"justice due to some Goose called Iron Goose, but it’s all going to be OK.");
         screen_area_puts(final->text, unicode_str);
+
     } else {
-        swprintf(unicode_str, COLUMNS, L"Game Over");
+
+        swprintf(unicode_str, COLUMNS, L"  ▄████  ▄▄▄       ███▄ ▄███▓▓█████     ▒█████   ██▒   █▓▓█████  ██▀███  ");
+        screen_area_puts(final->text, unicode_str);
+
+        swprintf(unicode_str, COLUMNS, L" ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀    ▒██▒  ██▒▓██░   █▒▓█   ▀ ▓██ ▒ ██▒");
+        screen_area_puts(final->text, unicode_str);
+
+        swprintf(unicode_str, COLUMNS, L"▒██░▄▄▄░▒██  ▀█▄  ▓██    ▓██░▒███      ▒██░  ██▒ ▓██  █▒░▒███   ▓██ ░▄█ ▒");
+        screen_area_puts(final->text, unicode_str);
+
+        swprintf(unicode_str, COLUMNS, L"░▓█  ██▓░██▄▄▄▄██ ▒██    ▒██ ▒▓█  ▄    ▒██   ██░  ▒██ █░░▒▓█  ▄ ▒██▀▀█▄  ");
+        screen_area_puts(final->text, unicode_str);
+
+        swprintf(unicode_str, COLUMNS, L"░▒▓███▀▒ ▓█   ▓██▒▒██▒   ░██▒░▒████▒   ░ ████▓▒░   ▒▀█░  ░▒████▒░██▓ ▒██▒");
+        screen_area_puts(final->text, unicode_str);
+
+        swprintf(unicode_str, COLUMNS, L" ░▒   ▒  ▒▒   ▓▒█░░ ▒░   ░  ░░░ ▒░ ░   ░ ▒░▒░▒░    ░ ▐░  ░░ ▒░ ░░ ▒▓ ░▒▓░");
+        screen_area_puts(final->text, unicode_str);
+
+        swprintf(unicode_str, COLUMNS, L"  ░   ░   ▒   ▒▒ ░░  ░      ░ ░ ░  ░     ░ ▒ ▒░    ░ ░░   ░ ░  ░  ░▒ ░ ▒░");
+        screen_area_puts(final->text, unicode_str);
+
+        swprintf(unicode_str, COLUMNS, L"░ ░   ░   ░   ▒   ░      ░      ░      ░ ░ ░ ▒       ░░     ░     ░░   ░ ");
+        screen_area_puts(final->text, unicode_str);
+
+        swprintf(unicode_str, COLUMNS, L"                                                     ░                 ");
         screen_area_puts(final->text, unicode_str);
     }
 
