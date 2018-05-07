@@ -7,9 +7,11 @@
  * @copyright GNU Public License
  */
 
+#undef __STRICT_ANSI__
+
 #include <stdio.h> 
 #include <stdlib.h> 
-#include <string.h> 
+#include <wchar.h> 
 #include "../include/player.h"
 #include "../include/player_test.h"
 #include "../include/test.h"
@@ -58,8 +60,8 @@ int main(int argc, char** argv) {
     if (all || test == 15) test2_player_get_id();
     if (all || test == 16) test1_player_get_graphic_description();
     if (all || test == 17) test2_player_get_graphic_description();
-    if (all || test == 18) test1_player_get_object();
-    if (all || test == 19) test2_player_get_object();
+    if (all || test == 18) test1_player_get_object_id();
+    if (all || test == 19) test2_player_get_object_id();
     if (all || test == 20) test1_player_get_location();
     if (all || test == 21) test2_player_get_location();
     if (all || test == 22) test1_player_get_objects_number();
@@ -104,13 +106,13 @@ void test2_player_create() {
 void test1_player_set_name() {
     Player *p = NULL;
     p = player_create(PLAYER_BASE_ID+1, 5);
-    PRINT_TEST_RESULT(player_set_name(p, "test") == OK);
+    PRINT_TEST_RESULT(player_set_name(p, L"test") == OK);
     player_destroy(p);
 }
 
 void test2_player_set_name() {
     Player *p = NULL;
-    PRINT_TEST_RESULT(player_set_name(p, "test") == ERROR);
+    PRINT_TEST_RESULT(player_set_name(p, L"test") == ERROR);
 }
 
 void test3_player_set_name() {
@@ -123,13 +125,13 @@ void test3_player_set_name() {
 void test1_player_set_graphic_description() {
     Player *p = NULL;
     p = player_create(PLAYER_BASE_ID+1, 5);
-    PRINT_TEST_RESULT(player_set_graphic_description(p, "test") == OK);
+    PRINT_TEST_RESULT(player_set_graphic_description(p, L"test") == OK);
     player_destroy(p);
 }
 
 void test2_player_set_graphic_description() {
     Player *p = NULL;
-    PRINT_TEST_RESULT(player_set_graphic_description(p, "test") == ERROR);
+    PRINT_TEST_RESULT(player_set_graphic_description(p, L"test") == ERROR);
 }
 
 void test3_player_set_graphic_description() {
@@ -196,8 +198,8 @@ void test3_player_del_object() {
 void test1_player_get_name() {
     Player *p = NULL;
     p = player_create(PLAYER_BASE_ID+1, 5);
-    player_set_name(p, "test");
-    PRINT_TEST_RESULT(strcmp(player_get_name(p), "test") == 0);
+    player_set_name(p, L"test");
+    PRINT_TEST_RESULT(wcscmp(player_get_name(p), L"test") == 0);
     player_destroy(p);
 }
 
@@ -221,8 +223,8 @@ void test2_player_get_id() {
 void test1_player_get_graphic_description() {
     Player *p = NULL;
     p = player_create(PLAYER_BASE_ID+1, 5);
-    player_set_graphic_description(p, "test");
-    PRINT_TEST_RESULT(strcmp(player_get_graphic_description(p), "test") == 0);
+    player_set_graphic_description(p, L"test");
+    PRINT_TEST_RESULT(wcscmp(player_get_graphic_description(p), L"test") == 0);
     player_destroy(p);
 }
 
@@ -244,17 +246,17 @@ void test2_player_get_location() {
     PRINT_TEST_RESULT(player_get_location(p) == NO_ID);
 }
 
-void test1_player_get_object() {
+void test1_player_get_object_id() {
     Player *p = NULL;
     p = player_create(PLAYER_BASE_ID+1, 5);
     player_add_object(p, OBJECT_BASE_ID+1);
-    PRINT_TEST_RESULT(player_get_object(p, 0) == OBJECT_BASE_ID+1);
+    PRINT_TEST_RESULT(player_get_object_id(p, 0) == OBJECT_BASE_ID+1);
     player_destroy(p);
 }
 
-void test2_player_get_object() {
+void test2_player_get_object_id() {
     Player *p = NULL;
-    PRINT_TEST_RESULT(player_get_object(p, 0) == NO_ID);
+    PRINT_TEST_RESULT(player_get_object_id(p, 0) == NO_ID);
 }
 
 void test1_player_get_objects_number() {

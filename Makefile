@@ -29,8 +29,8 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 ./testfiles/game_management_test: ./obj/game_management_test.o $(OBJGAME)
 	$(MAKE) -o ./testfiles/game_management_test ./obj/game_management_test.o $(OBJGAME) $(NFD)
 
-./testfiles/link_test: ./obj/link_test.o ./obj/link.o ./obj/space.o
-	$(MAKE) -o ./testfiles/link_test ./obj/link_test.o ./obj/link.o
+./testfiles/link_test: ./obj/link_test.o $(OBJGAME)
+	$(MAKE) -o ./testfiles/link_test ./obj/link_test.o $(OBJGAME)
 
 ./testfiles/set_test: ./obj/set_test.o ./obj/set.o
 	$(MAKE) -o ./testfiles/set_test ./obj/set_test.o ./obj/set.o

@@ -8,9 +8,11 @@
  * @copyright GNU Public License
  */
 
+#undef __STRICT_ANSI__
+
 #include <stdio.h> 
 #include <stdlib.h> 
-#include <string.h> 
+#include <wchar.h>
 #include "../include/space.h"
 #include "../include/space_test.h"
 #include "../include/test.h"
@@ -130,13 +132,13 @@ void test2_space_create() {
 void test1_space_set_name() {
     Space *space = NULL;
     space = space_create(SPACE_BASE_ID+1);
-    PRINT_TEST_RESULT(space_set_name(space, "test") == OK);
+    PRINT_TEST_RESULT(space_set_name(space, L"test") == OK);
     space_destroy(space);
 }
 
 void test2_space_set_name() {
     Space *space = NULL;
-    PRINT_TEST_RESULT(space_set_name(space, "test") == ERROR);
+    PRINT_TEST_RESULT(space_set_name(space, L"test") == ERROR);
 }
 
 void test3_space_set_name() {
@@ -195,11 +197,11 @@ void test7_space_set_direction() {
 
 void test1_space_set_graphic_description() {
     Space *space = NULL;
-    char desc[MAX_GDESC_R][MAX_GDESC_C];
+    wchar_t desc[MAX_GDESC_R][MAX_GDESC_C];
     int i;
     space = space_create(SPACE_BASE_ID+1);
     for (i = 0; i < MAX_GDESC_R; i++) {
-        strcpy(desc[i], "desc");
+        wcscpy(desc[i], L"desc");
     }
     PRINT_TEST_RESULT(space_set_graphic_description(space, desc) == OK);
     space_destroy(space);
@@ -207,10 +209,10 @@ void test1_space_set_graphic_description() {
 
 void test2_space_set_graphic_description() {
     Space *space = NULL;
-    char desc[MAX_GDESC_R][MAX_GDESC_C];
+    wchar_t desc[MAX_GDESC_R][MAX_GDESC_C];
     int i;
     for (i = 0; i < MAX_GDESC_R; i++) {
-        strcpy(desc[i], "desc");
+        wcscpy(desc[i], L"desc");
     }
     PRINT_TEST_RESULT(space_set_graphic_description(space, desc) == ERROR);
 }
@@ -224,11 +226,11 @@ void test3_space_set_graphic_description() {
 
 void test1_space_set_basic_description() {
     Space *space = NULL;
-    char basic_description[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t basic_description[MAX_TDESC_R][MAX_TDESC_C];
     int i;
     space = space_create(SPACE_BASE_ID+1);
     for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(basic_description[i], "Basic description");
+        wcscpy(basic_description[i], L"Basic description");
     }
     PRINT_TEST_RESULT(space_set_basic_description(space, basic_description) == OK);
     space_destroy(space);
@@ -236,10 +238,10 @@ void test1_space_set_basic_description() {
 
 void test2_space_set_basic_description() {
     Space *space = NULL;
-    char basic_description[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t basic_description[MAX_TDESC_R][MAX_TDESC_C];
     int i;
     for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(basic_description[i], "Basic description");
+        wcscpy(basic_description[i], L"Basic description");
     }
     PRINT_TEST_RESULT(space_set_basic_description(space, basic_description) == ERROR);
 }
@@ -253,11 +255,11 @@ void test3_space_set_basic_description() {
 
 void test1_space_set_check_description() {
     Space *space = NULL;
-    char check_description[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t check_description[MAX_TDESC_R][MAX_TDESC_C];
     int i;
     space = space_create(SPACE_BASE_ID+1);
     for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(check_description[i], "Check description");
+        wcscpy(check_description[i], L"Check description");
     }
     PRINT_TEST_RESULT(space_set_check_description(space, check_description) == OK);
     space_destroy(space);
@@ -265,10 +267,10 @@ void test1_space_set_check_description() {
 
 void test2_space_set_check_description() {
     Space *space = NULL;
-    char check_description[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t check_description[MAX_TDESC_R][MAX_TDESC_C];
     int i;
     for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(check_description[i], "Check description");
+        wcscpy(check_description[i], L"Check description");
     }
     PRINT_TEST_RESULT(space_set_check_description(space, check_description) == ERROR);
 }
@@ -283,8 +285,8 @@ void test3_space_set_check_description() {
 void test1_space_get_name() {
     Space *space = NULL;
     space = space_create(SPACE_BASE_ID+1);
-    space_set_name(space, "test");
-    PRINT_TEST_RESULT(strcmp(space_get_name(space), "test") == 0);
+    space_set_name(space, L"test");
+    PRINT_TEST_RESULT(wcscmp(space_get_name(space), L"test") == 0);
     space_destroy(space);
 }
 
@@ -350,18 +352,18 @@ void test6_space_get_direction() {
 
 void test1_space_get_graphic_description() {
     Space *space = NULL;
-    char desc[MAX_GDESC_R][MAX_GDESC_C];
-    char **descEnd;
+    wchar_t desc[MAX_GDESC_R][MAX_GDESC_C];
+    wchar_t **descEnd;
     int i;
     int result = 0;
     space = space_create(SPACE_BASE_ID+1);
     for (i = 0; i < MAX_GDESC_R; i++) {
-        strcpy(desc[i], "desc");
+        wcscpy(desc[i], L"desc");
     }
     space_set_graphic_description(space, desc);
     descEnd = space_get_graphic_description(space);
     for (i = 0; i < MAX_GDESC_R; i++) {
-        if (strcmp(descEnd[i], "desc") != 0) {
+        if (wcscmp(descEnd[i], L"desc") != 0) {
             result = 1;
         }
     }
@@ -376,18 +378,18 @@ void test2_space_get_graphic_description() {
 
 void test1_space_get_basic_description() {
     Space *space = NULL;
-    char basic_description[MAX_TDESC_R][MAX_TDESC_C];
-    char **basic_description_end;
+    wchar_t basic_description[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t **basic_description_end;
     int i;
     int result = 0;
     space = space_create(SPACE_BASE_ID+1);
     for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(basic_description[i], "Basic description");
+        wcscpy(basic_description[i], L"Basic description");
     }
     space_set_basic_description(space, basic_description);
     basic_description_end = space_get_basic_description(space);
     for (i = 0; i < MAX_TDESC_R; i++) {
-        if (strcmp(basic_description_end[i], "Basic description") != 0) {
+        if (wcscmp(basic_description_end[i], L"Basic description") != 0) {
             result = 1;
         }
     }
@@ -402,18 +404,18 @@ void test2_space_get_basic_description() {
 
 void test1_space_get_check_description() {
     Space *space = NULL;
-    char check_description[MAX_TDESC_R][MAX_TDESC_C];
-    char **check_description_end;
+    wchar_t check_description[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t **check_description_end;
     int i;
     int result = 0;
     space = space_create(SPACE_BASE_ID+1);
     for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(check_description[i], "Check description");
+        wcscpy(check_description[i], L"Check description");
     }
     space_set_check_description(space, check_description);
     check_description_end = space_get_check_description(space);
     for (i = 0; i < MAX_TDESC_R; i++) {
-        if (strcmp(check_description_end[i], "Check description") != 0) {
+        if (wcscmp(check_description_end[i], L"Check description") != 0) {
             result = 1;
         }
     }

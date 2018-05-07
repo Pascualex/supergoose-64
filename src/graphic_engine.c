@@ -24,7 +24,7 @@
 
 /*Graphic Engine structure, which includes the six areas that are used when playing.*/
 struct _Graphic_engine {
-    Area *map_left, *map_left_separator, *map_center, *map_right_separator, *map_right, *links_names, *objects_in_room_1, *objects_in_room_2, *objects_in_room_3, *inventory_1, *inventory_2, *inventory_3, *banner, *feedback, *chat;
+    Area *map_left, *map_left_separator, *map_center, *map_right_separator, *map_right, *links_names, *objects_in_room_1, *objects_in_room_2, *objects_in_room_3, *inventory_1, *inventory_2, *inventory_3, *descript, *banner, *feedback, *chat;
 };
 
 /*This function is used to allocate the memory the graphic engine is going to use.*/
@@ -46,7 +46,8 @@ Graphic_engine *graphic_engine_create() {
     graphic_engine->objects_in_room_3   = screen_area_init(107, 14, 16,  5, WHITE, BLACK, FALSE);
     graphic_engine->inventory_1         = screen_area_init( 88, 21, 37,  1, WHITE, BLACK, FALSE);
     graphic_engine->inventory_2         = screen_area_init( 90, 23, 16,  5, WHITE, BLACK, FALSE);
-    graphic_engine->inventory_3         = screen_area_init(107, 23, 16,  5, WHITE, BLACK, FALSE);    
+    graphic_engine->inventory_3         = screen_area_init(107, 23, 16,  5, WHITE, BLACK, FALSE);
+    graphic_engine->descript            = screen_area_init( 88, 30, 37, 14, WHITE, BLACK,  TRUE);    
     graphic_engine->feedback            = screen_area_init( 88, 45, 37, 13, WHITE, BLACK,  TRUE);
     graphic_engine->chat                = screen_area_init(  3, 50, 84,  8, WHITE, BLACK,  TRUE);
 
@@ -74,7 +75,8 @@ void graphic_engine_destroy(Graphic_engine *graphic_engine) {
     screen_area_destroy(graphic_engine->objects_in_room_3);
     screen_area_destroy(graphic_engine->inventory_1);
     screen_area_destroy(graphic_engine->inventory_2);
-    screen_area_destroy(graphic_engine->inventory_3);    
+    screen_area_destroy(graphic_engine->inventory_3);  
+    screen_area_destroy(graphic_engine->descript);    
     screen_area_destroy(graphic_engine->feedback);
     screen_area_destroy(graphic_engine->chat);
 
@@ -437,6 +439,9 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
             screen_area_puts(graphic_engine->inventory_3, unicode_str);
         } 
     }    
+
+    /* Paint the in the descript area */
+    screen_area_clear(graphic_engine->descript);
 
     /* Paint the in the banner area */
     screen_area_clear(graphic_engine->banner);

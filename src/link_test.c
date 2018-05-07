@@ -8,10 +8,12 @@
  * @copyright GNU Public License
  */
 
+#undef __STRICT_ANSI__
+
 /*C libraries*/
 #include <stdio.h> 
 #include <stdlib.h> 
-#include <string.h> 
+#include <wchar.h> 
 /*Own libraries*/
 #include "../include/link.h"
 #include "../include/link_test.h"
@@ -101,13 +103,13 @@ void test4_link_create() {
 void test1_link_set_name() {
     Link *link = NULL;
     link = link_create(LINK_BASE_ID+1);
-    PRINT_TEST_RESULT(link_set_name(link, "string") == OK);
+    PRINT_TEST_RESULT(link_set_name(link, L"string") == OK);
     link_destroy(link);
 }
 
 void test2_link_set_name() {
     Link *link = NULL;
-    PRINT_TEST_RESULT(link_set_name(link, "string") == ERROR);
+    PRINT_TEST_RESULT(link_set_name(link, L"string") == ERROR);
     link_destroy(link);
 }
 
@@ -164,14 +166,14 @@ void test2_link_get_id() {
 void test1_link_get_name() {
     Link *link = NULL;
     link = link_create(LINK_BASE_ID+1);
-    link_set_name(link, "string");
-    PRINT_TEST_RESULT(!strcmp(link_get_name(link), "string"));
+    link_set_name(link, L"string");
+    PRINT_TEST_RESULT(!wcscmp(link_get_name(link), L"string"));
     link_destroy(link);
 }
 
 void test2_link_get_name() {
     Link *link = NULL;
-    link_set_name(link, "string");
+    link_set_name(link, L"string");
     PRINT_TEST_RESULT(link_get_name(link) == NULL);
 }
 
