@@ -83,6 +83,8 @@ typedef enum {
     LEFT,           /*!< Left space (old) */
     PREVIOUS,       /*!< Previous space (old)*/
     RIGHT,          /*!< Right space (old)*/
+    UP,             /*!< Up space (old)*/
+    DOWN,           /*!< Down space (old)*/
     GRASP,          /*!< Grasp an object */
     DROP,           /*!< Drop an object */
     THROW,          /*!< Roll the die */
