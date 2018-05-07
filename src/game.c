@@ -1148,10 +1148,29 @@ STATUS game_callback_roll(Game *game, char * string) {
 /*This action is used to see the description of a space or an object*/
 STATUS game_callback_check(Game *game, char *string) {
     Object *object;
+    BOOL space_glowing;
+    int i;
 
     if (game == NULL || game->players == NULL || game->objects == NULL || string == NULL || atoi(string) < 0 || atoi(string) > ID_RANGE) return ERROR;
 
-    if (space_check_tag(game_find(game, player_get_location(game->players[0])), ILLUMINATED) == FALSE) return DARK; 
+    if (space_check_tag(game_find(game, player_get_location(game->players[0])), ILLUMINATED) == FALSE) {
+        space_glowing = FALSE;
+        for (i = 0; i < player_get_objects_number(game->players[0]); i++) {
+            if (object_check_tag((Object *) game_find(game, player_get_object_id(game->players[0], i)), GLOWING)) {
+                space_glowing = TRUE;
+                break;
+            }
+        }
+        if (!space_glowing) {
+            for (i = 0; i < space_get_objects_number((Space *) game_find(game, player_get_location(game->players[0]))); i++) {
+                if (object_check_tag((Object *) game_find(game, space_get_object_id((Space *) game_find(game, player_get_location(game->players[0])), i)), GLOWING)) {
+                    space_glowing = TRUE;
+                    break;
+                }
+            }
+        }
+        if (!space_glowing) return DARK;         
+    }
     
     if (strcmp(string, "space") == 0 || strcmp(string, "s") == 0) {
         game->last_text_description = space_get_check_description(game_find(game, player_get_location(game->players[0])));

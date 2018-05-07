@@ -122,7 +122,7 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
         if (id_north != NO_ID) {
             space_north = (Space *) game_find(game, id_north);
             space_glowing = FALSE;
-    		for (j = 0; j < space_get_objects_number( (Space *) game_find(game, id_north)); j++) {
+    		for (j = 0; j < space_get_objects_number((Space *) game_find(game, id_north)); j++) {
     			if (object_check_tag((Object *) game_find(game, space_get_object_id((Space *) game_find(game, id_north), j)), GLOWING)) {
     				space_glowing = TRUE;
     				break;
@@ -171,14 +171,14 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
 
         if (id_act != NO_ID) { 
         	space_glowing = FALSE;
-	    	for (j = 0; j < player_get_objects_number( (Player *) game_find(game, PLAYER_BASE_ID+1)); j++) {
+	    	for (j = 0; j < player_get_objects_number((Player *) game_find(game, PLAYER_BASE_ID+1)); j++) {
 	    		if (object_check_tag((Object *) game_find(game, player_get_object_id((Player *) game_find(game, PLAYER_BASE_ID+1), j)), GLOWING)) {
 	    			space_glowing = TRUE;
 	    			break;
 	    		}
 	    	}
 	    	if (!space_glowing) {
-	    		for (j = 0; j < space_get_objects_number( (Space *) game_find(game, id_act)); j++) {
+	    		for (j = 0; j < space_get_objects_number((Space *) game_find(game, id_act)); j++) {
 	    			if (object_check_tag((Object *) game_find(game, space_get_object_id((Space *) game_find(game, id_act), j)), GLOWING)) {
 	    				space_glowing = TRUE;
 	    				break;
@@ -211,7 +211,7 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
         if (id_south != NO_ID) {
             space_south = (Space *) game_find(game, id_south);
             space_glowing = FALSE;
-    		for (j = 0; j < space_get_objects_number( (Space *) game_find(game, id_south)); j++) {
+    		for (j = 0; j < space_get_objects_number((Space *) game_find(game, id_south)); j++) {
     			if (object_check_tag((Object *) game_find(game, space_get_object_id((Space *) game_find(game, id_south), j)), GLOWING)) {
     				space_glowing = TRUE;
     				break;
@@ -253,7 +253,7 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
         if (id_west != NO_ID) {
             space_west = (Space *) game_find(game, id_west);
             space_glowing = FALSE;
-    		for (j = 0; j < space_get_objects_number( (Space *) game_find(game, id_west)); j++) {
+    		for (j = 0; j < space_get_objects_number((Space *) game_find(game, id_west)); j++) {
     			if (object_check_tag((Object *) game_find(game, space_get_object_id((Space *) game_find(game, id_west), j)), GLOWING)) {
     				space_glowing = TRUE;
     				break;
