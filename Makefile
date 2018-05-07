@@ -123,16 +123,16 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 
 #=====================================UTILS=====================================#
 run:
-	chmod 777 run.sh
-	chmod 777 music.sh
-	gnome-terminal --window --full-screen --command=./run.sh
+	./SuperGoose_64 || true
+
+mute:
+	gnome-terminal --window --full-screen --command=./SuperGoose_64 || true
 music:
-	chmod 777 run.sh
-	chmod 777 music.sh
-	gnome-terminal --window --full-screen --command=./run.sh
-	./music.sh
+	chmod 777 ./lib/music.sh
+	gnome-terminal --window --full-screen --command=./SuperGoose_64
+	./lib/music.sh	|| true
 valgrind:
-	valgrind -v -q --leak-check=full ./SuperGoose_64
+	valgrind -v -q --leak-check=full ./SuperGoose_64	|| true
 
 install:
 	sudo apt install gtk+-3.0

@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
     Graphic_engine *gengine;
     FILE *log = NULL;
 
+    system("xdotool key Ctrl+minus");
     if (argc != 3 && argc != 1) { /* Check if we have log file. */
         fprintf(stderr, "Use: %s (normal use) or %s -l <game_log_file> (using log file)\n", argv[0], argv[0]);
         return 1;
@@ -45,6 +46,9 @@ int main(int argc, char *argv[]) {
     }
     if (log == NULL){
 	    if (game_menu(game) == ERROR) {
+            system("xdotool key Ctrl+plus");
+            system("killall -q music.sh");
+            system("killall -q aplay");
 			game_destroy(game);
 			return 1;
 		}
@@ -106,7 +110,8 @@ int main(int argc, char *argv[]) {
     game_destroy(game);
 
     if (log) fclose(log);
-    system("killall make");
-
+    system("xdotool key Ctrl+plus");
+    system("killall -q music.sh");
+    system("killall -q aplay");
     return 0;
 }
