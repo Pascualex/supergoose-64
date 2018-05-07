@@ -1101,6 +1101,8 @@ STATUS game_callback_grasp(Game *game, char *string) {
     if (player_get_location(game->players[0]) == NO_ID || space_check_object((Space *) game_find(game, player_get_location(game->players[0])), object_get_id(object)) == FALSE || player_is_full(game->players[0]) == TRUE || player_get_location(game->players[0]) != object_get_location(object)) return ERROR;
     if (object_check_tag(object, MOVABLE) == FALSE) return UNMOVABLE;
 
+    object_add_tags(object, 1, MOVED);
+
     return game_set_object_location(game, player_get_id(game->players[0]), object_get_id(object));
 }
 
@@ -1189,7 +1191,11 @@ STATUS game_callback_check(Game *game, char *string) {
 		if (player_get_location(game->players[0]) != object_get_location(object)) return FAR;		
 	}	
 
-    game->last_text_description = object_get_check(object);
+    if (!object_check_tag(object, MOVED)){
+        game->last_text_description = object_get_check(object);  
+    } else {
+        game->last_text_description = object_get_alt_check(object);
+    }
     if (game->last_text_description == NULL) return ERROR;
 
     return OK;
