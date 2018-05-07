@@ -91,24 +91,29 @@ int main(int argc, char *argv[]) {
             game_destroy(game);
             game_create(game);
         }
-        rule = game_rules_update(game, command);
         game_update(game, command);
+        rule = game_rules_update(game, command);            
 
-        if (log != NULL) {
-        	if (command_get_command(command) != PROMODE){
-	            if (strcmp(command_get_info(command), "NO_INFO") == 0) {
-	                fprintf(log, "%s", command_get_str(game_get_last_command(game)));
-	            } else {
-	                fprintf(log, "%s %s", command_get_str(game_get_last_command(game)), command_get_info(command));
-	            }
-	            if (game_get_status_last_command(game) == OK) {
-	                fprintf(log, " --> OK\n");
-	            } else {
-	                fprintf(log, " --> ERROR\n");
-	            }
-	        }
+        if (rule == END1 || rule == END2 || rule == END3) {            
+            break;
+        } else {
+            if (log != NULL) {
+                if (command_get_command(command) != PROMODE){
+                    if (strcmp(command_get_info(command), "NO_INFO") == 0) {
+                        fprintf(log, "%s", command_get_str(game_get_last_command(game)));
+                    } else {
+                        fprintf(log, "%s %s", command_get_str(game_get_last_command(game)), command_get_info(command));
+                    }
+                    if (game_get_status_last_command(game) == OK) {
+                        fprintf(log, " --> OK\n");
+                    } else {
+                        fprintf(log, " --> ERROR\n");
+                    }
+                }
+            }
         }
-    }
+        
+    }    
 
     final = final_create();
     if (final != NULL){
@@ -116,9 +121,8 @@ int main(int argc, char *argv[]) {
         final_destroy(final);
     }
 
-
-    command_destroy(command);
     graphic_engine_destroy(gengine);
+    command_destroy(command);    
     game_destroy(game);
 
     if (log) fclose(log);

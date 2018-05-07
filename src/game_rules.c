@@ -28,9 +28,9 @@ RULES_STATUS game_rules_update(Game *game, Command *command) {
 	location = player_get_location((Player *) game_find(game, PLAYER_BASE_ID+1));
 
 	/* RULE 1 */
-	if (location == HALL_ROOM_ID && (command_get_command(command) == MOVE && ((!strcmp(command_get_info(command), "north") || !strcmp(command_get_info(command), "n")) || command_get_command(command) == UP))) {
+	if (location == HALL_ROOM_ID && (command_get_command(command) == MOVE && ((!strncmp(command_get_info(command), "north", 5) || !strncmp(command_get_info(command), "n", 1)) || command_get_command(command) == UP))) {
 		for (j = 0; j < player_get_objects_number((Player *) game_find(game, PLAYER_BASE_ID+1)); j++) {
-    		if (object_check_tag((Object *) game_find(game, player_get_object_id((Player *) game_find(game, PLAYER_BASE_ID+1), j)), IS_KEY)) {
+    		if (object_check_tag((Object *) game_find(game, player_get_object_id((Player *) game_find(game, PLAYER_BASE_ID+1), j)), IS_KEY)) {    			
     			return END1;
     		}
     	}

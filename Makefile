@@ -133,10 +133,12 @@ run:
 
 mute:
 	gnome-terminal --window --full-screen --command=./SuperGoose_64 || true
+	
 music:
 	chmod 777 ./lib/music.sh
 	gnome-terminal --window --full-screen --command=./SuperGoose_64
 	./lib/music.sh	|| true
+
 valgrind:
 	valgrind -v -q --leak-check=full ./SuperGoose_64	|| true
 
@@ -158,7 +160,7 @@ doxylink:
 	ln -sf ./doc/html/index.html DocLink.html
 
 dist:
-	tar -czf SuperGoose_64.tgz include src obj doc MEETINGS *file*
+	tar -czf SuperGoose_64.tgz include src obj doc MEETINGS *file* *.pdf
 
 test:
 	./testfiles/./die_test
