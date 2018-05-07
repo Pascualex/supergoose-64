@@ -1143,7 +1143,6 @@ STATUS game_callback_open(Game *game, char *string) {
     }
 
 	link = (Link *) game_find(game, atoi(slink)+LINK_BASE_ID);
-
     if (link == NULL) {
         link = (Link *) game_find_name(game, slink);
         if (link == NULL) return ERROR;

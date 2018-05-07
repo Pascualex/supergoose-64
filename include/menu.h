@@ -4,7 +4,6 @@
  * @author Eric Morales
  * @version 1.0 
  * @date 23-04-2018
- * @updated 23-04-2018
  * @copyright GNU Public License
  */
 

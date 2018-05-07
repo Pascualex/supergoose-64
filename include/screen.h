@@ -12,8 +12,8 @@
 
 #include "types.h"
 
-#define ROWS 60
-#define COLUMNS 128
+#define ROWS 60      /*!< The number of rows in the screen */
+#define COLUMNS 128  /*!< The number of columns in the screen */
 
 /**
  * @brief               It holds the necessary data to manage areas.

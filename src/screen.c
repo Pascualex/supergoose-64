@@ -98,9 +98,10 @@ void screen_destroy() {
 void screen_paint() {
     int i, j;
 
-    if (data != NULL || data_fg_color != NULL || data_bg_color != NULL) {
-
-        puts("\033[2J");
+    if (data != NULL || data_fg_color != NULL || data_bg_color != NULL) {        
+        for (i = 0; i < 100; i++) {
+            printf("\n");
+        }
 
         for (i = 0; i < ROWS; i++) {
             for (j = 0; j < COLUMNS; j++) {

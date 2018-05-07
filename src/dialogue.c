@@ -28,18 +28,18 @@
     EXIT,        --
     MOVE,        --
     FOLLOWING,   --
-    LEFT,        -- 
+    LEFT,        --
     PREVIOUS,    --
     RIGHT,       --
-    GRASP,       -- 
+    GRASP,       --
     DROP,        --
     THROW,       --
     CHECK,       --
-    OPEN_L,         
+    OPEN_L,        
     TURN_ON,       
-    TURN_OFF,    
+    TURN_OFF,      
     LOAD,          
-    SAVE,           
+    SAVE,          
     PROMODE        
 } T_Command;*/
 
