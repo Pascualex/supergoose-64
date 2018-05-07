@@ -13,6 +13,7 @@
 /*Own libraries*/
 #include "../include/graphic_engine.h"
 #include "../include/game_rules.h"
+#include "../include/final.h"
 
 
 /*This is the main program of the game, where the action takes place. It is responsible of calling all the other function and advises if anythin is going wrong*/
@@ -20,7 +21,9 @@ int main(int argc, char *argv[]) {
     Game *game = NULL;
     Command *command = NULL;
     Graphic_engine *gengine;
+    Final *final = NULL;
     FILE *log = NULL;
+    RULES_STATUS rule = NO_RULE;
 
     system("xdotool key Ctrl+minus");
     if (argc != 3 && argc != 1) { /* Check if we have log file. */
@@ -88,7 +91,7 @@ int main(int argc, char *argv[]) {
             game_destroy(game);
             game_create(game);
         }
-        game_rules_update(game, command);
+        rule = game_rules_update(game, command);
         game_update(game, command);
 
         if (log != NULL) {
@@ -106,6 +109,13 @@ int main(int argc, char *argv[]) {
 	        }
         }
     }
+
+    final = final_create();
+    if (final != NULL){
+        final_paint(final, rule);
+        final_destroy(final);
+    }
+
 
     command_destroy(command);
     graphic_engine_destroy(gengine);

@@ -1,7 +1,7 @@
 #===================================HEADERS===================================#
 MAKE=gcc -g -Wall -pedantic -ansi -I./lib/ 
-OBJ= ./obj/command.o ./obj/die.o ./obj/game.o ./obj/game_loop.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o ./obj/dialogue.o ./obj/game_rules.o
-OBJGAME= ./obj/command.o ./obj/die.o ./obj/game.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o ./obj/dialogue.o ./obj/game_rules.o
+OBJ= ./obj/command.o ./obj/die.o ./obj/final.o ./obj/game.o ./obj/game_loop.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o ./obj/dialogue.o ./obj/game_rules.o
+OBJGAME= ./obj/command.o ./obj/die.o ./obj/final.o ./obj/game.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o ./obj/dialogue.o ./obj/game_rules.o
 NFD=-m64 -no-pie -s -lnfd `pkg-config --libs gtk+-3.0` -L/usr/lib64 -L./lib/ ./lib/libnfd.a
 
 #=====================================ALL=====================================#
@@ -53,6 +53,9 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 
 ./obj/die.o: ./src/die.c ./include/die.h ./include/types.h
 	$(MAKE) -c ./src/die.c -o ./obj/die.o 
+
+./obj/final.o: ./src/final.c ./include/final.h ./include/types.h
+	$(MAKE) -c ./src/final.c -o ./obj/final.o
 
 ./obj/game.o: ./src/game.c ./include/game.h ./include/types.h ./include/menu.h
 	$(MAKE) -c ./src/game.c -o ./obj/game.o
