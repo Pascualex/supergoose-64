@@ -426,6 +426,17 @@ void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][M
         wcscpy(graphic_description[7], HALLWAY_4_7);
         wcscpy(graphic_description[8], HALLWAY_4_8);
         wcscpy(graphic_description[9], HALLWAY_4_9);
+    } else if (wcscmp(graphic_description_type, L"HALLWAY_5") == 0) {
+        wcscpy(graphic_description[0], HALLWAY_5_0);
+        wcscpy(graphic_description[1], HALLWAY_5_1);
+        wcscpy(graphic_description[2], HALLWAY_5_2);
+        wcscpy(graphic_description[3], HALLWAY_5_3);
+        wcscpy(graphic_description[4], HALLWAY_5_4);
+        wcscpy(graphic_description[5], HALLWAY_5_5);
+        wcscpy(graphic_description[6], HALLWAY_5_6);
+        wcscpy(graphic_description[7], HALLWAY_5_7);
+        wcscpy(graphic_description[8], HALLWAY_5_8);
+        wcscpy(graphic_description[9], HALLWAY_5_9);
     } else if (wcscmp(graphic_description_type, L"HIBERNATION_ROOM") == 0) {
         wcscpy(graphic_description[0], HIBERNATION_ROOM_0);
         wcscpy(graphic_description[1], HIBERNATION_ROOM_1);
@@ -492,6 +503,28 @@ void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][M
         wcscpy(graphic_description[7], ELEVATOR_12_7);
         wcscpy(graphic_description[8], ELEVATOR_12_8);
         wcscpy(graphic_description[9], ELEVATOR_12_9);
+    } else if (wcscmp(graphic_description_type, L"ELEVATOR_21") == 0) {
+        wcscpy(graphic_description[0], ELEVATOR_21_0);
+        wcscpy(graphic_description[1], ELEVATOR_21_1);
+        wcscpy(graphic_description[2], ELEVATOR_21_2);
+        wcscpy(graphic_description[3], ELEVATOR_21_3);
+        wcscpy(graphic_description[4], ELEVATOR_21_4);
+        wcscpy(graphic_description[5], ELEVATOR_21_5);
+        wcscpy(graphic_description[6], ELEVATOR_21_6);
+        wcscpy(graphic_description[7], ELEVATOR_21_7);
+        wcscpy(graphic_description[8], ELEVATOR_21_8);
+        wcscpy(graphic_description[9], ELEVATOR_21_9);
+    } else if (wcscmp(graphic_description_type, L"ELEVATOR_22") == 0) {
+        wcscpy(graphic_description[0], ELEVATOR_22_0);
+        wcscpy(graphic_description[1], ELEVATOR_22_1);
+        wcscpy(graphic_description[2], ELEVATOR_22_2);
+        wcscpy(graphic_description[3], ELEVATOR_22_3);
+        wcscpy(graphic_description[4], ELEVATOR_22_4);
+        wcscpy(graphic_description[5], ELEVATOR_22_5);
+        wcscpy(graphic_description[6], ELEVATOR_22_6);
+        wcscpy(graphic_description[7], ELEVATOR_22_7);
+        wcscpy(graphic_description[8], ELEVATOR_22_8);
+        wcscpy(graphic_description[9], ELEVATOR_22_9);
     } else if (wcscmp(graphic_description_type, L"WAREHOUSE") == 0) {
         wcscpy(graphic_description[0], WAREHOUSE_0);
         wcscpy(graphic_description[1], WAREHOUSE_1);
@@ -580,7 +613,7 @@ void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][M
         wcscpy(graphic_description[7], WASHROOM_7);
         wcscpy(graphic_description[8], WASHROOM_8);
         wcscpy(graphic_description[9], WASHROOM_9);
-    }  else if (wcscmp(graphic_description_type, L"TECHNICAL_LAB_1") == 0) {
+    } else if (wcscmp(graphic_description_type, L"TECHNICAL_LAB_1") == 0) {
         wcscpy(graphic_description[0], TECHNICAL_LAB_1_0);
         wcscpy(graphic_description[1], TECHNICAL_LAB_1_1);
         wcscpy(graphic_description[2], TECHNICAL_LAB_1_2);
@@ -591,7 +624,7 @@ void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][M
         wcscpy(graphic_description[7], TECHNICAL_LAB_1_7);
         wcscpy(graphic_description[8], TECHNICAL_LAB_1_8);
         wcscpy(graphic_description[9], TECHNICAL_LAB_1_9);
-    }  else if (wcscmp(graphic_description_type, L"TECHNICAL_LAB_2") == 0) {
+    } else if (wcscmp(graphic_description_type, L"TECHNICAL_LAB_2") == 0) {
         wcscpy(graphic_description[0], TECHNICAL_LAB_2_0);
         wcscpy(graphic_description[1], TECHNICAL_LAB_2_1);
         wcscpy(graphic_description[2], TECHNICAL_LAB_2_2);
@@ -602,7 +635,7 @@ void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][M
         wcscpy(graphic_description[7], TECHNICAL_LAB_2_7);
         wcscpy(graphic_description[8], TECHNICAL_LAB_2_8);
         wcscpy(graphic_description[9], TECHNICAL_LAB_2_9);
-    }  else if (wcscmp(graphic_description_type, L"LARGE_LAB") == 0) {
+    } else if (wcscmp(graphic_description_type, L"LARGE_LAB") == 0) {
         wcscpy(graphic_description[0], LARGE_LAB_0);
         wcscpy(graphic_description[1], LARGE_LAB_1);
         wcscpy(graphic_description[2], LARGE_LAB_2);
@@ -613,7 +646,7 @@ void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][M
         wcscpy(graphic_description[7], LARGE_LAB_7);
         wcscpy(graphic_description[8], LARGE_LAB_8);
         wcscpy(graphic_description[9], LARGE_LAB_9);
-    }  else if (wcscmp(graphic_description_type, L"TRANS_LAB") == 0) {
+    } else if (wcscmp(graphic_description_type, L"TRANS_LAB") == 0) {
         wcscpy(graphic_description[0], TRANS_LAB_0);
         wcscpy(graphic_description[1], TRANS_LAB_1);
         wcscpy(graphic_description[2], TRANS_LAB_2);
@@ -624,7 +657,7 @@ void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][M
         wcscpy(graphic_description[7], TRANS_LAB_7);
         wcscpy(graphic_description[8], TRANS_LAB_8);
         wcscpy(graphic_description[9], TRANS_LAB_9);
-    }  else if (wcscmp(graphic_description_type, L"POWER_LAB") == 0) {
+    } else if (wcscmp(graphic_description_type, L"POWER_LAB") == 0) {
         wcscpy(graphic_description[0], POWER_LAB_0);
         wcscpy(graphic_description[1], POWER_LAB_1);
         wcscpy(graphic_description[2], POWER_LAB_2);
@@ -635,7 +668,7 @@ void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][M
         wcscpy(graphic_description[7], POWER_LAB_7);
         wcscpy(graphic_description[8], POWER_LAB_8);
         wcscpy(graphic_description[9], POWER_LAB_9);
-    }  else if (wcscmp(graphic_description_type, L"POWER_INFO") == 0) {
+    } else if (wcscmp(graphic_description_type, L"POWER_INFO") == 0) {
         wcscpy(graphic_description[0], POWER_INFO_0);
         wcscpy(graphic_description[1], POWER_INFO_1);
         wcscpy(graphic_description[2], POWER_INFO_2);
@@ -646,6 +679,17 @@ void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][M
         wcscpy(graphic_description[7], POWER_INFO_7);
         wcscpy(graphic_description[8], POWER_INFO_8);
         wcscpy(graphic_description[9], POWER_INFO_9);
+    } else if (wcscmp(graphic_description_type, L"TRANS_ROOM") == 0) {
+        wcscpy(graphic_description[0], TRANS_ROOM_0);
+        wcscpy(graphic_description[1], TRANS_ROOM_1);
+        wcscpy(graphic_description[2], TRANS_ROOM_2);
+        wcscpy(graphic_description[3], TRANS_ROOM_3);
+        wcscpy(graphic_description[4], TRANS_ROOM_4);
+        wcscpy(graphic_description[5], TRANS_ROOM_5);
+        wcscpy(graphic_description[6], TRANS_ROOM_6);
+        wcscpy(graphic_description[7], TRANS_ROOM_7);
+        wcscpy(graphic_description[8], TRANS_ROOM_8);
+        wcscpy(graphic_description[9], TRANS_ROOM_9);
     } else {
         wcscpy(graphic_description[0], ERROR_ROOM_0);
         wcscpy(graphic_description[1], ERROR_ROOM_1);
