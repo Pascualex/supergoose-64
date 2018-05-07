@@ -22,6 +22,9 @@
 #include "../include/die.h"
 #include "../include/command.h"
 
+T_Command last_cmd;
+STATUS last_cmd_status;
+
 void dialogue_generate(Game *game, wchar_t dialogue[MAX_DIA_R][MAX_DIA_C]) {
     Player *player = NULL;
     Space *space = NULL;
@@ -197,9 +200,21 @@ void dialogue_generate(Game *game, wchar_t dialogue[MAX_DIA_R][MAX_DIA_C]) {
             current_row++;
     }
     
+    if (last_cmd == game_get_last_command(game) && game_get_status_last_command(game) != OK && last_cmd_status != OK) {
+        swprintf(dialogue[current_row], MAX_DIA_C, L" You have already tried that without success!");
+        current_row++;
+    }    
+
     for (i = current_row; i < MAX_DIA_R; i++) {
-        swprintf(dialogue[i], MAX_DIA_C, L" ");
+        if (i == MAX_DIA_R-1) {
+            swprintf(dialogue[i], MAX_DIA_C, L" If you need help with commands, type 'h' or 'help'.");
+        } else {
+            swprintf(dialogue[i], MAX_DIA_C, L" ");
+        }        
     }
+
+    last_cmd = game_get_last_command(game);
+    last_cmd_status = game_get_status_last_command(game);
 
     return;
 }

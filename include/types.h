@@ -28,11 +28,11 @@
 #define NO_ID -1                    /*!< Default Id used when there is no Id or something works as it shouldn't */
 #define NOT_FOUND -1                /*!< Used when a set doesnt found the given Id position */
 
-#define SET_MAX_IDS 10               /*!< Maximum number of Ids a set can store */
+#define SET_MAX_IDS 10              /*!< Maximum number of Ids a set can store */
 #define MAX_SPACES 100              /*!< Maximum number of spaces a game is prepared to store */
-#define MAX_PLAYERS 10              /*!< Maximum number of players a game is prepared to store */
-#define MAX_OBJECTS 10              /*!< Maximum number of objects a game is prepared to store */
-#define MAX_DIES 10                 /*!< Maximum number of dies a game is prepared to store */
+#define MAX_PLAYERS 5               /*!< Maximum number of players a game is prepared to store */
+#define MAX_OBJECTS 20              /*!< Maximum number of objects a game is prepared to store */
+#define MAX_DIES 1                  /*!< Maximum number of dies a game is prepared to store */
 #define MAX_LINKS 50                /*!< Maximum number of links a game is prepared to store */
 #define MAX_TAGS 10                 /*!< Maximun number of tags an object can have */
 

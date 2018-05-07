@@ -282,8 +282,8 @@ void test3_player_get_objects_number() {
 void test4_player_get_objects_number() {
     Player *p = NULL;
     int i;
-    p = player_create(PLAYER_BASE_ID+1, 5);
-    for (i = 0; i <= MAX_OBJECTS+1; i++) {
+    p = player_create(PLAYER_BASE_ID+1, SET_MAX_IDS);
+    for (i = 0; i < SET_MAX_IDS; i++) {
         player_add_object(p, OBJECT_BASE_ID+1+i);
     }
     PRINT_TEST_RESULT(player_get_objects_number(p) == SET_MAX_IDS);

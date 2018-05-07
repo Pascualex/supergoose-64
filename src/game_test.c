@@ -226,8 +226,8 @@ void test1_game_add_player() {
     Player *player = NULL;
     game = game_create();
     game_create_from_file(game, "./datafiles/test.dat");
-    player = player_create(PLAYER_BASE_ID+2, 2);
-    PRINT_TEST_RESULT(game_add_player(game, player, 2) == OK);
+    player = player_create(PLAYER_BASE_ID+2, 1);
+    PRINT_TEST_RESULT(game_add_player(game, player, 4) == OK);
     game_destroy(game);
 }
 

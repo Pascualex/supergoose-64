@@ -701,6 +701,17 @@ void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][M
         wcscpy(graphic_description[7], POWER_INFO_7);
         wcscpy(graphic_description[8], POWER_INFO_8);
         wcscpy(graphic_description[9], POWER_INFO_9);
+    } else if (wcscmp(graphic_description_type, L"TECHNICAL_ROOM") == 0) {
+        wcscpy(graphic_description[0], TECHNICAL_ROOM_0);
+        wcscpy(graphic_description[1], TECHNICAL_ROOM_1);
+        wcscpy(graphic_description[2], TECHNICAL_ROOM_2);
+        wcscpy(graphic_description[3], TECHNICAL_ROOM_3);
+        wcscpy(graphic_description[4], TECHNICAL_ROOM_4);
+        wcscpy(graphic_description[5], TECHNICAL_ROOM_5);
+        wcscpy(graphic_description[6], TECHNICAL_ROOM_6);
+        wcscpy(graphic_description[7], TECHNICAL_ROOM_7);
+        wcscpy(graphic_description[8], TECHNICAL_ROOM_8);
+        wcscpy(graphic_description[9], TECHNICAL_ROOM_9);
     } else if (wcscmp(graphic_description_type, L"TRANS_ROOM") == 0) {
         wcscpy(graphic_description[0], TRANS_ROOM_0);
         wcscpy(graphic_description[1], TRANS_ROOM_1);

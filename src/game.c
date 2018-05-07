@@ -491,7 +491,6 @@ STATUS game_add_player(Game *game, Player *player, Id location_id) {
 
     game->players[game->players_number] = player;
     game->players_number++;
-
     if (game_set_player_location(game, location_id, player_get_id(player)) == ERROR) return ERROR;
 
     return OK;

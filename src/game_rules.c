@@ -27,7 +27,8 @@ RULES_STATUS game_rules_update(Game *game, Command *command) {
 
 	location = player_get_location((Player *) game_find(game, PLAYER_BASE_ID+1));
 
-	if ( location == HALL_ROOM_ID && (command_get_command(command) == MOVE && ((!strcmp(command_get_info(command),"north") || !strcmp(command_get_info(command),"n")) || command_get_command(command) == UP))) {
+	/* RULE 1 */
+	if (location == HALL_ROOM_ID && (command_get_command(command) == MOVE && ((!strcmp(command_get_info(command), "north") || !strcmp(command_get_info(command), "n")) || command_get_command(command) == UP))) {
 		for (j = 0; j < player_get_objects_number((Player *) game_find(game, PLAYER_BASE_ID+1)); j++) {
     		if (object_check_tag((Object *) game_find(game, player_get_object_id((Player *) game_find(game, PLAYER_BASE_ID+1), j)), IS_KEY)) {
     			return END1;
@@ -35,21 +36,21 @@ RULES_STATUS game_rules_update(Game *game, Command *command) {
     	}
 	}
 
+	/* RULE 2 */
 	if (location == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, GEARS_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, FUSE_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, TRANS_CORE_ID)) == TRANS_ROOM_ID) {
 		return END2;
 	}
 
-	if ( location == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, GEARS_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, FUSE_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, POWER_CORE_ID)) == TRANS_ROOM_ID) {
+	/* RULE 3 */
+	if (location == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, GEARS_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, FUSE_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, POWER_CORE_ID)) == TRANS_ROOM_ID) {
 		return END3;
 	}
-
-
 
 	die = die_create(DIE_BASE_ID+1, 2);
 	if (die == NULL) return ERROR_RULES;
 
+	/* RULE 4 */
 	if (die_roll(die) == 1) {
-		
 		die_destroy(die);
 		
 		failing_space = (Space *) game_find(game, FAILING_SPACE_ID);
@@ -65,6 +66,8 @@ RULES_STATUS game_rules_update(Game *game, Command *command) {
 
 		return SPACE_ILLUMINATED;
 	}
+
+	die_destroy(die);
 
 	return NO_RULE;
 }

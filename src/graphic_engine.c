@@ -40,20 +40,20 @@ Graphic_engine *graphic_engine_create() {
     graphic_engine->map_center          = screen_area_init( 35,  7, 20, 42, WHITE, BLACK, FALSE);
     graphic_engine->map_right_separator = screen_area_init( 55,  7,  6, 42, WHITE, BLACK, FALSE);
     graphic_engine->map_right           = screen_area_init( 61,  7, 20, 42, WHITE, BLACK, FALSE);
-    graphic_engine->links_names         = screen_area_init( 88,  7, 37,  4, WHITE, BLACK,  TRUE);
-    graphic_engine->objects_in_room_1   = screen_area_init( 88, 12, 37,  1, WHITE, BLACK, FALSE);
-    graphic_engine->objects_in_room_2   = screen_area_init( 90, 14, 16,  5, WHITE, BLACK, FALSE);
-    graphic_engine->objects_in_room_3   = screen_area_init(107, 14, 16,  5, WHITE, BLACK, FALSE);
-    graphic_engine->inventory_1         = screen_area_init( 88, 21, 37,  1, WHITE, BLACK, FALSE);
-    graphic_engine->inventory_2         = screen_area_init( 90, 23, 16,  5, WHITE, BLACK, FALSE);
-    graphic_engine->inventory_3         = screen_area_init(107, 23, 16,  5, WHITE, BLACK, FALSE);
-    graphic_engine->descript            = screen_area_init( 88, 30, 37, 14, WHITE, BLACK,  TRUE);    
+    graphic_engine->links_names         = screen_area_init( 88,  7, 37,  6, WHITE, BLACK,  TRUE);
+    graphic_engine->objects_in_room_1   = screen_area_init( 88, 14, 37,  1, WHITE, BLACK, FALSE);
+    graphic_engine->objects_in_room_2   = screen_area_init( 90, 16, 16,  5, WHITE, BLACK, FALSE);
+    graphic_engine->objects_in_room_3   = screen_area_init(107, 16, 16,  5, WHITE, BLACK, FALSE);
+    graphic_engine->inventory_1         = screen_area_init( 88, 23, 37,  1, WHITE, BLACK, FALSE);
+    graphic_engine->inventory_2         = screen_area_init( 90, 25, 16,  5, WHITE, BLACK, FALSE);
+    graphic_engine->inventory_3         = screen_area_init(107, 25, 16,  5, WHITE, BLACK, FALSE);
+    graphic_engine->descript            = screen_area_init( 88, 32, 37, 12, WHITE, BLACK,  TRUE);    
     graphic_engine->feedback            = screen_area_init( 88, 45, 37, 13, WHITE, BLACK,  TRUE);
     graphic_engine->chat                = screen_area_init(  3, 50, 84,  8, WHITE, BLACK,  TRUE);
 
     screen_add_border( 2,  6, 86, 44, WHITE, BLACK);
-    screen_add_border(87, 11, 39, 10, WHITE, BLACK);
-    screen_add_border(87, 20, 39, 10, WHITE, BLACK);
+    screen_add_border(87, 13, 39, 10, WHITE, BLACK);
+    screen_add_border(87, 22, 39, 10, WHITE, BLACK);
 
     return graphic_engine;
 }
@@ -88,7 +88,7 @@ void graphic_engine_destroy(Graphic_engine *graphic_engine) {
 void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
     Id id_act = NO_ID, id_north = NO_ID, id_west = NO_ID, id_south = NO_ID, id_east = NO_ID;
     Space *space_act = NULL, *space_north = NULL, *space_west = NULL, *space_south = NULL, *space_east = NULL;
-    Link *link_north = NULL, *link_west = NULL, *link_south = NULL, *link_east = NULL;
+    Link *link_north = NULL, *link_west = NULL, *link_south = NULL, *link_east = NULL, *link_above = NULL, *link_below = NULL;
     Player *player = NULL;
     wchar_t unicode_str[COLUMNS];
     wchar_t **graphic_description_act, **graphic_description_north, **graphic_description_west, **graphic_description_south, **graphic_description_east, graphic_description_not_illuminated[MAX_GDESC_R][MAX_GDESC_C];
@@ -377,6 +377,8 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
     link_west  = (Link*) game_find(game, space_get_direction(space_act,  WEST));
     link_south = (Link*) game_find(game, space_get_direction(space_act, SOUTH));
     link_east  = (Link*) game_find(game, space_get_direction(space_act,  EAST));
+    link_above = (Link*) game_find(game, space_get_direction(space_act, ABOVE));
+    link_below = (Link*) game_find(game, space_get_direction(space_act, BELOW));
     if (link_north != NULL) swprintf(unicode_str, COLUMNS, L" Northern link: %S", link_get_name(link_north));
     else swprintf(unicode_str, COLUMNS, L" Northern link: X");
     screen_area_puts(graphic_engine->links_names, unicode_str);
@@ -387,8 +389,14 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
     else swprintf(unicode_str, COLUMNS, L" Southern link: X");
     screen_area_puts(graphic_engine->links_names, unicode_str);
     if (link_east != NULL) swprintf(unicode_str, COLUMNS, L" Eastern link: %S", link_get_name(link_east));
-    else swprintf(unicode_str, COLUMNS, L" Eastern link: X");;
+    else swprintf(unicode_str, COLUMNS, L" Eastern link: X");
     screen_area_puts(graphic_engine->links_names, unicode_str);    
+    if (link_above != NULL) swprintf(unicode_str, COLUMNS, L" Upper link: %S", link_get_name(link_above));
+    else swprintf(unicode_str, COLUMNS, L" Upper link: X");
+    screen_area_puts(graphic_engine->links_names, unicode_str); 
+    if (link_below != NULL) swprintf(unicode_str, COLUMNS, L" Lower link: %S", link_get_name(link_below));
+    else swprintf(unicode_str, COLUMNS, L" Lower link: X");
+    screen_area_puts(graphic_engine->links_names, unicode_str); 
 
     /* Paint the in the objects_in_room areas */
     screen_area_clear(graphic_engine->objects_in_room_1);
