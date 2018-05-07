@@ -11,6 +11,8 @@
 #define GAMERULES_H
 
 #include "types.h"
+#include "../include/game.h"
+#include "../include/command.h"
 
 /**
  * @name 		game_rules_update
@@ -19,8 +21,9 @@
  * @date		05-05-2018
  * @brief 		Applies rules to the game.
  * @param 		Game* -> a game in which different rules will be applied.
+ * @param 		Command* -> the last command introduced.
  * @return		A RULES_STATUS which indicates what rules have been applied.
  */
-RULES_STATUS game_rules_update(Game *game);
+RULES_STATUS game_rules_update(Game *game, Command *command);
 
 #endif

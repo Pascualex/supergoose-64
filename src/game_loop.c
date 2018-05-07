@@ -12,6 +12,7 @@
 #include <string.h>
 /*Own libraries*/
 #include "../include/graphic_engine.h"
+#include "../include/game_rules.h"
 
 
 /*This is the main program of the game, where the action takes place. It is responsible of calling all the other function and advises if anythin is going wrong*/
@@ -87,6 +88,7 @@ int main(int argc, char *argv[]) {
             game_destroy(game);
             game_create(game);
         }
+        game_rules_update(game, command);
         game_update(game, command);
 
         if (log != NULL) {

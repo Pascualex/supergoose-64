@@ -46,6 +46,14 @@
 #define OBJECT_BASE_TAGS 0           /*!< The number of tags that an object has by default */
 #define SPACE_BASE_TAGS 0            /*!< The number of tags that an object has by default */
 
+#define HALL_ROOM_ID 13              /*!< The id of the hall */
+#define FAILING_SPACE_ID 119         /*!< The id of the space that has a failing light */
+#define TRANS_ROOM_ID 1229           /*!< The id of the transmutation room */
+#define TRANS_CORE_ID 8              /*!< The id of the transmutation core */
+#define POWER_CORE_ID 40             /*!< The id of the power core */
+#define FUSE_ID 22                   /*!< The id of the fuses */
+#define GEARS_ID 9                   /*!< The id of the gears */
+
 /**
  * @brief Id (to store Ids of objects, players, etc)
  */
@@ -150,6 +158,20 @@ typedef enum {
     ILLUMINATED,     /*!< The space is a illuminated */
     FINAL_ROOM       /*!< The space is the final room */
 } TAG;
+
+/**
+ * @brief RULES_STATUS enumeration 
+ */
+typedef enum {
+    ERROR_RULES = 0,    /*!< Error when aplying the rules */
+    SPACE_ILLUMINATED,  /*!< A space has been illuminated */
+    END1,               /*!< The game ends with the first end */
+    END2,               /*!< The game ends with the second end */
+    END3,               /*!< The game ends with the third end */
+    NO_RULE             /*!< The game applied no rule */
+    
+} RULES_STATUS;
+
 
 #endif
 

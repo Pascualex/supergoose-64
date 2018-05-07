@@ -9,19 +9,44 @@
 
 /*C libraries*/
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 /*Own libraries*/
-#include "../include/game.h"
+#include "../include/player.h"
 #include "../include/game_rules.h"
+#include "../include/die.h"
+#include "../include/types.h"
 
-RULES_STATUS game_rules_update(Game *game) {
+RULES_STATUS game_rules_update(Game *game, Command *command) {
 	Die *die = NULL;
 	Space *failing_space = NULL;
+	Id location = NO_ID;
+	int j;
 
-	if (game == NULL || game_get_players_number(game) == 0) return ERROR;
+	if (game == NULL || game_get_players_number(game) == 0 || command == NULL) return ERROR_RULES;
 
-	Die = die_ini(DIE_BASE_ID+1, 2);
-	if (die == NULL) return ERROR;
+	location = player_get_location((Player *) game_find(game, PLAYER_BASE_ID+1));
+
+	if ( location == HALL_ROOM_ID && (command_get_command(command) == MOVE && ((!strcmp(command_get_info(command),"north") || !strcmp(command_get_info(command),"n")) || command_get_command(command) == UP))) {
+		for (j = 0; j < player_get_objects_number((Player *) game_find(game, PLAYER_BASE_ID+1)); j++) {
+    		if (object_check_tag((Object *) game_find(game, player_get_object_id((Player *) game_find(game, PLAYER_BASE_ID+1), j)), IS_KEY)) {
+    			return END1;
+    		}
+    	}
+	}
+
+	if (location == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, GEARS_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, FUSE_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, TRANS_CORE_ID)) == TRANS_ROOM_ID) {
+		return END2;
+	}
+
+	if ( location == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, GEARS_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, FUSE_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, POWER_CORE_ID)) == TRANS_ROOM_ID) {
+		return END3;
+	}
+
+
+
+	die = die_create(DIE_BASE_ID+1, 2);
+	if (die == NULL) return ERROR_RULES;
 
 	if (die_roll(die) == 1) {
 		
@@ -29,15 +54,17 @@ RULES_STATUS game_rules_update(Game *game) {
 		
 		failing_space = (Space *) game_find(game, FAILING_SPACE_ID);
 		if (failing_space == NULL) {
-			return ERROR;
+			return ERROR_RULES;
 		}
 		
 		if (space_check_tag(failing_space, ILLUMINATED)) {
-			space_remove_tag(failing_space, ILLUMINATED);
+			space_remove_tags(failing_space, 1, ILLUMINATED);
 		} else {
-			space_add_tag(failing_space, ILLUMINATED);
+			space_add_tags(failing_space, 1, ILLUMINATED);
 		}
 
 		return SPACE_ILLUMINATED;
 	}
+
+	return NO_RULE;
 }
