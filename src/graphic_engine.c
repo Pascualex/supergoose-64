@@ -140,7 +140,7 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
                 screen_area_puts(graphic_engine->map_center, unicode_str);
                 swprintf(unicode_str, COLUMNS, L"                    ");
                 screen_area_puts(graphic_engine->map_center, unicode_str);
-                swprintf(unicode_str, COLUMNS, L"                    ");
+                swprintf(unicode_str, COLUMNS, L"Darkness            ");
                 screen_area_puts(graphic_engine->map_center, unicode_str);
                 for (i = 0; i < MAX_GDESC_R; i++) {
                     swprintf(unicode_str, COLUMNS, L"%S", graphic_description_not_illuminated[i]);
@@ -169,7 +169,7 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
                     screen_area_puts(graphic_engine->map_center, unicode_str);
                 } 
             } else {
-                swprintf(unicode_str, COLUMNS, L"                    ");
+                swprintf(unicode_str, COLUMNS, L"Darkness            ");
                 screen_area_puts(graphic_engine->map_center, unicode_str);
                 for (i = 0; i < MAX_GDESC_R; i++) {
                     swprintf(unicode_str, COLUMNS, L"%S", graphic_description_not_illuminated[i]);
@@ -204,7 +204,7 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
                 if (link_get_status((Link*) game_find(game, space_get_direction(space_act, SOUTH))) == OPEN) swprintf(unicode_str, COLUMNS, L"        ↑  ↓        ");
                 else swprintf(unicode_str, COLUMNS, L"        ⤉  ⤈        ");
                 screen_area_puts(graphic_engine->map_center, unicode_str);
-                swprintf(unicode_str, COLUMNS, L"                    ");
+                swprintf(unicode_str, COLUMNS, L"Darkness            ");
                 screen_area_puts(graphic_engine->map_center, unicode_str);
                 for (i = 0; i < MAX_GDESC_R; i++) {
                     swprintf(unicode_str, COLUMNS, L"%S", graphic_description_not_illuminated[i]);
@@ -234,7 +234,7 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
                     screen_area_puts(graphic_engine->map_left, unicode_str);
                 }
             } else {
-                swprintf(unicode_str, COLUMNS, L"                    ");
+                swprintf(unicode_str, COLUMNS, L"Darkness            ");
                 for (i = 0; i < 16; i++) {
                     screen_area_puts(graphic_engine->map_left, unicode_str);
                 }
@@ -288,7 +288,7 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
                     screen_area_puts(graphic_engine->map_right, unicode_str);
                 }
             } else {
-                swprintf(unicode_str, COLUMNS, L"                    ");
+                swprintf(unicode_str, COLUMNS, L"Darkness            ");
                 for (i = 0; i < 16; i++) {
                     screen_area_puts(graphic_engine->map_right, unicode_str);
                 }

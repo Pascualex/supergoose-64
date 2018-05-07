@@ -22,27 +22,6 @@
 #include "../include/die.h"
 #include "../include/command.h"
 
-/*typedef enum {
-    NO_CMD = -1, --
-    UNKNOWN,     --
-    EXIT,        --
-    MOVE,        --
-    FOLLOWING,   --
-    LEFT,        --
-    PREVIOUS,    --
-    RIGHT,       --
-    GRASP,       --
-    DROP,        --
-    THROW,       --
-    CHECK,       --
-    OPEN_L,        
-    TURN_ON,       
-    TURN_OFF,      
-    LOAD,          
-    SAVE,          
-    PROMODE        
-} T_Command;*/
-
 void dialogue_generate(Game *game, wchar_t dialogue[MAX_DIA_R][MAX_DIA_C]) {
     Player *player = NULL;
     Space *space = NULL;
@@ -87,7 +66,7 @@ void dialogue_generate(Game *game, wchar_t dialogue[MAX_DIA_R][MAX_DIA_C]) {
                     current_row++;
                 }                   
             } else if (game_get_status_last_command(game) == CLOSED_LINK) { 
-                swprintf(dialogue[current_row], MAX_DIA_C, L" You can't move through a closed path.");
+                swprintf(dialogue[current_row], MAX_DIA_C, L" You shall not pass! (through a closed path).");
                 current_row++;
             } else {
                 swprintf(dialogue[current_row], MAX_DIA_C, L" You can't move in that direction.");
@@ -156,6 +135,60 @@ void dialogue_generate(Game *game, wchar_t dialogue[MAX_DIA_R][MAX_DIA_C]) {
                 current_row++;
             } else {
                 swprintf(dialogue[current_row], MAX_DIA_C, L" You couldn't check the object.");
+                current_row++;
+            }
+            break;
+        case OPEN_L :
+            if (game_get_status_last_command(game) == OK) {
+                swprintf(dialogue[current_row], MAX_DIA_C, L" You hear a sound. Now the path is opened.");
+                current_row++;
+            } else {
+                swprintf(dialogue[current_row], MAX_DIA_C, L" You couln't open it.");
+                current_row++;
+            }
+            break;
+        case TURN_ON :
+            if (game_get_status_last_command(game) == OK) {
+                swprintf(dialogue[current_row], MAX_DIA_C, L" You hear a sound. Now the object is turned on.");
+                current_row++;
+            } else {
+                swprintf(dialogue[current_row], MAX_DIA_C, L" You couln't turn it on.");
+                current_row++;
+            }
+            break;
+        case TURN_OFF :
+            if (game_get_status_last_command(game) == OK) {
+                swprintf(dialogue[current_row], MAX_DIA_C, L" You hear a sound. Now the object is turned off.");
+                current_row++;
+            } else {
+                swprintf(dialogue[current_row], MAX_DIA_C, L" You couln't turn it off.");
+                current_row++;
+            }
+            break;
+        case LOAD :
+            if (game_get_status_last_command(game) == OK) {
+                swprintf(dialogue[current_row], MAX_DIA_C, L" Game loaded successfully.");
+                current_row++;
+            } else {
+                swprintf(dialogue[current_row], MAX_DIA_C, L" Couldn't load game.");
+                current_row++;
+            }
+            break;
+        case SAVE :
+            if (game_get_status_last_command(game) == OK) {
+                swprintf(dialogue[current_row], MAX_DIA_C, L" Game saved successfully.");
+                current_row++;
+            } else {
+                swprintf(dialogue[current_row], MAX_DIA_C, L" Couldn't save game.");
+                current_row++;
+            }
+            break;
+        case PROMODE :
+            if (game_get_status_last_command(game) == OK) {
+                swprintf(dialogue[current_row], MAX_DIA_C, L" Movement mode changed.");
+                current_row++;
+            } else {
+                swprintf(dialogue[current_row], MAX_DIA_C, L" UNEXPECTED ERROR.");
                 current_row++;
             }
             break;
