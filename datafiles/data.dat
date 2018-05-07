@@ -69,45 +69,45 @@
 #o:00020|Poster2  |0123| EXPERIMENT 552:                                                         | "KILLER FROG: 50% frog, 50% human. The perfect human, able to..."       | Wait, what? A human frog? HAHAHAHA You must be kidding.                 | Not movable                                                             | Not movable                                                             | Not movable                                                             |
 #o:00021|Poster666|0123| EXPERIMENT 666:                                                         | "Mother$%@% KILLING GEESE" That must be you. I'm proud. This is good.   | lets read more... "Killed in action". Wait what? This is sad :frowning: | Not movable                                                             | Not movable                                                             | Not movable                                                             |
 
-#l:0001|Link1| 1101|1102|OPEN|
-#l:0002|Link2| 1102|1103|OPEN|
-#l:0003|Link3| 1103|1104|OPEN|
-#l:0004|Link4| 1103|1105|OPEN|
-#l:0005|Link5| 1105|1106|OPEN|IS_KEY|
-#l:0006|Link6| 1102|1107|OPEN|
-#l:0007|Link7| 1107|1108|OPEN|IS_BASE_ID_CARD|
-#l:0009|Link9| 1102|1109|OPEN|IS_CROWBAR|
-#l:0010|Link10|0009|0010|OPEN|
-#l:0011|Link11|0010|0011|OPEN|
-#l:0012|Link12|0010|0012|OPEN|
-#l:0013|Link13|0012|0013|OPEN|
-#l:0014|Link14|0013|0014|OPEN|
-#l:0015|Link15|0014|0016|OPEN|IS_CROWBAR|
-#l:0016|Link16|0014|0015|OPEN|IS_BASE_ID_CARD|
-#l:0017|Link17|0015|0116|OPEN|IS_BASE_ID_CARD|
-#l:0019|Link19|0116|0117|OPEN|
-#l:0020|Link20|0117|0122|OPEN|
-#l:0021|Link21|0117|0118|OPEN|
-#l:0022|Link22|0118|0119|OPEN|
-#l:0023|Link23|0118|0120|OPEN|
-#l:0024|Link24|0120|0121|OPEN|
-#l:0025|Link25|0122|0123|OPEN|
-#l:0026|Link26|0122|0124|OPEN|IS_FULL_ID_CARD|
-#l:0027|Link27|0122|0125|OPEN|IS_CROWBAR|
-#l:0050|Link50|1109|0008|OPEN|
-#l:0051|Link51|0008|0009|OPEN|
-#l:0030|Link30|1226|1227|OPEN|
-#l:0028|Link28|1228|1330|OPEN|
-#l:0029|Link29|1228|1227|OPEN|IS_FULL_ID_CARD|
-#l:0031|Link31|1227|1229|OPEN|
-#l:0032|Link32|1229|1230|OPEN|
-#l:0033|Link33|1229|1232|OPEN|
-#l:0034|Link34|1229|1234|OPEN|
-#l:0039|Link39|1230|1231|OPEN|IS_TRANS_CORE_KEY|
-#l:0040|Link40|1232|1233|OPEN|IS_FUSE_KEY|
-#l:0036|Link36|1330|1331|OPEN|
-#l:0037|Link37|1331|1333|OPEN|IS_FULL_ID_CARD|
-#l:0038|Link38|1333|1334|OPEN|
-#l:0052|Link52|1108|1226|OPEN|
+#l:0001|Path1|1101|1102|OPEN|
+#l:0002|Path2|1102|1103|OPEN|
+#l:0003|Path3|1103|1104|OPEN|
+#l:0004|Path4|1103|1105|OPEN|
+#l:0005|Lock|1105|1106|OPEN|IS_KEY|
+#l:0006|Path5|1102|1107|OPEN|
+#l:0007|CardLector1|1107|1108|OPEN|IS_BASE_ID_CARD|
+#l:0009|WeakDoor1|1102|1109|OPEN|IS_CROWBAR|
+#l:0010|Path6|0009|0010|OPEN|
+#l:0011|Path7|0010|0011|OPEN|
+#l:0012|Path8|0010|0012|OPEN|
+#l:0013|Path9|0012|0013|OPEN|
+#l:0014|Path10|0013|0014|OPEN|
+#l:0015|WeakDoor2|0014|0016|OPEN|IS_CROWBAR|
+#l:0016|CardLector2|0014|0015|OPEN|IS_BASE_ID_CARD|
+#l:0017|CardLector3|0015|0116|OPEN|IS_BASE_ID_CARD|
+#l:0019|Path11|0116|0117|OPEN|
+#l:0020|Path12|0117|0122|OPEN|
+#l:0021|Path13|0117|0118|OPEN|
+#l:0022|Path14|0118|0119|OPEN|
+#l:0023|Path15|0118|0120|OPEN|
+#l:0024|Path16|0120|0121|OPEN|
+#l:0025|Path17|0122|0123|OPEN|
+#l:0026|CardLector4|0122|0124|OPEN|IS_FULL_ID_CARD|
+#l:0027|WeakDoor3|0122|0125|OPEN|IS_CROWBAR|
+#l:0028|Path18|1228|1330|OPEN|
+#l:0029|CardLector5|1228|1227|OPEN|IS_FULL_ID_CARD|
+#l:0030|Path19|1226|1227|OPEN|
+#l:0031|Path20|1227|1229|OPEN|
+#l:0032|Path21|1229|1230|OPEN|
+#l:0033|Path22|1229|1232|OPEN|
+#l:0034|Path23|1229|1234|OPEN|
+#l:0036|Path24|1330|1331|OPEN|
+#l:0037|CardLector6|1331|1333|OPEN|IS_FULL_ID_CARD|
+#l:0038|Path25|1333|1334|OPEN|
+#l:0039|TransfusionLock|1230|1231|OPEN|IS_TRANS_CORE_KEY|
+#l:0040|TransfusionLock|1232|1233|OPEN|IS_FUSE_KEY|
+#l:0050|Path26|1109|0008|OPEN|
+#l:0051|Path27|0008|0009|OPEN|
+#l:0052|Path28|1108|1226|OPEN|
 
 #p:0001|Player 1|1101|5|(* _ *)|
