@@ -49,7 +49,7 @@ void dialogue_generate(Game *game, wchar_t dialogue[MAX_DIA_R][MAX_DIA_C]) {
                 current_row++;
             } 
             break;
-        case MOVE : case PREVIOUS : case LEFT : case FOLLOWING : case RIGHT :
+        case MOVE : case PREVIOUS : case LEFT : case FOLLOWING : case RIGHT : case UP : case DOWN :
             if (game_get_status_last_command(game) == OK) {                
                 text_description = space_get_basic_description(space); 
                 swprintf(dialogue[current_row], MAX_DIA_C, L" You moved to %S.", space_get_name(space));
