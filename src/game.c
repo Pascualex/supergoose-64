@@ -22,7 +22,7 @@
 #include "../include/menu.h"
 
 /*We define the number of functions we have related to the different commands.*/
-#define N_CALLBACK 18
+#define N_CALLBACK 20
 /*We define the number of possible directions to move for the move command.*/
 #define N_DIR 6
 /*INI is used to initialize those variable as the starting number of objects when they are 0.*/
@@ -136,6 +136,36 @@ STATUS game_callback_right(Game *, char *);
 
 /* FUNCTION:
  *
+ * @name        game_callback_up
+ *
+ * @author      Eric Morales
+ * @version     1.0
+ * @date        30-04-2018
+ * @description It allows the player to move up.
+ * @input
+ *              game:       A Game*, whose player will try to move facing west.
+ *              string:     A char*, which should contain the id of the player who will move.
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not.
+ */
+STATUS game_callback_up(Game *, char *);
+
+/* FUNCTION:
+ *
+ * @name        game_callback_down
+ *
+ * @author      Eric Morales
+ * @version     1.0
+ * @date        30-04-2018
+ * @description It allows the player to move down.
+ * @input
+ *              game:       A Game*, whose player will try to move facing west.
+ *              string:     A char*, which should contain the id of the player who will move.
+ * @output      A STATUS, which indicates whether the command was executed succesfully or not.
+ */
+STATUS game_callback_down(Game *, char *);
+
+/* FUNCTION:
+ *
  * @name 		game_callback_check
  *
  * @author 		Eric Morales
@@ -222,7 +252,7 @@ STATUS game_callback_open(Game *, char *);
  *              string:     A char*, which should contain object that is going to be turned on.
  * @output      A STATUS, which indicates whether the command was executed succesfully or not.
  */
-STATUS game_callback_turnon(Game *game, char *string);
+STATUS game_callback_turnon(Game *, char *);
 
 /* FUNCTION:
  *
@@ -237,7 +267,7 @@ STATUS game_callback_turnon(Game *game, char *string);
  *              string:     A char*, which should contain object that is going to be turned off.
  * @output      A STATUS, which indicates whether the command was executed succesfully or not.
  */
-STATUS game_callback_turnoff(Game *game, char *string);
+STATUS game_callback_turnoff(Game *, char *);
 
 /* FUNCTION:
  *
@@ -252,7 +282,7 @@ STATUS game_callback_turnoff(Game *game, char *string);
  *              string:     A char*, which should contain the name of the file that you are going to load.
  * @output      A STATUS, which indicates whether the command was executed succesfully or not.
  */
-STATUS game_callback_load(Game *game, char *string);
+STATUS game_callback_load(Game *, char *);
 
 /* FUNCTION:
  *
@@ -267,7 +297,7 @@ STATUS game_callback_load(Game *game, char *string);
  *              string:     A char*, nothing important.
  * @output      A STATUS, which indicates whether the command was executed succesfully or not.
  */
-STATUS game_callback_save(Game *game, char *string);
+STATUS game_callback_save(Game *, char *);
 
 /* FUNCTION:
  *
@@ -282,7 +312,7 @@ STATUS game_callback_save(Game *game, char *string);
  *              string:     A char*, nothing important.
  * @output      A STATUS, which indicates whether the command was executed succesfully or not.
  */
-STATUS game_callback_promode(Game *game, char *string);
+STATUS game_callback_promode(Game *, char *);
 
 /* FUNCTION:
  *
@@ -297,7 +327,7 @@ STATUS game_callback_promode(Game *game, char *string);
  *              string:     A char*, nothing important.
  * @output      A STATUS, which indicates whether the command was executed succesfully or not.
  */
-STATUS game_callback_help(Game *game, char *string);
+STATUS game_callback_help(Game *, char *);
 
 /*We define the callback functions*/
 static callback_fn game_callback_fn_list[N_CALLBACK] = {
@@ -308,6 +338,8 @@ static callback_fn game_callback_fn_list[N_CALLBACK] = {
     game_callback_left,
     game_callback_following,
     game_callback_right,
+    game_callback_up,
+    game_callback_down,
     game_callback_grasp,
     game_callback_drop,
     game_callback_roll,
@@ -1031,6 +1063,16 @@ STATUS game_callback_right(Game *game, char *string) {
     return game_callback_move(game, "East");
 }
 
+STATUS game_callback_up(Game *game, char *string) {
+
+    return game_callback_move(game, "Above");
+}
+
+STATUS game_callback_down(Game *game, char *string) {
+
+    return game_callback_move(game, "Below");
+}
+
 /*This command is used when grasping objects, copying them to the players inventory and then deleting them if they pass all the error control it has*/
 STATUS game_callback_grasp(Game *game, char *string) {
     Object *object = NULL;
@@ -1136,7 +1178,7 @@ STATUS game_callback_open(Game *game, char *string) {
 	sobj = strtok(NULL, " \n");
 
 	obj = (Object *) game_find(game, atoi(sobj)+OBJECT_BASE_ID);
-
+    printf("jaja");
     if (obj == NULL) {
         obj = (Object *) game_find_name(game, sobj);
         if (obj == NULL) return ERROR;
