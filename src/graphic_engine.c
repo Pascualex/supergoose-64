@@ -24,7 +24,7 @@
 
 /*Graphic Engine structure, which includes the six areas that are used when playing.*/
 struct _Graphic_engine {
-    Area *map_left, *map_left_separator, *map_center, *map_right_separator, *map_right, *objects_in_room_1, *objects_in_room_2, *objects_in_room_3, *inventory_1, *inventory_2, *inventory_3, *descript, *banner, *feedback, *chat;
+    Area *map_left, *map_left_separator, *map_center, *map_right_separator, *map_right, *links_names, *objects_in_room_1, *objects_in_room_2, *objects_in_room_3, *inventory_1, *inventory_2, *inventory_3, *banner, *feedback, *chat;
 };
 
 /*This function is used to allocate the memory the graphic engine is going to use.*/
@@ -40,19 +40,19 @@ Graphic_engine *graphic_engine_create() {
     graphic_engine->map_center          = screen_area_init( 35,  7, 20, 42, WHITE, BLACK, FALSE);
     graphic_engine->map_right_separator = screen_area_init( 55,  7,  6, 42, WHITE, BLACK, FALSE);
     graphic_engine->map_right           = screen_area_init( 61,  7, 20, 42, WHITE, BLACK, FALSE);
-    graphic_engine->objects_in_room_1   = screen_area_init( 88,  7, 37,  1, WHITE, BLACK, FALSE);
-    graphic_engine->objects_in_room_2   = screen_area_init( 90,  9, 16,  5, WHITE, BLACK, FALSE);
-    graphic_engine->objects_in_room_3   = screen_area_init(107,  9, 16,  5, WHITE, BLACK, FALSE);
-    graphic_engine->inventory_1         = screen_area_init( 88, 16, 37,  1, WHITE, BLACK, FALSE);
-    graphic_engine->inventory_2         = screen_area_init( 90, 18, 16,  5, WHITE, BLACK, FALSE);
-    graphic_engine->inventory_3         = screen_area_init(107, 18, 16,  5, WHITE, BLACK, FALSE);
-    graphic_engine->descript            = screen_area_init( 88, 25, 37, 19, WHITE, BLACK,  TRUE);
+    graphic_engine->links_names         = screen_area_init( 88,  7, 37,  4, WHITE, BLACK,  TRUE);
+    graphic_engine->objects_in_room_1   = screen_area_init( 88, 12, 37,  1, WHITE, BLACK, FALSE);
+    graphic_engine->objects_in_room_2   = screen_area_init( 90, 14, 16,  5, WHITE, BLACK, FALSE);
+    graphic_engine->objects_in_room_3   = screen_area_init(107, 14, 16,  5, WHITE, BLACK, FALSE);
+    graphic_engine->inventory_1         = screen_area_init( 88, 21, 37,  1, WHITE, BLACK, FALSE);
+    graphic_engine->inventory_2         = screen_area_init( 90, 23, 16,  5, WHITE, BLACK, FALSE);
+    graphic_engine->inventory_3         = screen_area_init(107, 23, 16,  5, WHITE, BLACK, FALSE);    
     graphic_engine->feedback            = screen_area_init( 88, 45, 37, 13, WHITE, BLACK,  TRUE);
     graphic_engine->chat                = screen_area_init(  3, 50, 84,  8, WHITE, BLACK,  TRUE);
 
     screen_add_border( 2,  6, 86, 44, WHITE, BLACK);
-    screen_add_border(87,  6, 39, 10, WHITE, BLACK);
-    screen_add_border(87, 15, 39, 10, WHITE, BLACK);
+    screen_add_border(87, 11, 39, 10, WHITE, BLACK);
+    screen_add_border(87, 20, 39, 10, WHITE, BLACK);
 
     return graphic_engine;
 }
@@ -68,13 +68,13 @@ void graphic_engine_destroy(Graphic_engine *graphic_engine) {
     screen_area_destroy(graphic_engine->map_center);
     screen_area_destroy(graphic_engine->map_right_separator);
     screen_area_destroy(graphic_engine->map_right);
+    screen_area_destroy(graphic_engine->links_names);
     screen_area_destroy(graphic_engine->objects_in_room_1);
     screen_area_destroy(graphic_engine->objects_in_room_2);
     screen_area_destroy(graphic_engine->objects_in_room_3);
     screen_area_destroy(graphic_engine->inventory_1);
     screen_area_destroy(graphic_engine->inventory_2);
-    screen_area_destroy(graphic_engine->inventory_3);
-    screen_area_destroy(graphic_engine->descript);
+    screen_area_destroy(graphic_engine->inventory_3);    
     screen_area_destroy(graphic_engine->feedback);
     screen_area_destroy(graphic_engine->chat);
 
@@ -86,6 +86,7 @@ void graphic_engine_destroy(Graphic_engine *graphic_engine) {
 void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
     Id id_act = NO_ID, id_north = NO_ID, id_west = NO_ID, id_south = NO_ID, id_east = NO_ID;
     Space *space_act = NULL, *space_north = NULL, *space_west = NULL, *space_south = NULL, *space_east = NULL;
+    Link *link_north = NULL, *link_west = NULL, *link_south = NULL, *link_east = NULL;
     Player *player = NULL;
     wchar_t unicode_str[COLUMNS];
     wchar_t **graphic_description_act, **graphic_description_north, **graphic_description_west, **graphic_description_south, **graphic_description_east, graphic_description_not_illuminated[MAX_GDESC_R][MAX_GDESC_C];
@@ -368,6 +369,25 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
         }
     }
 
+    /* Paint the in the links names area */
+    screen_area_clear(graphic_engine->links_names);
+    link_north = (Link*) game_find(game, space_get_direction(space_act, NORTH));
+    link_west  = (Link*) game_find(game, space_get_direction(space_act,  WEST));
+    link_south = (Link*) game_find(game, space_get_direction(space_act, SOUTH));
+    link_east  = (Link*) game_find(game, space_get_direction(space_act,  EAST));
+    if (link_north != NULL) swprintf(unicode_str, COLUMNS, L" Northern link: %S", link_get_name(link_north));
+    else swprintf(unicode_str, COLUMNS, L" Northern link: X");
+    screen_area_puts(graphic_engine->links_names, unicode_str);
+    if (link_west != NULL) swprintf(unicode_str, COLUMNS, L" Western link: %S", link_get_name(link_west));
+    else swprintf(unicode_str, COLUMNS, L" Western link: X");
+    screen_area_puts(graphic_engine->links_names, unicode_str);    
+    if (link_south != NULL) swprintf(unicode_str, COLUMNS, L" Southern link: %S", link_get_name(link_south));
+    else swprintf(unicode_str, COLUMNS, L" Southern link: X");
+    screen_area_puts(graphic_engine->links_names, unicode_str);
+    if (link_east != NULL) swprintf(unicode_str, COLUMNS, L" Eastern link: %S", link_get_name(link_east));
+    else swprintf(unicode_str, COLUMNS, L" Eastern link: X");;
+    screen_area_puts(graphic_engine->links_names, unicode_str);    
+
     /* Paint the in the objects_in_room areas */
     screen_area_clear(graphic_engine->objects_in_room_1);
     screen_area_clear(graphic_engine->objects_in_room_2);
@@ -416,10 +436,7 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
         } else {
             screen_area_puts(graphic_engine->inventory_3, unicode_str);
         } 
-    }
-
-    /* Paint the in the description area */
-    screen_area_clear(graphic_engine->descript);
+    }    
 
     /* Paint the in the banner area */
     screen_area_clear(graphic_engine->banner);
