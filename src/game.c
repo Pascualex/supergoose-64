@@ -680,25 +680,25 @@ STATUS game_get_status_last_command(Game* game) {
 }
 
 void game_print_data(FILE *f, Game *game) {
-    /*int i = 0;
+    int i = 0;
 
     if (game == NULL) return;
 
     for (i = 0; i < game->spaces_number; i++) {
         space_print(f, game->spaces[i]);
     }
-    fprintf(f, "\n");
+    fwprintf(f, L"\n");
     for (i = 0; i < game->objects_number; i++) {
         object_print(f, game->objects[i]);
     }
-    fprintf(f, "\n");
+    fwprintf(f, L"\n");
     for (i = 0; i < game->links_number; i++) {
         link_print(f, game->links[i]);
     }
-    fprintf(f, "\n");
+    fwprintf(f, L"\n");
     for (i = 0; i < game->players_number; i++) {
         player_print(f, game->players[i]);
-    }*/
+    }
 }
 
 /*This function checks if the game is over or not. By the moment, its always false (unless it receives wrong arguments) as there are no losing conditions*/

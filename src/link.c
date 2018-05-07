@@ -142,11 +142,11 @@ TAG link_get_opener(Link *link) {
     return link->opener;
 }
 
-/*STATUS link_print(FILE *f, Link *link) {
+STATUS link_print(FILE *f, Link *link) {
 
     if (link == NULL) return ERROR;
 
-    fwprintf(f, L"#l:%04ld|%-8s|", link->id - LINK_BASE_ID, link->name);
+    fwprintf(f, L"#l:%04ld|%-8S|", link->id - LINK_BASE_ID, link->name);
 
     if (link->space1 == NO_ID) {
         fwprintf(f, L"%04ld|", link->space1);
@@ -161,7 +161,7 @@ TAG link_get_opener(Link *link) {
     }
 
     fwprintf(f, L"%d|", link->status);
-    fwprintf(f, L"%s|\n", game_tag_to_str(link->opener));
+    fwprintf(f, L"%S|\n", game_tag_to_str(link->opener));
 
     return OK;
-}*/
+}

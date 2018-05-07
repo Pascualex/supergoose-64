@@ -185,11 +185,11 @@ BOOL player_is_full(Player *player) {
     return inventory_is_full(player->inventory);
 }
 
-/*STATUS player_print(FILE *f, Player *player) {
+STATUS player_print(FILE *f, Player *player) {
 
     if (player == NULL) return ERROR;
 
-    fwprintf(f, L"#p:%04ld|%-8s|", player->id - PLAYER_BASE_ID, player->name);
+    fwprintf(f, L"#p:%04ld|%-8S|", player->id - PLAYER_BASE_ID, player->name);
 
     if (player->location == NO_ID) {
         fwprintf(f, L"%04ld|", player->location);
@@ -197,7 +197,7 @@ BOOL player_is_full(Player *player) {
         fwprintf(f, L"%04ld|", player->location - SPACE_BASE_ID);
     }
 
-    fwprintf(f, L"%d|%s|\n", player->inventory_size, player->graphic_description);
+    fwprintf(f, L"%d|%S|\n", player->inventory_size, player->graphic_description);
 
     return OK;
-}*/
+}

@@ -265,7 +265,7 @@ STATUS object_remove_tag(Object *object, TAG object_tag) {
 }
 
 /*It prints all the object data.*/
-/*STATUS object_print(FILE *f, Object *object) {
+STATUS object_print(FILE *f, Object *object) {
     TAG *object_tags = NULL;
     int num_tags, i;
 
@@ -276,8 +276,8 @@ STATUS object_remove_tag(Object *object, TAG object_tag) {
 
     num_tags = object_get_tags_number(object);
 
-    fwprintf(f, L"#o:%04ld|%-8s|%04ld|", object->id - OBJECT_BASE_ID, object->name, object->location);
-    fwprintf(f, L"%s|%s|%s|%s|%s|%s|", object->check[0], object->check[1], object->check[2], object->alt_check[0], object->alt_check[1], object->alt_check[2]);
+    fwprintf(f, L"#o:%04ld|%-8S|%04ld|", object->id - OBJECT_BASE_ID, object->name, object->location);
+    fwprintf(f, L"%S|%S|%S|%S|%S|%S|", object->check[0], object->check[1], object->check[2], object->alt_check[0], object->alt_check[1], object->alt_check[2]);
 
     for (i = 0; i < num_tags; i++) {
         if (object_tags[i] != NO_TAG){
@@ -287,4 +287,4 @@ STATUS object_remove_tag(Object *object, TAG object_tag) {
     fwprintf(f, L"\n");
     
     return OK;
-}*/
+}

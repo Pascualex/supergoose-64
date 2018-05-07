@@ -91,6 +91,7 @@ STATUS game_management_load_spaces(Game *game, char *filename) {
             for (direction = NORTH; direction <= BELOW; direction++) space_set_direction(space, direction, LINK_BASE_ID+directions_ids[direction]);
             select_space_graphic_description(graphic_description, graphic_description_type);
             space_set_graphic_description(space, graphic_description);
+            space_set_graphic_description_type(space, graphic_description_type);
             space_set_basic_description(space, basic_description);
             space_set_check_description(space, check_description);
             for (j = 0; j < i; j++) space_add_tags(space, 1, tags[j]);

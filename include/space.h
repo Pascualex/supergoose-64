@@ -95,10 +95,22 @@ STATUS space_del_object(Space *, Id object_id);
  * @date		05-03-2018
  * @brief 		It changes the graphic description of the passed space.
  * @param 		Space* with the space whose graphic description will be changed.
- * @param 		wchar_t with the new graphich description for the space.
+ * @param 		wchar_t** with the new graphich description for the space.
  * @return		A STATUS which indicates whether the operation could be executed correctly.
  */
 STATUS space_set_graphic_description(Space *, wchar_t graphic_description[MAX_GDESC_R][MAX_GDESC_C]);
+
+/** 
+ * @name 		space_set_graphic_description_type
+ * @author 		Alejandro Pascual
+ * @version             1.0
+ * @date		06-05-2018
+ * @brief 		It changes the graphic description type of the passed space.
+ * @param 		Space* with the space whose graphic description type will be changed.
+ * @param 		wchar_t* with the new graphich description type for the space.
+ * @return		A STATUS which indicates whether the operation could be executed correctly.
+ */
+STATUS space_set_graphic_description_type(Space *, wchar_t graphic_description_type[WORD_SIZE]);
 
 /** 
  * @name 		space_set_basic_description
@@ -156,6 +168,17 @@ const wchar_t *space_get_name(Space *);
  * @return		A wchar_t**, with the graphic description of the space passed.
  */
 wchar_t **space_get_graphic_description(Space *);
+
+/**
+ * @name 		space_get_graphic_description_type
+ * @author 		Alejandro Pascual
+ * @version             1.0
+ * @date		07-05-2018
+ * @brief 		It returns the graphic description type that the passed space holds.
+ * @param 		Space* with the space whose graphic description type will be returned.
+ * @return		A wchar_t*, with the graphic description type of the space passed.
+ */
+wchar_t *space_get_graphic_description_type(Space *);
 
 /** 
  * @name 		space_get_basic_description

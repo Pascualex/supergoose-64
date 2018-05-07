@@ -24,9 +24,10 @@
 struct _Space {
     Id id; /*An Id to distinguish the space from other spaces or things*/
     wchar_t name[WORD_SIZE]; /*A wchar_t used to name the space*/
-    Id directions_ids[6];
+    Id directions_ids[6]; /*An array of ids for the links*/
     Set *objects_ids; /*A set to store the objects it has*/
     wchar_t **graphic_description; /*A graphic description to use in the graphic engine*/
+    wchar_t graphic_description_type[WORD_SIZE]; /*A string that lets us save the game storing the graphic description type*/
     wchar_t **basic_description; /*A field to store the basic information of the space.*/
     wchar_t **check_description; /*A field to store the information of the space and give it when asked playing.*/
     TAG space_tags[MAX_TAGS]; /*An array of tags that define the propierties of the space*/
@@ -219,6 +220,7 @@ STATUS space_set_graphic_description(Space *space, wchar_t graphic_description[M
     return OK;
 }
 
+
 /*This function sets the basic description of the space, to use it on the graphic engine*/
 STATUS space_set_basic_description(Space *space, wchar_t basic_description[MAX_TDESC_R][MAX_TDESC_C]) {
     int i;
@@ -228,6 +230,16 @@ STATUS space_set_basic_description(Space *space, wchar_t basic_description[MAX_T
     for (i = 0; i < MAX_TDESC_R; i++) {
         wcscpy(space->basic_description[i], basic_description[i]);
     }
+
+    return OK;
+}
+
+/*This function sets the graphic description type of the space to use it on the save*/
+STATUS space_set_graphic_description_type(Space *space, wchar_t graphic_description_type[WORD_SIZE]) {
+
+    if (space == NULL || graphic_description_type == NULL) return ERROR;
+
+    wcscpy(space->graphic_description_type, graphic_description_type);
 
     return OK;
 }
@@ -269,12 +281,20 @@ const wchar_t *space_get_name(Space *space) {
     return space->name;
 }
 
-/*This function is used to get the graphic description of a set to use it in the graphic engine later*/
+/*This function is used to get the graphic description to use it in the graphic engine later*/
 wchar_t **space_get_graphic_description(Space *space) {
 
     if (space == NULL) return NULL;
 
     return space->graphic_description;
+}
+
+/*This function is used to get the graphic description type to use it in the save*/
+wchar_t *space_get_graphic_description_type(Space *space) {
+
+    if (space == NULL) return NULL;
+
+    return space->graphic_description_type;
 }
 
 /*This function gets the basic description of a space*/
@@ -469,7 +489,7 @@ int space_get_tags_number(Space *space) {
     return space->num_tags;
 }
 
-/*STATUS space_print(FILE *f, Space *space) {
+STATUS space_print(FILE *f, Space *space) {
     TAG *space_tags = NULL;
     int num_tags, i;
 
@@ -480,7 +500,7 @@ int space_get_tags_number(Space *space) {
 
     num_tags = space_get_tags_number(space);
 
-    fwprintf(f, L"#s:%04ld|%-8s|",    space->id - SPACE_BASE_ID, space->name);
+    fwprintf(f, L"#s:%04ld|%-8S|", space->id - SPACE_BASE_ID, space->name);
 
     for (i = 0; i < 6; i++) {
         if (space_get_direction(space, i) != NO_ID) {
@@ -490,7 +510,7 @@ int space_get_tags_number(Space *space) {
         }
     }
 
-    fwprintf(f, L"%s|%s|%s|%s|%s|%s|%s|%s|%s|", space->graphic_description[0], space->graphic_description[1], space->graphic_description[2], space->basic_description[0], space->basic_description[1], space->basic_description[2], space->check_description[0], space->check_description[1], space->check_description[2]);
+    fwprintf(f, L"%S|%S|%S|%S|%S|%S|%S|", space->graphic_description_type, space->basic_description[0], space->basic_description[1], space->basic_description[2], space->check_description[0], space->check_description[1], space->check_description[2]);
 
     for (i = 0; i < num_tags; i++) {
         if (space_tags[i] != NO_TAG){
@@ -500,4 +520,4 @@ int space_get_tags_number(Space *space) {
     fwprintf(f, L"\n");
 
     return OK;
-}*/
+}

@@ -154,7 +154,7 @@ STATUS command_proMode(Command *command) {
     system("/bin/stty raw");
     input = getchar();
     /* Este if parece que lo esta ignorando un poco xd*/
-    if (input == '^'){
+    if (input == '^') {
         getchar();
         getchar();
         input = getchar();
