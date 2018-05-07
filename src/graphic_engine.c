@@ -17,6 +17,7 @@
 #include <string.h>
 /*Own libraries*/
 #include "../include/screen.h"
+#include "../include/game.h"
 #include "../include/graphic_engine.h"
 #include "../include/graphic_descriptions.h"
 #include "../include/dialogue.h"
@@ -92,6 +93,8 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
     T_Command last_cmd = UNKNOWN;
     extern char *cmd_to_str[];
     int i;
+    long int j;
+    BOOL space_glowing = FALSE;
 
     player = (Player *) game_find(game, PLAYER_BASE_ID + game_get_players_number(game));
     if (player == NULL) return;
@@ -118,7 +121,14 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
 
         if (id_north != NO_ID) {
             space_north = (Space *) game_find(game, id_north);
-            if (space_check_tag(space_north, ILLUMINATED) == TRUE) {                
+            space_glowing = FALSE;
+    		for (j = 0; j < space_get_objects_number( (Space *) game_find(game, id_north)); j++) {
+    			if (object_check_tag((Object *) game_find(game, space_get_object_id((Space *) game_find(game, id_north), j)), GLOWING)) {
+    				space_glowing = TRUE;
+    				break;
+    			}
+    		}
+            if (space_check_tag(space_north, ILLUMINATED) == TRUE || space_glowing == TRUE) {                
                 graphic_description_north = space_get_graphic_description(space_north);
                 swprintf(unicode_str, COLUMNS, L"                    ");
                 screen_area_puts(graphic_engine->map_center, unicode_str);
@@ -160,7 +170,22 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
         }
 
         if (id_act != NO_ID) { 
-            if (space_check_tag(space_act, ILLUMINATED) == TRUE) {           
+        	space_glowing = FALSE;
+	    	for (j = 0; j < player_get_objects_number( (Player *) game_find(game, PLAYER_BASE_ID+1)); j++) {
+	    		if (object_check_tag((Object *) game_find(game, player_get_object_id((Player *) game_find(game, PLAYER_BASE_ID+1), j)), GLOWING)) {
+	    			space_glowing = TRUE;
+	    			break;
+	    		}
+	    	}
+	    	if (!space_glowing) {
+	    		for (j = 0; j < space_get_objects_number( (Space *) game_find(game, id_act)); j++) {
+	    			if (object_check_tag((Object *) game_find(game, space_get_object_id((Space *) game_find(game, id_act), j)), GLOWING)) {
+	    				space_glowing = TRUE;
+	    				break;
+	    			}
+	    		}
+	    	}
+            if (space_check_tag(space_act, ILLUMINATED) == TRUE || space_glowing == TRUE) {           
                 graphic_description_act = space_get_graphic_description(space_act);
                 swprintf(unicode_str, COLUMNS, L"%-17S %2d", space_get_name(space_act), space_get_objects_number(space_act));
                 screen_area_puts(graphic_engine->map_center, unicode_str);
@@ -184,8 +209,15 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
         }
 
         if (id_south != NO_ID) {
-            space_south = (Space *) game_find(game, id_south);   
-            if (space_check_tag(space_south, ILLUMINATED) == TRUE) {  
+            space_south = (Space *) game_find(game, id_south);
+            space_glowing = FALSE;
+    		for (j = 0; j < space_get_objects_number( (Space *) game_find(game, id_south)); j++) {
+    			if (object_check_tag((Object *) game_find(game, space_get_object_id((Space *) game_find(game, id_south), j)), GLOWING)) {
+    				space_glowing = TRUE;
+    				break;
+    			}
+    		}   
+            if (space_check_tag(space_south, ILLUMINATED) == TRUE || space_glowing == TRUE) {  
                 graphic_description_south = space_get_graphic_description(space_south);
                 swprintf(unicode_str, COLUMNS, L"                    ");
                 screen_area_puts(graphic_engine->map_center, unicode_str);            
@@ -220,7 +252,14 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
         id_west = link_get_other_side((Link*) game_find(game, space_get_direction(space_act, WEST)), id_act);
         if (id_west != NO_ID) {
             space_west = (Space *) game_find(game, id_west);
-            if (space_check_tag(space_west, ILLUMINATED) == TRUE) { 
+            space_glowing = FALSE;
+    		for (j = 0; j < space_get_objects_number( (Space *) game_find(game, id_west)); j++) {
+    			if (object_check_tag((Object *) game_find(game, space_get_object_id((Space *) game_find(game, id_west), j)), GLOWING)) {
+    				space_glowing = TRUE;
+    				break;
+    			}
+    		} 
+            if (space_check_tag(space_west, ILLUMINATED) == TRUE || space_glowing == TRUE) { 
                 graphic_description_west = space_get_graphic_description(space_west);
 
                 swprintf(unicode_str, COLUMNS, L"                    ");
@@ -274,7 +313,14 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
         id_east = link_get_other_side((Link*) game_find(game, space_get_direction(space_act, EAST)), id_act);
         if (id_east != NO_ID) {
             space_east = (Space *) game_find(game, id_east);
-            if (space_check_tag(space_east, ILLUMINATED) == TRUE) { 
+            space_glowing = FALSE;
+    		for (j = 0; j < space_get_objects_number( (Space *) game_find(game, id_east)); j++) {
+    			if (object_check_tag((Object *) game_find(game, space_get_object_id((Space *) game_find(game, id_east), j)), GLOWING)) {
+    				space_glowing = TRUE;
+    				break;
+    			}
+    		}
+            if (space_check_tag(space_east, ILLUMINATED) == TRUE || space_glowing == TRUE) { 
                 graphic_description_east = space_get_graphic_description(space_east);
 
                 swprintf(unicode_str, COLUMNS, L"                    ");
@@ -325,8 +371,23 @@ void graphic_engine_paint_game(Graphic_engine *graphic_engine, Game *game) {
     /* Paint the in the objects_in_room areas */
     screen_area_clear(graphic_engine->objects_in_room_1);
     screen_area_clear(graphic_engine->objects_in_room_2);
-    screen_area_clear(graphic_engine->objects_in_room_3);    
-    if (space_check_tag(space_act, ILLUMINATED) == TRUE) {
+    screen_area_clear(graphic_engine->objects_in_room_3);
+    space_glowing = FALSE;
+	for (j = 0; j < player_get_objects_number( (Player *) game_find(game, PLAYER_BASE_ID+1)); j++) {
+		if (object_check_tag((Object *) game_find(game, player_get_object_id((Player *) game_find(game, PLAYER_BASE_ID+1), j)), GLOWING)) {
+			space_glowing = TRUE;
+			break;
+		}
+	}
+	if (!space_glowing) {
+		for (j = 0; j < space_get_objects_number( (Space *) game_find(game, id_act)); j++) {
+			if (object_check_tag((Object *) game_find(game, space_get_object_id((Space *) game_find(game, id_act), j)), GLOWING)) {
+				space_glowing = TRUE;
+				break;
+			}
+		}
+	}    
+    if (space_check_tag(space_act, ILLUMINATED) == TRUE || space_glowing == TRUE) {
         swprintf(unicode_str, COLUMNS, L" Objects in this room:");
         screen_area_puts(graphic_engine->objects_in_room_1, unicode_str);
         for (i = 0; i < space_get_objects_number(space_act); i++) {        
