@@ -7,9 +7,11 @@
  * @copyright GNU Public License
  */
 
+#undef __STRICT_ANSI__
+
 #include <stdio.h> 
 #include <stdlib.h> 
-#include <string.h> 
+#include <wchar.h> 
 #include "../include/object.h"
 #include "../include/object_test.h"
 #include "../include/test.h"
@@ -96,13 +98,13 @@ void test2_object_create() {
 void test1_object_set_name() {
     Object *object = NULL;
     object = object_create(OBJECT_BASE_ID+1);
-    PRINT_TEST_RESULT(object_set_name(object, "test") == OK);
+    PRINT_TEST_RESULT(object_set_name(object, L"test") == OK);
     object_destroy(object);
 }
 
 void test2_object_set_name() {
     Object *object = NULL;
-    PRINT_TEST_RESULT(object_set_name(object, "test") == ERROR);
+    PRINT_TEST_RESULT(object_set_name(object, L"test") == ERROR);
 }
 
 void test3_object_set_name() {
@@ -134,11 +136,11 @@ void test3_object_set_location() {
 
 void test1_object_set_check() {
     Object *object = NULL;
-    char check[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t check[MAX_TDESC_R][MAX_TDESC_C];
     int i;
     object = object_create(OBJECT_BASE_ID+1);
     for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(check[i], "CHECK");
+        wcscpy(check[i], L"CHECK");
     }
     PRINT_TEST_RESULT(object_set_check(object, check) == OK);
     object_destroy(object);
@@ -146,10 +148,10 @@ void test1_object_set_check() {
 
 void test2_object_set_check() {
     Object *object = NULL;
-    char check[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t check[MAX_TDESC_R][MAX_TDESC_C];
     int i;
     for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(check[i], "CHECK");
+        wcscpy(check[i], L"CHECK");
     }
     PRINT_TEST_RESULT(object_set_check(object, check) == ERROR);
 }
@@ -157,8 +159,8 @@ void test2_object_set_check() {
 void test1_object_get_name() {
     Object *object = NULL;
     object = object_create(OBJECT_BASE_ID+1);
-    object_set_name(object, "test");
-    PRINT_TEST_RESULT(strcmp(object_get_name(object), "test") == 0);
+    object_set_name(object, L"test");
+    PRINT_TEST_RESULT(wcscmp(object_get_name(object), L"test") == 0);
     object_destroy(object);
 }
 
@@ -194,18 +196,18 @@ void test2_object_get_location() {
 
 void test1_object_get_check() {
     Object *object = NULL;
-    char check[MAX_TDESC_R][MAX_TDESC_C];
-    char **checkEnd;
+    wchar_t check[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t **checkEnd;
     int i;
     int result = 0;
     object = object_create(OBJECT_BASE_ID+1);
     for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(check[i], "CHECK");
+        wcscpy(check[i], L"CHECK");
     }
     object_set_check(object, check);
     checkEnd = object_get_check(object);
     for (i = 0; i < MAX_TDESC_R; i++) {
-        if (strcmp(checkEnd[i], "CHECK") != 0) {
+        if (wcscmp(checkEnd[i], L"CHECK") != 0) {
             result = 1;
         }
     }
@@ -289,10 +291,10 @@ void test2_object_remove_tag() {
 
 void test1_object_set_alt_check(){
     Object *object = NULL;
-    char alt_check[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t alt_check[MAX_TDESC_R][MAX_TDESC_C];
     int i;
     for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(alt_check[i], "ALT_CHECK");
+        wcscpy(alt_check[i], L"ALT_CHECK");
     }
     object = object_create(OBJECT_BASE_ID+1);
     PRINT_TEST_RESULT(object_set_alt_check(object, alt_check) == OK);
@@ -301,24 +303,24 @@ void test1_object_set_alt_check(){
 
 void test2_object_set_alt_check(){
     Object *object = NULL;
-    char alt_check[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t alt_check[MAX_TDESC_R][MAX_TDESC_C];
     PRINT_TEST_RESULT(object_set_alt_check(object, alt_check) == ERROR);
 }
 
 void test1_object_get_alt_check() {
     Object *object = NULL;
-    char alt_check[MAX_TDESC_R][MAX_TDESC_C];
-    char **checkEnd;
+    wchar_t alt_check[MAX_TDESC_R][MAX_TDESC_C];
+    wchar_t **checkEnd;
     int i;
     int result = 0;
     object = object_create(OBJECT_BASE_ID+1);
     for (i = 0; i < MAX_TDESC_R; i++) {
-        strcpy(alt_check[i], "ALT_CHECK");
+        wcscpy(alt_check[i], L"ALT_CHECK");
     }
     object_set_alt_check(object, alt_check);
     checkEnd = object_get_alt_check(object);
     for (i = 0; i < MAX_TDESC_R; i++) {
-        if (strcmp(checkEnd[i], "ALT_CHECK") != 0) {
+        if (wcscmp(checkEnd[i], L"ALT_CHECK") != 0) {
             result = 1;
         }
     }

@@ -134,14 +134,14 @@ void test2_player_get_graphic_description();
  * @pre Player ID and Object Id
  * @post OUTPUT==OK (matching Ids)
  */
-void test1_player_get_object();
+void test1_player_get_object_id();
 
 /**
  * @test Test to check if a NULL Player returns a NO_ID when asked for the object Id
  * @pre NULL Player 
  * @post OUTPUT==NO_ID
  */
-void test2_player_get_object();
+void test2_player_get_object_id();
 
 /**
  * @test Test to see if player carried objects number is correct

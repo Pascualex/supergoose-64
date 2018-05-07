@@ -8,9 +8,12 @@
  * @copyright GNU Public License
  */
 
+#undef __STRICT_ANSI__
+
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <string.h> 
+#include <wchar.h>
 #include "../include/game.h"
 #include "../include/game_test.h"
 #include "../include/test.h"
@@ -566,14 +569,14 @@ void test2_game_get_status_last_command() {
 void test1_game_get_last_text_description() {
     Game *game = NULL;
     Command *command = NULL;
-    char **desc = NULL;
+    wchar_t **desc = NULL;
     game = game_create();
     command = command_create();
     game_create_from_file(game, "./datafiles/test.dat");
     command_get_user_input(command);
     game_update(game, command);
     desc = game_get_last_text_description(game);
-    PRINT_TEST_RESULT(!strcmp(desc[0], "OBJ DESC 1") || !strcmp(desc[1], "OBJ DESC 2") || !strcmp(desc[2], "OBJ DESC 3"));
+    PRINT_TEST_RESULT(!wcscmp(desc[0], L"OBJ DESC 1") || !wcscmp(desc[1], L"OBJ DESC 2") || !wcscmp(desc[2], L"OBJ DESC 3"));
     game_destroy(game);
     command_destroy(command);
 }
@@ -586,14 +589,14 @@ void test2_game_get_last_text_description() {
 void test3_game_get_last_text_description() {
     Game *game = NULL;
     Command *command = NULL;
-    char **desc = NULL;
+    wchar_t **desc = NULL;
     game = game_create();
     command = command_create();
     game_create_from_file(game, "./datafiles/test.dat");
     command_get_user_input(command);
     game_update(game, command);
     desc = game_get_last_text_description(game);
-    PRINT_TEST_RESULT(!strcmp(desc[0], "CHECK DESC 1") || !strcmp(desc[1], "CHECK DESC 2") || !strcmp(desc[2], "CHECK DESC 3"));
+    PRINT_TEST_RESULT(!wcscmp(desc[0], L"CHECK DESC 1") || !wcscmp(desc[1], L"CHECK DESC 2") || !wcscmp(desc[2], L"CHECK DESC 3"));
     game_destroy(game);
     command_destroy(command);
 }
@@ -635,60 +638,3 @@ void test4_game_add_link() {
     PRINT_TEST_RESULT(game_add_link(game, link) == ERROR);
     game_destroy(game);
 }
-
-/*FOLLOWING FUNCTION IS NO LONGER PUBLIC; BUT LEAVING IT IN CASE IT IS IN THE FUTURE*/
-
-/*void test1_game_get_connection() {
-    Game *game = NULL;
-    Space *s1 = NULL, *s2 = NULL;
-    game = game_create();
-    game = game_create_from_file(game, "./datafiles/test.dat");
-    s1 = space_create(SPACE_BASE_ID+2);
-    s2 = space_create(SPACE_BASE_ID+3);
-    PRINT_TEST_RESULT(game_get_connection(game, s1, s2)==NULL);
-    game_destroy(game);
-    space_destroy(s1);
-    space_destroy(s2);    
-}
-
-void test2_game_get_connection() {
-    Game *game = NULL;
-    Space *s1 = NULL, *s2 = NULL;
-    s1 = space_create(SPACE_BASE_ID+2);
-    s2 = space_create(SPACE_BASE_ID+3);
-    PRINT_TEST_RESULT(game_get_connection(game, s1, s2)==NULL);
-    space_destroy(s1);
-    space_destroy(s2);    
-}
-
-void test3_game_get_connection() {
-    Game *game = NULL;
-    Space *s1 = NULL, *s2 = NULL;
-    game = game_create();
-    s2 = space_create(SPACE_BASE_ID+3);
-    PRINT_TEST_RESULT(game_get_connection(game, s1, s2)==NULL);
-    game_destroy(game);
-    space_destroy(s2);    
-}
-
-void test4_game_get_connection() {
-    Game *game = NULL;
-    Space *s1 = NULL, *s2 = NULL;
-    game = game_create();
-    s1 = space_create(SPACE_BASE_ID+2);
-    PRINT_TEST_RESULT(game_get_connection(game, s1, s2)==NULL);
-    game_destroy(game);
-    space_destroy(s1);    
-}
-
-void test5_game_get_connection() {
-    Game *game = NULL;
-    Space *s1 = NULL, *s2 = NULL;
-    game = game_create();
-    s1 = space_create(SPACE_BASE_ID+2);
-    s2 = space_create(SPACE_BASE_ID+3);
-    PRINT_TEST_RESULT(game_get_connection(game, s1, s2)==NULL);
-    game_destroy(game);
-    space_destroy(s1);
-    space_destroy(s2);    
-}*/

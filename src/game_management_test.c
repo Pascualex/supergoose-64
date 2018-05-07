@@ -4,6 +4,7 @@
 #include <string.h> 
 /*Own libraries*/
 #include "../include/game_management.h"
+#include "../include/game_management_test.h"
 #include "../include/game.h"
 #include "../include/test.h"
 #include "../include/types.h"
