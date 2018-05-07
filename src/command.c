@@ -121,7 +121,7 @@ STATUS command_get_user_input(Command *command) {
         if (inputInfo != NULL && strcmp(inputInfo, "-->") != 0) {
 			strcpy(command->info, inputInfo);
 
-			if (cmd == 11) {
+			if (cmd == OPEN_L) {
 				inputInfo = strtok(NULL, " \n");
 				if (strcasecmp(inputInfo, "with") != 0) {
 					strcpy(command->info, "NO_INFO");

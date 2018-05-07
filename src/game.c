@@ -1184,7 +1184,7 @@ STATUS game_callback_open(Game *game, char *string) {
 
     if (game == NULL || game->players == NULL || game->objects == NULL || string == NULL || strcmp(string, "NO_INFO") == 0) return ERROR;
 
-	slink = strtok(string, " \n");
+	slink = strtok(string, " ");
 	sobj = strtok(NULL, " \n");
 
     if (sobj == NULL || slink == NULL) return ERROR;
