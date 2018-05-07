@@ -11,7 +11,7 @@
 #define TYPES_H
 
 
-#define SAFE_MODE 0                 /*!< Safe mode, to avoid possibly leaks of memmory: (1) ON or (0) OFF */
+#define SAFE_MODE 1                 /*!< Safe mode, to avoid possibly leaks of memmory: (1) ON or (0) OFF */
 
 #define MAX_DIA_C 85                /*!< Maximum columns of the text dialogue */
 #define MAX_DIA_R 8                 /*!< Maximum rows of the text dialogue */

@@ -1178,7 +1178,7 @@ STATUS game_callback_open(Game *game, char *string) {
 	sobj = strtok(NULL, " \n");
 
 	obj = (Object *) game_find(game, atoi(sobj)+OBJECT_BASE_ID);
-    printf("jaja");
+
     if (obj == NULL) {
         obj = (Object *) game_find_name(game, sobj);
         if (obj == NULL) return ERROR;

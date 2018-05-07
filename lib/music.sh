@@ -2,5 +2,5 @@
 
 
 while true; do 
-	aplay -q gamemusic.wav
+	aplay ./lib/gamemusic.wav
 done
