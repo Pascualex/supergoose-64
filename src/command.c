@@ -135,8 +135,6 @@ STATUS command_get_user_input(Command *command) {
         } else {
             strcpy(command->info, "NO_INFO");
         }
-
-
     }
 
     return OK;

@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
                 fprintf(stderr, "Error while opening the file.\n");
                 return 1;
             }
-            fprintf(log, "Patata");
+            fprintf(log, " ");
         } else {
             fprintf(stderr, "Use: %s (normal use) or %s -l <game_log_file> (using log file)\n", argv[0], argv[0]);
             return 1;

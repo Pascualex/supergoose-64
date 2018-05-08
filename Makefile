@@ -2,7 +2,7 @@
 MAKE=gcc -g -Wall -pedantic -ansi -I./lib/ 
 OBJ= ./obj/command.o ./obj/die.o ./obj/final.o ./obj/game.o ./obj/game_loop.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o ./obj/dialogue.o ./obj/game_rules.o
 OBJGAME= ./obj/command.o ./obj/die.o ./obj/final.o ./obj/game.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o ./obj/dialogue.o ./obj/game_rules.o
-NFD=-m64 -no-pie -s -lnfd `pkg-config --libs gtk+-3.0` -L/usr/lib64 -L./lib/ ./lib/libnfd.a
+NFD=-m64 -s -lnfd `pkg-config --libs gtk+-3.0` -L/usr/lib64 -L./lib/ ./lib/libnfd.a
 
 #=====================================ALL=====================================#
 all: SuperGoose_64 run
