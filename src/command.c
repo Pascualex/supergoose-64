@@ -177,26 +177,6 @@ STATUS command_proMode(Command *command) {
             cmd = LEFT;
             break;
     }
-    switch (input) {
-	    case 'w':
-	        cmd = FOLLOWING;
-	        break;
-	    case 's':
-	        cmd = PREVIOUS;
-	        break;
-	    case 'd':
-	        cmd = RIGHT;
-	        break;
-	    case 'a':
-	        cmd = LEFT;
-	        break;
-	    case 'q':
-	        cmd = UP;
-	        break;
-	    case 'e':
-	        cmd = DOWN;
-	        break;
-	}
 
     if (cmd != UNKNOWN){
         command->command = cmd;

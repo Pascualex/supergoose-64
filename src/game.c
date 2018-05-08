@@ -1204,11 +1204,14 @@ STATUS game_callback_check(Game *game, char *string) {
 STATUS game_callback_open(Game *game, char *string) {
     Object *obj;
 	Link *link;
-	char *sobj, *slink;
+	char *sobj, *slink, *aux;
 
     if (game == NULL || game->players == NULL || game->objects == NULL || string == NULL || strcmp(string, "NO_INFO") == 0) return ERROR;
 
-	slink = strtok(string, " ");
+    aux = (char *) malloc(sizeof(char)*(strlen(string)+1));
+    strcpy(aux, string);
+
+	slink = strtok(aux, " ");
 	sobj = strtok(NULL, " \n");
 
     if (sobj == NULL || slink == NULL) return ERROR;
@@ -1236,6 +1239,7 @@ STATUS game_callback_open(Game *game, char *string) {
 
 	link_set_status(link, OPEN);
 
+    free(aux);
     return OK;
 }
 

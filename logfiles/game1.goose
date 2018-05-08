@@ -1,3 +1,4 @@
+ 
 Grasp beak --> OK
 Following --> OK
 Grasp key --> OK
@@ -20,4 +21,3 @@ Throw --> OK
 Throw --> OK
 Following --> ERROR
 Right --> ERROR
-Exit --> OK

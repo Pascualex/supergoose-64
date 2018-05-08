@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
     Final *final = NULL;
     FILE *log = NULL;
     RULES_STATUS rule = NO_RULE;
-
+    char *aux = NULL;
     system("xdotool key Ctrl+minus");
     if (argc != 3 && argc != 1) { /* Check if we have log file. */
         fprintf(stderr, "Use: %s (normal use) or %s -l <game_log_file> (using log file)\n", argv[0], argv[0]);
@@ -37,6 +37,7 @@ int main(int argc, char *argv[]) {
                 fprintf(stderr, "Error while opening the file.\n");
                 return 1;
             }
+            fprintf(log, "Patata");
         } else {
             fprintf(stderr, "Use: %s (normal use) or %s -l <game_log_file> (using log file)\n", argv[0], argv[0]);
             return 1;
@@ -102,7 +103,13 @@ int main(int argc, char *argv[]) {
                     if (strcmp(command_get_info(command), "NO_INFO") == 0) {
                         fprintf(log, "%s", command_get_str(game_get_last_command(game)));
                     } else {
-                        fprintf(log, "%s %s", command_get_str(game_get_last_command(game)), command_get_info(command));
+                        if (command_get_command(command) == OPEN_L){
+                            aux = strtok(command_get_info(command), " ");
+                            aux = strtok(NULL, " ");
+                            fprintf(log, "%s %s with %s", command_get_str(game_get_last_command(game)), command_get_info(command), aux);
+                        } else {
+                            fprintf(log, "%s %s", command_get_str(game_get_last_command(game)), command_get_info(command));
+                        }
                     }
                     if (game_get_status_last_command(game) == OK) {
                         fprintf(log, " --> OK\n");

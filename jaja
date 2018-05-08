@@ -1,0 +1,21 @@
+ Right --> OK
+Previous --> OK
+Previous --> OK
+Grasp crowbar --> OK
+Following --> OK
+Following --> OK
+Open weakdoor1 with crowbar --> OK
+Right --> OK
+Up --> OK
+Left --> OK
+Following --> OK
+Right --> OK
+Right --> OK
+Right --> OK
+Open weakdoor2 with crowbar --> OK
+Following --> OK
+Grasp keys --> OK
+Previous --> OK
+Left --> OK
+Previous --> ERROR
+Exit --> OK
