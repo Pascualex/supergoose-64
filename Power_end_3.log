@@ -1,0 +1,89 @@
+ Right --> OK
+Previous --> OK
+Previous --> OK
+Grasp crowbar --> OK
+Following --> OK
+Right --> OK
+Grasp key --> OK
+Open lock with key --> OK
+Previous --> OK
+Grasp idcard1 --> OK
+Following --> OK
+Left --> OK
+Following --> OK
+Open weakdoor1 with crowbar --> OK
+Right --> OK
+Up --> OK
+Left --> OK
+Following --> OK
+Right --> OK
+Right --> OK
+Right --> OK
+Open cardlector2 with idcard1 --> OK
+Right --> OK
+Open cardlector3 with idcard1 --> OK
+Up --> OK
+Right --> OK
+Following --> OK
+Open weakdoor3 with crowbar --> OK
+Following --> OK
+Grasp idcard2 --> OK
+Previous --> OK
+Open cardlector4 with idcard2 --> OK
+Left --> OK
+Check s --> OK
+Right --> OK
+Previous --> OK
+Previous --> OK
+Right --> OK
+Right --> OK
+Grasp lantern --> OK
+Left --> OK
+Left --> OK
+Following --> OK
+Left --> OK
+Down --> OK
+Left --> OK
+Left --> OK
+Left --> OK
+Left --> OK
+Previous --> OK
+Right --> OK
+Down --> OK
+Left --> OK
+Following --> OK
+TurnOn lantern --> OK
+Open cardlector1 with idcard1 --> OK
+Following --> OK
+Down --> OK
+Previous --> OK
+Open cardlector5 with idcard2 --> OK
+Left --> OK
+Down --> OK
+Following --> OK
+Open cardlector6 with idcard2 --> OK
+Right --> OK
+Following --> OK
+Grasp powercore --> OK
+Previous --> OK
+Left --> OK
+Previous --> OK
+Up --> OK
+Right --> OK
+Previous --> OK
+Right --> OK
+Grasp gears --> OK
+Left --> OK
+Left --> OK
+Grasp fusekey --> OK
+Right --> OK
+Previous --> OK
+Open fuselock with fusekey --> OK
+Right --> OK
+Grasp fuses --> OK
+Left --> OK
+Following --> OK
+Drop fuses --> OK
+Drop gears --> OK
+Drop powercore --> OK
+Exit --> OK
