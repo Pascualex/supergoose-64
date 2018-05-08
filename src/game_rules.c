@@ -10,6 +10,7 @@
 /*C libraries*/
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <stdlib.h>
 /*Own libraries*/
 #include "../include/player.h"
@@ -27,8 +28,10 @@ RULES_STATUS game_rules_update(Game *game, Command *command) {
 
 	location = player_get_location((Player *) game_find(game, PLAYER_BASE_ID+1));
 
-	/* RULE 1 */
-	if (location == HALL_ROOM_ID && (command_get_command(command) == MOVE && ((!strncmp(command_get_info(command), "north", 5) || !strncmp(command_get_info(command), "n", 1)) || command_get_command(command) == UP))) {
+	/* RULE 1 (command_get_command(command) == MOVE && ((!strcasecmp(command_get_info(command), "north") || !strncmp(command_get_info(command), "n", 1)) || ))) {*/
+	printf("%d\n", command_get_command(command));
+	if (location == HALL_ROOM_ID && command_get_command(command) == PREVIOUS){
+		printf("ssss");
 		for (j = 0; j < player_get_objects_number((Player *) game_find(game, PLAYER_BASE_ID+1)); j++) {
     		if (object_check_tag((Object *) game_find(game, player_get_object_id((Player *) game_find(game, PLAYER_BASE_ID+1), j)), IS_KEY)) {    			
     			return END1;
@@ -37,12 +40,12 @@ RULES_STATUS game_rules_update(Game *game, Command *command) {
 	}
 
 	/* RULE 2 */
-	if (location == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, GEARS_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, FUSE_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, TRANS_CORE_ID)) == TRANS_ROOM_ID) {
+	if (location == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, GEARS_ID + OBJECT_BASE_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, FUSE_ID + OBJECT_BASE_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, TRANS_CORE_ID + OBJECT_BASE_ID)) == TRANS_ROOM_ID) {
 		return END2;
 	}
 
 	/* RULE 3 */
-	if (location == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, GEARS_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, FUSE_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, POWER_CORE_ID)) == TRANS_ROOM_ID) {
+	if (location == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, GEARS_ID + OBJECT_BASE_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, FUSE_ID + OBJECT_BASE_ID)) == TRANS_ROOM_ID && object_get_location((Object *) game_find(game, POWER_CORE_ID + OBJECT_BASE_ID)) == TRANS_ROOM_ID) {
 		return END3;
 	}
 
