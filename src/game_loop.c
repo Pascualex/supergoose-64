@@ -25,11 +25,12 @@ int main(int argc, char *argv[]) {
     FILE *log = NULL;
     RULES_STATUS rule = NO_RULE;
     char *aux = NULL;
-    system("xdotool key Ctrl+minus");
+    
     if (argc != 3 && argc != 1) { /* Check if we have log file. */
         fprintf(stderr, "Use: %s (normal use) or %s -l <game_log_file> (using log file)\n", argv[0], argv[0]);
         return 1;
     }
+
     if (argc == 3) {
         if (strcmp(argv[1], "-l") == 0) {
             log = fopen(argv[2], "w");
@@ -51,9 +52,6 @@ int main(int argc, char *argv[]) {
     }
     if (log == NULL){
 	    if (game_menu(game) == ERROR) {
-            system("xdotool key Ctrl+plus");
-            system("killall -q music.sh");
-            system("killall -q aplay");
 			game_destroy(game);
 			return 1;
 		}
@@ -133,8 +131,5 @@ int main(int argc, char *argv[]) {
     game_destroy(game);
 
     if (log) fclose(log);
-    system("xdotool key Ctrl+plus");
-    system("killall -q music.sh");
-    system("killall -q aplay");
     return 0;
 }

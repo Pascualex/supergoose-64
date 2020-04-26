@@ -2,15 +2,14 @@
 MAKE=gcc -g -Wall -pedantic -ansi -I./lib/ 
 OBJ= ./obj/command.o ./obj/die.o ./obj/final.o ./obj/game.o ./obj/game_loop.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o ./obj/dialogue.o ./obj/game_rules.o
 OBJGAME= ./obj/command.o ./obj/die.o ./obj/final.o ./obj/game.o ./obj/game_management.o ./obj/graphic_engine.o ./obj/inventory.o ./obj/link.o ./obj/object.o ./obj/player.o ./obj/screen.o ./obj/set.o ./obj/space.o ./obj/menu.o ./obj/dialogue.o ./obj/game_rules.o
-NFD=-m64 -s -lnfd `pkg-config --libs gtk+-3.0` -L/usr/lib64 -L./lib/ ./lib/libnfd.a
 
 #=====================================ALL=====================================#
-all: SuperGoose_64 run
+all: SuperGoose_64
 full: doxygen dist doxylink test_create SuperGoose_64 test valgrind
 
 #================================MAIN PROGRAMS================================#
 SuperGoose_64: $(OBJ)
-	$(MAKE) -o SuperGoose_64 $(OBJ) $(NFD)
+	$(MAKE) -o SuperGoose_64 $(OBJ)
 test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory_test ./testfiles/game_test ./testfiles/game_management_test ./testfiles/link_test ./testfiles/set_test ./testfiles/space_test ./testfiles/player_test ./testfiles/object_test
 
 #====================================TESTS====================================#
@@ -24,10 +23,10 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 	$(MAKE) -o ./testfiles/inventory_test ./obj/inventory_test.o ./obj/inventory.o ./obj/set.o
 
 ./testfiles/game_test: ./obj/game_test.o $(OBJGAME) 
-	$(MAKE) -o ./testfiles/game_test ./obj/game_test.o $(OBJGAME) $(NFD)
+	$(MAKE) -o ./testfiles/game_test ./obj/game_test.o $(OBJGAME)
 
 ./testfiles/game_management_test: ./obj/game_management_test.o $(OBJGAME)
-	$(MAKE) -o ./testfiles/game_management_test ./obj/game_management_test.o $(OBJGAME) $(NFD)
+	$(MAKE) -o ./testfiles/game_management_test ./obj/game_management_test.o $(OBJGAME)
 
 ./testfiles/link_test: ./obj/link_test.o $(OBJGAME)
 	$(MAKE) -o ./testfiles/link_test ./obj/link_test.o $(OBJGAME)
@@ -129,22 +128,10 @@ test_create: ./testfiles/command_test ./testfiles/die_test ./testfiles/inventory
 
 #=====================================UTILS=====================================#
 run:
-	./SuperGoose_64 || true
-
-mute:
-	gnome-terminal --window --full-screen --command=./SuperGoose_64 || true
-	
-music:
-	chmod 777 ./lib/music.sh
-	gnome-terminal --window --full-screen --command=./SuperGoose_64
-	./lib/music.sh	|| true
+	./SuperGoose_64
 
 valgrind:
-	valgrind -v -q --leak-check=full ./SuperGoose_64	|| true
-
-install:
-	sudo apt install gtk+-3.0
-	sudo apt install xdotool
+	valgrind -v -q --leak-check=full ./SuperGoose_64
 
 clear:
 	rm SuperGoose_64* ./testfiles/* ./obj/*

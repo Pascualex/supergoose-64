@@ -10,7 +10,6 @@
 #include "../include/game.h"
 #include "../include/game_management.h"
 #include "../include/graphic_descriptions.h"
-#include "nfd.h"
 
 void select_space_graphic_description(wchar_t graphic_description[MAX_GDESC_R][MAX_GDESC_C], wchar_t graphic_description_type[WORD_SIZE]);
 
@@ -308,32 +307,12 @@ STATUS game_management_load_links(Game *game, char *filename) {
 }
 
 STATUS game_management_load(Game *game, char *filename){
-    nfdchar_t *outPath = NULL;
-    char aux[256];
-
+    
     if (game == NULL || filename == NULL){
         return ERROR;
     }
 
-    strcpy(aux, filename);
-
-    if (SAFE_MODE) {
-        printf("You are using the Safe Mode, some features are disabled, we are loading the initial datafile.");
-        strcpy(aux, "./datafiles/data.dat");
-    } else {
-        if (strcmp(aux, "NO_INFO") == 0) {
-            if (NFD_OpenDialog( NULL, "./save_games/", &outPath ) == NFD_OKAY) {
-                strcpy(aux, (char *) outPath);
-                free(outPath);
-            }
-            else {
-                free(outPath);
-                return ERROR;
-            }
-        }
-    }
-
-    if (game_create_from_file(game, aux) == ERROR){
+    if (game_create_from_file(game, "./datafiles/data.dat") == ERROR){
         return ERROR;
     } 
 

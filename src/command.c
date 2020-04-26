@@ -53,7 +53,7 @@ char *short_cmd_to_str[N_CMD] = {	"",
 									"x",	/* Exit */
 									"m", 	/* Move */
 									"w", 	/* Previous */
-									"a", 	/* Previous */
+									"a", 	/* Left */
 									"s", 	/* Following */
 									"d", 	/* Right */
 									"q", 	/* Up */
